@@ -13,7 +13,6 @@
 		2E773CEC27080A9D00668C84 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E773CEA27080A9D00668C84 /* Main.storyboard */; };
 		2E773CEE27080A9F00668C84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E773CED27080A9F00668C84 /* Assets.xcassets */; };
 		2E773CF127080A9F00668C84 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E773CEF27080A9F00668C84 /* LaunchScreen.storyboard */; };
-		2E773CF927080B5800668C84 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E773CF827080B5800668C84 /* SearchViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,7 +24,6 @@
 		2E773CED27080A9F00668C84 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2E773CF027080A9F00668C84 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2E773CF227080A9F00668C84 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2E773CF827080B5800668C84 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,7 +60,6 @@
 				2E773CE627080A9D00668C84 /* SceneDelegate.swift */,
 				2E773CE827080A9D00668C84 /* ViewController.swift */,
 				2E773CEA27080A9D00668C84 /* Main.storyboard */,
-				2E773CF827080B5800668C84 /* SearchViewController.swift */,
 				2E773CED27080A9F00668C84 /* Assets.xcassets */,
 				2E773CEF27080A9F00668C84 /* LaunchScreen.storyboard */,
 				2E773CF227080A9F00668C84 /* Info.plist */,
@@ -143,7 +140,6 @@
 			files = (
 				2E773CE927080A9D00668C84 /* ViewController.swift in Sources */,
 				2E773CE527080A9D00668C84 /* AppDelegate.swift in Sources */,
-				2E773CF927080B5800668C84 /* SearchViewController.swift in Sources */,
 				2E773CE727080A9D00668C84 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
