@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E3EAC26270BD30400875E38 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3EAC25270BD30400875E38 /* TestViewController.swift */; };
 		2EFE68D32706D803009F9726 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EFE68D22706D803009F9726 /* AppDelegate.swift */; };
 		2EFE68D52706D803009F9726 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EFE68D42706D803009F9726 /* SceneDelegate.swift */; };
 		2EFE68D72706D803009F9726 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EFE68D62706D803009F9726 /* ViewController.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2E3EAC25270BD30400875E38 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		2EFE68CF2706D803009F9726 /* LEDBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LEDBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EFE68D22706D803009F9726 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2EFE68D42706D803009F9726 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 				2EFE68D22706D803009F9726 /* AppDelegate.swift */,
 				2EFE68D42706D803009F9726 /* SceneDelegate.swift */,
 				2EFE68D62706D803009F9726 /* ViewController.swift */,
+				2E3EAC25270BD30400875E38 /* TestViewController.swift */,
 				2EFE68D82706D803009F9726 /* Main.storyboard */,
 				2EFE68E62706DB18009F9726 /* MainViewController.swift */,
 				2EFE68DB2706D806009F9726 /* Assets.xcassets */,
@@ -141,6 +144,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E3EAC26270BD30400875E38 /* TestViewController.swift in Sources */,
 				2EFE68D72706D803009F9726 /* ViewController.swift in Sources */,
 				2EFE68D32706D803009F9726 /* AppDelegate.swift in Sources */,
 				2EFE68D52706D803009F9726 /* SceneDelegate.swift in Sources */,
