@@ -11,11 +11,10 @@ class TestViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+		print("hello~~")
 
         // Do any additional setup after loading the view.
     }
-    
-
     /*
     // MARK: - Navigation
 
