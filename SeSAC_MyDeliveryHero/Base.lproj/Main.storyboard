@@ -138,7 +138,7 @@
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="80" id="rD0-Ng-qpt"/>
                                 </constraints>
                             </view>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="자세한 설명은 생략한다..." borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wws-MS-up6">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="더 이상의 자세한 설명은 생략한다..." borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wws-MS-up6">
                                 <rect key="frame" x="47" y="538" width="320" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="20s-bt-blr"/>
