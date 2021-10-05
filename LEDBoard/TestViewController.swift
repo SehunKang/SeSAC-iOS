@@ -12,7 +12,8 @@ class TestViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 		print("hello")
-		print("mudafakar")
+		print("bye")
+		print("remote git repo")
 
         // Do any additional setup after loading the view.
     }
