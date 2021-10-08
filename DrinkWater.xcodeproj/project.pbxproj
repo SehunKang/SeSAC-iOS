@@ -13,6 +13,9 @@
 		2EB0519D271006A3002D8E91 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EB0519B271006A3002D8E91 /* Main.storyboard */; };
 		2EB0519F271006A5002D8E91 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EB0519E271006A5002D8E91 /* Assets.xcassets */; };
 		2EB051A2271006A5002D8E91 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EB051A0271006A5002D8E91 /* LaunchScreen.storyboard */; };
+		2EB051AA271008E4002D8E91 /* DrinkWaterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB051A9271008E3002D8E91 /* DrinkWaterViewController.swift */; };
+		2EB051AC27100900002D8E91 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB051AB27100900002D8E91 /* ProfileViewController.swift */; };
+		2EB051B52710347F002D8E91 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2EB051B42710347F002D8E91 /* IQKeyboardManagerSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,8 @@
 		2EB0519E271006A5002D8E91 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2EB051A1271006A5002D8E91 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2EB051A3271006A5002D8E91 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2EB051A9271008E3002D8E91 /* DrinkWaterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrinkWaterViewController.swift; sourceTree = "<group>"; };
+		2EB051AB27100900002D8E91 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +36,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2EB051B52710347F002D8E91 /* IQKeyboardManagerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,6 +66,8 @@
 				2EB05197271006A3002D8E91 /* SceneDelegate.swift */,
 				2EB05199271006A3002D8E91 /* ViewController.swift */,
 				2EB0519B271006A3002D8E91 /* Main.storyboard */,
+				2EB051AB27100900002D8E91 /* ProfileViewController.swift */,
+				2EB051A9271008E3002D8E91 /* DrinkWaterViewController.swift */,
 				2EB0519E271006A5002D8E91 /* Assets.xcassets */,
 				2EB051A0271006A5002D8E91 /* LaunchScreen.storyboard */,
 				2EB051A3271006A5002D8E91 /* Info.plist */,
@@ -83,6 +91,9 @@
 			dependencies = (
 			);
 			name = DrinkWater;
+			packageProductDependencies = (
+				2EB051B42710347F002D8E91 /* IQKeyboardManagerSwift */,
+			);
 			productName = DrinkWater;
 			productReference = 2EB05192271006A3002D8E91 /* DrinkWater.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +122,9 @@
 				Base,
 			);
 			mainGroup = 2EB05189271006A3002D8E91;
+			packageReferences = (
+				2EB051B32710347F002D8E91 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+			);
 			productRefGroup = 2EB05193271006A3002D8E91 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -140,7 +154,9 @@
 			files = (
 				2EB0519A271006A3002D8E91 /* ViewController.swift in Sources */,
 				2EB05196271006A3002D8E91 /* AppDelegate.swift in Sources */,
+				2EB051AC27100900002D8E91 /* ProfileViewController.swift in Sources */,
 				2EB05198271006A3002D8E91 /* SceneDelegate.swift in Sources */,
+				2EB051AA271008E4002D8E91 /* DrinkWaterViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -305,7 +321,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -332,7 +348,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -358,6 +374,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2EB051B32710347F002D8E91 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
+			requirement = {
+				kind = exactVersion;
+				version = 6.5.6;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2EB051B42710347F002D8E91 /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2EB051B32710347F002D8E91 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2EB0518A271006A3002D8E91 /* Project object */;
 }
