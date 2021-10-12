@@ -13,6 +13,7 @@
 		2EC0587B2715B71E00421FBC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EC058792715B71E00421FBC /* Main.storyboard */; };
 		2EC0587D2715B71F00421FBC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EC0587C2715B71F00421FBC /* Assets.xcassets */; };
 		2EC058802715B71F00421FBC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EC0587E2715B71F00421FBC /* LaunchScreen.storyboard */; };
+		2EC058882715B7D700421FBC /* PracTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC058872715B7D700421FBC /* PracTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		2EC0587C2715B71F00421FBC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2EC0587F2715B71F00421FBC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2EC058812715B71F00421FBC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2EC058872715B7D700421FBC /* PracTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PracTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +62,7 @@
 				2EC058752715B71E00421FBC /* SceneDelegate.swift */,
 				2EC058772715B71E00421FBC /* ViewController.swift */,
 				2EC058792715B71E00421FBC /* Main.storyboard */,
+				2EC058872715B7D700421FBC /* PracTableViewController.swift */,
 				2EC0587C2715B71F00421FBC /* Assets.xcassets */,
 				2EC0587E2715B71F00421FBC /* LaunchScreen.storyboard */,
 				2EC058812715B71F00421FBC /* Info.plist */,
@@ -139,6 +142,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2EC058782715B71E00421FBC /* ViewController.swift in Sources */,
+				2EC058882715B7D700421FBC /* PracTableViewController.swift in Sources */,
 				2EC058742715B71E00421FBC /* AppDelegate.swift in Sources */,
 				2EC058762715B71E00421FBC /* SceneDelegate.swift in Sources */,
 			);
