@@ -13,6 +13,8 @@
 		2EC935FB27170816004D7F0E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EC935F927170816004D7F0E /* Main.storyboard */; };
 		2EC935FD27170818004D7F0E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EC935FC27170818004D7F0E /* Assets.xcassets */; };
 		2EC9360027170818004D7F0E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EC935FE27170818004D7F0E /* LaunchScreen.storyboard */; };
+		2EC9360827170862004D7F0E /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC9360727170862004D7F0E /* MainTableViewCell.swift */; };
+		2EC9361027170BA2004D7F0E /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC9360F27170BA2004D7F0E /* MainTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		2EC935FC27170818004D7F0E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2EC935FF27170818004D7F0E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2EC9360127170818004D7F0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2EC9360727170862004D7F0E /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
+		2EC9360F27170BA2004D7F0E /* MainTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +64,8 @@
 				2EC935F527170816004D7F0E /* SceneDelegate.swift */,
 				2EC935F727170816004D7F0E /* ViewController.swift */,
 				2EC935F927170816004D7F0E /* Main.storyboard */,
+				2EC9360F27170BA2004D7F0E /* MainTableViewController.swift */,
+				2EC9360727170862004D7F0E /* MainTableViewCell.swift */,
 				2EC935FC27170818004D7F0E /* Assets.xcassets */,
 				2EC935FE27170818004D7F0E /* LaunchScreen.storyboard */,
 				2EC9360127170818004D7F0E /* Info.plist */,
@@ -140,7 +146,9 @@
 			files = (
 				2EC935F827170816004D7F0E /* ViewController.swift in Sources */,
 				2EC935F427170816004D7F0E /* AppDelegate.swift in Sources */,
+				2EC9360827170862004D7F0E /* MainTableViewCell.swift in Sources */,
 				2EC935F627170816004D7F0E /* SceneDelegate.swift in Sources */,
+				2EC9361027170BA2004D7F0E /* MainTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
