@@ -9,10 +9,15 @@ import UIKit
 
 class MainTableViewController: UITableViewController {
 
+	struct ShoppingListStruct {
+		var isBought: Bool
+		var shoppingListText: String
+		var isFavorite: Bool
+	}
 	
-	var shoppingList: [String] = ["쇼핑리스트를 추가해 보세요"] {
+	var shoppingList = [ShoppingListStruct]() {
 		didSet {
-			tableView.reloadData()
+			saveData()
 		}
 	}
 	
@@ -33,13 +38,11 @@ class MainTableViewController: UITableViewController {
 		addButton.backgroundColor = .systemGray5
 		addButton.setAttributedTitle(NSAttributedString(string: "추가", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15)] ), for: .normal)
 		addButton.layer.cornerRadius = 8
-	
+		
+		loadData()
     }
 
-    // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 	
@@ -47,29 +50,90 @@ class MainTableViewController: UITableViewController {
 		return shoppingList.count
     }
 
-	@IBAction func buttonTouched(_ sender: UIButton) {
-		if mainTextField.text != ""  {
-			shoppingList.append(mainTextField.text!)
+	@IBAction func addButtonTouched(_ sender: UIButton) {
+		if let text = mainTextField.text {
+			let newList = ShoppingListStruct(isBought: false, shoppingListText: text, isFavorite: false)
+			shoppingList.append(newList)
+		} else {
+			print("Error at addButtonTouched")
 		}
+	}
+	
+	func loadData() {
+		let userDefaults = UserDefaults.standard
+		
+		if let data = userDefaults.object(forKey: "shoppingList") as? [[String:Any]] {
+			var list = [ShoppingListStruct]()
+			for datum in data {
+				guard let isBoughtValue = datum["isBought"] as? Bool else {return}
+				guard let shoppingListValue = datum["shoppingList"] as? String else {return}
+				guard let isFavoriteValue = datum["isFavorite"] as? Bool else {return}
+				list.append(ShoppingListStruct(isBought: isBoughtValue, shoppingListText: shoppingListValue, isFavorite: isFavoriteValue))
+			}
+			self.shoppingList = list
+		}
+	}
+	
+	func saveData() {
+		var list: [[String:Any]] = []
+		
+		for i in shoppingList {
+			let data: [String:Any] = [
+				"isBought": i.isBought,
+				"shoppingList": i.shoppingListText,
+				"isFavorite": i.isFavorite
+			]
+			list.append(data)
+		}
+		UserDefaults.standard.set(list, forKey: "shoppingList")
+		tableView.reloadData()
 	}
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		guard let cell = tableView.dequeueReusableCell(withIdentifier:  "MainTableViewCell", for: indexPath) as? MainTableViewCell  else {
 			return UITableViewCell()
 		}
+		if shoppingList[indexPath.row].isBought == true {
+			cell.checkButton.setImage(UIImage.init(systemName: "checkmark.square.fill"), for: .normal)
+		} else {
+			cell.checkButton.setImage(UIImage.init(systemName: "checkmark.square"), for: .normal)
+		}
 		
-		cell.checkButton.setImage(UIImage.init(systemName: "checkmark.square"), for: .normal)
+		if shoppingList[indexPath.row].isFavorite == true {
+			cell.starButton.setImage(UIImage.init(systemName: "star.fill"), for: .normal)
+		} else {
+			cell.starButton.setImage(UIImage.init(systemName: "star"), for: .normal)
+		}
+		
 		cell.checkButton.setTitle("", for: .normal)
-		
-		cell.starButton.setImage(UIImage.init(systemName: "star"), for: .normal)
 		cell.starButton.setTitle("", for: .normal)
-		
-		cell.toDoLabel.text = shoppingList[indexPath.row]
+		cell.toDoLabel.text = shoppingList[indexPath.row].shoppingListText
 		cell.toDoLabel.backgroundColor = .clear
 		cell.viewForCell.backgroundColor = .systemGray5
 		cell.viewForCell.layer.cornerRadius = 8
 		
 		return cell
+	}
+	@IBAction func checkButtonTouched(_ sender: UIButton) {
+		let buttonPosition = sender.convert(sender.bounds.origin, to: tableView)
+		if let indexPath = tableView.indexPathForRow(at: buttonPosition) {
+			if shoppingList[indexPath.row].isBought == true {
+				shoppingList[indexPath.row].isBought = false
+			} else {
+				shoppingList[indexPath.row].isBought = true
+			}
+		}
+	}
+	
+	@IBAction func starButtonTouched(_ sender: UIButton) {
+		let buttonPosition = sender.convert(sender.bounds.origin, to: tableView)
+		if let indexPath = tableView.indexPathForRow(at: buttonPosition) {
+			if shoppingList[indexPath.row].isFavorite == true {
+				shoppingList[indexPath.row].isFavorite = false
+			} else {
+				shoppingList[indexPath.row].isFavorite = true
+			}
+		}
 	}
 	
 	override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -81,9 +145,4 @@ class MainTableViewController: UITableViewController {
 			shoppingList.remove(at: indexPath.row)
 		}
 	}
-
-	
-	
-
-  
 }
