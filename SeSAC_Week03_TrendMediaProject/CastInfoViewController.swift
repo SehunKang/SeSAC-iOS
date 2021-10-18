@@ -6,16 +6,19 @@
 //
 
 import UIKit
+import Kingfisher
+import SwiftUI
 
 class CastInfoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-	var list = tvShow[whereAmI].starring.components(separatedBy: ", ")
+//	var castList: [String]
+//	var headerView: String
+	var list: TvShow?
 	
 	@IBOutlet weak var castTableView: UITableView!
 	
 	override func viewDidLoad() {
         super.viewDidLoad()
-		print(list)
 		castTableView.delegate = self
 		castTableView.dataSource = self
 		
@@ -28,7 +31,7 @@ class CastInfoViewController: UIViewController, UITableViewDelegate, UITableView
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return list.count
+		return list?.starring.components(separatedBy: ", ").count ?? 0
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -36,7 +39,7 @@ class CastInfoViewController: UIViewController, UITableViewDelegate, UITableView
 		
 		cell.castImage.backgroundColor = .black
 		cell.castImage.contentMode = .scaleAspectFit
-		cell.actorLabel.text = list[indexPath.row]
+		cell.actorLabel.text = list?.starring.components(separatedBy: ", ")[indexPath.row]
 		cell.actorLabel.textColor = .black
 		cell.castLabel.text = "starring"
 		
@@ -46,5 +49,16 @@ class CastInfoViewController: UIViewController, UITableViewDelegate, UITableView
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		return 100
 	}
+	
+	func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+		return (UIScreen.main.bounds.height / 4)
 
+	}
+	
+	func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+		let imageView = UIImageView()
+		let url = URL(string: list!.backdropImage)
+		imageView.kf.setImage(with: url)
+		return imageView
+	}
 }

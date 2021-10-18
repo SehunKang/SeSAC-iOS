@@ -18,4 +18,3 @@ struct TvShow {
 	var backdropImage: String
 }
 
-var whereAmI: Int = 0

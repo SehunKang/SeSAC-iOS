@@ -7,6 +7,11 @@
 
 import UIKit
 
+//UIButton.addtarget의 경우 다른 매개변수를 넣을 수 없어서 UIButton을 커스텀하여 값을 전달할수 있게 만들었다.
+class SubclassedUIButton: UIButton {
+	var showInfo: TvShow?
+}
+
 class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
 	@IBOutlet weak var mainTableView: UITableView!
@@ -61,9 +66,23 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 		cell.alikeContentsRecommendLabel.font = .systemFont(ofSize: 15)
 		cell.alikeContentsRecommendButton.setImage(UIImage(systemName: "chevron.right"), for: .normal)
 		cell.alikeContentsRecommendButton.tintColor = .black
-		
+		cell.webViewButton.showInfo = list[indexPath.section]
+		cell.webViewButton.setImage(UIImage(systemName: "paperclip.circle.fill"), for: .normal)
+		cell.webViewButton.tintColor = .white
+		cell.webViewButton.addTarget(self, action: #selector(webViewButtonTouched), for: .touchUpInside)
 		return cell
 	}
+	
+	@objc func webViewButtonTouched(sender: SubclassedUIButton) {
+		let sb = UIStoryboard(name: "Main", bundle: nil)
+		let vc = sb.instantiateViewController(withIdentifier: "WebViewController") as! WebViewController
+		//새로 열리는 창에 내비게이션컨트롤러를 사용할 수 있게 해줌
+		let navController = UINavigationController(rootViewController: vc)
+		vc.list = sender.showInfo
+		self.present(navController, animated: true, completion: nil)
+		
+	}
+	
 	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 		return ("#\(list[section].genre)")
 	}
@@ -85,10 +104,10 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 	}	
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		whereAmI = indexPath.section
 		let sb = UIStoryboard(name: "Main", bundle: nil)
 		let vc = sb.instantiateViewController(withIdentifier: "CastInfoViewController") as! CastInfoViewController
+		vc.list = list[indexPath.section]
 		navigationController?.pushViewController(vc, animated: true)
 	}
-
+		
 }
