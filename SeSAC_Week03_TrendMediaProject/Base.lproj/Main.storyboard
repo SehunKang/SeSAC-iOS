@@ -35,9 +35,19 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XZw-zB-Zge">
                                 <rect key="frame" x="20" y="168" width="374" height="100"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BcW-2c-il3">
+                                        <rect key="frame" x="287" y="20" width="47" height="60"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="book.fill" catalog="system"/>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" systemColor="systemBrownColor"/>
                                 <constraints>
+                                    <constraint firstItem="BcW-2c-il3" firstAttribute="top" secondItem="XZw-zB-Zge" secondAttribute="top" constant="20" id="Fil-mx-xBb"/>
                                     <constraint firstAttribute="height" constant="100" id="GCN-em-WyR"/>
+                                    <constraint firstAttribute="trailing" secondItem="BcW-2c-il3" secondAttribute="trailing" constant="40" id="eLc-Yw-cu2"/>
+                                    <constraint firstAttribute="bottom" secondItem="BcW-2c-il3" secondAttribute="bottom" constant="20" id="ymy-FA-V2h"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="MainTableView" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="2cA-H0-pNU">
@@ -399,6 +409,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="book.fill" catalog="system" width="128" height="95"/>
         <image name="list.bullet" catalog="system" width="128" height="88"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <systemColor name="systemBackgroundColor">

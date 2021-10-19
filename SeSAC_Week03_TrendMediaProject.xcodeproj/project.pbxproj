@@ -23,6 +23,8 @@
 		2E9B75B12719A2B300FC2F6D /* tvshowinfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9B75B02719A2B300FC2F6D /* tvshowinfo.swift */; };
 		2ED7EA85271D4625002EE340 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 2ED7EA84271D4625002EE340 /* Kingfisher */; };
 		2ED7EA87271D5A1D002EE340 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED7EA86271D5A1D002EE340 /* WebViewController.swift */; };
+		2ED7EAA0271E9394002EE340 /* AdditionalInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED7EA9E271E9394002EE340 /* AdditionalInfoTableViewCell.swift */; };
+		2ED7EAA1271E9394002EE340 /* AdditionalInfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2ED7EA9F271E9394002EE340 /* AdditionalInfoTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +45,8 @@
 		2E9B75AE271995AE00FC2F6D /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
 		2E9B75B02719A2B300FC2F6D /* tvshowinfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tvshowinfo.swift; sourceTree = "<group>"; };
 		2ED7EA86271D5A1D002EE340 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		2ED7EA9E271E9394002EE340 /* AdditionalInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalInfoTableViewCell.swift; sourceTree = "<group>"; };
+		2ED7EA9F271E9394002EE340 /* AdditionalInfoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdditionalInfoTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +92,8 @@
 				2E247FA6271AF95000882864 /* InfoTableViewCell.swift */,
 				2E9B75AA2719708500FC2F6D /* CastInfoViewController.swift */,
 				2E247FA8271B071400882864 /* CastInfoTableViewCell.swift */,
+				2ED7EA9F271E9394002EE340 /* AdditionalInfoTableViewCell.xib */,
+				2ED7EA9E271E9394002EE340 /* AdditionalInfoTableViewCell.swift */,
 				2ED7EA86271D5A1D002EE340 /* WebViewController.swift */,
 				2E9B759927196C3C00FC2F6D /* Assets.xcassets */,
 				2E9B759B27196C3C00FC2F6D /* LaunchScreen.storyboard */,
@@ -160,6 +166,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2ED7EAA1271E9394002EE340 /* AdditionalInfoTableViewCell.xib in Resources */,
 				2E9B759D27196C3C00FC2F6D /* LaunchScreen.storyboard in Resources */,
 				2E9B759A27196C3C00FC2F6D /* Assets.xcassets in Resources */,
 				2E9B759827196C3A00FC2F6D /* Main.storyboard in Resources */,
@@ -176,6 +183,7 @@
 				2E9B759527196C3A00FC2F6D /* ViewController.swift in Sources */,
 				2E247FA9271B071400882864 /* CastInfoTableViewCell.swift in Sources */,
 				2E247FA7271AF95000882864 /* InfoTableViewCell.swift in Sources */,
+				2ED7EAA0271E9394002EE340 /* AdditionalInfoTableViewCell.swift in Sources */,
 				2E9B75AF271995AE00FC2F6D /* MainTableViewCell.swift in Sources */,
 				2E9B75AD271990FD00FC2F6D /* Tvshow.swift in Sources */,
 				2E9B75B12719A2B300FC2F6D /* tvshowinfo.swift in Sources */,

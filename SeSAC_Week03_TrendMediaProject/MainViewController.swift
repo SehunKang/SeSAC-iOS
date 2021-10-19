@@ -83,6 +83,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 		
 	}
 	
+
 	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 		return ("#\(list[section].genre)")
 	}

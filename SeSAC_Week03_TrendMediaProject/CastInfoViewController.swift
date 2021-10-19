@@ -14,6 +14,7 @@ class CastInfoViewController: UIViewController, UITableViewDelegate, UITableView
 //	var castList: [String]
 //	var headerView: String
 	var list: TvShow?
+	var isAdditionalInfoButtonTouched = false
 	
 	@IBOutlet weak var castTableView: UITableView!
 	
@@ -22,43 +23,82 @@ class CastInfoViewController: UIViewController, UITableViewDelegate, UITableView
 		castTableView.delegate = self
 		castTableView.dataSource = self
 		
+		//xib파일 연결
+		let nibName = UINib(nibName: "AdditionalInfoTableViewCell", bundle: nil)
+		castTableView.register(nibName, forCellReuseIdentifier: "AdditionalInfoTableViewCell")
+		
 		navigationItem.leftBarButtonItem = UIBarButtonItem(title: "뒤로", style: .plain, target: self, action: #selector(backButtonTouched))
 		navigationItem.leftBarButtonItem?.tintColor = .black
+	
+		castTableView.rowHeight = UITableView.automaticDimension
     }
 	
 	@objc func backButtonTouched() {
 		navigationController?.popViewController(animated: true)
 	}
 	
-	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return list?.starring.components(separatedBy: ", ").count ?? 0
+	func numberOfSections(in tableView: UITableView) -> Int {
+		return 2
 	}
+	
+	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return section == 0 ? 1 : list?.starring.components(separatedBy: ", ").count ?? 0
+		}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		guard let cell = tableView.dequeueReusableCell(withIdentifier: "CastInfoTableViewCell", for: indexPath) as? CastInfoTableViewCell else {return UITableViewCell()}
-		
-		cell.castImage.backgroundColor = .black
-		cell.castImage.contentMode = .scaleAspectFit
-		cell.actorLabel.text = list?.starring.components(separatedBy: ", ")[indexPath.row]
-		cell.actorLabel.textColor = .black
-		cell.castLabel.text = "starring"
-		
-		return cell
+		if indexPath.section == 1 {
+			guard let cell = tableView.dequeueReusableCell(withIdentifier: "CastInfoTableViewCell", for: indexPath) as? CastInfoTableViewCell else {return UITableViewCell()}
+			cell.castImage.backgroundColor = .black
+			cell.castImage.contentMode = .scaleAspectFit
+			cell.actorLabel.text = list?.starring.components(separatedBy: ", ")[indexPath.row]
+			cell.actorLabel.textColor = .black
+			cell.castLabel.text = "starring"
+			return cell
+		} else {
+			guard let cell = tableView.dequeueReusableCell(withIdentifier: "AdditionalInfoTableViewCell", for: indexPath) as? AdditionalInfoTableViewCell else {return UITableViewCell()}
+			cell.tag = 0
+			cell.additionalInfoButton.tag = cell.tag
+			cell.additionalInfoLabel.text = list?.overview
+			cell.additionalInfoLabel.numberOfLines = 0
+			cell.additionalInfoButton.setImage(UIImage(systemName: isAdditionalInfoButtonTouched == true ? "chevron.up" : "chevron.down"), for: .normal)
+			cell.additionalInfoButton.addTarget(self, action: #selector(additionalInfoButtonTouched), for: .touchUpInside)
+			return cell
+		}
+
 	}
+	@objc func additionalInfoButtonTouched() {
+		isAdditionalInfoButtonTouched = !isAdditionalInfoButtonTouched
+		castTableView.reloadData()
+	}
+
+//	func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+//		return 1000
+//	}
 	
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-		return 100
+		if indexPath.section == 0 {
+			if isAdditionalInfoButtonTouched == true {
+				return UITableView.automaticDimension
+			} else {
+				return 100
+			}
+		} else {
+			return 100
+		}
 	}
 	
 	func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-		return (UIScreen.main.bounds.height / 4)
-
+		return section == 0 ? (UIScreen.main.bounds.height / 4) : 0
 	}
 	
 	func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-		let imageView = UIImageView()
-		let url = URL(string: list!.backdropImage)
-		imageView.kf.setImage(with: url)
-		return imageView
+		if section == 0 {
+			let imageView = UIImageView()
+			let url = URL(string: list!.backdropImage)
+			imageView.kf.setImage(with: url)
+			return imageView
+		} else {
+			return nil
+		}
 	}
 }
