@@ -14,6 +14,7 @@ class SubclassedUIButton: UIButton {
 
 class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+	@IBOutlet weak var bookButton: UIButton!
 	@IBOutlet weak var mainTableView: UITableView!
 	@IBOutlet weak var mainviewTitle: UILabel!
 	@IBOutlet weak var searchButton: UIBarButtonItem!
@@ -31,7 +32,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 		mainviewTitle.font = .boldSystemFont(ofSize: 30)
 		searchButton.image = UIImage(systemName: "magnifyingglass")
 		searchButton.tintColor = .black
-		
+
     }
 	
 	func numberOfSections(in tableView: UITableView) -> Int {
@@ -82,7 +83,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 		self.present(navController, animated: true, completion: nil)
 		
 	}
-	
 
 	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 		return ("#\(list[section].genre)")
@@ -94,6 +94,13 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 	
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		return (UIScreen.main.bounds.height * 0.5)
+	}
+	
+	@IBAction func bookButtonTouched(_ sender: Any) {
+		let sb = UIStoryboard(name: "Main", bundle: nil)
+		let vc = sb.instantiateViewController(withIdentifier: "BookTableViewController") as! BookTableViewController
+		vc.list = list
+		navigationController?.pushViewController(vc, animated: true)
 	}
 	
 	@IBAction func searchButtonTouched(_ sender: Any) {

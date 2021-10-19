@@ -5,6 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -39,7 +40,10 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BcW-2c-il3">
                                         <rect key="frame" x="287" y="20" width="47" height="60"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="book.fill" catalog="system"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="book.fill" catalog="system" imagePadding="0.0"/>
+                                        <connections>
+                                            <action selector="bookButtonTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1YN-6f-5Mu"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBrownColor"/>
@@ -196,6 +200,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="bookButton" destination="BcW-2c-il3" id="1HD-tQ-ady"/>
                         <outlet property="mainTableView" destination="2cA-H0-pNU" id="9i5-lp-guF"/>
                         <outlet property="mainviewTitle" destination="byH-fl-gWK" id="8bi-EM-A4E"/>
                         <outlet property="searchButton" destination="bba-eZ-4jl" id="rMq-et-3Jw"/>
@@ -406,6 +411,60 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8UA-P4-hQ9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3267" y="110"/>
+        </scene>
+        <!--Book Table View Controller-->
+        <scene sceneID="lNQ-dU-AlU">
+            <objects>
+                <viewController storyboardIdentifier="BookTableViewController" id="KWE-7w-Z2I" customClass="BookTableViewController" customModule="SeSAC_Week03_TrendMediaProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="SqN-He-9ss">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Dyq-Sp-ve3">
+                                <rect key="frame" x="20" y="52" width="374" height="810"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="WkS-Rn-hrp">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Asg-Eq-z2E">
+                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ooU-ej-kTs">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="yFv-S9-sH6">
+                                        <rect key="frame" x="246" y="0.0" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ZBu-xM-UhY">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="04c-2K-anm"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Dyq-Sp-ve3" firstAttribute="leading" secondItem="04c-2K-anm" secondAttribute="leading" constant="20" id="5BX-ut-jjc"/>
+                            <constraint firstItem="04c-2K-anm" firstAttribute="bottom" secondItem="Dyq-Sp-ve3" secondAttribute="bottom" id="CbQ-Hm-9FQ"/>
+                            <constraint firstItem="Dyq-Sp-ve3" firstAttribute="top" secondItem="04c-2K-anm" secondAttribute="top" constant="8" id="Mn2-tO-lZe"/>
+                            <constraint firstItem="04c-2K-anm" firstAttribute="trailing" secondItem="Dyq-Sp-ve3" secondAttribute="trailing" constant="20" id="T3v-gL-gxa"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="bookCollectionView" destination="Dyq-Sp-ve3" id="Jh7-6G-wNd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mhS-3H-IkO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4016" y="110"/>
         </scene>
     </scenes>
     <resources>
