@@ -190,9 +190,16 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="TREND MEDIA" id="020-Jb-8O3">
-                        <barButtonItem key="leftBarButtonItem" title="Item" image="list.bullet" catalog="system" id="bsw-5T-iRc">
-                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </barButtonItem>
+                        <leftBarButtonItems>
+                            <barButtonItem title="Item" image="list.bullet" catalog="system" id="bsw-5T-iRc">
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </barButtonItem>
+                            <barButtonItem title="Item" id="DeR-0B-8rz">
+                                <connections>
+                                    <action selector="mapButtonTouched:" destination="BYZ-38-t0r" id="lZb-qp-yEe"/>
+                                </connections>
+                            </barButtonItem>
+                        </leftBarButtonItems>
                         <barButtonItem key="rightBarButtonItem" image="magnifyingglass" catalog="system" id="bba-eZ-4jl">
                             <connections>
                                 <action selector="searchButtonTouched:" destination="BYZ-38-t0r" id="xTj-Ns-NQM"/>
@@ -203,6 +210,7 @@
                         <outlet property="bookButton" destination="BcW-2c-il3" id="1HD-tQ-ady"/>
                         <outlet property="mainTableView" destination="2cA-H0-pNU" id="9i5-lp-guF"/>
                         <outlet property="mainviewTitle" destination="byH-fl-gWK" id="8bi-EM-A4E"/>
+                        <outlet property="mapButton" destination="DeR-0B-8rz" id="rTL-ik-FB5"/>
                         <outlet property="searchButton" destination="bba-eZ-4jl" id="rMq-et-3Jw"/>
                     </connections>
                 </viewController>
@@ -465,6 +473,35 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mhS-3H-IkO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4016" y="110"/>
+        </scene>
+        <!--Map View Controller-->
+        <scene sceneID="aeu-Rd-N3E">
+            <objects>
+                <viewController storyboardIdentifier="MapViewController" id="UUU-3d-mac" customClass="MapViewController" customModule="SeSAC_Week03_TrendMediaProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="n4B-yd-N49">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="blz-ky-Obi">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                            </mapView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Ktb-pm-C9y"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Ktb-pm-C9y" firstAttribute="trailing" secondItem="blz-ky-Obi" secondAttribute="trailing" id="QxV-5k-whl"/>
+                            <constraint firstItem="Ktb-pm-C9y" firstAttribute="bottom" secondItem="blz-ky-Obi" secondAttribute="bottom" id="b7i-3I-mNf"/>
+                            <constraint firstItem="blz-ky-Obi" firstAttribute="top" secondItem="Ktb-pm-C9y" secondAttribute="top" id="iP4-jB-b29"/>
+                            <constraint firstItem="blz-ky-Obi" firstAttribute="leading" secondItem="Ktb-pm-C9y" secondAttribute="leading" id="rDl-L7-LY1"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="blz-ky-Obi" id="cwZ-dw-clI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S5L-9I-dwp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4768" y="110"/>
         </scene>
     </scenes>
     <resources>

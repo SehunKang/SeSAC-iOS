@@ -18,3 +18,10 @@ struct TvShow {
 	var backdropImage: String
 }
 
+struct TheaterLocation {
+	var type: String
+	var location: String
+	var latitude: Double
+	var longitude: Double
+}
+

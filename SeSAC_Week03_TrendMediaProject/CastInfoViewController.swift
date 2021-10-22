@@ -17,7 +17,7 @@ class CastInfoViewController: UIViewController, UITableViewDelegate, UITableView
 	var isAdditionalInfoButtonTouched = false
 	
 	@IBOutlet weak var castTableView: UITableView!
-	
+
 	override func viewDidLoad() {
         super.viewDidLoad()
 		castTableView.delegate = self
@@ -59,7 +59,7 @@ class CastInfoViewController: UIViewController, UITableViewDelegate, UITableView
 			cell.tag = 0
 			cell.additionalInfoButton.tag = cell.tag
 			cell.additionalInfoLabel.text = list?.overview
-			cell.additionalInfoLabel.numberOfLines = 0
+			cell.additionalInfoLabel.numberOfLines = isAdditionalInfoButtonTouched ? 0 : 2
 			cell.additionalInfoButton.setImage(UIImage(systemName: isAdditionalInfoButtonTouched == true ? "chevron.up" : "chevron.down"), for: .normal)
 			cell.additionalInfoButton.addTarget(self, action: #selector(additionalInfoButtonTouched), for: .touchUpInside)
 			return cell
@@ -68,13 +68,14 @@ class CastInfoViewController: UIViewController, UITableViewDelegate, UITableView
 	}
 	@objc func additionalInfoButtonTouched() {
 		isAdditionalInfoButtonTouched = !isAdditionalInfoButtonTouched
-		castTableView.reloadData()
+		castTableView.reloadRows(at: [IndexPath(item: 0, section: 0)], with: .fade)
+		
 	}
 
 //	func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
 //		return 1000
 //	}
-	
+//아래의 메서드가 viewdidload에서의 rowheight프러퍼티보다 더 높은 우선순위를 가진다
 	func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 		if indexPath.section == 0 {
 			if isAdditionalInfoButtonTouched == true {

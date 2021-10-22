@@ -18,6 +18,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 	@IBOutlet weak var mainTableView: UITableView!
 	@IBOutlet weak var mainviewTitle: UILabel!
 	@IBOutlet weak var searchButton: UIBarButtonItem!
+	@IBOutlet weak var mapButton: UIBarButtonItem!
 	
 	var list = tvShow
 	
@@ -32,7 +33,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 		mainviewTitle.font = .boldSystemFont(ofSize: 30)
 		searchButton.image = UIImage(systemName: "magnifyingglass")
 		searchButton.tintColor = .black
-
+		mapButton.image = UIImage(systemName: "map")
+		mapButton.tintColor = .black
     }
 	
 	func numberOfSections(in tableView: UITableView) -> Int {
@@ -109,7 +111,15 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 		let navController = UINavigationController(rootViewController: vc)
 		vc.modalPresentationStyle = .fullScreen
 		self.present(navController, animated: true, completion: nil)
-	}	
+	}
+	
+	@IBAction func mapButtonTouched(_ sender: UIBarButtonItem) {
+		let sb = UIStoryboard(name: "Main", bundle: nil)
+		let vc = sb.instantiateViewController(withIdentifier: "MapViewController") as! MapViewController
+		navigationController?.pushViewController(vc, animated: true)
+		
+	}
+	
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		let sb = UIStoryboard(name: "Main", bundle: nil)
