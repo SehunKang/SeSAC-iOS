@@ -27,7 +27,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemPinkColor"/>
+                                <color key="backgroundColor" red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="byH-fl-gWK" secondAttribute="bottom" constant="60" id="Pxq-bC-4aQ"/>
                                     <constraint firstAttribute="height" constant="120" id="RLf-yO-JQD"/>
@@ -38,24 +38,57 @@
                                 <rect key="frame" x="20" y="168" width="374" height="100"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BcW-2c-il3">
-                                        <rect key="frame" x="287" y="20" width="47" height="60"/>
+                                        <rect key="frame" x="254" y="8" width="112.5" height="84"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="book.fill" catalog="system" imagePadding="0.0"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="book.closed" catalog="system" imagePadding="0.0">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="50"/>
+                                            <color key="baseForegroundColor" systemColor="systemBlueColor"/>
+                                        </buttonConfiguration>
                                         <connections>
                                             <action selector="bookButtonTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1YN-6f-5Mu"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9fR-NT-Xd1">
+                                        <rect key="frame" x="131" y="8" width="112" height="84"/>
+                                        <state key="normal" title="Button" image="tv" catalog="system">
+                                            <color key="titleColor" systemColor="systemYellowColor"/>
+                                        </state>
+                                        <buttonConfiguration key="configuration" style="plain" image="tv" catalog="system" imagePadding="0.0">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="50" scale="default"/>
+                                            <color key="baseForegroundColor" systemColor="systemYellowColor"/>
+                                        </buttonConfiguration>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sMc-Bz-aba">
+                                        <rect key="frame" x="7.5" y="8" width="112.5" height="84"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" image="film" catalog="system" imagePadding="0.0">
+                                            <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="50"/>
+                                            <color key="baseForegroundColor" systemColor="systemGreenColor"/>
+                                        </buttonConfiguration>
+                                    </button>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBrownColor"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="BcW-2c-il3" firstAttribute="top" secondItem="XZw-zB-Zge" secondAttribute="top" constant="20" id="Fil-mx-xBb"/>
+                                    <constraint firstItem="BcW-2c-il3" firstAttribute="top" secondItem="XZw-zB-Zge" secondAttribute="top" constant="8" id="1ap-Df-wYl"/>
+                                    <constraint firstItem="9fR-NT-Xd1" firstAttribute="leading" secondItem="sMc-Bz-aba" secondAttribute="trailing" constant="11" id="4Lt-lz-r7Z"/>
+                                    <constraint firstItem="9fR-NT-Xd1" firstAttribute="width" secondItem="XZw-zB-Zge" secondAttribute="width" multiplier="0.3" id="9rJ-6h-FF1"/>
+                                    <constraint firstAttribute="bottom" secondItem="BcW-2c-il3" secondAttribute="bottom" constant="8" id="DAJ-9O-s9C"/>
                                     <constraint firstAttribute="height" constant="100" id="GCN-em-WyR"/>
-                                    <constraint firstAttribute="trailing" secondItem="BcW-2c-il3" secondAttribute="trailing" constant="40" id="eLc-Yw-cu2"/>
-                                    <constraint firstAttribute="bottom" secondItem="BcW-2c-il3" secondAttribute="bottom" constant="20" id="ymy-FA-V2h"/>
+                                    <constraint firstItem="BcW-2c-il3" firstAttribute="centerY" secondItem="XZw-zB-Zge" secondAttribute="centerY" id="GeS-Ea-nWx"/>
+                                    <constraint firstItem="sMc-Bz-aba" firstAttribute="top" secondItem="XZw-zB-Zge" secondAttribute="top" constant="8" id="NlH-qH-Dxq"/>
+                                    <constraint firstItem="BcW-2c-il3" firstAttribute="leading" secondItem="9fR-NT-Xd1" secondAttribute="trailing" constant="11" id="aSH-cU-8Nr"/>
+                                    <constraint firstItem="9fR-NT-Xd1" firstAttribute="centerY" secondItem="XZw-zB-Zge" secondAttribute="centerY" id="aeb-mj-o8Z"/>
+                                    <constraint firstAttribute="bottom" secondItem="9fR-NT-Xd1" secondAttribute="bottom" constant="8" id="d8P-sI-AZJ"/>
+                                    <constraint firstItem="9fR-NT-Xd1" firstAttribute="top" secondItem="XZw-zB-Zge" secondAttribute="top" constant="8" id="fo2-qg-68h"/>
+                                    <constraint firstItem="9fR-NT-Xd1" firstAttribute="centerX" secondItem="XZw-zB-Zge" secondAttribute="centerX" id="iEP-W8-X0Y"/>
+                                    <constraint firstItem="sMc-Bz-aba" firstAttribute="width" secondItem="XZw-zB-Zge" secondAttribute="width" multiplier="0.3" id="n6b-6E-52X"/>
+                                    <constraint firstItem="sMc-Bz-aba" firstAttribute="centerY" secondItem="XZw-zB-Zge" secondAttribute="centerY" id="noI-ir-HkJ"/>
+                                    <constraint firstAttribute="bottom" secondItem="sMc-Bz-aba" secondAttribute="bottom" constant="8" id="q8a-uG-6sO"/>
+                                    <constraint firstItem="BcW-2c-il3" firstAttribute="width" secondItem="XZw-zB-Zge" secondAttribute="width" multiplier="0.3" id="rg6-6s-avk"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="MainTableView" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="2cA-H0-pNU">
-                                <rect key="frame" x="20" y="328" width="374" height="568"/>
+                                <rect key="frame" x="20" y="268" width="374" height="628"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MainTableViewCell" rowHeight="333" id="1Cv-pt-N9E" customClass="MainTableViewCell" customModule="SeSAC_Week03_TrendMediaProject" customModuleProvider="target">
@@ -179,14 +212,14 @@
                             <constraint firstItem="XZw-zB-Zge" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="3v0-wo-yLf"/>
                             <constraint firstItem="rtz-jr-Pm5" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="4Iy-ip-KHw"/>
                             <constraint firstItem="XZw-zB-Zge" firstAttribute="centerX" secondItem="byH-fl-gWK" secondAttribute="centerX" id="7xZ-XG-fBW"/>
-                            <constraint firstItem="2cA-H0-pNU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="9cv-Y3-MjQ"/>
-                            <constraint firstAttribute="bottom" secondItem="2cA-H0-pNU" secondAttribute="bottom" id="Ffu-a0-hog"/>
+                            <constraint firstAttribute="bottom" secondItem="2cA-H0-pNU" secondAttribute="bottom" id="ErZ-LN-HLY"/>
+                            <constraint firstItem="2cA-H0-pNU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Hbf-tp-okm"/>
                             <constraint firstItem="XZw-zB-Zge" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="80" id="Qg0-E8-MHs"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="2cA-H0-pNU" secondAttribute="trailing" constant="20" id="YGv-m5-kbK"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="XZw-zB-Zge" secondAttribute="trailing" constant="20" id="bmE-a7-cnw"/>
-                            <constraint firstItem="2cA-H0-pNU" firstAttribute="top" secondItem="XZw-zB-Zge" secondAttribute="bottom" constant="60" id="daS-gF-uPB"/>
+                            <constraint firstItem="2cA-H0-pNU" firstAttribute="top" secondItem="XZw-zB-Zge" secondAttribute="bottom" id="cQ4-Yr-uzw"/>
                             <constraint firstItem="rtz-jr-Pm5" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="hrt-Bs-JQJ"/>
                             <constraint firstItem="XZw-zB-Zge" firstAttribute="trailing" secondItem="byH-fl-gWK" secondAttribute="trailing" id="qmZ-Kn-dZs"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="2cA-H0-pNU" secondAttribute="trailing" constant="20" id="y2X-6Z-otb"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="TREND MEDIA" id="020-Jb-8O3">
@@ -212,6 +245,7 @@
                         <outlet property="mainviewTitle" destination="byH-fl-gWK" id="8bi-EM-A4E"/>
                         <outlet property="mapButton" destination="DeR-0B-8rz" id="rTL-ik-FB5"/>
                         <outlet property="searchButton" destination="bba-eZ-4jl" id="rMq-et-3Jw"/>
+                        <outlet property="viewOfThreeButtons" destination="XZw-zB-Zge" id="SFf-El-KU9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -505,17 +539,22 @@
         </scene>
     </scenes>
     <resources>
-        <image name="book.fill" catalog="system" width="128" height="95"/>
+        <image name="book.closed" catalog="system" width="115" height="128"/>
+        <image name="film" catalog="system" width="128" height="93"/>
         <image name="list.bullet" catalog="system" width="128" height="88"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+        <image name="tv" catalog="system" width="128" height="97"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
-        <systemColor name="systemBrownColor">
-            <color red="0.63529411764705879" green="0.51764705882352946" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
-        <systemColor name="systemPinkColor">
-            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -14,6 +14,7 @@ class SubclassedUIButton: UIButton {
 
 class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+	@IBOutlet weak var viewOfThreeButtons: UIView!
 	@IBOutlet weak var bookButton: UIButton!
 	@IBOutlet weak var mainTableView: UITableView!
 	@IBOutlet weak var mainviewTitle: UILabel!
@@ -25,9 +26,10 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 	override func viewDidLoad() {
         super.viewDidLoad()
 		
+		viewOfThreeButtons.layer.cornerRadius = 8
 		mainTableView.delegate = self
 		mainTableView.dataSource = self
-		mainviewTitle.text = "OH JACK!"
+		mainviewTitle.text = "MAIN TITLE"
 		mainviewTitle.textColor = .white
 		mainviewTitle.textAlignment = .center
 		mainviewTitle.font = .boldSystemFont(ofSize: 30)
