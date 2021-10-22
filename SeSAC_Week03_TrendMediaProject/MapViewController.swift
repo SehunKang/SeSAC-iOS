@@ -25,11 +25,13 @@ class MapViewController: UIViewController {
 		mapView.delegate = self
 		locationManager.delegate = self
 		
+	
 		setDefaultLocation()
 		setTheatreAnnotation(type: "all")
 		showAlert()
 		checkUsersLocationServicesAuthorization()
-    }
+		
+	}
 	
 	func setDefaultLocation() {
 		let location = CLLocationCoordinate2D(latitude: 37.566385167896016, longitude: 126.9779657721714)
@@ -40,27 +42,52 @@ class MapViewController: UIViewController {
 	
 	@objc
 	func showAlert() {
-		let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-		let all = UIAlertAction(title: "전체보기", style: .default) { _ in
-			self.setTheatreAnnotation(type: "all")
-		}
-		let lotte = UIAlertAction(title: "롯데시네마", style: .default) { _ in
-			self.setTheatreAnnotation(type: "롯데시네마")
-		}
-		let megabox = UIAlertAction(title: "메가박스", style: .default) { _ in
-			self.setTheatreAnnotation(type: "메가박스")
-		}
-		let cgv = UIAlertAction(title: "CGV", style: .default) { _ in
-			self.setTheatreAnnotation(type: "CGV")
-		}
-		let cancel = UIAlertAction(title: "취소", style: .cancel)
-		alert.addAction(lotte)
-		alert.addAction(megabox)
-		alert.addAction(cgv)
-		alert.addAction(all)
-		alert.addAction(cancel)
 		
-		self.present(alert, animated: true)
+		let authorizationStatus: CLAuthorizationStatus
+		if #available(iOS 14.0, *) {
+			authorizationStatus = locationManager.authorizationStatus
+		} else {
+			authorizationStatus = CLLocationManager.authorizationStatus()
+		}
+
+		if CLLocationManager.locationServicesEnabled() && (authorizationStatus == CLAuthorizationStatus.authorizedWhenInUse || authorizationStatus == CLAuthorizationStatus.authorizedAlways ){
+	
+			let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+			let all = UIAlertAction(title: "전체보기", style: .default) { _ in
+				self.setTheatreAnnotation(type: "all")
+			}
+			let lotte = UIAlertAction(title: "롯데시네마", style: .default) { _ in
+				self.setTheatreAnnotation(type: "롯데시네마")
+			}
+			let megabox = UIAlertAction(title: "메가박스", style: .default) { _ in
+				self.setTheatreAnnotation(type: "메가박스")
+			}
+			let cgv = UIAlertAction(title: "CGV", style: .default) { _ in
+				self.setTheatreAnnotation(type: "CGV")
+			}
+			let cancel = UIAlertAction(title: "취소", style: .cancel)
+			alert.addAction(lotte)
+			alert.addAction(megabox)
+			alert.addAction(cgv)
+			alert.addAction(all)
+			alert.addAction(cancel)
+			
+			self.present(alert, animated: true)
+
+		} else {
+			let alert = UIAlertController(title: "위치서비스", message: "디바이스의 위치서비스를 사용하시겠습니까? ", preferredStyle: .alert)
+			let ok = UIAlertAction(title: "예", style: .default) { _ in
+				guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+				if UIApplication.shared.canOpenURL(url) {
+					UIApplication.shared.open(url)
+				}
+			}
+			let no = UIAlertAction(title: "아니오", style: .cancel, handler: nil)
+			alert.addAction(ok)
+			alert.addAction(no)
+			self.present(alert, animated: true)
+		}
+		
 	}
     
 	func setTheatreAnnotation(type: String) {
@@ -104,7 +131,7 @@ extension MapViewController: CLLocationManagerDelegate, MKMapViewDelegate {
 		switch authorizationStatus {
 		case .notDetermined:
 			locationManager.desiredAccuracy = kCLLocationAccuracyBest
-			locationManager.requestWhenInUseAuthorization()
+			locationManager.requestWhenInUseAuthorization() // OS레벨에서 한번만 물어본다 하는듯, 재요청 불가. 질문할것
 			locationManager.startUpdatingLocation()
 		case .restricted, .denied:
 			print("restricted, denied")
@@ -168,6 +195,14 @@ extension MapViewController: CLLocationManagerDelegate, MKMapViewDelegate {
 		getCurrentAddress(location: CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude))
 		locationManager.stopUpdatingLocation()
 		}
+	
+	func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+		checkUsersLocationServicesAuthorization()
+	}
+	
+	func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+		checkUsersLocationServicesAuthorization()
+	}
 	
 	func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
 		print(error)
