@@ -13,6 +13,11 @@
 		2ECFC1EA272C19950046A938 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2ECFC1E8272C19950046A938 /* Main.storyboard */; };
 		2ECFC1EC272C19970046A938 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2ECFC1EB272C19970046A938 /* Assets.xcassets */; };
 		2ECFC1EF272C19970046A938 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2ECFC1ED272C19970046A938 /* LaunchScreen.storyboard */; };
+		2ECFC1F7272C19D20046A938 /* BoxOfficeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECFC1F6272C19D20046A938 /* BoxOfficeViewController.swift */; };
+		2ECFC1F9272C1A200046A938 /* BoxOfficeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECFC1F8272C1A200046A938 /* BoxOfficeTableViewCell.swift */; };
+		2ECFC1FB272C22830046A938 /* BoxOfficeApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECFC1FA272C22830046A938 /* BoxOfficeApiManager.swift */; };
+		2ECFC208272C30540046A938 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 2ECFC207272C30540046A938 /* Alamofire */; };
+		2ECFC20B272C305B0046A938 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = 2ECFC20A272C305B0046A938 /* SwiftyJSON */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +29,9 @@
 		2ECFC1EB272C19970046A938 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2ECFC1EE272C19970046A938 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2ECFC1F0272C19970046A938 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2ECFC1F6272C19D20046A938 /* BoxOfficeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeViewController.swift; sourceTree = "<group>"; };
+		2ECFC1F8272C1A200046A938 /* BoxOfficeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeTableViewCell.swift; sourceTree = "<group>"; };
+		2ECFC1FA272C22830046A938 /* BoxOfficeApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxOfficeApiManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +39,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2ECFC20B272C305B0046A938 /* SwiftyJSON in Frameworks */,
+				2ECFC208272C30540046A938 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,6 +70,9 @@
 				2ECFC1E4272C19950046A938 /* SceneDelegate.swift */,
 				2ECFC1E6272C19950046A938 /* ViewController.swift */,
 				2ECFC1E8272C19950046A938 /* Main.storyboard */,
+				2ECFC1F6272C19D20046A938 /* BoxOfficeViewController.swift */,
+				2ECFC1FA272C22830046A938 /* BoxOfficeApiManager.swift */,
+				2ECFC1F8272C1A200046A938 /* BoxOfficeTableViewCell.swift */,
 				2ECFC1EB272C19970046A938 /* Assets.xcassets */,
 				2ECFC1ED272C19970046A938 /* LaunchScreen.storyboard */,
 				2ECFC1F0272C19970046A938 /* Info.plist */,
@@ -83,6 +96,10 @@
 			dependencies = (
 			);
 			name = SeSAC_BoxOfficeProject;
+			packageProductDependencies = (
+				2ECFC207272C30540046A938 /* Alamofire */,
+				2ECFC20A272C305B0046A938 /* SwiftyJSON */,
+			);
 			productName = SeSAC_BoxOfficeProject;
 			productReference = 2ECFC1DF272C19950046A938 /* SeSAC_BoxOfficeProject.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +128,10 @@
 				Base,
 			);
 			mainGroup = 2ECFC1D6272C19950046A938;
+			packageReferences = (
+				2ECFC206272C30540046A938 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				2ECFC209272C305B0046A938 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
+			);
 			productRefGroup = 2ECFC1E0272C19950046A938 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -138,8 +159,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2ECFC1F7272C19D20046A938 /* BoxOfficeViewController.swift in Sources */,
+				2ECFC1F9272C1A200046A938 /* BoxOfficeTableViewCell.swift in Sources */,
 				2ECFC1E7272C19950046A938 /* ViewController.swift in Sources */,
 				2ECFC1E3272C19950046A938 /* AppDelegate.swift in Sources */,
+				2ECFC1FB272C22830046A938 /* BoxOfficeApiManager.swift in Sources */,
 				2ECFC1E5272C19950046A938 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -358,6 +382,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2ECFC206272C30540046A938 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+		2ECFC209272C305B0046A938 /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2ECFC207272C30540046A938 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2ECFC206272C30540046A938 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		2ECFC20A272C305B0046A938 /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2ECFC209272C305B0046A938 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2ECFC1D7272C19950046A938 /* Project object */;
 }
