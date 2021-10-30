@@ -19,7 +19,7 @@ class MainTableViewCell: UITableViewCell {
 	@IBOutlet weak var alikeContentsRecommendView: UIView!
 	@IBOutlet weak var alikeContentsRecommendButton: UIButton!
 	@IBOutlet weak var alikeContentsRecommendLabel: UILabel!
-	@IBOutlet weak var webViewButton: SubclassedUIButton!
+	@IBOutlet weak var webViewButton: UIButton!
 	
     override func awakeFromNib() {
         super.awakeFromNib()

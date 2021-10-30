@@ -14,6 +14,9 @@ class CastInfoViewController: UIViewController, UITableViewDelegate, UITableView
 //	var castList: [String]
 //	var headerView: String
 	var list: TvShow?
+	
+	var detailedInfo: DetailedTvInfo?
+	
 	var isAdditionalInfoButtonTouched = false
 	
 	@IBOutlet weak var castTableView: UITableView!
@@ -42,7 +45,7 @@ class CastInfoViewController: UIViewController, UITableViewDelegate, UITableView
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return section == 0 ? 1 : list?.starring.components(separatedBy: ", ").count ?? 0
+		return section == 0 ? 1 : detailedInfo?.cast.count ?? 0
 		}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -50,15 +53,17 @@ class CastInfoViewController: UIViewController, UITableViewDelegate, UITableView
 			guard let cell = tableView.dequeueReusableCell(withIdentifier: "CastInfoTableViewCell", for: indexPath) as? CastInfoTableViewCell else {return UITableViewCell()}
 			cell.castImage.backgroundColor = .black
 			cell.castImage.contentMode = .scaleAspectFit
-			cell.actorLabel.text = list?.starring.components(separatedBy: ", ")[indexPath.row]
+			let url = URL(string: "https://image.tmdb.org/t/p/w300\(detailedInfo!.actorImageURL[indexPath.row])")
+			cell.castImage.kf.setImage(with: url)
+			cell.actorLabel.text = detailedInfo?.actor[indexPath.row]
 			cell.actorLabel.textColor = .black
-			cell.castLabel.text = "starring"
+			cell.castLabel.text = detailedInfo?.cast[indexPath.row]
 			return cell
 		} else {
 			guard let cell = tableView.dequeueReusableCell(withIdentifier: "AdditionalInfoTableViewCell", for: indexPath) as? AdditionalInfoTableViewCell else {return UITableViewCell()}
 			cell.tag = 0
 			cell.additionalInfoButton.tag = cell.tag
-			cell.additionalInfoLabel.text = list?.overview
+			cell.additionalInfoLabel.text = detailedInfo!.overview
 			cell.additionalInfoLabel.numberOfLines = isAdditionalInfoButtonTouched ? 0 : 2
 			cell.additionalInfoButton.setImage(UIImage(systemName: isAdditionalInfoButtonTouched == true ? "chevron.up" : "chevron.down"), for: .normal)
 			cell.additionalInfoButton.addTarget(self, action: #selector(additionalInfoButtonTouched), for: .touchUpInside)
@@ -95,7 +100,7 @@ class CastInfoViewController: UIViewController, UITableViewDelegate, UITableView
 	func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 		if section == 0 {
 			let imageView = UIImageView()
-			let url = URL(string: list!.backdropImage)
+			let url = URL(string: "https://image.tmdb.org/t/p/w300\(detailedInfo!.backdropImageUrl)")
 			imageView.kf.setImage(with: url)
 			return imageView
 		} else {
