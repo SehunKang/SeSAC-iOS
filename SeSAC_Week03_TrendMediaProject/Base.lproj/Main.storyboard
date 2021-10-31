@@ -164,8 +164,11 @@
                                                         <constraint firstAttribute="width" constant="30" id="hGy-CR-Le5"/>
                                                         <constraint firstAttribute="height" constant="30" id="uI2-Lu-sYl"/>
                                                     </constraints>
+                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                     <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="plain"/>
+                                                    <buttonConfiguration key="configuration" style="plain" image="paperclip" catalog="system">
+                                                        <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" configurationType="pointSize" pointSize="22"/>
+                                                    </buttonConfiguration>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -445,10 +448,29 @@
                     <view key="view" contentMode="scaleToFill" id="2cJ-oW-5UB">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g9Y-NB-LdY">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Ejf-2r-D2z"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Ejf-2r-D2z" firstAttribute="bottom" secondItem="g9Y-NB-LdY" secondAttribute="bottom" id="DWu-By-KfJ"/>
+                            <constraint firstItem="g9Y-NB-LdY" firstAttribute="leading" secondItem="Ejf-2r-D2z" secondAttribute="leading" id="LBt-mR-zwc"/>
+                            <constraint firstItem="g9Y-NB-LdY" firstAttribute="top" secondItem="Ejf-2r-D2z" secondAttribute="top" id="Nn2-mP-xQY"/>
+                            <constraint firstItem="Ejf-2r-D2z" firstAttribute="trailing" secondItem="g9Y-NB-LdY" secondAttribute="trailing" id="V0R-Mk-oh4"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="7We-6a-n5U"/>
+                    <connections>
+                        <outlet property="webView" destination="g9Y-NB-LdY" id="g2C-EW-HkX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8UA-P4-hQ9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -543,6 +565,7 @@
         <image name="film" catalog="system" width="128" height="93"/>
         <image name="list.bullet" catalog="system" width="128" height="88"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+        <image name="paperclip" catalog="system" width="121" height="128"/>
         <image name="tv" catalog="system" width="128" height="97"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

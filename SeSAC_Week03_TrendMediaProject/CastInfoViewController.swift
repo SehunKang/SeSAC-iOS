@@ -45,7 +45,7 @@ class CastInfoViewController: UIViewController, UITableViewDelegate, UITableView
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return section == 0 ? 1 : detailedInfo?.cast.count ?? 0
+		return section == 0 ? 1 : detailedInfo?.character.count ?? 0
 		}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -57,7 +57,7 @@ class CastInfoViewController: UIViewController, UITableViewDelegate, UITableView
 			cell.castImage.kf.setImage(with: url)
 			cell.actorLabel.text = detailedInfo?.actor[indexPath.row]
 			cell.actorLabel.textColor = .black
-			cell.castLabel.text = detailedInfo?.cast[indexPath.row]
+			cell.castLabel.text = detailedInfo?.character[indexPath.row]
 			return cell
 		} else {
 			guard let cell = tableView.dequeueReusableCell(withIdentifier: "AdditionalInfoTableViewCell", for: indexPath) as? AdditionalInfoTableViewCell else {return UITableViewCell()}

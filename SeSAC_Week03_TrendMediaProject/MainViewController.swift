@@ -28,7 +28,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
 		
 		//머리가 나쁘면 머리도 몸도 고생
-		APIManager.shared.fetchTextData(item: "https://api.themoviedb.org/3/trending/tv/week", page: 1) { json in
+		APIManager.shared.fetchTextData(apiURL: "https://api.themoviedb.org/3/trending/tv/week", page: 1, language: "ko") { json in
 			for i in 0...json["results"].count - 1 {
 				var intForGenre: [Int] = []
 				for j in 0...json["results"][i]["genre_id"].count { intForGenre.append(json["results"][i]["genre_id"][j].intValue) }
@@ -94,8 +94,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 		cell.alikeContentsRecommendLabel.font = .systemFont(ofSize: 15)
 		cell.alikeContentsRecommendButton.setImage(UIImage(systemName: "chevron.right"), for: .normal)
 		cell.alikeContentsRecommendButton.tintColor = .black
-		cell.webViewButton.setImage(UIImage(systemName: "paperclip.circle.fill"), for: .normal)
-		cell.webViewButton.tintColor = .white
+		cell.webViewButton.tintColor = .black
 		cell.webViewButton.tag = indexPath.section
 		cell.webViewButton.addTarget(self, action: #selector(webViewButtonTouched), for: .touchUpInside)
 		return cell
@@ -107,8 +106,20 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 		//새로 열리는 창에 내비게이션컨트롤러를 사용할 수 있게 해줌
 		let navController = UINavigationController(rootViewController: vc)
 		vc.list = tvInfo[sender.tag]
-		self.present(navController, animated: true, completion: nil)
-		
+		let id = tvInfo[sender.tag].id
+		//언어를 한국어로 설정했을 때 없는 경우가 있음
+		APIManager.shared.fetchTextData(apiURL:"https://api.themoviedb.org/3/tv/\(id)/videos", page: 1, language: "ko", result: { json in
+			
+			if let url = json["results"][0]["key"].string {
+				vc.destinationURL = "https://youtube.com/watch?v=\(url)"
+				self.present(navController, animated: true, completion: nil)
+			} else {
+				APIManager.shared.fetchTextData(apiURL: "https://api.themoviedb.org/3/tv/\(id)/videos", page: 1, language: "en") { newJson in
+					vc.destinationURL = "https://youtube.com/watch?v=\(newJson["results"][0]["key"].stringValue)"
+					self.present(navController, animated: true, completion: nil)
+				}
+			}
+		})
 	}
 
 	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -156,7 +167,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 		let sb = UIStoryboard(name: "Main", bundle: nil)
 		let vc = sb.instantiateViewController(withIdentifier: "CastInfoViewController") as! CastInfoViewController
 		let id = tvInfo[indexPath.section].id
-		APIManager.shared.fetchTextData(item: "https://api.themoviedb.org/3/tv/\(id)/credits", page: 1) { json in
+		APIManager.shared.fetchTextData(apiURL: "https://api.themoviedb.org/3/tv/\(id)/credits", page: 1, language: "ko") { json in
 			var actorlist: [String] = []
 			var characterlist: [String] = []
 			var imageURLlist: [String] = []
@@ -166,7 +177,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 				imageURLlist.append(json["cast"][i]["profile_path"].stringValue)
 			}
 			let detailedInfo = DetailedTvInfo(
-				cast: characterlist,
+				character: characterlist,
 				actor: actorlist,
 				actorImageURL: imageURLlist,
 				overview: self.tvInfo[indexPath.section].overview,

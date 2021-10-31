@@ -14,10 +14,10 @@ class APIManager {
 	
 	static let shared = APIManager()
 	
-	func fetchTextData(item: String, page: Int, result: @escaping (JSON) -> () ) {
+	func fetchTextData(apiURL: String, page: Int, language: String, result: @escaping (JSON) -> () ) {
 	
-		let url = item
-		let parameter: Parameters = ["api_key": APIkey.TMDBkey, "language": "ko", "page": String(page)]
+		let url = apiURL
+		let parameter: Parameters = ["api_key": APIkey.TMDBkey, "language": language, "page": String(page)]
 
 		
 		AF.request(url, method: .get, parameters: parameter).validate().responseJSON { response in

@@ -62,7 +62,7 @@ struct TvInfo {
 }
 
 struct DetailedTvInfo {
-	var cast: [String]
+	var character: [String]
 	var actor: [String]
 	var actorImageURL:[String]
 	var overview: String
