@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Network
 import Kingfisher
 
 class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -19,21 +20,27 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 	
 	var contentInfo: MovieOrTV? {
 		didSet {
-			infoSet(contentInfo: contentInfo!)
+			tvInfo.removeAll()
+			infoSet(contentInfo: contentInfo!, index: 1)
 		}
 	}
 	
 	var list = tvShow
+	
 	var tvInfo: [TvInfo] = [] {
 		didSet {
 			mainTableView.reloadData()
 		}
 	}
+	
+	let networkMonitor = NWPathMonitor()
 
 	override func viewDidLoad() {
         super.viewDidLoad()
 		
 		contentInfo = .tv
+		
+		networkMonitorStart()
 		viewOfThreeButtons.layer.cornerRadius = 8
 		mainTableView.delegate = self
 		mainTableView.dataSource = self
@@ -47,11 +54,34 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 		mapButton.tintColor = .black
     }
 	
-	func infoSet(contentInfo: MovieOrTV) {
-		tvInfo.removeAll()
+	func networkMonitorStart() {
+		
+		networkMonitor.start(queue: DispatchQueue.global())
+		networkMonitor.pathUpdateHandler = { path in
+			if path.status != .satisfied {
+				//dispatchqueue없이 하면 알람관련하여 스레드 에러가 뜬다. = "Modifications to the layout engine must not be performed from a background thread after it has been accessed from the main thread"
+				DispatchQueue.main.async {
+					let alert = UIAlertController(title: "오류", message: "네트워크 연결이 필요합니다", preferredStyle: .alert)
+					let connect = UIAlertAction(title: "연결", style: .default) { _ in
+						guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+						if UIApplication.shared.canOpenURL(url) {
+							UIApplication.shared.open(url)
+						}
+					}
+					let cancel = UIAlertAction(title: "취소", style: .cancel)
+					alert.addAction(connect)
+					alert.addAction(cancel)
+					self.present(alert, animated: true)
+				}
+			}
+		}
+
+	}
+	
+	func infoSet(contentInfo: MovieOrTV, index: Int) {
 		let content = contentInfo == .tv ? "tv" : "movie"
 		//머리가 나쁘면 머리도 몸도 고생
-		APIManager.shared.fetchTextData(apiURL: "https://api.themoviedb.org/3/trending/\(content)/week", page: 1, language: "ko") { json in
+		APIManager.shared.fetchTextData(apiURL: "https://api.themoviedb.org/3/trending/\(content)/week", page: index, language: "ko") { json in
 			for i in 0...json["results"].count - 1 {
 				var intForGenre: [Int] = []
 				for j in 0...json["results"][i]["genre_id"].count { intForGenre.append(json["results"][i]["genre_id"][j].intValue) }
