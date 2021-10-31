@@ -18,6 +18,11 @@ struct APIkey {
 	static let TMDBkey = "7ef0e0c306672ea2fa568ed12416bc82"
 }
 
+enum MovieOrTV {
+	case movie
+	case tv
+}
+
 struct Genre {
 	static let genreDictionary: [Int:String] = [
 		28:"액션",

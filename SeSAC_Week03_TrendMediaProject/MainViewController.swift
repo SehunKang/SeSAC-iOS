@@ -17,6 +17,12 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 	@IBOutlet weak var searchButton: UIBarButtonItem!
 	@IBOutlet weak var mapButton: UIBarButtonItem!
 	
+	var contentInfo: MovieOrTV? {
+		didSet {
+			infoSet(contentInfo: contentInfo!)
+		}
+	}
+	
 	var list = tvShow
 	var tvInfo: [TvInfo] = [] {
 		didSet {
@@ -27,8 +33,25 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 	override func viewDidLoad() {
         super.viewDidLoad()
 		
+		contentInfo = .tv
+		viewOfThreeButtons.layer.cornerRadius = 8
+		mainTableView.delegate = self
+		mainTableView.dataSource = self
+		mainviewTitle.text = "MAIN TITLE"
+		mainviewTitle.textColor = .white
+		mainviewTitle.textAlignment = .center
+		mainviewTitle.font = .boldSystemFont(ofSize: 30)
+		searchButton.image = UIImage(systemName: "magnifyingglass")
+		searchButton.tintColor = .black
+		mapButton.image = UIImage(systemName: "map")
+		mapButton.tintColor = .black
+    }
+	
+	func infoSet(contentInfo: MovieOrTV) {
+		tvInfo.removeAll()
+		let content = contentInfo == .tv ? "tv" : "movie"
 		//머리가 나쁘면 머리도 몸도 고생
-		APIManager.shared.fetchTextData(apiURL: "https://api.themoviedb.org/3/trending/tv/week", page: 1, language: "ko") { json in
+		APIManager.shared.fetchTextData(apiURL: "https://api.themoviedb.org/3/trending/\(content)/week", page: 1, language: "ko") { json in
 			for i in 0...json["results"].count - 1 {
 				var intForGenre: [Int] = []
 				for j in 0...json["results"][i]["genre_id"].count { intForGenre.append(json["results"][i]["genre_id"][j].intValue) }
@@ -45,22 +68,9 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 				self.tvInfo.append(value)
 			}
 		}
-		
-		viewOfThreeButtons.layer.cornerRadius = 8
-		mainTableView.delegate = self
-		mainTableView.dataSource = self
-		mainviewTitle.text = "MAIN TITLE"
-		mainviewTitle.textColor = .white
-		mainviewTitle.textAlignment = .center
-		mainviewTitle.font = .boldSystemFont(ofSize: 30)
-		searchButton.image = UIImage(systemName: "magnifyingglass")
-		searchButton.tintColor = .black
-		mapButton.image = UIImage(systemName: "map")
-		mapButton.tintColor = .black
-    }
+	}
 	
 	func numberOfSections(in tableView: UITableView) -> Int {
-		print("**************\(tvInfo.count)")
 		return tvInfo.count
 	}
 	
@@ -108,20 +118,31 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 		vc.list = tvInfo[sender.tag]
 		let id = tvInfo[sender.tag].id
 		//언어를 한국어로 설정했을 때 없는 경우가 있음
-		APIManager.shared.fetchTextData(apiURL:"https://api.themoviedb.org/3/tv/\(id)/videos", page: 1, language: "ko", result: { json in
+		let content = contentInfo == .tv ? "tv" : "movie"
+		APIManager.shared.fetchTextData(apiURL:"https://api.themoviedb.org/3/\(content)/\(id)/videos", page: 1, language: "ko", result: { json in
 			
 			if let url = json["results"][0]["key"].string {
 				vc.destinationURL = "https://youtube.com/watch?v=\(url)"
 				self.present(navController, animated: true, completion: nil)
 			} else {
-				APIManager.shared.fetchTextData(apiURL: "https://api.themoviedb.org/3/tv/\(id)/videos", page: 1, language: "en") { newJson in
+				APIManager.shared.fetchTextData(apiURL: "https://api.themoviedb.org/3/\(content)/\(id)/videos", page: 1, language: "en") { newJson in
 					vc.destinationURL = "https://youtube.com/watch?v=\(newJson["results"][0]["key"].stringValue)"
 					self.present(navController, animated: true, completion: nil)
 				}
 			}
 		})
 	}
-
+	@IBAction func fileButtonClicked(_ sender: Any) {
+		contentInfo = .movie
+	}
+	@IBAction func tvButtonClicked(_ sender: Any) {
+		contentInfo = .tv
+	}
+	
+	
+	
+	
+	
 	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 //		var returnValue: String = ""
 //		for i in 0...tvInfo[section].genre.count - 1{
@@ -167,7 +188,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 		let sb = UIStoryboard(name: "Main", bundle: nil)
 		let vc = sb.instantiateViewController(withIdentifier: "CastInfoViewController") as! CastInfoViewController
 		let id = tvInfo[indexPath.section].id
-		APIManager.shared.fetchTextData(apiURL: "https://api.themoviedb.org/3/tv/\(id)/credits", page: 1, language: "ko") { json in
+		let content = contentInfo == .tv ? "tv" : "movie"
+		APIManager.shared.fetchTextData(apiURL: "https://api.themoviedb.org/3/\(content)/\(id)/credits", page: 1, language: "ko") { json in
 			var actorlist: [String] = []
 			var characterlist: [String] = []
 			var imageURLlist: [String] = []
