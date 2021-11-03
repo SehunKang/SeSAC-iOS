@@ -57,12 +57,22 @@
                                         <constraint firstItem="DuJ-bI-EIA" firstAttribute="top" secondItem="hJT-nG-c2j" secondAttribute="top" constant="-9" id="yGq-MH-kJm"/>
                                     </constraints>
                                 </view>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5oT-Tm-inY">
+                                    <rect key="frame" x="338.5" y="3" width="45" height="31"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="plain" image="list.dash" catalog="system"/>
+                                    <connections>
+                                        <action selector="sortButtonClicked:" destination="9o4-3u-xPF" eventType="touchUpInside" id="6dA-2z-uvF"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <constraints>
+                                <constraint firstItem="5oT-Tm-inY" firstAttribute="centerY" secondItem="FnG-uW-hrh" secondAttribute="centerY" id="6fR-xj-nOG"/>
                                 <constraint firstItem="bgG-PA-GZh" firstAttribute="leading" secondItem="yiF-bE-2Nt" secondAttribute="leading" constant="20" id="iKL-cL-SIT"/>
                                 <constraint firstItem="FnG-uW-hrh" firstAttribute="top" secondItem="yiF-bE-2Nt" secondAttribute="top" constant="8" id="iei-N2-yaG"/>
                                 <constraint firstAttribute="trailing" secondItem="bgG-PA-GZh" secondAttribute="trailing" constant="20" id="mD3-I3-Vt1"/>
                                 <constraint firstItem="FnG-uW-hrh" firstAttribute="centerX" secondItem="yiF-bE-2Nt" secondAttribute="centerX" id="o5j-e5-CVF"/>
+                                <constraint firstItem="5oT-Tm-inY" firstAttribute="centerX" secondItem="hJT-nG-c2j" secondAttribute="centerX" id="pCj-ko-NAc"/>
                                 <constraint firstItem="bgG-PA-GZh" firstAttribute="top" secondItem="FnG-uW-hrh" secondAttribute="bottom" constant="10" id="r7O-hs-kzU"/>
                             </constraints>
                         </view>
@@ -132,6 +142,7 @@
                         <outlet property="headerView" destination="bgG-PA-GZh" id="MhU-Dx-hsc"/>
                         <outlet property="mainTextField" destination="DuJ-bI-EIA" id="rqn-PD-F2l"/>
                         <outlet property="mainTitleLabel" destination="FnG-uW-hrh" id="ncU-UR-hPi"/>
+                        <outlet property="sortButton" destination="5oT-Tm-inY" id="TeJ-Df-zEF"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gKq-gC-T4Q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -140,6 +151,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="list.dash" catalog="system" width="128" height="85"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

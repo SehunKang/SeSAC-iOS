@@ -14,6 +14,7 @@ class MainTableViewController: UITableViewController {
 	@IBOutlet weak var mainTitleLabel: UILabel!
 	@IBOutlet weak var mainTextField: UITextField!
 	@IBOutlet weak var headerView: UIView!
+	@IBOutlet weak var sortButton: UIButton!
 	
 	let  localRealm = try! Realm()
 	
@@ -33,15 +34,21 @@ class MainTableViewController: UITableViewController {
 		addButton.backgroundColor = .systemGray5
 		addButton.setAttributedTitle(NSAttributedString(string: "추가", attributes: [NSAttributedString.Key.foregroundColor: UIColor.black, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15)] ), for: .normal)
 		addButton.layer.cornerRadius = 8
-		
+	
     }
+	
+//	override func viewWillDisappear(_ animated: Bool) {
+//		super.viewWillDisappear(animated)
+//		try! localRealm.write {
+//			localRealm.add(tasks, update: .all)
+//		}
+//	}
 
 	@IBAction func checkButtonTouched(_ sender: UIButton) {
 		let buttonPosition = sender.convert(sender.bounds.origin, to: tableView)
 		if let indexPath = tableView.indexPathForRow(at: buttonPosition) {
 			try! localRealm.write {
 				tasks[indexPath.row].isCheck = !tasks[indexPath.row].isCheck
-				print(tasks[indexPath.row].isCheck)
 			}
 			tableView.reloadData()
 		}
@@ -52,8 +59,6 @@ class MainTableViewController: UITableViewController {
 		if let indexPath = tableView.indexPathForRow(at: buttonPosition) {
 			try! localRealm.write{
 				tasks[indexPath.row].isStar = !tasks[indexPath.row].isStar
-				print(tasks[indexPath.row].isStar)
-
 			}
 			tableView.reloadData()
 		}
@@ -71,6 +76,45 @@ class MainTableViewController: UITableViewController {
 			print("Error at addButtonTouched")
 		}
 	}
+	
+	@IBAction func sortButtonClicked(_ sender: Any) {
+		//시작할때 초기화를 안해주면 정렬을 선택할때마다 정렬의 기준들이 겹친다
+		self.tasks = self.localRealm.objects(ShoppingList.self)
+		
+		let alert = UIAlertController(title: "정렬", message: "오와열!", preferredStyle: .actionSheet)
+		//데이터를 일회성으로 소팅하는게 아니라 Results의 상태가 소팅을 지속하는 상태가 되는 것 같다.
+		let checkBox = UIAlertAction(title: "안한 일", style: .default) { _ in
+			self.tasks = self.tasks.sorted(byKeyPath: "isCheck", ascending: true)
+			self.tableView.reloadData()
+		}
+		let old = UIAlertAction(title: "오래된 순서", style: .default) { _ in
+			self.tasks = self.tasks.sorted(byKeyPath: "createDate", ascending: true)
+			self.tableView.reloadData()
+		}
+		let new = UIAlertAction(title: "최근 순서", style: .default) { _ in
+			self.tasks = self.tasks.sorted(byKeyPath: "createDate", ascending: false)
+			self.tableView.reloadData()
+		}
+		let star = UIAlertAction(title: "Star", style: .default) { _ in
+			self.tasks = self.localRealm.objects(ShoppingList.self).sorted(byKeyPath: "isStar", ascending: false)
+			self.tableView.reloadData()
+		}
+		let original = UIAlertAction(title: "원래대로", style: .default) { _ in
+			self.tasks = self.localRealm.objects(ShoppingList.self)
+			self.tableView.reloadData()
+		}
+		let cancel = UIAlertAction(title: "취소", style: .cancel)
+		
+		alert.addAction(checkBox)
+		alert.addAction(old)
+		alert.addAction(new)
+		alert.addAction(star)
+		alert.addAction(original)
+		alert.addAction(cancel)
+		
+		present(alert, animated: true, completion: nil)
+	}
+	
 	
 	override func numberOfSections(in tableView: UITableView) -> Int {
 		return 1
@@ -96,10 +140,6 @@ class MainTableViewController: UITableViewController {
 			cell.starButton.setImage(UIImage.init(systemName: "star"), for: .normal)
 		}
 		cell.toDoLabel.text = row.thingToBuy
-		cell.toDoLabel.backgroundColor = .clear
-		cell.viewForCell.backgroundColor = .systemGray5
-		cell.viewForCell.layer.cornerRadius = 8
-		
 		return cell
 	}
 	
