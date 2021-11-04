@@ -12,25 +12,54 @@
         <!--설정-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController id="Y6W-OH-hqX" sceneMemberID="viewController">
+                <viewController id="Y6W-OH-hqX" customClass="SettingViewController" customModule="SeSAC_Week06" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Siu-v0-4QT">
+                                <rect key="frame" x="79" y="137" width="246" height="106"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="백업하기"/>
+                                <connections>
+                                    <action selector="backupButtonClicked:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="88q-Qr-6yd"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dCH-eo-oB4">
+                                <rect key="frame" x="79" y="340" width="246" height="111"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="공유"/>
+                                <connections>
+                                    <action selector="activityViewControllerButtonClicekd:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Vqf-Ao-jVG"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g63-Xy-Enb">
+                                <rect key="frame" x="79" y="512" width="246" height="130"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="복구"/>
+                                <connections>
+                                    <action selector="restoreButtonClicked:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="ueF-6C-mIe"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="설정" id="rX8-nw-I9D">
-                        <imageReference key="image" image="person.crop.circle" catalog="system" symbolScale="default"/>
+                        <imageReference key="image" image="gear.circle" catalog="system" symbolScale="default"/>
                     </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-16" y="98"/>
+            <point key="canvasLocation" x="-17.39130434782609" y="97.767857142857139"/>
         </scene>
     </scenes>
     <resources>
-        <image name="person.crop.circle" catalog="system" width="128" height="121"/>
+        <image name="gear.circle" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
