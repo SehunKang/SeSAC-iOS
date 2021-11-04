@@ -10,6 +10,8 @@
 		2E50EC2E2730F8CA007882C9 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 2E50EC2D2730F8CA007882C9 /* Realm */; };
 		2E50EC302730F8CA007882C9 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2E50EC2F2730F8CA007882C9 /* RealmSwift */; };
 		2E50EC322730F8DF007882C9 /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E50EC312730F8DF007882C9 /* RealmModel.swift */; };
+		2E7A9D412733E8CD0012DB09 /* Zip in Frameworks */ = {isa = PBXBuildFile; productRef = 2E7A9D402733E8CD0012DB09 /* Zip */; };
+		2E7A9D462733F6D00012DB09 /* JGProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 2E7A9D452733F6D00012DB09 /* JGProgressHUD */; };
 		2EC935F427170816004D7F0E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC935F327170816004D7F0E /* AppDelegate.swift */; };
 		2EC935F627170816004D7F0E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC935F527170816004D7F0E /* SceneDelegate.swift */; };
 		2EC935F827170816004D7F0E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC935F727170816004D7F0E /* ViewController.swift */; };
@@ -39,6 +41,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E7A9D462733F6D00012DB09 /* JGProgressHUD in Frameworks */,
+				2E7A9D412733E8CD0012DB09 /* Zip in Frameworks */,
 				2E50EC302730F8CA007882C9 /* RealmSwift in Frameworks */,
 				2E50EC2E2730F8CA007882C9 /* Realm in Frameworks */,
 			);
@@ -99,6 +103,8 @@
 			packageProductDependencies = (
 				2E50EC2D2730F8CA007882C9 /* Realm */,
 				2E50EC2F2730F8CA007882C9 /* RealmSwift */,
+				2E7A9D402733E8CD0012DB09 /* Zip */,
+				2E7A9D452733F6D00012DB09 /* JGProgressHUD */,
 			);
 			productName = SeSAC_Week3_ShoppingList;
 			productReference = 2EC935F027170816004D7F0E /* SeSAC_Week3_ShoppingList.app */;
@@ -130,6 +136,8 @@
 			mainGroup = 2EC935E727170816004D7F0E;
 			packageReferences = (
 				2E50EC2C2730F8CA007882C9 /* XCRemoteSwiftPackageReference "realm-cocoa" */,
+				2E7A9D3F2733E8CD0012DB09 /* XCRemoteSwiftPackageReference "Zip" */,
+				2E7A9D442733F6D00012DB09 /* XCRemoteSwiftPackageReference "JGProgressHUD" */,
 			);
 			productRefGroup = 2EC935F127170816004D7F0E /* Products */;
 			projectDirPath = "";
@@ -312,6 +320,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = WXLXA9H28U;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SeSAC_Week3_ShoppingList/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -339,6 +348,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = WXLXA9H28U;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SeSAC_Week3_ShoppingList/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -391,6 +401,22 @@
 				version = 10.18.0;
 			};
 		};
+		2E7A9D3F2733E8CD0012DB09 /* XCRemoteSwiftPackageReference "Zip" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/marmelroy/Zip.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+		2E7A9D442733F6D00012DB09 /* XCRemoteSwiftPackageReference "JGProgressHUD" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/JonasGessner/JGProgressHUD.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -403,6 +429,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2E50EC2C2730F8CA007882C9 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
 			productName = RealmSwift;
+		};
+		2E7A9D402733E8CD0012DB09 /* Zip */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2E7A9D3F2733E8CD0012DB09 /* XCRemoteSwiftPackageReference "Zip" */;
+			productName = Zip;
+		};
+		2E7A9D452733F6D00012DB09 /* JGProgressHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2E7A9D442733F6D00012DB09 /* XCRemoteSwiftPackageReference "JGProgressHUD" */;
+			productName = JGProgressHUD;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -6,7 +6,11 @@
 //
 
 import UIKit
+import MobileCoreServices
 import RealmSwift
+import Zip
+import JGProgressHUD
+
 
 class MainTableViewController: UITableViewController {
 		
@@ -15,10 +19,13 @@ class MainTableViewController: UITableViewController {
 	@IBOutlet weak var mainTextField: UITextField!
 	@IBOutlet weak var headerView: UIView!
 	@IBOutlet weak var sortButton: UIButton!
+	@IBOutlet weak var backupButton: UIButton!
 	
 	let  localRealm = try! Realm()
 	
 	var tasks: Results<ShoppingList>!
+	
+	let hud = JGProgressHUD()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -44,7 +51,7 @@ class MainTableViewController: UITableViewController {
 //		}
 //	}
 
-	@IBAction func checkButtonTouched(_ sender: UIButton) {
+	@IBAction func checkButtonClicked(_ sender: UIButton) {
 		let buttonPosition = sender.convert(sender.bounds.origin, to: tableView)
 		if let indexPath = tableView.indexPathForRow(at: buttonPosition) {
 			try! localRealm.write {
@@ -54,7 +61,7 @@ class MainTableViewController: UITableViewController {
 		}
 	}
 	
-	@IBAction func starButtonTouched(_ sender: UIButton) {
+	@IBAction func starButtonClicked(_ sender: UIButton) {
 		let buttonPosition = sender.convert(sender.bounds.origin, to: tableView)
 		if let indexPath = tableView.indexPathForRow(at: buttonPosition) {
 			try! localRealm.write{
@@ -63,8 +70,11 @@ class MainTableViewController: UITableViewController {
 			tableView.reloadData()
 		}
 	}
+	@IBAction func keyboardReturn(_ sender: Any) {
+		addButtonClicked(addButton)
+	}
 	
-	@IBAction func addButtonTouched(_ sender: UIButton) {
+	@IBAction func addButtonClicked(_ sender: UIButton) {
 		
 		if let text = mainTextField.text {
 			let task = ShoppingList(thingToBuy: text, isStar: false, isCheck: false, createDate: Date())
@@ -77,6 +87,25 @@ class MainTableViewController: UITableViewController {
 		}
 	}
 	
+	@IBAction func backupButttonClicked(_ sender: Any) {
+		let alert = UIAlertController(title: "백업 및 복구", message: nil, preferredStyle: .actionSheet)
+		let backupAlert = UIAlertAction(title: "백업", style: .default) { _ in
+			self.hud.show(in: self.view)
+			self.backupProcess()
+		}
+		let restroeAlert = UIAlertAction(title: "복구", style: .default) { _ in
+			self.restoreProcess()
+		}
+		let cancel = UIAlertAction(title: "취소", style: .cancel)
+		
+		alert.addAction(backupAlert)
+		alert.addAction(restroeAlert)
+		alert.addAction(cancel)
+		
+		present(alert, animated: true, completion: nil)
+	}
+	
+	
 	@IBAction func sortButtonClicked(_ sender: Any) {
 		//시작할때 초기화를 안해주면 정렬을 선택할때마다 정렬의 기준들이 겹친다
 		self.tasks = self.localRealm.objects(ShoppingList.self)
@@ -84,7 +113,7 @@ class MainTableViewController: UITableViewController {
 		let alert = UIAlertController(title: "정렬", message: "오와열!", preferredStyle: .actionSheet)
 		//데이터를 일회성으로 소팅하는게 아니라 Results의 상태가 소팅을 지속하는 상태가 되는 것 같다.
 		let checkBox = UIAlertAction(title: "안한 일", style: .default) { _ in
-			self.tasks = self.tasks.sorted(byKeyPath: "isCheck", ascending: true)
+			self.tasks = self.tasks.filter("isCheck == false")
 			self.tableView.reloadData()
 		}
 		let old = UIAlertAction(title: "오래된 순서", style: .default) { _ in
@@ -96,7 +125,7 @@ class MainTableViewController: UITableViewController {
 			self.tableView.reloadData()
 		}
 		let star = UIAlertAction(title: "Star", style: .default) { _ in
-			self.tasks = self.localRealm.objects(ShoppingList.self).sorted(byKeyPath: "isStar", ascending: false)
+			self.tasks = self.tasks.filter("isStar == true")
 			self.tableView.reloadData()
 		}
 		let original = UIAlertAction(title: "원래대로", style: .default) { _ in
@@ -155,4 +184,118 @@ class MainTableViewController: UITableViewController {
 			tableView.reloadData()
 		}
 	}
+	
+	func documentDirectoryPath() -> String? {
+		let documentDirectory = FileManager.SearchPathDirectory.documentDirectory
+		let userDomainMask = FileManager.SearchPathDomainMask.userDomainMask
+		let path = NSSearchPathForDirectoriesInDomains(documentDirectory, userDomainMask, true)
+		if let directoryPath = path.first {
+			return directoryPath
+		} else {
+			return nil
+		}
+	}
+
+	func presentActivityViewController() {
+		let fileName = (documentDirectoryPath()! as NSString).appendingPathComponent("archive.zip")
+		let fileURL = URL(fileURLWithPath: fileName)
+		
+		let vc = UIActivityViewController(activityItems: [fileURL], applicationActivities: [])
+		self.present(vc, animated: true, completion: nil)
+	}
+
+	func backupProcess() {
+	//	self.view.isUserInteractionEnabled = false //이걸 안넣어줘도 알아서 안눌린다.
+
+		var urlPaths = [URL]()
+		
+		if let path = documentDirectoryPath() {
+			let realm = (path as NSString).appendingPathComponent("default.realm")
+			if FileManager.default.fileExists(atPath: realm) {
+				urlPaths.append(URL(string: realm)!)
+			} else {
+				print("there is no file to backup")
+			}
+		}
+		do {
+			let zipFilePath = try Zip.quickZipFiles(urlPaths, fileName: "archive")
+			print("zip path: \(zipFilePath)")
+			hud.dismiss(afterDelay: 1)
+			presentActivityViewController()
+		}
+		catch {
+			print("Something went wrong")
+			hud.dismiss(afterDelay: 1)
+		}
+	//	self.view.isUserInteractionEnabled = true
+	}
+
+	func restoreProcess() {
+		
+		let documentPicker = UIDocumentPickerViewController(documentTypes: [kUTTypeArchive as String], in: .import)
+		documentPicker.delegate = self
+		documentPicker.allowsMultipleSelection = false
+		self.present(documentPicker, animated: true) {
+		}
+		
+	}
+
+	
+	
+}
+
+extension MainTableViewController: UIDocumentPickerDelegate {
+	
+	func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
+		print(#function)
+	}
+	
+	func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
+		print(#function)
+		
+		guard let selectedFileUrl = urls.first else {return}
+		
+		let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+		let sandboxFileURL = directory.appendingPathComponent(selectedFileUrl.lastPathComponent)
+		
+		if FileManager.default.fileExists(atPath: sandboxFileURL.path) {
+			do {
+				let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+				let fileURL = documentDirectory.appendingPathComponent("archive.zip")
+				
+				try Zip.unzipFile(fileURL, destination: documentDirectory, overwrite: true, password: nil, progress: { progress in
+					print("progress: \(progress)")
+				}, fileOutputHandler: { unzippedFile in
+					print("unzippedFile: \(unzippedFile)")
+				})
+			} catch {
+				print("unzip ERROR")
+			}
+		} else {
+			do {
+				try FileManager.default.copyItem(at: selectedFileUrl, to: sandboxFileURL)
+		
+				let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+				let fileURL = documentDirectory.appendingPathComponent("archive.zip")
+				
+				try Zip.unzipFile(fileURL, destination: documentDirectory, overwrite: true, password: nil, progress: { progress in
+					print("progress: \(progress)")
+				}, fileOutputHandler: { unzippedFile in
+					print("unzippedFile: \(unzippedFile)")
+				})
+			} catch {
+				print("unzip 2 ERROR")
+			}
+		}
+		//restoreAlert의 클로져와 restoreProcess에 넣으면 주기가 안맞아서 그런지 안뜸
+		let alert = UIAlertController(title: "재시작 필요함", message: nil, preferredStyle: .alert)
+		let ok = UIAlertAction(title: "확인", style: .default) { _ in
+			exit(0)
+		}
+		alert.addAction(ok)
+		self.present(alert, animated: true, completion: nil)
+
+	}
+	
+	
 }

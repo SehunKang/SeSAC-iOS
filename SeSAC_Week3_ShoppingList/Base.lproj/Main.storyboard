@@ -32,6 +32,9 @@
                                             <rect key="frame" x="8" y="8" width="308" height="44"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
+                                            <connections>
+                                                <action selector="keyboardReturn:" destination="9o4-3u-xPF" eventType="editingDidEndOnExit" id="qXI-c7-pRZ"/>
+                                            </connections>
                                         </textField>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hJT-nG-c2j">
                                             <rect key="frame" x="316" y="17" width="50" height="25"/>
@@ -41,7 +44,7 @@
                                             <state key="normal" title="Button"/>
                                             <buttonConfiguration key="configuration" style="plain" title="Button"/>
                                             <connections>
-                                                <action selector="addButtonTouched:" destination="9o4-3u-xPF" eventType="touchUpInside" id="dVx-JO-ygb"/>
+                                                <action selector="addButtonClicked:" destination="9o4-3u-xPF" eventType="touchUpInside" id="lNC-KF-dK1"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -58,16 +61,28 @@
                                     </constraints>
                                 </view>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5oT-Tm-inY">
-                                    <rect key="frame" x="338.5" y="3" width="45" height="31"/>
+                                    <rect key="frame" x="337" y="3" width="48" height="31"/>
                                     <state key="normal" title="Button"/>
                                     <buttonConfiguration key="configuration" style="plain" image="list.dash" catalog="system"/>
                                     <connections>
                                         <action selector="sortButtonClicked:" destination="9o4-3u-xPF" eventType="touchUpInside" id="6dA-2z-uvF"/>
                                     </connections>
                                 </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IcZ-qY-hXU">
+                                    <rect key="frame" x="28" y="3" width="48" height="31"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="plain" image="tray" catalog="system"/>
+                                    <connections>
+                                        <action selector="backupButttonClicked:" destination="9o4-3u-xPF" eventType="touchUpInside" id="rQ8-jH-tzB"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <constraints>
                                 <constraint firstItem="5oT-Tm-inY" firstAttribute="centerY" secondItem="FnG-uW-hrh" secondAttribute="centerY" id="6fR-xj-nOG"/>
+                                <constraint firstItem="IcZ-qY-hXU" firstAttribute="width" secondItem="5oT-Tm-inY" secondAttribute="width" id="7Py-bj-P0N"/>
+                                <constraint firstItem="IcZ-qY-hXU" firstAttribute="leading" secondItem="DuJ-bI-EIA" secondAttribute="leading" id="AsX-6Z-mZV"/>
+                                <constraint firstItem="IcZ-qY-hXU" firstAttribute="centerY" secondItem="5oT-Tm-inY" secondAttribute="centerY" id="RgU-bP-mvd"/>
+                                <constraint firstItem="IcZ-qY-hXU" firstAttribute="height" secondItem="5oT-Tm-inY" secondAttribute="height" id="Tvp-95-btk"/>
                                 <constraint firstItem="bgG-PA-GZh" firstAttribute="leading" secondItem="yiF-bE-2Nt" secondAttribute="leading" constant="20" id="iKL-cL-SIT"/>
                                 <constraint firstItem="FnG-uW-hrh" firstAttribute="top" secondItem="yiF-bE-2Nt" secondAttribute="top" constant="8" id="iei-N2-yaG"/>
                                 <constraint firstAttribute="trailing" secondItem="bgG-PA-GZh" secondAttribute="trailing" constant="20" id="mD3-I3-Vt1"/>
@@ -93,7 +108,7 @@
                                             <state key="normal" title="Button"/>
                                             <buttonConfiguration key="configuration" style="plain"/>
                                             <connections>
-                                                <action selector="checkButtonTouched:" destination="9o4-3u-xPF" eventType="touchUpInside" id="vpj-YU-n3y"/>
+                                                <action selector="checkButtonClicked:" destination="9o4-3u-xPF" eventType="touchUpInside" id="rRV-O2-3cS"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="40J-xt-9cg">
@@ -101,7 +116,7 @@
                                             <state key="normal" title="Button"/>
                                             <buttonConfiguration key="configuration" style="plain"/>
                                             <connections>
-                                                <action selector="starButtonTouched:" destination="9o4-3u-xPF" eventType="touchUpInside" id="RnZ-LZ-xsr"/>
+                                                <action selector="starButtonClicked:" destination="9o4-3u-xPF" eventType="touchUpInside" id="zM8-3D-kNi"/>
                                             </connections>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rxF-7D-1iT">
@@ -139,6 +154,7 @@
                     </tableView>
                     <connections>
                         <outlet property="addButton" destination="hJT-nG-c2j" id="mhC-Kh-4zB"/>
+                        <outlet property="backupButton" destination="IcZ-qY-hXU" id="rMP-5Q-tlb"/>
                         <outlet property="headerView" destination="bgG-PA-GZh" id="MhU-Dx-hsc"/>
                         <outlet property="mainTextField" destination="DuJ-bI-EIA" id="rqn-PD-F2l"/>
                         <outlet property="mainTitleLabel" destination="FnG-uW-hrh" id="ncU-UR-hPi"/>
@@ -152,6 +168,7 @@
     </scenes>
     <resources>
         <image name="list.dash" catalog="system" width="128" height="85"/>
+        <image name="tray" catalog="system" width="128" height="88"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
