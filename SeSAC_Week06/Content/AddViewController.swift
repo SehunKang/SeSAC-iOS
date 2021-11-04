@@ -26,7 +26,7 @@ class AddViewController: UIViewController {
 	override func viewDidLoad() {
         super.viewDidLoad()
 		
-		imageLoadButton.titleLabel?.text = "click for upload an image"
+		imageLoadButton.setTitle("클릭하여 이미지 업로드", for: .normal)
 		setContentNavigaionBar()
 		
 		print("realm is located at:", localRealm.configuration.fileURL!)
@@ -88,12 +88,20 @@ class AddViewController: UIViewController {
 	}
 	
 	@objc func saveButtonClicekd(_ sender: UIBarButtonItem) {
-		
+		self.view.isUserInteractionEnabled = false // alert을 넣어서 없어도 될것 같지만 혹시 모르니..
 		let task = UserDiary(diaryTitle: textField.text!, diaryText: textView.text!, writeDate: Date(), registerDate: Date())
 		try! localRealm.write {
 			localRealm.add(task)
-			saveImageToDocumentDirectory(imageName: "\(task._id).jpg", image: imageView.image!)
+			//이미지 저장 조건처리
+			if imageView.image != nil {
+				saveImageToDocumentDirectory(imageName: "\(task._id).jpg", image: imageView.image!)
+			}
 		}
+		let alert = UIAlertController(title: "저장 완료!", message: nil, preferredStyle: .alert)
+		alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+		self.view.isUserInteractionEnabled = true
+		self.present(alert, animated: true, completion: nil)
+
 	}
 	
 	func saveImageToDocumentDirectory(imageName: String, image: UIImage) {
