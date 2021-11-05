@@ -89,12 +89,18 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		
 		let taskToUpdate = tasks[indexPath.row]
+		
+		guard let vc = self.storyboard?.instantiateViewController(withIdentifier: SearchDetailViewController.identifier) as? SearchDetailViewController else { return }
+		vc.modalPresentationStyle = .fullScreen
+		vc.dataIndex = taskToUpdate._id
+		self.present(vc, animated: true, completion: nil)
+
 		//1. 수정 = 레코드에 대한 값 수정
-		try! localRealm.write {
-			taskToUpdate.diaryTitle = "new Title"
-			taskToUpdate.diaryText = "new text"
-			tableView.reloadData()
-		}
+//		try! localRealm.write {
+//			taskToUpdate.diaryTitle = "new Title"
+//			taskToUpdate.diaryText = "new text"
+//			tableView.reloadData()
+//		}
 		
 		//2. 일괄 수정
 //		try! localRealm.write {
@@ -123,7 +129,10 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
 		cell.cellImageView.image = loadImageFromDocumentDirectory(imageName: "\(row._id).jpg")
 		
 		cell.cellTitleLabel.text = row.diaryTitle
-		cell.cellDateLabel.text = "\(row.writeDate)"
+		
+		let format = DateFormatter()
+		format.dateFormat = "yyyy년 MM월 dd일"
+		cell.cellDateLabel.text = format.string(from: row.writeDate)
 		cell.cellTextLabel.text = row.diaryText
 		cell.cellTextLabel.numberOfLines = 0
 		cell.cellImageView.backgroundColor = .blue

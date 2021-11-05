@@ -89,7 +89,16 @@ class AddViewController: UIViewController {
 	
 	@objc func saveButtonClicekd(_ sender: UIBarButtonItem) {
 		self.view.isUserInteractionEnabled = false // alert을 넣어서 없어도 될것 같지만 혹시 모르니..
-		let task = UserDiary(diaryTitle: textField.text!, diaryText: textView.text!, writeDate: Date(), registerDate: Date())
+		
+		let format = DateFormatter()
+		format.dateFormat = "yyyy년 MM월 dd일"
+		
+//		let date = dateButton.currentTitle!
+//		let value = format.date(from: date)
+		
+		guard let date = dateButton.currentTitle, let value = format.date(from: date) else { return }
+		
+		let task = UserDiary(diaryTitle: textField.text!, diaryText: textView.text!, writeDate: value, registerDate: Date())
 		try! localRealm.write {
 			localRealm.add(task)
 			//이미지 저장 조건처리
@@ -135,9 +144,32 @@ class AddViewController: UIViewController {
 			print("error")
 		}
 	}
+	@IBAction func dateButtonClicked(_ sender: UIButton) {
+		let alert = UIAlertController(title: "날짜 선택", message: "날짜를 선택해 주세요", preferredStyle: .alert)
+		//Alert Customizing
+		//스토리보드 씬 + 클래스 -> 화면 전환 코드
+//		let contentView = DatePickerViewController()
+		guard let contentView = self.storyboard?.instantiateViewController(withIdentifier: "DatePickerViewController") as? DatePickerViewController else { return }
+//		contentView.preferredContentSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+		contentView.preferredContentSize.height = 200
+		alert.setValue(contentView, forKey: "contentViewController")
+		
+		let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+		let ok = UIAlertAction(title: "확인", style: .default) { _ in
+			
+			let formatter = DateFormatter()
+			formatter.dateFormat = "yyyy년 MM월 dd일"
+			let value = formatter.string(from: contentView.datePicker.date)
+			
+			//확인 버튼을 눌렀을 때 버튼의 타이틀 변경
+			self.dateButton.setTitle(value, for: .normal)
+		}
+		
+		alert.addAction(cancel)
+		alert.addAction(ok)
+		self.present(alert, animated: true, completion: nil)
+	}
 	
-	
-
 }
 
 extension AddViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {

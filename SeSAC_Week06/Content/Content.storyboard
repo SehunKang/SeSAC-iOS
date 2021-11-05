@@ -36,7 +36,10 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eEA-1d-IkI">
                                 <rect key="frame" x="20" y="566" width="374" height="31"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="날짜"/>
+                                <connections>
+                                    <action selector="dateButtonClicked:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="Crp-Fi-jgi"/>
+                                </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="IYX-WZ-e8v">
                                 <rect key="frame" x="20" y="607" width="374" height="206"/>
@@ -93,6 +96,35 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="133" y="98"/>
+        </scene>
+        <!--Date Picker View Controller-->
+        <scene sceneID="kyX-zZ-3N6">
+            <objects>
+                <viewController storyboardIdentifier="DatePickerViewController" id="r1K-c9-hiF" customClass="DatePickerViewController" customModule="SeSAC_Week06" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gDD-tk-6VN">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="OBW-KB-WSx">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                            </datePicker>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="5Tz-yD-dKq"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="5Tz-yD-dKq" firstAttribute="bottom" secondItem="OBW-KB-WSx" secondAttribute="bottom" id="0jm-qs-Cdd"/>
+                            <constraint firstItem="OBW-KB-WSx" firstAttribute="trailing" secondItem="5Tz-yD-dKq" secondAttribute="trailing" id="Fqn-y0-8j5"/>
+                            <constraint firstItem="OBW-KB-WSx" firstAttribute="leading" secondItem="5Tz-yD-dKq" secondAttribute="leading" id="Oxs-hg-XH1"/>
+                            <constraint firstItem="OBW-KB-WSx" firstAttribute="top" secondItem="5Tz-yD-dKq" secondAttribute="top" id="UW8-7s-1hf"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="datePicker" destination="OBW-KB-WSx" id="cBR-SL-x3y"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oL9-6R-0JJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1031" y="116"/>
         </scene>
     </scenes>
     <resources>
