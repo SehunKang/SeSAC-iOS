@@ -27,7 +27,6 @@ class SearchDetailViewController: UIViewController {
 		tableView.delegate = self
 		tableView.dataSource = self
 		task = localRealm.object(ofType: UserDiary.self, forPrimaryKey: dataIndex)!
-		print(task.diaryText)
 		
 		setNavigaionBar()
     }
@@ -65,6 +64,9 @@ extension SearchDetailViewController: UITableViewDelegate, UITableViewDataSource
 		//textView에 텍스트가 안나왔는데 일단 인스펙터에서 scrolling enable을 체크헤제 하였더니 급한대로 나오긴 한다
 		cell.detailTextVuew.text = task.diaryText!
 		cell.detailDateButton.setTitle(format.string(from: task.writeDate), for: .normal)
+		let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+		let imageURL = documentDirectory.appendingPathComponent("\(task._id).jpg")
+		cell.detailImageView.image = UIImage(contentsOfFile: imageURL.path)
 		return cell
 	}
 	
