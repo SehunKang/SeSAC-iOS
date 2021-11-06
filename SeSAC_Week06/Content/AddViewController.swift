@@ -88,15 +88,16 @@ class AddViewController: UIViewController {
 	}
 	
 	@objc func saveButtonClicekd(_ sender: UIBarButtonItem) {
-		self.view.isUserInteractionEnabled = false // alert을 넣어서 없어도 될것 같지만 혹시 모르니..
+//		self.view.isUserInteractionEnabled = false // alert을 넣어서 없어도 될것 같지만 혹시 모르니..
 		
 		let format = DateFormatter()
 		format.dateFormat = "yyyy년 MM월 dd일"
 		
 //		let date = dateButton.currentTitle!
 //		let value = format.date(from: date)
-		
-		guard let date = dateButton.currentTitle, let value = format.date(from: date) else { return }
+		//날짜가 클릭이 안된 상태면 따로 알림없이 Date()를 넣어주었다.
+		let date = dateButton.currentTitle ?? format.string(from: Date())
+		let value = format.date(from: date)!
 		
 		let task = UserDiary(diaryTitle: textField.text!, diaryText: textView.text!, writeDate: value, registerDate: Date())
 		try! localRealm.write {
@@ -108,7 +109,7 @@ class AddViewController: UIViewController {
 		}
 		let alert = UIAlertController(title: "저장 완료!", message: nil, preferredStyle: .alert)
 		alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-		self.view.isUserInteractionEnabled = true
+//		self.view.isUserInteractionEnabled = true
 		self.present(alert, animated: true, completion: nil)
 
 	}

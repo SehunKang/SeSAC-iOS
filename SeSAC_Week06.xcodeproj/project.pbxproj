@@ -40,6 +40,7 @@
 		2E7A9D4F2734CE740012DB09 /* RealmQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7A9D4E2734CE740012DB09 /* RealmQuery.swift */; };
 		2E7A9D5527353C680012DB09 /* SearchDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7A9D5427353C680012DB09 /* SearchDetailViewController.swift */; };
 		2E7A9D57273545FF0012DB09 /* SearchDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7A9D56273545FF0012DB09 /* SearchDetailTableViewCell.swift */; };
+		2E7A9D5A27364D8C0012DB09 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2E7A9D5927364D8C0012DB09 /* IQKeyboardManagerSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -89,6 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E7A9D5A27364D8C0012DB09 /* IQKeyboardManagerSwift in Frameworks */,
 				2E50EC4327336DCB007882C9 /* Zip in Frameworks */,
 				2E7A9D492734AD840012DB09 /* FSCalendar in Frameworks */,
 				2E50EC282730C822007882C9 /* RealmSwift in Frameworks */,
@@ -217,8 +219,8 @@
 			isa = PBXGroup;
 			children = (
 				2E50EC03272FB748007882C9 /* Content.storyboard */,
-				2E7A9D4A2734B5300012DB09 /* DatePickerViewController.swift */,
 				2E50EC11272FE250007882C9 /* AddViewController.swift */,
+				2E7A9D4A2734B5300012DB09 /* DatePickerViewController.swift */,
 			);
 			path = Content;
 			sourceTree = "<group>";
@@ -253,6 +255,7 @@
 				2E50EC272730C822007882C9 /* RealmSwift */,
 				2E50EC4227336DCB007882C9 /* Zip */,
 				2E7A9D482734AD840012DB09 /* FSCalendar */,
+				2E7A9D5927364D8C0012DB09 /* IQKeyboardManagerSwift */,
 			);
 			productName = SeSAC_Week05;
 			productReference = 2E50EBA4272F6F5D007882C9 /* SeSAC_Week06.app */;
@@ -288,6 +291,7 @@
 				2E50EC242730C822007882C9 /* XCRemoteSwiftPackageReference "realm-cocoa" */,
 				2E50EC4127336DCB007882C9 /* XCRemoteSwiftPackageReference "Zip" */,
 				2E7A9D472734AD840012DB09 /* XCRemoteSwiftPackageReference "FSCalendar" */,
+				2E7A9D5827364D8C0012DB09 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 			);
 			productRefGroup = 2E50EBA5272F6F5D007882C9 /* Products */;
 			projectDirPath = "";
@@ -621,6 +625,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		2E7A9D5827364D8C0012DB09 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
+			requirement = {
+				kind = exactVersion;
+				version = 6.5.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -643,6 +655,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2E7A9D472734AD840012DB09 /* XCRemoteSwiftPackageReference "FSCalendar" */;
 			productName = FSCalendar;
+		};
+		2E7A9D5927364D8C0012DB09 /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2E7A9D5827364D8C0012DB09 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
