@@ -23,11 +23,9 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 		
-		self.view.backgroundColor = .black
 		
 		tableView.delegate = self
 		tableView.dataSource = self
-		tableView.backgroundColor = .black
 		definesPresentationContext = true
 		
 		tableView.keyboardDismissMode = .onDrag
@@ -86,7 +84,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
 		label.frame = CGRect.init(x: 5, y: 5, width: headerView.frame.width - 5, height: headerView.frame.height - 5)
 		label.text = "\(tasks.count)개 찾음"
 		label.font = .boldSystemFont(ofSize: 30)
-		label.textColor = .white
+		label.textColor = .label
 		headerView.addSubview(label)
 
 		return headerView

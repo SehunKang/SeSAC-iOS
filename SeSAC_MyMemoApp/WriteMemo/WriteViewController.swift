@@ -29,6 +29,7 @@ class WriteViewController: UIViewController {
 		setNavItem()
 		setDefaultText()
 		textView.becomeFirstResponder()
+		textView.textColor = .label
 
 
 	}
@@ -104,9 +105,9 @@ extension WriteViewController: UITextViewDelegate {
 		let replaced = textAsNSString.replacingCharacters(in: range, with: text) as NSString
 		let boldRange = replaced.range(of: "\n")
 		if boldRange.location > range.location {
-			textView.typingAttributes = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 40)]
+			textView.typingAttributes = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 40), NSAttributedString.Key.foregroundColor: UIColor.label]
 		} else {
-			textView.typingAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20)]
+			textView.typingAttributes = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20), NSAttributedString.Key.foregroundColor: UIColor.label]
 		}
 		
 		return true

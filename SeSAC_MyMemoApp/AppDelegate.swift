@@ -18,6 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 		IQKeyboardManager.shared.enable = true
 		IQKeyboardManager.shared.enableAutoToolbar = false
+		UITableViewCell.appearance().backgroundColor = .secondarySystemGroupedBackground
+		UITableView.appearance().backgroundColor = .systemGroupedBackground
+		
 		
 		return true
 	}

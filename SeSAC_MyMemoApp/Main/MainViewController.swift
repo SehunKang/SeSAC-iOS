@@ -23,14 +23,14 @@ class MainViewController: UIViewController {
 		
 		tableView.delegate = self
 		tableView.dataSource = self
+
 		
 		tasks = realm.objects(UserMemo.self)
 		addObserver()
 
-		self.view.backgroundColor = .black
+		self.view.backgroundColor = .systemGroupedBackground
 		setDefaultNavigaionBar()
 		setBottomNavBar()
-		tableView.backgroundColor = .black
 		definesPresentationContext = true
 	}
 	
@@ -64,14 +64,15 @@ class MainViewController: UIViewController {
 	func setDefaultNavigaionBar() {
 		let appearance = UINavigationBarAppearance()
 		
-		appearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-		appearance.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-		appearance.backgroundColor = UIColor(red: 22/255, green: 22/255, blue: 22/255, alpha: 1)
+//		appearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.label]
+//		appearance.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.label]
+		appearance.configureWithTransparentBackground()
 		navigationController?.navigationBar.prefersLargeTitles = true
-		navigationController?.navigationBar.barTintColor = UIColor(red: 22/255, green: 22/255, blue: 22/255, alpha: 1)
+//		navigationController?.navigationBar.barTintColor = UIColor(red: 22/255, green: 22/255, blue: 22/255, alpha: 1)
 //		navigationController?.navigationBar.barStyle = .black
 		navigationController?.navigationBar.standardAppearance = appearance
 		navigationController?.navigationBar.scrollEdgeAppearance = appearance
+		
 		setSearch()
 		setNavTitle()
 
@@ -89,13 +90,13 @@ class MainViewController: UIViewController {
 	//툴바가 있는줄 모르고 네비게이션바를 하단에 삽입했는데 시간이 없어 안 바꾼다.
 	func setBottomNavBar() {
 		let appearance = UINavigationBarAppearance()
-		appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
-		appearance.backgroundColor = UIColor(red: 22/255, green: 22/255, blue: 22/255, alpha: 1)
+//		appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+//		appearance.backgroundColor = UIColor(red: 22/255, green: 22/255, blue: 22/255, alpha: 1)
 		bottomNavigationBar.standardAppearance = appearance
 		bottomNavigationBar.scrollEdgeAppearance = appearance
 		let writeButton = UIBarButtonItem(image: UIImage(systemName: "square.and.pencil"), style: .plain, target: nil, action: #selector(writeMemoButtonClicked))
 		bottomNavigationBar.topItem?.rightBarButtonItem = writeButton
-		bottomNavigationBar.topItem?.rightBarButtonItem?.tintColor = .systemOrange
+//		bottomNavigationBar.topItem?.rightBarButtonItem?.tintColor = .systemOrange
 		
 	}
 	
@@ -120,7 +121,7 @@ extension MainViewController: UITableViewDelegate, UITableViewDataSource {
 		label.frame = CGRect.init(x: 5, y: 5, width: headerView.frame.width - 5, height: headerView.frame.height - 5)
 		label.text = section == 0 ? "고정된 메모" : "메모"
 		label.font = .boldSystemFont(ofSize: 30)
-		label.textColor = .white
+		label.textColor = .label
 		headerView.addSubview(label)
 		
 		return headerView

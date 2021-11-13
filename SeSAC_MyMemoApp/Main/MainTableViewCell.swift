@@ -17,11 +17,11 @@ class MainTableViewCell: UITableViewCell {
 	
     override func awakeFromNib() {
         super.awakeFromNib()
-		self.backgroundColor = UIColor(red: 22/255, green: 22/255, blue: 22/255, alpha: 1)
-		titleMemo.textColor = .white
-		dateMemo.textColor = .gray
+		titleMemo.textColor = .label
+		titleMemo.font = .boldSystemFont(ofSize: 17)
+		dateMemo.textColor = .secondaryLabel
 		dateMemo.font = .systemFont(ofSize: 15)
-		textMemo.textColor = .gray
+		textMemo.textColor = .secondaryLabel
 		textMemo.font = .systemFont(ofSize: 15)
 		
     }

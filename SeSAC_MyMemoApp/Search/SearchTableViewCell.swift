@@ -17,12 +17,12 @@ class SearchTableViewCell: UITableViewCell {
 	
     override func awakeFromNib() {
         super.awakeFromNib()
-		self.backgroundColor = UIColor(red: 22/255, green: 22/255, blue: 22/255, alpha: 1)
-		searchTitle.textColor = .white
+		searchTitle.textColor = .label
+		searchTitle.font = .boldSystemFont(ofSize: 17)
 		searchDate.font = .systemFont(ofSize: 15)
-		searchDate.textColor = .gray
+		searchDate.textColor = .secondaryLabel
 		searchText.font = .systemFont(ofSize: 15)
-		searchText.textColor = .gray
+		searchText.textColor = .secondaryLabel
         // Initialization code
     }
 
