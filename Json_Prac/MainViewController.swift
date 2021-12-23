@@ -36,8 +36,32 @@ class MainViewController: UIViewController {
         }
         let customView = CustomView()
         customView.refreshButton.addTarget(self, action: #selector(refresh), for: .touchUpInside)
+        customView.shareButton.addTarget(self, action: #selector(share), for: .touchUpInside)
         let customItem = UIBarButtonItem(customView: customView)
         toolBar.setItems([customItem], animated: true)
+        
+    }
+    
+    @objc func share() {
+        
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
+        let format = DateFormatter()
+        format.dateFormat = "yyyy년 MM월 dd일 EEEE"
+        format.locale = Locale(identifier: "ko-KR")
+        encoder.dateEncodingStrategy = .formatted(format)
+        
+        do {
+            let data = try encoder.encode(beerData)
+            guard let jsonString = String(data: data, encoding: .utf8) else {fatalError()}
+            let activityViewController = UIActivityViewController(activityItems: [jsonString], applicationActivities: nil)
+            activityViewController.popoverPresentationController?.sourceView = self.view
+            self.present(activityViewController, animated: true, completion: nil)
+            print(jsonString)
+        } catch {
+            print(error)
+        }
+        
         
     }
     
