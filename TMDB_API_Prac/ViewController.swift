@@ -10,6 +10,24 @@ import SnapKit
 
 class ViewController: UIViewController {
     
+    var TVShowData: TVshow?
+    
+    var searchText: String? {
+        didSet {
+            APIService().requestSearch(searchQuery: searchText!) { data in
+                
+                DispatchQueue.main.async {
+                    self.TVShowData = data
+                    self.collectionView.reloadData()
+                    
+                }
+            }
+            currentPage = 1
+        }
+    }
+    
+    var currentPage: Int!
+    
     let collectionView: UICollectionView = {
         
         let layout = UICollectionViewFlowLayout()
@@ -31,6 +49,8 @@ class ViewController: UIViewController {
     
     func setNavBar() {
         let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchBar.returnKeyType = .done
+        searchController.searchBar.delegate = self
         self.navigationItem.searchController = searchController
     }
     
@@ -48,10 +68,13 @@ class ViewController: UIViewController {
 
 }
 
+//MARK: CollectionViewDelegate
 extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        let result = TVShowData?.totalResults ?? 0
+        print(result)
+        return result
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -74,9 +97,48 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCell.identifier, for: indexPath) as? ImageCell else { return UICollectionViewCell()}
-        cell.imageView.backgroundColor = .gray
+
+
+        if self.searchText == nil {return UICollectionViewCell()}
+        
+        if indexPath.item > (currentPage * 20 - 1) {
+            currentPage = indexPath.item / 20 + 1
+            APIService().requestSearch(searchQuery: self.searchText!, page: currentPage) { data in
+                self.TVShowData = data
+            }
+        } else if indexPath.item < ((currentPage - 1) * 20) {
+            currentPage = indexPath.item / 20 + 1
+            DispatchQueue.main.async {
+                APIService().requestSearch(searchQuery: self.searchText!, page: self.currentPage) { data in
+                    self.TVShowData = data
+                }
+            }
+        }
+        
+        if let posterPath = self.TVShowData?.results[indexPath.item - ((currentPage - 1) * 20)].posterPath {
+            APIService().requestPoster(posterPath: posterPath) { image in
+                DispatchQueue.main.async {
+                    cell.imageView.image = image
+                }
+            }
+        } else {
+            DispatchQueue.main.async {
+                cell.imageView.image = UIImage(systemName: "x.circle")
+            }
+        }
         return cell
     }
+        
+}
+
+//MARK: UISearchBarDelegate
+extension ViewController: UISearchBarDelegate {
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        guard let text = searchBar.text else {return}
+        self.searchText = text
+    }
+    
     
 }
 

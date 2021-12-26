@@ -16,6 +16,10 @@
 		2E2B3E6F2774B1A100285DF6 /* TMDB_API_PracUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2B3E6E2774B1A100285DF6 /* TMDB_API_PracUITests.swift */; };
 		2E2B3E712774B1A100285DF6 /* TMDB_API_PracUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2B3E702774B1A100285DF6 /* TMDB_API_PracUITestsLaunchTests.swift */; };
 		2E2B3E7F2774B36500285DF6 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2E2B3E7E2774B36500285DF6 /* SnapKit */; };
+		2E2B3E832775490C00285DF6 /* temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2B3E822775490C00285DF6 /* temp.swift */; };
+		2E2B3E86277803D300285DF6 /* APIStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2B3E85277803D300285DF6 /* APIStruct.swift */; };
+		2E2B3E8827780FBF00285DF6 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2B3E8727780FBF00285DF6 /* APIService.swift */; };
+		2E2B3E8A277810A800285DF6 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2B3E89277810A800285DF6 /* APIKey.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +52,10 @@
 		2E2B3E6A2774B1A100285DF6 /* TMDB_API_PracUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TMDB_API_PracUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E2B3E6E2774B1A100285DF6 /* TMDB_API_PracUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDB_API_PracUITests.swift; sourceTree = "<group>"; };
 		2E2B3E702774B1A100285DF6 /* TMDB_API_PracUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMDB_API_PracUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		2E2B3E822775490C00285DF6 /* temp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = temp.swift; sourceTree = "<group>"; };
+		2E2B3E85277803D300285DF6 /* APIStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIStruct.swift; sourceTree = "<group>"; };
+		2E2B3E8727780FBF00285DF6 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		2E2B3E89277810A800285DF6 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,12 +107,16 @@
 		2E2B3E4C2774B19F00285DF6 /* TMDB_API_Prac */ = {
 			isa = PBXGroup;
 			children = (
+				2E2B3E5B2774B1A100285DF6 /* Info.plist */,
 				2E2B3E4D2774B19F00285DF6 /* AppDelegate.swift */,
 				2E2B3E4F2774B19F00285DF6 /* SceneDelegate.swift */,
+				2E2B3E822775490C00285DF6 /* temp.swift */,
 				2E2B3E512774B19F00285DF6 /* ViewController.swift */,
+				2E2B3E85277803D300285DF6 /* APIStruct.swift */,
+				2E2B3E8727780FBF00285DF6 /* APIService.swift */,
+				2E2B3E89277810A800285DF6 /* APIKey.swift */,
 				2E2B3E562774B1A100285DF6 /* Assets.xcassets */,
 				2E2B3E582774B1A100285DF6 /* LaunchScreen.storyboard */,
-				2E2B3E5B2774B1A100285DF6 /* Info.plist */,
 			);
 			path = TMDB_API_Prac;
 			sourceTree = "<group>";
@@ -262,9 +274,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E2B3E86277803D300285DF6 /* APIStruct.swift in Sources */,
+				2E2B3E8A277810A800285DF6 /* APIKey.swift in Sources */,
 				2E2B3E522774B19F00285DF6 /* ViewController.swift in Sources */,
 				2E2B3E4E2774B19F00285DF6 /* AppDelegate.swift in Sources */,
 				2E2B3E502774B19F00285DF6 /* SceneDelegate.swift in Sources */,
+				2E2B3E8827780FBF00285DF6 /* APIService.swift in Sources */,
+				2E2B3E832775490C00285DF6 /* temp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
