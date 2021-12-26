@@ -15,12 +15,14 @@ class APIService {
         print("request for query: ", searchQuery)
         
         var urlComponent = URLComponents(string: "https://api.themoviedb.org/3/search/tv?")
-        let api_key = URLQueryItem(name: "api_key", value: apiKey)
+        
+        let apiKey = URLQueryItem(name: "api_key", value: apiKey)
         let language = URLQueryItem(name: "language", value: "ko-KR")
         let query = URLQueryItem(name: "query", value: searchQuery)
         let include = URLQueryItem(name: "include_adult", value: "true")
         let page = URLQueryItem(name: "page", value: "\(page)")
-        urlComponent?.queryItems?.append(api_key)
+        
+        urlComponent?.queryItems?.append(apiKey)
         urlComponent?.queryItems?.append(language)
         urlComponent?.queryItems?.append(query)
         urlComponent?.queryItems?.append(include)
@@ -42,7 +44,6 @@ class APIService {
             }
             
             if let data = data, let TVShowData = try? JSONDecoder().decode(TVshow.self, from: data) {
-                print("Succeed", TVShowData)
                 completion(TVShowData)
                 return
             }
@@ -70,6 +71,36 @@ class APIService {
                 guard let image = UIImage(data: data) else {return}
                 completion(image)
                 return
+            }
+            
+        }.resume()
+    }
+    
+    func requestTvShowDetail(id: Int, completion: @escaping (TvShowDetail) -> Void) {
+        
+        var urlComponent = URLComponents(string: "https://api.themoviedb.org/3/tv/\(id)")!
+
+        let queryItems = [URLQueryItem(name: "api_key", value: apiKey), URLQueryItem(name: "language", value: "ko-KR")]
+        
+        urlComponent.queryItems = queryItems
+        
+        let url = urlComponent.url!
+        print(url)
+        
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            
+            if let error = error {
+                print(error)
+                return
+            }
+            
+            guard let response = response as? HTTPURLResponse, (200...299).contains(response.statusCode) else {
+                print(response)
+                return
+            }
+            
+            if let data = data, let detailData = try? JSONDecoder().decode(TvShowDetail.self, from: data) {
+                completion(detailData)
             }
             
         }.resume()

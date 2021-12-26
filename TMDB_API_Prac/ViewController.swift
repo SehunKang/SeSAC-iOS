@@ -128,6 +128,20 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         }
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = TVDetailsViewController()
+        let currentPage = indexPath.item / 20 + 1
+        let id = TVShowData?.results[indexPath.item - ((currentPage - 1) * 20)].id
+        
+        APIService().requestTvShowDetail(id: id!) { data in
+            vc.data = data
+        }
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+
+        
+    }
         
 }
 

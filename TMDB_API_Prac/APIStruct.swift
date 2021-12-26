@@ -48,3 +48,31 @@ struct Result: Codable {
         case voteCount = "vote_count"
     }
 }
+
+struct TvShowDetail: Codable {
+    let name: String
+    let numberOfSeasons: Int
+    let seasons: [Season]
+    
+    enum CodingKeys: String, CodingKey {
+        case name
+        case numberOfSeasons = "number_of_seasons"
+        case seasons
+    }
+}
+
+struct Season: Codable {
+    let airDate: String?
+    let episodeCount, id, seasonNumber: Int
+    let name, overview, posterPath: String
+
+    
+    enum CodingKeys: String, CodingKey {
+        case airDate =  "air_date"
+        case episodeCount = "episode_count"
+        case id, name, overview
+        case posterPath = "poster_path"
+        case seasonNumber = "season_number"
+    }
+}
+
