@@ -13,10 +13,26 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+        
+        //로그인에 따른 분기처리 필요
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        let id = UserDefaults.standard.string(forKey: "nickname")
+        
+        var rv: UIViewController = SignInViewController()
+        
+        //여기서 id, password로 http POST를 보내 로그인하게 하고싶은데 password를 어떻게 처리해야할지 몰라 임시방편으로 아래 코드를 사용
+        if id != nil {
+            rv = MainViewController()
+        }
+        
+        window = UIWindow(windowScene: windowScene)
+        
+        let rootViewController = UINavigationController(rootViewController: rv)
+        
+        window?.rootViewController = rootViewController
+        window?.makeKeyAndVisible()
+
+        
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
