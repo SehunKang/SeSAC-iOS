@@ -76,7 +76,7 @@ class APIService {
         }.resume()
     }
     
-    func requestTvShowDetail(id: Int, completion: @escaping (TvShowDetail) -> Void) {
+    func requestTvShowDetail(id: Int, completion: @escaping (TvShowDetail?) -> Void) {
         
         var urlComponent = URLComponents(string: "https://api.themoviedb.org/3/tv/\(id)")!
 

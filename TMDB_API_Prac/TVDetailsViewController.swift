@@ -37,7 +37,7 @@ class TVDetailsViewController: UIViewController {
 extension TVDetailsViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.numberOfSeasons
+        return data.seasons.count
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -52,7 +52,7 @@ extension TVDetailsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TVDetailsTableViewCell.identifier, for: indexPath) as? TVDetailsTableViewCell else { return UITableViewCell() }
         
-        let season = data.seasons[indexPath.row + 1]
+        let season = data.seasons[indexPath.row]
         
         APIService().requestPoster(posterPath: season.posterPath) { image in
             DispatchQueue.main.async {
@@ -60,7 +60,7 @@ extension TVDetailsViewController: UITableViewDataSource, UITableViewDelegate {
             }
         }
         cell.titleLabel.text = "\(data.name) \(season.name)"
-        cell.infoLabel.text = "\(season.airDate!) | Episode \(season.episodeCount)"
+        cell.infoLabel.text = "\(season.airDate ?? "") | Episode \(season.episodeCount)"
         cell.detailLabel.text = season.overview
         
         return cell

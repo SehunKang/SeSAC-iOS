@@ -132,18 +132,19 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = TVDetailsViewController()
         let currentPage = indexPath.item / 20 + 1
+        print("page: ",currentPage)
         let id = TVShowData?.results[indexPath.item - ((currentPage - 1) * 20)].id
-        
         APIService().requestTvShowDetail(id: id!) { data in
-            vc.data = data
+            DispatchQueue.main.async {
+                if data != nil {
+                    vc.data = data
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+            }
         }
-        
-        self.navigationController?.pushViewController(vc, animated: true)
-
-        
     }
-        
 }
+        
 
 //MARK: UISearchBarDelegate
 extension ViewController: UISearchBarDelegate {
