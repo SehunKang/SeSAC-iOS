@@ -9,13 +9,34 @@
 /* Begin PBXBuildFile section */
 		2EE99AD4277E94AD0042CD29 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99AD3277E94AD0042CD29 /* AppDelegate.swift */; };
 		2EE99AD6277E94AD0042CD29 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99AD5277E94AD0042CD29 /* SceneDelegate.swift */; };
-		2EE99AD8277E94AD0042CD29 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99AD7277E94AD0042CD29 /* ViewController.swift */; };
-		2EE99ADB277E94AD0042CD29 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EE99AD9277E94AD0042CD29 /* Main.storyboard */; };
 		2EE99ADD277E94AF0042CD29 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EE99ADC277E94AF0042CD29 /* Assets.xcassets */; };
 		2EE99AE0277E94AF0042CD29 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EE99ADE277E94AF0042CD29 /* LaunchScreen.storyboard */; };
 		2EE99AEB277E94AF0042CD29 /* SeSAC_FarmTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99AEA277E94AF0042CD29 /* SeSAC_FarmTests.swift */; };
 		2EE99AF5277E94AF0042CD29 /* SeSAC_FarmUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99AF4277E94AF0042CD29 /* SeSAC_FarmUITests.swift */; };
 		2EE99AF7277E94AF0042CD29 /* SeSAC_FarmUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99AF6277E94AF0042CD29 /* SeSAC_FarmUITestsLaunchTests.swift */; };
+		2EE99B0A277E9FF10042CD29 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 2EE99B09277E9FF10042CD29 /* SnapKit */; };
+		2EE99B0E277EA0650042CD29 /* InitialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99B0D277EA0650042CD29 /* InitialViewController.swift */; };
+		2EE99B10277EA7AF0042CD29 /* CenterCustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99B0F277EA7AF0042CD29 /* CenterCustomView.swift */; };
+		2EE99B12277EB6B40042CD29 /* InitalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99B11277EB6B40042CD29 /* InitalView.swift */; };
+		2EE99B14277EBB790042CD29 /* StartButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99B13277EBB790042CD29 /* StartButtonView.swift */; };
+		2EE99B16277EBCC50042CD29 /* SignUpCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99B15277EBCC50042CD29 /* SignUpCheckView.swift */; };
+		2EE99B19277EC2150042CD29 /* InitialViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99B18277EC2150042CD29 /* InitialViewViewModel.swift */; };
+		2EE99B1E277EC2D90042CD29 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99B1D277EC2D90042CD29 /* SignUpViewController.swift */; };
+		2EE99B23277EC35E0042CD29 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99B22277EC35D0042CD29 /* SignInViewController.swift */; };
+		2EE99B25277EC3930042CD29 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99B24277EC3930042CD29 /* SignUpView.swift */; };
+		2EE99B27277EC6310042CD29 /* SignUpFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99B26277EC6310042CD29 /* SignUpFieldView.swift */; };
+		2EE99B29277EC8200042CD29 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99B28277EC8200042CD29 /* Observable.swift */; };
+		2EE99B2B277EC8D70042CD29 /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99B2A277EC8D70042CD29 /* SignUpViewModel.swift */; };
+		2EE99B2D277EC9780042CD29 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99B2C277EC9780042CD29 /* APIService.swift */; };
+		2EE99B2F277ECCF30042CD29 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99B2E277ECCF30042CD29 /* Endpoint.swift */; };
+		2EE99B31277EEA6F0042CD29 /* SignModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99B30277EEA6F0042CD29 /* SignModel.swift */; };
+		2EE99B39277F0CC90042CD29 /* MainPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99B38277F0CC90042CD29 /* MainPostViewController.swift */; };
+		2EE99B3B277F130B0042CD29 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99B3A277F130B0042CD29 /* SignInView.swift */; };
+		2EE99B3D277F14660042CD29 /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99B3C277F14660042CD29 /* SignInViewModel.swift */; };
+		2EE99B48277F32EA0042CD29 /* FirstRowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99B47277F32EA0042CD29 /* FirstRowCell.swift */; };
+		2EE99B4A277F33390042CD29 /* SecondRowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99B49277F33390042CD29 /* SecondRowCell.swift */; };
+		2EE99B4C277F34770042CD29 /* PlusButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99B4B277F34770042CD29 /* PlusButtonView.swift */; };
+		2EE99B4E277F37140042CD29 /* MainPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99B4D277F37140042CD29 /* MainPostViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,8 +60,6 @@
 		2EE99AD0277E94AD0042CD29 /* SeSAC_Farm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeSAC_Farm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EE99AD3277E94AD0042CD29 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2EE99AD5277E94AD0042CD29 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		2EE99AD7277E94AD0042CD29 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		2EE99ADA277E94AD0042CD29 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2EE99ADC277E94AF0042CD29 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2EE99ADF277E94AF0042CD29 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2EE99AE1277E94AF0042CD29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -49,6 +68,28 @@
 		2EE99AF0277E94AF0042CD29 /* SeSAC_FarmUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SeSAC_FarmUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EE99AF4277E94AF0042CD29 /* SeSAC_FarmUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSAC_FarmUITests.swift; sourceTree = "<group>"; };
 		2EE99AF6277E94AF0042CD29 /* SeSAC_FarmUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeSAC_FarmUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		2EE99B0D277EA0650042CD29 /* InitialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewController.swift; sourceTree = "<group>"; };
+		2EE99B0F277EA7AF0042CD29 /* CenterCustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterCustomView.swift; sourceTree = "<group>"; };
+		2EE99B11277EB6B40042CD29 /* InitalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitalView.swift; sourceTree = "<group>"; };
+		2EE99B13277EBB790042CD29 /* StartButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartButtonView.swift; sourceTree = "<group>"; };
+		2EE99B15277EBCC50042CD29 /* SignUpCheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCheckView.swift; sourceTree = "<group>"; };
+		2EE99B18277EC2150042CD29 /* InitialViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewViewModel.swift; sourceTree = "<group>"; };
+		2EE99B1D277EC2D90042CD29 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		2EE99B22277EC35D0042CD29 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		2EE99B24277EC3930042CD29 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		2EE99B26277EC6310042CD29 /* SignUpFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpFieldView.swift; sourceTree = "<group>"; };
+		2EE99B28277EC8200042CD29 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		2EE99B2A277EC8D70042CD29 /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		2EE99B2C277EC9780042CD29 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		2EE99B2E277ECCF30042CD29 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		2EE99B30277EEA6F0042CD29 /* SignModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignModel.swift; sourceTree = "<group>"; };
+		2EE99B38277F0CC90042CD29 /* MainPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPostViewController.swift; sourceTree = "<group>"; };
+		2EE99B3A277F130B0042CD29 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		2EE99B3C277F14660042CD29 /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
+		2EE99B47277F32EA0042CD29 /* FirstRowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstRowCell.swift; sourceTree = "<group>"; };
+		2EE99B49277F33390042CD29 /* SecondRowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondRowCell.swift; sourceTree = "<group>"; };
+		2EE99B4B277F34770042CD29 /* PlusButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusButtonView.swift; sourceTree = "<group>"; };
+		2EE99B4D277F37140042CD29 /* MainPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPostViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2EE99B0A277E9FF10042CD29 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,8 +143,11 @@
 			children = (
 				2EE99AD3277E94AD0042CD29 /* AppDelegate.swift */,
 				2EE99AD5277E94AD0042CD29 /* SceneDelegate.swift */,
-				2EE99AD7277E94AD0042CD29 /* ViewController.swift */,
-				2EE99AD9277E94AD0042CD29 /* Main.storyboard */,
+				2EE99B33277F0C7C0042CD29 /* Post */,
+				2EE99B03277E99940042CD29 /* Initiation */,
+				2EE99B2E277ECCF30042CD29 /* Endpoint.swift */,
+				2EE99B28277EC8200042CD29 /* Observable.swift */,
+				2EE99B2C277EC9780042CD29 /* APIService.swift */,
 				2EE99ADC277E94AF0042CD29 /* Assets.xcassets */,
 				2EE99ADE277E94AF0042CD29 /* LaunchScreen.storyboard */,
 				2EE99AE1277E94AF0042CD29 /* Info.plist */,
@@ -127,6 +172,191 @@
 			path = SeSAC_FarmUITests;
 			sourceTree = "<group>";
 		};
+		2EE99B03277E99940042CD29 /* Initiation */ = {
+			isa = PBXGroup;
+			children = (
+				2EE99B30277EEA6F0042CD29 /* SignModel.swift */,
+				2EE99B04277E99B50042CD29 /* Initiation */,
+				2EE99B0B277EA03E0042CD29 /* SignUp */,
+				2EE99B0C277EA0470042CD29 /* SignIn */,
+			);
+			path = Initiation;
+			sourceTree = "<group>";
+		};
+		2EE99B04277E99B50042CD29 /* Initiation */ = {
+			isa = PBXGroup;
+			children = (
+				2EE99B06277E9AAD0042CD29 /* Model */,
+				2EE99B05277E9AA70042CD29 /* View */,
+				2EE99B07277E9AB20042CD29 /* ViewModel */,
+			);
+			path = Initiation;
+			sourceTree = "<group>";
+		};
+		2EE99B05277E9AA70042CD29 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2EE99B0D277EA0650042CD29 /* InitialViewController.swift */,
+				2EE99B11277EB6B40042CD29 /* InitalView.swift */,
+				2EE99B17277EC1960042CD29 /* CustomView */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2EE99B06277E9AAD0042CD29 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2EE99B07277E9AB20042CD29 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2EE99B18277EC2150042CD29 /* InitialViewViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		2EE99B0B277EA03E0042CD29 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				2EE99B1C277EC2CE0042CD29 /* Model */,
+				2EE99B1B277EC2C50042CD29 /* View */,
+				2EE99B1A277EC2B80042CD29 /* ViewModel */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
+		2EE99B0C277EA0470042CD29 /* SignIn */ = {
+			isa = PBXGroup;
+			children = (
+				2EE99B21277EC3500042CD29 /* Model */,
+				2EE99B20277EC34B0042CD29 /* View */,
+				2EE99B1F277EC3450042CD29 /* ViewModel */,
+			);
+			path = SignIn;
+			sourceTree = "<group>";
+		};
+		2EE99B17277EC1960042CD29 /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				2EE99B13277EBB790042CD29 /* StartButtonView.swift */,
+				2EE99B15277EBCC50042CD29 /* SignUpCheckView.swift */,
+				2EE99B0F277EA7AF0042CD29 /* CenterCustomView.swift */,
+			);
+			path = CustomView;
+			sourceTree = "<group>";
+		};
+		2EE99B1A277EC2B80042CD29 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2EE99B2A277EC8D70042CD29 /* SignUpViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		2EE99B1B277EC2C50042CD29 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2EE99B1D277EC2D90042CD29 /* SignUpViewController.swift */,
+				2EE99B24277EC3930042CD29 /* SignUpView.swift */,
+				2EE99B32277EEE150042CD29 /* CustomView */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2EE99B1C277EC2CE0042CD29 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2EE99B1F277EC3450042CD29 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2EE99B3C277F14660042CD29 /* SignInViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		2EE99B20277EC34B0042CD29 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2EE99B22277EC35D0042CD29 /* SignInViewController.swift */,
+				2EE99B3A277F130B0042CD29 /* SignInView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2EE99B21277EC3500042CD29 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2EE99B32277EEE150042CD29 /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				2EE99B26277EC6310042CD29 /* SignUpFieldView.swift */,
+			);
+			path = CustomView;
+			sourceTree = "<group>";
+		};
+		2EE99B33277F0C7C0042CD29 /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				2EE99B34277F0C9B0042CD29 /* MainPost */,
+			);
+			path = Post;
+			sourceTree = "<group>";
+		};
+		2EE99B34277F0C9B0042CD29 /* MainPost */ = {
+			isa = PBXGroup;
+			children = (
+				2EE99B37277F0CB20042CD29 /* Model */,
+				2EE99B35277F0CA00042CD29 /* VIew */,
+				2EE99B36277F0CA50042CD29 /* ViewModel */,
+			);
+			path = MainPost;
+			sourceTree = "<group>";
+		};
+		2EE99B35277F0CA00042CD29 /* VIew */ = {
+			isa = PBXGroup;
+			children = (
+				2EE99B38277F0CC90042CD29 /* MainPostViewController.swift */,
+				2EE99B42277F22830042CD29 /* CustomView */,
+			);
+			path = VIew;
+			sourceTree = "<group>";
+		};
+		2EE99B36277F0CA50042CD29 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2EE99B4D277F37140042CD29 /* MainPostViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		2EE99B37277F0CB20042CD29 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2EE99B42277F22830042CD29 /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				2EE99B47277F32EA0042CD29 /* FirstRowCell.swift */,
+				2EE99B49277F33390042CD29 /* SecondRowCell.swift */,
+				2EE99B4B277F34770042CD29 /* PlusButtonView.swift */,
+			);
+			path = CustomView;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -143,6 +373,9 @@
 			dependencies = (
 			);
 			name = SeSAC_Farm;
+			packageProductDependencies = (
+				2EE99B09277E9FF10042CD29 /* SnapKit */,
+			);
 			productName = SeSAC_Farm;
 			productReference = 2EE99AD0277E94AD0042CD29 /* SeSAC_Farm.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +448,9 @@
 				Base,
 			);
 			mainGroup = 2EE99AC7277E94AD0042CD29;
+			packageReferences = (
+				2EE99B08277E9FF10042CD29 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = 2EE99AD1277E94AD0042CD29 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -233,7 +469,6 @@
 			files = (
 				2EE99AE0277E94AF0042CD29 /* LaunchScreen.storyboard in Resources */,
 				2EE99ADD277E94AF0042CD29 /* Assets.xcassets in Resources */,
-				2EE99ADB277E94AD0042CD29 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,9 +493,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2EE99AD8277E94AD0042CD29 /* ViewController.swift in Sources */,
+				2EE99B29277EC8200042CD29 /* Observable.swift in Sources */,
+				2EE99B2D277EC9780042CD29 /* APIService.swift in Sources */,
+				2EE99B31277EEA6F0042CD29 /* SignModel.swift in Sources */,
+				2EE99B12277EB6B40042CD29 /* InitalView.swift in Sources */,
+				2EE99B3D277F14660042CD29 /* SignInViewModel.swift in Sources */,
+				2EE99B27277EC6310042CD29 /* SignUpFieldView.swift in Sources */,
+				2EE99B48277F32EA0042CD29 /* FirstRowCell.swift in Sources */,
+				2EE99B0E277EA0650042CD29 /* InitialViewController.swift in Sources */,
+				2EE99B4C277F34770042CD29 /* PlusButtonView.swift in Sources */,
+				2EE99B4E277F37140042CD29 /* MainPostViewModel.swift in Sources */,
 				2EE99AD4277E94AD0042CD29 /* AppDelegate.swift in Sources */,
+				2EE99B4A277F33390042CD29 /* SecondRowCell.swift in Sources */,
+				2EE99B14277EBB790042CD29 /* StartButtonView.swift in Sources */,
+				2EE99B2B277EC8D70042CD29 /* SignUpViewModel.swift in Sources */,
 				2EE99AD6277E94AD0042CD29 /* SceneDelegate.swift in Sources */,
+				2EE99B3B277F130B0042CD29 /* SignInView.swift in Sources */,
+				2EE99B25277EC3930042CD29 /* SignUpView.swift in Sources */,
+				2EE99B2F277ECCF30042CD29 /* Endpoint.swift in Sources */,
+				2EE99B10277EA7AF0042CD29 /* CenterCustomView.swift in Sources */,
+				2EE99B19277EC2150042CD29 /* InitialViewViewModel.swift in Sources */,
+				2EE99B1E277EC2D90042CD29 /* SignUpViewController.swift in Sources */,
+				2EE99B39277F0CC90042CD29 /* MainPostViewController.swift in Sources */,
+				2EE99B23277EC35E0042CD29 /* SignInViewController.swift in Sources */,
+				2EE99B16277EBCC50042CD29 /* SignUpCheckView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,14 +553,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		2EE99AD9277E94AD0042CD29 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2EE99ADA277E94AD0042CD29 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		2EE99ADE277E94AF0042CD29 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -444,7 +692,6 @@
 				INFOPLIST_FILE = SeSAC_Farm/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -472,7 +719,6 @@
 				INFOPLIST_FILE = SeSAC_Farm/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -604,6 +850,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		2EE99B08277E9FF10042CD29 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		2EE99B09277E9FF10042CD29 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2EE99B08277E9FF10042CD29 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2EE99AC8277E94AD0042CD29 /* Project object */;
 }
