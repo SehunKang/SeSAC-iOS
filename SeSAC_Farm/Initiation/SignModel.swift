@@ -21,7 +21,7 @@ struct User: Codable {
     let blocked: Bool?
     let role: Role
     let createdAt, updatedAt: String
-    let posts: [Post?]
+    let posts: [PostFromUser?]
     let comments: [Comment?]
 
     enum CodingKeys: String, CodingKey {
@@ -32,8 +32,7 @@ struct User: Codable {
     }
 }
 
-// MARK: - Post
-struct Post: Codable {
+struct PostFromUser: Codable {
     let id: Int
     let text: String
     let user: User

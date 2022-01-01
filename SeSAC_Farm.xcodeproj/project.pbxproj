@@ -39,6 +39,12 @@
 		2EE99B4E277F37140042CD29 /* MainPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99B4D277F37140042CD29 /* MainPostViewModel.swift */; };
 		2EE99B5027801DCC0042CD29 /* MainPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99B4F27801DCC0042CD29 /* MainPostModel.swift */; };
 		2EE99B52278028560042CD29 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99B51278028560042CD29 /* Extension.swift */; };
+		2EE99B58278030380042CD29 /* DetailPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99B57278030380042CD29 /* DetailPostViewController.swift */; };
+		2EE99B5A278031A50042CD29 /* PostInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99B59278031A50042CD29 /* PostInfoCell.swift */; };
+		2EE99B5C27803DDB0042CD29 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99B5B27803DDB0042CD29 /* CommentCell.swift */; };
+		2EE99B5E278092170042CD29 /* DetailPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99B5D278092170042CD29 /* DetailPostViewModel.swift */; };
+		2EE99B602780A9BF0042CD29 /* DetailPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99B5F2780A9BF0042CD29 /* DetailPostModel.swift */; };
+		2EE99B622780BBE80042CD29 /* TextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99B612780BBE80042CD29 /* TextCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +100,12 @@
 		2EE99B4D277F37140042CD29 /* MainPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPostViewModel.swift; sourceTree = "<group>"; };
 		2EE99B4F27801DCC0042CD29 /* MainPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPostModel.swift; sourceTree = "<group>"; };
 		2EE99B51278028560042CD29 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		2EE99B57278030380042CD29 /* DetailPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPostViewController.swift; sourceTree = "<group>"; };
+		2EE99B59278031A50042CD29 /* PostInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostInfoCell.swift; sourceTree = "<group>"; };
+		2EE99B5B27803DDB0042CD29 /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
+		2EE99B5D278092170042CD29 /* DetailPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPostViewModel.swift; sourceTree = "<group>"; };
+		2EE99B5F2780A9BF0042CD29 /* DetailPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPostModel.swift; sourceTree = "<group>"; };
+		2EE99B612780BBE80042CD29 /* TextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -313,6 +325,7 @@
 		2EE99B33277F0C7C0042CD29 /* Post */ = {
 			isa = PBXGroup;
 			children = (
+				2EE99B53278030140042CD29 /* DetailPost */,
 				2EE99B34277F0C9B0042CD29 /* MainPost */,
 			);
 			path = Post;
@@ -361,6 +374,43 @@
 				2EE99B4B277F34770042CD29 /* PlusButtonView.swift */,
 			);
 			path = CustomView;
+			sourceTree = "<group>";
+		};
+		2EE99B53278030140042CD29 /* DetailPost */ = {
+			isa = PBXGroup;
+			children = (
+				2EE99B56278030280042CD29 /* Model */,
+				2EE99B55278030230042CD29 /* View */,
+				2EE99B542780301A0042CD29 /* ViewModel */,
+			);
+			path = DetailPost;
+			sourceTree = "<group>";
+		};
+		2EE99B542780301A0042CD29 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2EE99B5D278092170042CD29 /* DetailPostViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		2EE99B55278030230042CD29 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2EE99B57278030380042CD29 /* DetailPostViewController.swift */,
+				2EE99B59278031A50042CD29 /* PostInfoCell.swift */,
+				2EE99B612780BBE80042CD29 /* TextCell.swift */,
+				2EE99B5B27803DDB0042CD29 /* CommentCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2EE99B56278030280042CD29 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2EE99B5F2780A9BF0042CD29 /* DetailPostModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -513,15 +563,21 @@
 				2EE99AD4277E94AD0042CD29 /* AppDelegate.swift in Sources */,
 				2EE99B4A277F33390042CD29 /* SecondRowCell.swift in Sources */,
 				2EE99B14277EBB790042CD29 /* StartButtonView.swift in Sources */,
+				2EE99B622780BBE80042CD29 /* TextCell.swift in Sources */,
 				2EE99B2B277EC8D70042CD29 /* SignUpViewModel.swift in Sources */,
 				2EE99AD6277E94AD0042CD29 /* SceneDelegate.swift in Sources */,
 				2EE99B3B277F130B0042CD29 /* SignInView.swift in Sources */,
 				2EE99B25277EC3930042CD29 /* SignUpView.swift in Sources */,
 				2EE99B2F277ECCF30042CD29 /* Endpoint.swift in Sources */,
+				2EE99B5E278092170042CD29 /* DetailPostViewModel.swift in Sources */,
+				2EE99B5A278031A50042CD29 /* PostInfoCell.swift in Sources */,
 				2EE99B10277EA7AF0042CD29 /* CenterCustomView.swift in Sources */,
 				2EE99B19277EC2150042CD29 /* InitialViewViewModel.swift in Sources */,
 				2EE99B1E277EC2D90042CD29 /* SignUpViewController.swift in Sources */,
+				2EE99B602780A9BF0042CD29 /* DetailPostModel.swift in Sources */,
+				2EE99B5C27803DDB0042CD29 /* CommentCell.swift in Sources */,
 				2EE99B39277F0CC90042CD29 /* MainPostViewController.swift in Sources */,
+				2EE99B58278030380042CD29 /* DetailPostViewController.swift in Sources */,
 				2EE99B5027801DCC0042CD29 /* MainPostModel.swift in Sources */,
 				2EE99B23277EC35E0042CD29 /* SignInViewController.swift in Sources */,
 				2EE99B16277EBCC50042CD29 /* SignUpCheckView.swift in Sources */,

@@ -16,10 +16,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         window = UIWindow(windowScene: windowScene)
+        var rootViewController: UIViewController!
         
-        token = UserDefaults.standard.string(forKey: "token") ?? ""
-        
-        let rootViewController = MainPostViewController()
+        if UserDefaults.standard.string(forKey: "token") != nil {
+            token = UserDefaults.standard.string(forKey: "token")!
+            rootViewController = MainPostViewController()
+        } else {
+            rootViewController = InitialViewController()
+        }
         
         window?.rootViewController = UINavigationController(rootViewController: rootViewController)
         window?.makeKeyAndVisible()

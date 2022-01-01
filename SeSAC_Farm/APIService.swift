@@ -45,11 +45,21 @@ class APIService {
 //        URLSession.request(endpoint: request, completion: completion)
 //    }
     
-    static func getPost(completion: @escaping ([EasyPost]?, APIError?) -> Void) {
+    static func getPost(completion: @escaping ([Post]?, APIError?) -> Void) {
         
         var request = URLRequest(url: Endpoint.post.url)
         request.httpMethod = Method.GET.rawValue
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        
+        URLSession.request(endpoint: request, completion: completion)
+    }
+    
+    static func getComment(id: Int, completion: @escaping ([DetailComment]?, APIError?) -> Void) {
+        
+        var request = URLRequest(url: Endpoint.getComment(postId: id).url)
+        request.httpMethod = Method.GET.rawValue
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        print(request as Any)
         
         URLSession.request(endpoint: request, completion: completion)
     }

@@ -26,7 +26,7 @@ class MainPostViewController: UIViewController {
         viewModel.getPost { error in
             if let error = error {
                 print(error)
-                //사용자에게 안내 후
+                //error의 종류에 따라 구분 및 안내해야하지만 일단 생략
                 DispatchQueue.main.async {
                     guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
                     windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: InitialViewController())
@@ -121,6 +121,21 @@ extension MainPostViewController: UITableViewDelegate, UITableViewDataSource {
             cell.separatorInset = .zero
             return cell
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let vc = DetailPostViewController()
+        vc.viewModel.postIndex = viewModel.post.value[indexPath.section].id
+//        vc.viewModel.post.value = viewModel.post.value[indexPath.section]
+        vc.viewModel.post = viewModel.post.value[indexPath.section]
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+//        viewModel.pushToDetailPost(self.navigationController!, to: vc) {
+//            vc.viewModel.post?.value = self.viewModel.post.value[indexPath.section]
+//        }
+        
     }
     
     

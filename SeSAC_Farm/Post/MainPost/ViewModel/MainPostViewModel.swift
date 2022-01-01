@@ -6,15 +6,16 @@
 //
 
 import Foundation
+import UIKit
 
 class MainPostViewModel {
     
-    var post: Observable<[EasyPost]> = Observable([])
+    var post: Observable<[Post]> = Observable([])
     
     func getPost(completion: @escaping (APIError?) -> Void) {
         
         APIService.getPost { data, error in
-            print(data as Any)
+            
             if data != nil {
                 self.post.value = data!
             }
@@ -29,7 +30,16 @@ extension MainPostViewModel {
         return post.value.count
     }
     
-    func cellForRowAt(at indexPath: IndexPath) -> EasyPost {
+    func cellForRowAt(at indexPath: IndexPath) -> Post {
         return post.value[indexPath.section]
     }
+    
+    func pushToDetailPost(_ navigationController: UINavigationController, to viewController: UIViewController, completion: () -> Void) {
+    
+        
+        navigationController.pushViewController(viewController, animated: true)
+        completion()
+        
+    }
+    
 }

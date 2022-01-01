@@ -39,9 +39,6 @@ class FirstRowCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-//        preservesSuperviewLayoutMargins = false
-//        separatorInset = UIEdgeInsets.init(top: 0, left: 20, bottom: 0, right: 20)
-//        layoutMargins = UIEdgeInsets.init(top: 0, left: 20, bottom: 0, right: 20)
         
         [nameLabel, postLabel, dateLabel].forEach {
             self.addSubview($0)
@@ -50,7 +47,6 @@ class FirstRowCell: UITableViewCell {
         nameLabel.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide).offset(15)
             make.leading.equalTo(safeAreaLayoutGuide).offset(20)
-//            make.trailing.greaterThanOrEqualTo(safeAreaLayoutGuide).inset(20)
         }
         
         postLabel.snp.makeConstraints { make in
