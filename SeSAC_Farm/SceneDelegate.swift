@@ -17,7 +17,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(windowScene: windowScene)
         
-        let rootViewController = InitialViewController()
+        token = UserDefaults.standard.string(forKey: "token") ?? ""
+        
+        let rootViewController = MainPostViewController()
         
         window?.rootViewController = UINavigationController(rootViewController: rootViewController)
         window?.makeKeyAndVisible()

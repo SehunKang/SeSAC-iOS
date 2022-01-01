@@ -45,7 +45,7 @@ class APIService {
 //        URLSession.request(endpoint: request, completion: completion)
 //    }
     
-    static func getPost(completion: @escaping ([Post]?, APIError?) -> Void) {
+    static func getPost(completion: @escaping ([EasyPost]?, APIError?) -> Void) {
         
         var request = URLRequest(url: Endpoint.post.url)
         request.httpMethod = Method.GET.rawValue

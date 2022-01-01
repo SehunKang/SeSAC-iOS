@@ -29,6 +29,11 @@ class SecondRowCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+//        preservesSuperviewLayoutMargins = false
+//        separatorInset = UIEdgeInsets.init(top: 0, left: 20, bottom: 0, right: 20)
+//        layoutMargins = UIEdgeInsets.init(top: 0, left: 20, bottom: 0, right: 20)
+//
+        
         [bubbleImage, commentLabel].forEach {
             self.addSubview($0)
         }

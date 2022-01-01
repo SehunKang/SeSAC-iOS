@@ -14,16 +14,17 @@ class FirstRowCell: UITableViewCell {
     
     let nameLabel: UILabel = {
         let label = UILabel()
-        label.backgroundColor = .lightGray
+        label.backgroundColor = .systemGroupedBackground
         label.sizeToFit()
         label.font = .systemFont(ofSize: 13)
+        label.numberOfLines = 1
         return label
     }()
     
     let postLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 20)
-        label.numberOfLines = 0
+        label.numberOfLines = 4
         label.sizeToFit()
         return label
     }()
@@ -38,6 +39,10 @@ class FirstRowCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+//        preservesSuperviewLayoutMargins = false
+//        separatorInset = UIEdgeInsets.init(top: 0, left: 20, bottom: 0, right: 20)
+//        layoutMargins = UIEdgeInsets.init(top: 0, left: 20, bottom: 0, right: 20)
+        
         [nameLabel, postLabel, dateLabel].forEach {
             self.addSubview($0)
         }
@@ -45,18 +50,21 @@ class FirstRowCell: UITableViewCell {
         nameLabel.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide).offset(15)
             make.leading.equalTo(safeAreaLayoutGuide).offset(20)
-            make.trailing.lessThanOrEqualTo(safeAreaLayoutGuide).inset(20)
+//            make.trailing.greaterThanOrEqualTo(safeAreaLayoutGuide).inset(20)
         }
         
         postLabel.snp.makeConstraints { make in
             make.top.equalTo(nameLabel.snp.bottom).offset(15)
-            make.leading.trailing.equalTo(nameLabel)
+            make.leading.equalTo(nameLabel)
+            make.trailing.lessThanOrEqualTo(safeAreaLayoutGuide).inset(20)
+
         }
         
         dateLabel.snp.makeConstraints { make in
             make.top.equalTo(postLabel.snp.bottom).offset(20)
             make.bottom.equalTo(self.snp.bottom).offset(-15)
-            make.leading.trailing.equalTo(nameLabel)
+            make.leading.equalTo(nameLabel)
+            make.trailing.lessThanOrEqualTo(safeAreaLayoutGuide).inset(20)
         }
 
     }

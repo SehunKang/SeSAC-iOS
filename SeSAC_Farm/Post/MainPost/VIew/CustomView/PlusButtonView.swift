@@ -14,6 +14,8 @@ class PlustButtonVIew: UIControl {
     let plusImage: UIImageView = {
         let view = UIImageView()
         view.image = UIImage(systemName: "plus")
+        view.tintColor = .white
+        view.contentMode = .scaleAspectFit
         return view
     }()
     
@@ -26,8 +28,6 @@ class PlustButtonVIew: UIControl {
             make.edges.equalToSuperview().inset(10)
         }
         self.backgroundColor = .systemGreen
-        self.layer.masksToBounds = true
-        self.layer.cornerRadius = self.frame.width/2
 
     }
     

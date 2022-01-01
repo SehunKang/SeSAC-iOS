@@ -30,9 +30,11 @@ class SignInView: UIView {
         signInField.nickNameField.snp.makeConstraints { make in
             make.height.equalTo(0)
         }
+        signInField.nickNameField.isHidden = true
         signInField.passwordCheck.snp.makeConstraints { make in
             make.height.equalTo(0)
         }
+        signInField.passwordCheck.isHidden = true
         
         signInField.confirmButton.setTitle("로그인", for: .normal)
     }

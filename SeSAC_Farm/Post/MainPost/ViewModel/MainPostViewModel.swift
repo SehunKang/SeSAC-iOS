@@ -9,13 +9,14 @@ import Foundation
 
 class MainPostViewModel {
     
-    var post: [Post]!
+    var post: Observable<[EasyPost]> = Observable([])
     
     func getPost(completion: @escaping (APIError?) -> Void) {
         
         APIService.getPost { data, error in
+            print(data as Any)
             if data != nil {
-                self.post = data
+                self.post.value = data!
             }
             completion(error)
         }
@@ -25,10 +26,10 @@ class MainPostViewModel {
 extension MainPostViewModel {
     
     var numberOfSection: Int {
-        return post.count
+        return post.value.count
     }
     
-    func cellForRowAt(at indexPath: IndexPath) -> Post {
-        return post[indexPath.section]
+    func cellForRowAt(at indexPath: IndexPath) -> EasyPost {
+        return post.value[indexPath.section]
     }
 }

@@ -37,6 +37,8 @@
 		2EE99B4A277F33390042CD29 /* SecondRowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99B49277F33390042CD29 /* SecondRowCell.swift */; };
 		2EE99B4C277F34770042CD29 /* PlusButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99B4B277F34770042CD29 /* PlusButtonView.swift */; };
 		2EE99B4E277F37140042CD29 /* MainPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99B4D277F37140042CD29 /* MainPostViewModel.swift */; };
+		2EE99B5027801DCC0042CD29 /* MainPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99B4F27801DCC0042CD29 /* MainPostModel.swift */; };
+		2EE99B52278028560042CD29 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99B51278028560042CD29 /* Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +92,8 @@
 		2EE99B49277F33390042CD29 /* SecondRowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondRowCell.swift; sourceTree = "<group>"; };
 		2EE99B4B277F34770042CD29 /* PlusButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlusButtonView.swift; sourceTree = "<group>"; };
 		2EE99B4D277F37140042CD29 /* MainPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPostViewModel.swift; sourceTree = "<group>"; };
+		2EE99B4F27801DCC0042CD29 /* MainPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPostModel.swift; sourceTree = "<group>"; };
+		2EE99B51278028560042CD29 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +152,7 @@
 				2EE99B2E277ECCF30042CD29 /* Endpoint.swift */,
 				2EE99B28277EC8200042CD29 /* Observable.swift */,
 				2EE99B2C277EC9780042CD29 /* APIService.swift */,
+				2EE99B51278028560042CD29 /* Extension.swift */,
 				2EE99ADC277E94AF0042CD29 /* Assets.xcassets */,
 				2EE99ADE277E94AF0042CD29 /* LaunchScreen.storyboard */,
 				2EE99AE1277E94AF0042CD29 /* Info.plist */,
@@ -343,6 +348,7 @@
 		2EE99B37277F0CB20042CD29 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2EE99B4F27801DCC0042CD29 /* MainPostModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -502,6 +508,7 @@
 				2EE99B48277F32EA0042CD29 /* FirstRowCell.swift in Sources */,
 				2EE99B0E277EA0650042CD29 /* InitialViewController.swift in Sources */,
 				2EE99B4C277F34770042CD29 /* PlusButtonView.swift in Sources */,
+				2EE99B52278028560042CD29 /* Extension.swift in Sources */,
 				2EE99B4E277F37140042CD29 /* MainPostViewModel.swift in Sources */,
 				2EE99AD4277E94AD0042CD29 /* AppDelegate.swift in Sources */,
 				2EE99B4A277F33390042CD29 /* SecondRowCell.swift in Sources */,
@@ -515,6 +522,7 @@
 				2EE99B19277EC2150042CD29 /* InitialViewViewModel.swift in Sources */,
 				2EE99B1E277EC2D90042CD29 /* SignUpViewController.swift in Sources */,
 				2EE99B39277F0CC90042CD29 /* MainPostViewController.swift in Sources */,
+				2EE99B5027801DCC0042CD29 /* MainPostModel.swift in Sources */,
 				2EE99B23277EC35E0042CD29 /* SignInViewController.swift in Sources */,
 				2EE99B16277EBCC50042CD29 /* SignUpCheckView.swift in Sources */,
 			);
