@@ -46,6 +46,10 @@
 		2EE99B602780A9BF0042CD29 /* DetailPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99B5F2780A9BF0042CD29 /* DetailPostModel.swift */; };
 		2EE99B622780BBE80042CD29 /* TextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99B612780BBE80042CD29 /* TextCell.swift */; };
 		2EE99B652781361A0042CD29 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2EE99B642781361A0042CD29 /* IQKeyboardManagerSwift */; };
+		2EE99B6B27816D140042CD29 /* WritePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99B6A27816D140042CD29 /* WritePostViewController.swift */; };
+		2EE99B6F278172050042CD29 /* WritePostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99B6E278172050042CD29 /* WritePostViewModel.swift */; };
+		2EE99B712781A9AB0042CD29 /* EditCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99B702781A9AB0042CD29 /* EditCommentViewController.swift */; };
+		2EE99B732781BADC0042CD29 /* modeltest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99B722781BADC0042CD29 /* modeltest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +111,10 @@
 		2EE99B5D278092170042CD29 /* DetailPostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPostViewModel.swift; sourceTree = "<group>"; };
 		2EE99B5F2780A9BF0042CD29 /* DetailPostModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPostModel.swift; sourceTree = "<group>"; };
 		2EE99B612780BBE80042CD29 /* TextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextCell.swift; sourceTree = "<group>"; };
+		2EE99B6A27816D140042CD29 /* WritePostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritePostViewController.swift; sourceTree = "<group>"; };
+		2EE99B6E278172050042CD29 /* WritePostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritePostViewModel.swift; sourceTree = "<group>"; };
+		2EE99B702781A9AB0042CD29 /* EditCommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCommentViewController.swift; sourceTree = "<group>"; };
+		2EE99B722781BADC0042CD29 /* modeltest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = modeltest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +172,7 @@
 				2EE99B33277F0C7C0042CD29 /* Post */,
 				2EE99B03277E99940042CD29 /* Initiation */,
 				2EE99B2E277ECCF30042CD29 /* Endpoint.swift */,
+				2EE99B722781BADC0042CD29 /* modeltest.swift */,
 				2EE99B28277EC8200042CD29 /* Observable.swift */,
 				2EE99B2C277EC9780042CD29 /* APIService.swift */,
 				2EE99B51278028560042CD29 /* Extension.swift */,
@@ -327,6 +336,7 @@
 		2EE99B33277F0C7C0042CD29 /* Post */ = {
 			isa = PBXGroup;
 			children = (
+				2EE99B6627816CE80042CD29 /* WritePost */,
 				2EE99B53278030140042CD29 /* DetailPost */,
 				2EE99B34277F0C9B0042CD29 /* MainPost */,
 			);
@@ -400,6 +410,7 @@
 			isa = PBXGroup;
 			children = (
 				2EE99B57278030380042CD29 /* DetailPostViewController.swift */,
+				2EE99B702781A9AB0042CD29 /* EditCommentViewController.swift */,
 				2EE99B59278031A50042CD29 /* PostInfoCell.swift */,
 				2EE99B612780BBE80042CD29 /* TextCell.swift */,
 				2EE99B5B27803DDB0042CD29 /* CommentCell.swift */,
@@ -411,6 +422,39 @@
 			isa = PBXGroup;
 			children = (
 				2EE99B5F2780A9BF0042CD29 /* DetailPostModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		2EE99B6627816CE80042CD29 /* WritePost */ = {
+			isa = PBXGroup;
+			children = (
+				2EE99B6927816CFC0042CD29 /* Model */,
+				2EE99B6827816CF60042CD29 /* VIew */,
+				2EE99B6727816CEF0042CD29 /* VIewModel */,
+			);
+			path = WritePost;
+			sourceTree = "<group>";
+		};
+		2EE99B6727816CEF0042CD29 /* VIewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2EE99B6E278172050042CD29 /* WritePostViewModel.swift */,
+			);
+			path = VIewModel;
+			sourceTree = "<group>";
+		};
+		2EE99B6827816CF60042CD29 /* VIew */ = {
+			isa = PBXGroup;
+			children = (
+				2EE99B6A27816D140042CD29 /* WritePostViewController.swift */,
+			);
+			path = VIew;
+			sourceTree = "<group>";
+		};
+		2EE99B6927816CFC0042CD29 /* Model */ = {
+			isa = PBXGroup;
+			children = (
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -553,13 +597,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2EE99B6F278172050042CD29 /* WritePostViewModel.swift in Sources */,
 				2EE99B29277EC8200042CD29 /* Observable.swift in Sources */,
 				2EE99B2D277EC9780042CD29 /* APIService.swift in Sources */,
 				2EE99B31277EEA6F0042CD29 /* SignModel.swift in Sources */,
 				2EE99B12277EB6B40042CD29 /* InitalView.swift in Sources */,
 				2EE99B3D277F14660042CD29 /* SignInViewModel.swift in Sources */,
 				2EE99B27277EC6310042CD29 /* SignUpFieldView.swift in Sources */,
+				2EE99B6B27816D140042CD29 /* WritePostViewController.swift in Sources */,
 				2EE99B48277F32EA0042CD29 /* FirstRowCell.swift in Sources */,
+				2EE99B712781A9AB0042CD29 /* EditCommentViewController.swift in Sources */,
 				2EE99B0E277EA0650042CD29 /* InitialViewController.swift in Sources */,
 				2EE99B4C277F34770042CD29 /* PlusButtonView.swift in Sources */,
 				2EE99B52278028560042CD29 /* Extension.swift in Sources */,
@@ -569,6 +616,7 @@
 				2EE99B14277EBB790042CD29 /* StartButtonView.swift in Sources */,
 				2EE99B622780BBE80042CD29 /* TextCell.swift in Sources */,
 				2EE99B2B277EC8D70042CD29 /* SignUpViewModel.swift in Sources */,
+				2EE99B732781BADC0042CD29 /* modeltest.swift in Sources */,
 				2EE99AD6277E94AD0042CD29 /* SceneDelegate.swift in Sources */,
 				2EE99B3B277F130B0042CD29 /* SignInView.swift in Sources */,
 				2EE99B25277EC3930042CD29 /* SignUpView.swift in Sources */,

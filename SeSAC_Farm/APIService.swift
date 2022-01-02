@@ -22,7 +22,6 @@ class APIService {
         var request =  URLRequest(url: Endpoint.signup.url)
         request.httpMethod = Method.POST.rawValue
         request.httpBody = "username=\(username)&email=\(email)&password=\(password)".data(using: .utf8, allowLossyConversion: false)
-        print(request)
         
         URLSession.request(endpoint: request, completion: completion)
     }
@@ -60,7 +59,7 @@ class APIService {
         var request = URLRequest(url: Endpoint.getComment(postId: id).url)
         request.httpMethod = Method.GET.rawValue
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
-        print(request as Any)
+
         
         URLSession.request(endpoint: request, completion: completion)
     }
@@ -71,7 +70,79 @@ class APIService {
         request.httpMethod = Method.POST.rawValue
         request.httpBody = "comment=\(comment)&post=\(id)".data(using: .utf8, allowLossyConversion: false)
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        URLSession.request(endpoint: request, completion: completion)
+    }
+    
+    static func editComment(commentId: Int, postId: Int, text: String, completion: @escaping (APIError?) -> Void) {
         
+        var request = URLRequest(url: Endpoint.commentDetail(id: commentId).url)
+        request.httpMethod = Method.PUT.rawValue
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        struct UploadData: Codable {
+            let comment: String
+            let post: Int
+        }
+        let data = UploadData(comment: text, post: postId)
+        guard let jsonData = try? JSONEncoder().encode(data) else {
+            print("error data convert")
+            return
+        }
+        URLSession.shared.uploadTask(with: request, from: jsonData) { data, response, error in
+            completion(nil)
+        }.resume()
+        
+    }
+    
+    static func deleteComment(commentId: Int, completion: @escaping (APIError?) -> Void) {
+        
+        var request = URLRequest(url: Endpoint.commentDetail(id: commentId).url)
+        request.httpMethod = Method.DELETE.rawValue
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+
+        URLSession.request(endpoint: request, completion: completion)
+    }
+    
+    static func writePost(text: String, completion: @escaping (APIError?) -> Void) {
+        
+        var request = URLRequest(url: Endpoint.post.url)
+        request.httpMethod = Method.POST.rawValue
+        request.httpBody = "text=\(text)".data(using: .utf8, allowLossyConversion: false)
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+
+        URLSession.request(endpoint: request, completion: completion)
+    }
+    
+    static func editPost(id: Int, text: String, completion: @escaping (APIError?) -> Void) {
+        
+        struct UploadData: Codable {
+            let text: String
+        }
+        
+        var request = URLRequest(url: Endpoint.postDetail(id: id).url)
+        request.httpMethod = Method.PUT.rawValue
+        
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        let data = UploadData(text: text)
+        guard let jsonData = try? JSONEncoder().encode(data) else {
+            print("error data convert")
+            return
+        }
+        
+        URLSession.shared.uploadTask(with: request, from: jsonData) { data, response, error in
+            completion(nil)
+        }.resume()
+
+    }
+    
+    static func deletePost(id: Int, completion: @escaping (APIError?) -> Void) {
+        
+        var request = URLRequest(url: Endpoint.postDetail(id: id).url)
+        request.httpMethod = Method.DELETE.rawValue
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+
         URLSession.request(endpoint: request, completion: completion)
     }
     

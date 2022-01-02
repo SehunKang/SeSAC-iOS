@@ -14,8 +14,11 @@ class MainPostViewController: UIViewController {
     let viewModel = MainPostViewModel()
     
     let tableView = UITableView(frame: .zero, style: .grouped)
-    //프레임을 설정해줘야 원이 된다... why?
+    //프레임을 직접 설정해줘야 원이 된다... why?
     let plusButton = PlustButtonVIew(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
+    
+//    var postData: [Post] = []
+
       
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,14 +34,21 @@ class MainPostViewController: UIViewController {
                     return
                 }
             }
+            self.tableView.reloadData()
         }
         
-        viewModel.post.bind { post in
+        viewModel.post.bind { posts in
             self.tableView.reloadData()
         }
         
         tableViewInit()
         plusButtonConfig()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        viewModel.postUpdate()
     }
     
     private func tableViewInit() {
@@ -64,6 +74,8 @@ class MainPostViewController: UIViewController {
         plusButton.layer.shadowOffset = CGSize(width: 0, height: 4)
         plusButton.layer.shadowRadius = 5
         plusButton.layer.shadowOpacity = 0.3
+        
+        plusButton.addTarget(self, action: #selector(writePost(_:)), for: .touchUpInside)
 
         view.addSubview(plusButton)
 
@@ -74,6 +86,14 @@ class MainPostViewController: UIViewController {
             make.height.equalTo(80)
         }
     }
+    
+    @objc func writePost(_ sender: UIButton) {
+        let vc = UINavigationController(rootViewController: WritePostViewController())
+        vc.modalPresentationStyle = .fullScreen
+        
+        self.present(vc, animated: true, completion: nil)
+        
+    }
 }
 
 extension MainPostViewController: UITableViewDelegate, UITableViewDataSource {
@@ -83,7 +103,7 @@ extension MainPostViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel.numberOfSection
+        return viewModel.post.value.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -95,19 +115,13 @@ extension MainPostViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if section == viewModel.numberOfSection - 1 { return 0 }
+        if section == viewModel.post.value.count - 1 { return 0 }
         return 10
         
     }
-    
-//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-//        let view = UIView()
-//        view.backgroundColor = .systemGroupedBackground
-//        return view
-//    }
         
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let data = viewModel.cellForRowAt(at: indexPath)
+        let data = viewModel.post.value[indexPath.section]
         if indexPath.row == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: FirstRowCell.identifier) as? FirstRowCell else {return UITableViewCell()}
             cell.nameLabel.text = data.user.username
@@ -126,17 +140,11 @@ extension MainPostViewController: UITableViewDelegate, UITableViewDataSource {
         
         let vc = DetailPostViewController()
         vc.viewModel.postId = viewModel.post.value[indexPath.section].id
-//        vc.viewModel.post.value = viewModel.post.value[indexPath.section]
-        vc.viewModel.post = viewModel.post.value[indexPath.section]
+        vc.viewModel.post.value = viewModel.post.value[indexPath.section]
+        vc.viewModel.postIndex = indexPath.section
         
         self.navigationController?.pushViewController(vc, animated: true)
         
-//        viewModel.pushToDetailPost(self.navigationController!, to: vc) {
-//            vc.viewModel.post?.value = self.viewModel.post.value[indexPath.section]
-//        }
         
     }
-    
-    
-    
 }

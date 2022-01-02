@@ -18,14 +18,13 @@ struct User: Codable {
     let id: Int
     let username, email, provider: String
     let confirmed: Bool
-    let blocked: Bool?
     let role: Role
     let createdAt, updatedAt: String
     let posts: [PostFromUser?]
     let comments: [Comment?]
 
     enum CodingKeys: String, CodingKey {
-        case id, username, email, provider, confirmed, blocked, role
+        case id, username, email, provider, confirmed, role
         case createdAt = "created_at"
         case updatedAt = "updated_at"
         case posts, comments
@@ -35,15 +34,15 @@ struct User: Codable {
 struct PostFromUser: Codable {
     let id: Int
     let text: String
-    let user: User
+    let user: Int
     let createdAt, updatedAt: String
-    let comments: [Comment?]
+//    let comments: [Comment?]
 
     enum CodingKeys: String, CodingKey {
         case id, text, user
         case createdAt = "created_at"
         case updatedAt = "updated_at"
-        case comments
+//        case comments
     }
 }
 

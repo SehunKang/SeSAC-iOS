@@ -22,6 +22,14 @@ class MainPostViewModel {
             completion(error)
         }
     }
+    
+    func postUpdate() {
+        APIService.getPost { data, error in
+            if data != nil {
+                self.post.value = data!
+            }
+        }
+    }
 }
 
 extension MainPostViewModel {

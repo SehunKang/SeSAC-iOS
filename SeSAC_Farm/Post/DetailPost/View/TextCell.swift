@@ -26,11 +26,11 @@ class TextCell: UITableViewCell {
         
         self.addSubview(mainTextLabel)
         mainTextLabel.snp.makeConstraints { make in
-            make.leading.trailing.equalTo(safeAreaLayoutGuide)
-            make.top.equalTo(self.safeAreaLayoutGuide).offset(20)
-            make.bottom.lessThanOrEqualTo(self.safeAreaLayoutGuide).offset(-60)
+            make.top.equalTo(safeAreaLayoutGuide).offset(20)
+            make.leading.equalTo(safeAreaLayoutGuide).offset(20)
+            make.trailing.equalTo(safeAreaLayoutGuide).offset(20)
+            make.bottom.equalToSuperview().offset(-20)
         }
-        
     }
     
     required init?(coder: NSCoder) {

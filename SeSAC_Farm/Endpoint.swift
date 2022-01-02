@@ -70,6 +70,7 @@ extension URLSession {
         return task
     }
     
+    
     static func request<T: Codable>(_ session: URLSession = .shared, endpoint: URLRequest, completion: @escaping (T?, APIError?) -> Void) {
         
         session.dataTask(endpoint) { data, response, error in
@@ -115,6 +116,7 @@ extension URLSession {
         
         session.dataTask(endpoint) { data, response, error in
             DispatchQueue.main.async {
+                
                 guard error == nil else {
                     completion(.failed)
                     return
@@ -134,7 +136,13 @@ extension URLSession {
                     completion(.failed)
                     return
                 }
-                print(data)
+//                do {
+//                    let decoder = JSONDecoder()
+//                    let userData = try decoder.decode(Test.self, from: data)
+//                    print(userData as Any)
+//                } catch {
+//                }
+
                 completion(nil)
             }
         }

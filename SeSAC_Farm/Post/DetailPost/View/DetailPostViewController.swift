@@ -14,6 +14,8 @@ class DetailPostViewController: UIViewController {
     let viewModel = DetailPostViewModel()
     
     let tableView = UITableView()
+    let toolbar = UIToolbar()
+
     
     let textfield = UITextField(frame: CGRect(x: 0, y: 0, width: 330, height: 35))
     
@@ -24,22 +26,53 @@ class DetailPostViewController: UIViewController {
         
         viewModel.getComment { error in
             if let error = error {
-                print(error)
-//                DispatchQueue.main.async {
-//                    guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
-//                    windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: InitialViewController())
-//                    windowScene.windows.first?.makeKeyAndVisible()
-//                }
                 tokenExpired(currentViewController: self)
             }
         }
         
         viewModel.comment.bind { comments in
-            self.tableView.reloadSections(IndexSet(integer: 2), with: .none)
+            self.tableView.reloadSections(IndexSet(1...2), with: .none)
         }
-        
-        tableViewInit()
+        viewModel.post.bind { post in
+            self.tableView.reloadSections(IndexSet(integer: 0), with: .none)
+        }
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "ellipsis"), style: .plain, target: self, action: #selector(editOrDelete))
         toolbarConfig()
+        tableViewInit()
+    }
+    
+    @objc func editOrDelete() {
+        
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let edit = UIAlertAction(title: "수정", style: .default) { action in
+            let vc = WritePostViewController()
+            vc.textField.text = self.viewModel.post.value.text
+            vc.viewModel.postId = self.viewModel.postId
+            vc.superViewModel = self.viewModel
+            let nav = UINavigationController(rootViewController: vc)
+            nav.modalPresentationStyle = .fullScreen
+            
+            self.present(nav, animated: true, completion: nil)
+        }
+        let delete = UIAlertAction(title: "삭제", style: .default) { action in
+            let alert = UIAlertController(title: "정말 삭제하시겠습니까?", message: nil, preferredStyle: .alert)
+            let ok = UIAlertAction(title: "네", style: .default) { action in
+                self.viewModel.deletePost { error in
+                    self.navigationController?.popViewController(animated: true)
+                }
+            }
+            let cancel = UIAlertAction(title: "아니오", style: .cancel, handler: nil)
+            alert.addAction(ok)
+            alert.addAction(cancel)
+            self.present(alert, animated: true, completion: nil)
+        }
+        let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        
+        alert.addAction(edit)
+        alert.addAction(delete)
+        alert.addAction(cancel)
+        
+        self.present(alert, animated: true, completion: nil)
     }
     
     
@@ -47,7 +80,8 @@ class DetailPostViewController: UIViewController {
         
         view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
-            make.edges.equalTo(view.safeAreaLayoutGuide)
+            make.top.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(toolbar.snp.top)
         }
         
         tableView.register(PostInfoCell.self, forCellReuseIdentifier: PostInfoCell.identifier)
@@ -56,11 +90,12 @@ class DetailPostViewController: UIViewController {
         tableView.register(TextCell.self, forCellReuseIdentifier: TextCell.identifier)
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 100
     }
     
     func toolbarConfig() {
         
-        let toolbar = UIToolbar()
         let flexible = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         textfield.layer.cornerRadius = 10
         textfield.backgroundColor = .systemGroupedBackground
@@ -98,44 +133,67 @@ extension DetailPostViewController: UITableViewDelegate, UITableViewDataSource {
         viewModel.numberOfSection
     }
     
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
-    }
-    
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
-//        return 100
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let postData = viewModel.post!
-        let commentData = viewModel.comment.value
         switch indexPath.section {
         case 0:
             if indexPath.row == 0 {
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: PostInfoCell.identifier) as? PostInfoCell else {return UITableViewCell()}
-                cell.nameLabel.text = postData.user.username
-                cell.dateLabel.text = postData.updatedAt.dateFormat()
+                cell.nameLabel.text = viewModel.post.value.user.username
+                cell.dateLabel.text = viewModel.post.value.updatedAt.dateFormat()
+                cell.selectionStyle = UITableViewCell.SelectionStyle.none
                 return cell
             } else {
-                let cell = tableView.dequeueReusableCell(withIdentifier: TextCell.identifier)!
-                cell.textLabel?.text = postData.text
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: TextCell.identifier) as? TextCell else {return UITableViewCell()}
+                cell.mainTextLabel.text = viewModel.post.value.text
+                cell.selectionStyle = UITableViewCell.SelectionStyle.none
                 return cell
             }
         case 1:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: SecondRowCell.identifier) as? SecondRowCell else {return UITableViewCell()}
-            cell.commentLabel.text = "댓글 \(postData.comments.count)"
+            cell.commentLabel.text = "댓글 \(viewModel.comment.value.count)"
+            cell.selectionStyle = UITableViewCell.SelectionStyle.none
             return cell
         case 2:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: CommentCell.identifier) as? CommentCell else {return UITableViewCell()}
-            cell.nameLabel.text = commentData[indexPath.row].user.username
-            cell.commentLabel.text = commentData[indexPath.row].comment
+            cell.nameLabel.text = viewModel.comment.value[indexPath.row].user.username
+            cell.commentLabel.text = viewModel.comment.value[indexPath.row].comment
             cell.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: .greatestFiniteMagnitude)
+            cell.selectionStyle = UITableViewCell.SelectionStyle.none
+            cell.button.tag = viewModel.comment.value[indexPath.row].id
+            cell.button.addTarget(self, action: #selector(commentEdit(_:)), for: .touchUpInside)
             return cell
         default:
             return UITableViewCell()
         }
+    }
+    
+    @objc func commentEdit(_ sender: UIButton) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let edit = UIAlertAction(title: "수정", style: .default) { action in
+            let vc = EditCommentViewController()
+            vc.commentId = sender.tag
+            vc.viewModel = self.viewModel
+            let nav = UINavigationController(rootViewController: vc)
+            self.present(nav, animated: true, completion: nil)
+        }
+        let delete = UIAlertAction(title: "삭제", style: .destructive) { action in
+            self.viewModel.deleteCommet(commentId: sender.tag) { error in
+                if error == nil {
+                    self.viewModel.getComment { error in
+                    }
+                }
+            }
+        }
+        let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        [edit, delete, cancel].forEach {
+            alert.addAction($0)
+        }
+        self.present(alert, animated: true, completion: nil)
     }
     
 }
@@ -146,7 +204,6 @@ extension DetailPostViewController: UITextFieldDelegate {
         guard let text = textfield.text, textfield.text != "" else { return }
         
         viewModel.writeComment(comment: text) { error in
-            print("write")
             if let error = error {
                 if error == .tokenExpired {
                     tokenExpired(currentViewController: self)
@@ -155,7 +212,6 @@ extension DetailPostViewController: UITextFieldDelegate {
                 }
             } else {
                 self.viewModel.getComment { error in
-                    print(error as Any)
                 }
             }
         }

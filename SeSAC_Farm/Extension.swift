@@ -30,7 +30,7 @@ public func tokenExpired(currentViewController: UIViewController) {
     let ok = UIAlertAction(title: "확인", style: .default) { action in
         DispatchQueue.main.async {
             guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
-            windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: SignInViewController())
+            windowScene.windows.first?.rootViewController = UINavigationController(rootViewController:InitialViewController())
             windowScene.windows.first?.makeKeyAndVisible()
         }
     }
