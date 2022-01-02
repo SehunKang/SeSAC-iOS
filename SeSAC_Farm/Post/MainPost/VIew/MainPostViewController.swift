@@ -13,7 +13,7 @@ class MainPostViewController: UIViewController {
     
     let viewModel = MainPostViewModel()
     
-    let tableView = UITableView()
+    let tableView = UITableView(frame: .zero, style: .grouped)
     //프레임을 설정해줘야 원이 된다... why?
     let plusButton = PlustButtonVIew(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
       
@@ -25,12 +25,10 @@ class MainPostViewController: UIViewController {
         
         viewModel.getPost { error in
             if let error = error {
-                print(error)
-                //error의 종류에 따라 구분 및 안내해야하지만 일단 생략
-                DispatchQueue.main.async {
-                    guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
-                    windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: InitialViewController())
-                    windowScene.windows.first?.makeKeyAndVisible()
+                if error == .tokenExpired {
+                    tokenExpired(currentViewController: self)
+                } else {
+                    return
                 }
             }
         }
@@ -55,7 +53,8 @@ class MainPostViewController: UIViewController {
         tableView.register(SecondRowCell.self, forCellReuseIdentifier: SecondRowCell.identifier)
         tableView.delegate = self
         tableView.dataSource = self
-        
+        tableView.sectionFooterHeight = 2
+        tableView.sectionHeaderHeight = 0
     }
     
     private func plusButtonConfig() {
@@ -101,11 +100,11 @@ extension MainPostViewController: UITableViewDelegate, UITableViewDataSource {
         
     }
     
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let view = UIView()
-        view.backgroundColor = .systemGroupedBackground
-        return view
-    }
+//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+//        let view = UIView()
+//        view.backgroundColor = .systemGroupedBackground
+//        return view
+//    }
         
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let data = viewModel.cellForRowAt(at: indexPath)
@@ -126,7 +125,7 @@ extension MainPostViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let vc = DetailPostViewController()
-        vc.viewModel.postIndex = viewModel.post.value[indexPath.section].id
+        vc.viewModel.postId = viewModel.post.value[indexPath.section].id
 //        vc.viewModel.post.value = viewModel.post.value[indexPath.section]
         vc.viewModel.post = viewModel.post.value[indexPath.section]
         

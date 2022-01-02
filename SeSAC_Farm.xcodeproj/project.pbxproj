@@ -45,6 +45,7 @@
 		2EE99B5E278092170042CD29 /* DetailPostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99B5D278092170042CD29 /* DetailPostViewModel.swift */; };
 		2EE99B602780A9BF0042CD29 /* DetailPostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99B5F2780A9BF0042CD29 /* DetailPostModel.swift */; };
 		2EE99B622780BBE80042CD29 /* TextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99B612780BBE80042CD29 /* TextCell.swift */; };
+		2EE99B652781361A0042CD29 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2EE99B642781361A0042CD29 /* IQKeyboardManagerSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,6 +115,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2EE99B0A277E9FF10042CD29 /* SnapKit in Frameworks */,
+				2EE99B652781361A0042CD29 /* IQKeyboardManagerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -431,6 +433,7 @@
 			name = SeSAC_Farm;
 			packageProductDependencies = (
 				2EE99B09277E9FF10042CD29 /* SnapKit */,
+				2EE99B642781361A0042CD29 /* IQKeyboardManagerSwift */,
 			);
 			productName = SeSAC_Farm;
 			productReference = 2EE99AD0277E94AD0042CD29 /* SeSAC_Farm.app */;
@@ -506,6 +509,7 @@
 			mainGroup = 2EE99AC7277E94AD0042CD29;
 			packageReferences = (
 				2EE99B08277E9FF10042CD29 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				2EE99B632781361A0042CD29 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 			);
 			productRefGroup = 2EE99AD1277E94AD0042CD29 /* Products */;
 			projectDirPath = "";
@@ -924,6 +928,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		2EE99B632781361A0042CD29 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -931,6 +943,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2EE99B08277E9FF10042CD29 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		2EE99B642781361A0042CD29 /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2EE99B632781361A0042CD29 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

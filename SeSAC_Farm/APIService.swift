@@ -12,6 +12,7 @@ enum APIError: Error {
     case noData
     case failed
     case invalidData
+    case tokenExpired
 }
 
 class APIService {
@@ -64,5 +65,14 @@ class APIService {
         URLSession.request(endpoint: request, completion: completion)
     }
     
+    static func writeComment(id: Int, comment: String, completion: @escaping (APIError?) -> Void ) {
+        
+        var request = URLRequest(url: Endpoint.comment.url)
+        request.httpMethod = Method.POST.rawValue
+        request.httpBody = "comment=\(comment)&post=\(id)".data(using: .utf8, allowLossyConversion: false)
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        
+        URLSession.request(endpoint: request, completion: completion)
+    }
     
 }

@@ -74,6 +74,8 @@ extension URLSession {
         
         session.dataTask(endpoint) { data, response, error in
             DispatchQueue.main.async {
+                
+                
                 guard error == nil else {
                     completion(nil, .failed)
                     return
@@ -90,6 +92,10 @@ extension URLSession {
                 }
                 
                 guard response.statusCode == 200 else {
+                    if response.statusCode == 401 {
+                        completion(nil, .tokenExpired)
+                        return
+                    }
                     completion(nil, .failed)
                     return
                 }
@@ -104,4 +110,34 @@ extension URLSession {
             }
         }
     }
+    
+    static func request(_ session: URLSession = .shared, endpoint: URLRequest, completion: @escaping (APIError?) -> Void) {
+        
+        session.dataTask(endpoint) { data, response, error in
+            DispatchQueue.main.async {
+                guard error == nil else {
+                    completion(.failed)
+                    return
+                }
+                
+                guard let data = data else {
+                    completion(.noData)
+                    return
+                }
+                
+                guard let response = response as? HTTPURLResponse else {
+                    completion(.invalidResponse)
+                    return
+                }
+                
+                guard response.statusCode == 200 else {
+                    completion(.failed)
+                    return
+                }
+                print(data)
+                completion(nil)
+            }
+        }
+    }
+
 }

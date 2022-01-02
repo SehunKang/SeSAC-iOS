@@ -7,12 +7,15 @@
 
 import Foundation
 import UIKit
+import SnapKit
 
 class DetailPostViewController: UIViewController {
     
     let viewModel = DetailPostViewModel()
     
     let tableView = UITableView()
+    
+    let textfield = UITextField(frame: CGRect(x: 0, y: 0, width: 330, height: 35))
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,11 +25,12 @@ class DetailPostViewController: UIViewController {
         viewModel.getComment { error in
             if let error = error {
                 print(error)
-                DispatchQueue.main.async {
-                    guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
-                    windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: InitialViewController())
-                    windowScene.windows.first?.makeKeyAndVisible()
-                }
+//                DispatchQueue.main.async {
+//                    guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+//                    windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: InitialViewController())
+//                    windowScene.windows.first?.makeKeyAndVisible()
+//                }
+                tokenExpired(currentViewController: self)
             }
         }
         
@@ -34,8 +38,8 @@ class DetailPostViewController: UIViewController {
             self.tableView.reloadSections(IndexSet(integer: 2), with: .none)
         }
         
-        
         tableViewInit()
+        toolbarConfig()
     }
     
     
@@ -53,6 +57,25 @@ class DetailPostViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
     }
+    
+    func toolbarConfig() {
+        
+        let toolbar = UIToolbar()
+        let flexible = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        textfield.layer.cornerRadius = 10
+        textfield.backgroundColor = .systemGroupedBackground
+        textfield.placeholder = "  댓글을 입력해주세요"
+        textfield.delegate = self
+        let textitem = UIBarButtonItem.init(customView: textfield)
+        toolbar.items = [flexible, textitem, flexible]
+        toolbar.backgroundColor = .systemBackground
+        view.addSubview(toolbar)
+        toolbar.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+            make.height.equalTo(44)
+        }
+    }
+    
 }
 
 extension DetailPostViewController: UITableViewDelegate, UITableViewDataSource {
@@ -115,6 +138,26 @@ extension DetailPostViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+}
+
+extension DetailPostViewController: UITextFieldDelegate {
     
-    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        guard let text = textfield.text, textfield.text != "" else { return }
+        
+        viewModel.writeComment(comment: text) { error in
+            print("write")
+            if let error = error {
+                if error == .tokenExpired {
+                    tokenExpired(currentViewController: self)
+                } else {
+                    return
+                }
+            } else {
+                self.viewModel.getComment { error in
+                    print(error as Any)
+                }
+            }
+        }
+    }
 }

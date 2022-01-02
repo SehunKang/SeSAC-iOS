@@ -9,7 +9,7 @@ import Foundation
 
 class DetailPostViewModel {
     
-    var postIndex: Int!
+    var postId: Int!
     
     var post: Post?
     
@@ -17,10 +17,17 @@ class DetailPostViewModel {
     
     func getComment(completion: @escaping (APIError?) -> Void) {
         
-        APIService.getComment(id: postIndex) { data, error in
+        APIService.getComment(id: postId) { data, error in
             if data != nil {
                 self.comment.value = data!
             }
+            completion(error)
+        }
+    }
+    
+    func writeComment(comment: String, completion: @escaping (APIError?) -> Void) {
+        
+        APIService.writeComment(id: postId, comment: comment) { error in
             completion(error)
         }
     }
