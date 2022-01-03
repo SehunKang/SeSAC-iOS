@@ -12,28 +12,20 @@ class MainPostViewModel {
     
     var post: Observable<[Post]> = Observable([])
     
-    func getPost(completion: @escaping (APIError?) -> Void) {
+    func getPost(refresh: UIRefreshControl? = nil, completion: @escaping (APIError?) -> Void) {
         
         APIService.getPost { data, error in
             
             if data != nil {
                 self.post.value = data!
             }
+            if refresh != nil {
+                refresh?.endRefreshing()
+            }
             completion(error)
         }
     }
     
-    func postUpdate(refresh: UIRefreshControl? = nil) {
-        APIService.getPost { data, error in
-            if data != nil {
-                self.post.value = data!
-                if refresh != nil {
-                    print("refresh")
-                    refresh?.endRefreshing()
-                }
-            }
-        }
-    }
 }
 
 extension MainPostViewModel {

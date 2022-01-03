@@ -26,7 +26,7 @@ class DetailPostViewController: UIViewController {
         
         viewModel.getComment { error in
             if let error = error {
-                tokenExpired(currentViewController: self)
+                self.tokenExpired()
             }
         }
         
@@ -206,7 +206,7 @@ extension DetailPostViewController: UITextFieldDelegate {
         viewModel.writeComment(comment: text) { error in
             if let error = error {
                 if error == .tokenExpired {
-                    tokenExpired(currentViewController: self)
+                    self.tokenExpired()
                 } else {
                     return
                 }

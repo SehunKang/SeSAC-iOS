@@ -52,7 +52,7 @@ class CommentCell: UITableViewCell {
         button.snp.makeConstraints { make in
             make.trailing.equalTo(safeAreaLayoutGuide).offset(-20)
             make.top.equalTo(nameLabel)
-            make.width.equalTo(15)
+            make.width.equalTo(30)
         }
         
         commentLabel.snp.makeConstraints { make in

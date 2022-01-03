@@ -22,20 +22,9 @@ class MainPostViewController: UIViewController {
       
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationController?.navigationBar.prefersLargeTitles = true
         title = "새싹농장"
         view.backgroundColor = .systemBackground
-        
-        viewModel.getPost { error in
-            if let error = error {
-                if error == .tokenExpired {
-                    tokenExpired(currentViewController: self)
-                } else {
-                    return
-                }
-            }
-            self.tableView.reloadData()
-        }
         
         viewModel.post.bind { posts in
             self.tableView.reloadData()
@@ -48,7 +37,15 @@ class MainPostViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        viewModel.postUpdate()
+        viewModel.getPost { error in
+            if let error = error {
+                if error == .tokenExpired {
+                    self.tokenExpired()
+                } else {
+                    return
+                }
+            }
+        }
     }
     
     private func tableViewConfig() {
@@ -56,7 +53,8 @@ class MainPostViewController: UIViewController {
         
         view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
-            make.edges.equalTo(view.safeAreaLayoutGuide)
+            make.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+            make.top.equalToSuperview()
         }
         
         tableView.register(FirstRowCell.self, forCellReuseIdentifier: FirstRowCell.identifier)
@@ -101,7 +99,15 @@ class MainPostViewController: UIViewController {
     }
     
     @objc func refreshPost(_ sender: UIRefreshControl) {
-        viewModel.postUpdate(refresh: sender)
+        viewModel.getPost(refresh: sender) { error in
+            if let error = error {
+                if error == .tokenExpired {
+                    self.tokenExpired()
+                } else {
+                    return
+                }
+            }
+        }
     }
 }
 

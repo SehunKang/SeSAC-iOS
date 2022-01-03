@@ -15,6 +15,14 @@ var token: String = "" {
     }
 }
 
+enum APIError: Error {
+    case invalidResponse
+    case noData
+    case failed
+    case invalidData
+    case tokenExpired
+}
+
 enum Method: String {
     case GET
     case POST
@@ -33,6 +41,16 @@ enum Endpoint {
     case commentDetail(id: Int)
 }
 
+enum ErrorMessage: String {
+    case invalidToken = "Invalid token."
+}
+
+struct ErrorBody: Codable {
+    let statusCode: Int
+    let error, message: String
+}
+
+
 extension Endpoint {
     var url: URL {
         switch self {
@@ -45,7 +63,6 @@ extension Endpoint {
         case .getComment(postId: let postId): return .makeEndPoint("comments?post=\(postId)")
         case .comment: return .makeEndPoint("comments")
         case .commentDetail(id: let id): return .makeEndPoint("comments/\(id)")
-            
         }
     }
 }
@@ -76,7 +93,6 @@ extension URLSession {
         session.dataTask(endpoint) { data, response, error in
             DispatchQueue.main.async {
                 
-                
                 guard error == nil else {
                     completion(nil, .failed)
                     return
@@ -92,9 +108,16 @@ extension URLSession {
                     return
                 }
                 
+                
                 guard response.statusCode == 200 else {
-                    if response.statusCode == 401 {
-                        completion(nil, .tokenExpired)
+                    do {
+                        let decoder = JSONDecoder()
+                        let jsonData = try decoder.decode(ErrorBody.self, from: data)
+                        if jsonData.message == ErrorMessage.invalidToken.rawValue {
+                            completion(nil, .tokenExpired)
+                            return
+                        }
+                    } catch {
                         return
                     }
                     completion(nil, .failed)
@@ -122,7 +145,7 @@ extension URLSession {
                     return
                 }
                 
-                guard let data = data else {
+                guard data != nil else {
                     completion(.noData)
                     return
                 }
@@ -133,6 +156,16 @@ extension URLSession {
                 }
                 
                 guard response.statusCode == 200 else {
+                    do {
+                        let decoder = JSONDecoder()
+                        let jsonData = try decoder.decode(ErrorBody.self, from: data!)
+                        if jsonData.message == ErrorMessage.invalidToken.rawValue {
+                            completion(.tokenExpired)
+                            return
+                        }
+                    } catch {
+                        return
+                    }
                     completion(.failed)
                     return
                 }

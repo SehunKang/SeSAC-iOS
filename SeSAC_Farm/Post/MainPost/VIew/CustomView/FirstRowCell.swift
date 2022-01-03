@@ -15,9 +15,11 @@ class FirstRowCell: UITableViewCell {
     let nameLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = .systemGroupedBackground
-        label.sizeToFit()
-        label.font = .systemFont(ofSize: 13)
+        label.font = .systemFont(ofSize: 15)
+//        label.sizeToFit()
+        label.textRect(forBounds: label.bounds, limitedToNumberOfLines: 1)
         label.numberOfLines = 1
+        label.layer.cornerRadius = 2
         return label
     }()
     
@@ -47,6 +49,7 @@ class FirstRowCell: UITableViewCell {
         nameLabel.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide).offset(15)
             make.leading.equalTo(safeAreaLayoutGuide).offset(20)
+            make.height.equalTo(20)
         }
         
         postLabel.snp.makeConstraints { make in

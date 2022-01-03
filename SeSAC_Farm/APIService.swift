@@ -7,13 +7,6 @@
 
 import Foundation
 
-enum APIError: Error {
-    case invalidResponse
-    case noData
-    case failed
-    case invalidData
-    case tokenExpired
-}
 
 class APIService {
   

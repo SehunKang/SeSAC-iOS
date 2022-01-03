@@ -25,21 +25,30 @@ extension String {
     }
 }
 
-public func tokenExpired(currentViewController: UIViewController) {
-    let alert = UIAlertController(title: "로그인 세션 만료", message: "다시 로그인 해 주세요", preferredStyle: .alert)
-    let ok = UIAlertAction(title: "확인", style: .default) { action in
-        DispatchQueue.main.async {
-            pushCallBack(vc: currentViewController) { vc in
-                vc.navigationController?.pushViewController(SignInViewController(), animated: false)
+extension UIViewController {
+    
+    public func presentAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let ok = UIAlertAction(title: "확인", style: .default, handler: nil)
+        alert.addAction(ok)
+        self.present(self, animated: true, completion: nil)
+    }
+    
+    func tokenExpired() {
+        let alert = UIAlertController(title: "로그인 세션 만료", message: "다시 로그인 해 주세요", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "확인", style: .default) { action in
+            DispatchQueue.main.async {
+                pushCallBack(vc: self) { vc in
+                    vc.navigationController?.pushViewController(SignInViewController(), animated: false)
+                }
             }
         }
+        alert.addAction(ok)
+        self.present(alert, animated: true, completion: nil)
     }
-    alert.addAction(ok)
-    currentViewController.present(alert, animated: true, completion: nil)
 }
 
-// 더 좋은 방법이 없을까?
-func pushCallBack(vc: UIViewController, completion: @escaping (UIViewController) -> ()) {
+public func pushCallBack(vc: UIViewController, completion: @escaping (UIViewController) -> ()) {
     guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
     let rootViewController = InitialViewController()
     windowScene.windows.first?.rootViewController = UINavigationController(rootViewController: rootViewController)
