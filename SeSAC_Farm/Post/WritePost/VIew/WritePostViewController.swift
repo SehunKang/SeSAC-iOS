@@ -45,7 +45,7 @@ class WritePostViewController: UIViewController {
     }
     
     @objc func didEndEditing(_ sender: UIBarButtonItem) {
-        guard viewModel.postId != nil else {
+        guard viewModel.postId != nil && textField.text != "" else {
             viewModel.writePost(text: textField.text) { error in
                 if error == nil {
                     let vm = MainPostViewModel()

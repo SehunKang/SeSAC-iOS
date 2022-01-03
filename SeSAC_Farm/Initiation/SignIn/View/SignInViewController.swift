@@ -7,6 +7,8 @@
 //
 import Foundation
 import UIKit
+import SimpleCheckbox
+
 
 class SignInViewController: UIViewController {
     
@@ -21,10 +23,57 @@ class SignInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        checkSaved()
+        
         modelBind()
         targetConfig()
     }
     
+    private func checkSaved() {
+        print(UserDefaults.standard.string(forKey: "email"))
+        print(UserDefaults.standard.string(forKey: "password"))
+        if let savedEmail = UserDefaults.standard.string(forKey: "email"), let savedPass = UserDefaults.standard.string(forKey: "password") {
+            self.viewModel.email.value = savedEmail
+            self.viewModel.password.value = savedPass
+            self.viewModel.check.value = true
+        } else {
+            return
+        }
+    }
+
+    private func targetConfig() {
+        
+        mainView.signInField.emailField.addTarget(self, action: #selector(emailFieldDidChange(_:)), for: .editingChanged)
+        mainView.signInField.passwordField.addTarget(self, action: #selector(passwordFieldDidChange(_:)), for: .editingChanged)
+        mainView.signInField.confirmButton.addTarget(self, action: #selector(requestSignIn), for: .touchUpInside)
+        mainView.checkBox.addTarget(self, action: #selector(checkBoxValueChanged(_:)), for: .valueChanged)
+    }
+    
+    private func modelBind() {
+        
+        viewModel.email.bind { text in
+            self.mainView.signInField.emailField.text = text
+        }
+        viewModel.password.bind { text in
+            self.mainView.signInField.passwordField.text = text
+        }
+        viewModel.check.bind { bool in
+            self.mainView.checkBox.isChecked = bool
+        }
+    }
+    
+    @objc private func emailFieldDidChange(_ textField: UITextField) {
+        viewModel.email.value = textField.text ?? ""
+    }
+    
+    @objc private func passwordFieldDidChange(_ textField: UITextField) {
+        viewModel.password.value = textField.text ?? ""
+    }
+    
+    @objc private func checkBoxValueChanged(_ sender: Checkbox) {
+        viewModel.check.value = sender.isChecked
+    }
+
     @objc private func requestSignIn() {
         
         viewModel.postSignIn { error in
@@ -42,31 +91,4 @@ class SignInViewController: UIViewController {
             }
         }
     }
-
-    private func targetConfig() {
-        mainView.signInField.emailField.addTarget(self, action: #selector(emailFieldDidChange(_:)), for: .editingChanged)
-        mainView.signInField.passwordField.addTarget(self, action: #selector(passwordFieldDidChange(_:)), for: .editingChanged)
-        mainView.signInField.confirmButton.addTarget(self, action: #selector(requestSignIn), for: .touchUpInside)
-
-    }
-    
-    private func modelBind() {
-        viewModel.email.bind { text in
-            self.mainView.signInField.emailField.text = text
-        }
-        viewModel.password.bind { text in
-            self.mainView.signInField.passwordField.text = text
-        }
-        
-    }
-    
-    @objc private func emailFieldDidChange(_ textField: UITextField) {
-        viewModel.email.value = textField.text ?? ""
-    }
-    @objc private func passwordFieldDidChange(_ textField: UITextField) {
-        viewModel.password.value = textField.text ?? ""
-    }
-
-    
-    
 }

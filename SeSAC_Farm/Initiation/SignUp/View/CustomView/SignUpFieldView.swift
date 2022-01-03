@@ -28,6 +28,7 @@ class SignUpFieldView: UIView {
         let field = UITextField()
         field.placeholder = "비밀번호"
         field.borderStyle = .roundedRect
+        field.isSecureTextEntry = true
         return field
     }()
 
@@ -35,6 +36,7 @@ class SignUpFieldView: UIView {
         let field = UITextField()
         field.placeholder = "비밀번호 확인"
         field.borderStyle = .roundedRect
+        field.isSecureTextEntry = true
         return field
     }()
     
@@ -42,6 +44,7 @@ class SignUpFieldView: UIView {
         let button = UIButton()
         button.setTitle("가입하기", for: .normal)
         button.backgroundColor = .systemGreen
+//        button.backgroundColor = .lightGray
         button.layer.cornerRadius = 8
         button.clipsToBounds = true
         return button

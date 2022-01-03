@@ -50,6 +50,7 @@
 		2EE99B6F278172050042CD29 /* WritePostViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99B6E278172050042CD29 /* WritePostViewModel.swift */; };
 		2EE99B712781A9AB0042CD29 /* EditCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99B702781A9AB0042CD29 /* EditCommentViewController.swift */; };
 		2EE99B732781BADC0042CD29 /* modeltest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99B722781BADC0042CD29 /* modeltest.swift */; };
+		2EE99BC02782E3D70042CD29 /* SimpleCheckbox in Frameworks */ = {isa = PBXBuildFile; productRef = 2EE99BBF2782E3D70042CD29 /* SimpleCheckbox */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,6 +124,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2EE99B0A277E9FF10042CD29 /* SnapKit in Frameworks */,
+				2EE99BC02782E3D70042CD29 /* SimpleCheckbox in Frameworks */,
 				2EE99B652781361A0042CD29 /* IQKeyboardManagerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -478,6 +480,7 @@
 			packageProductDependencies = (
 				2EE99B09277E9FF10042CD29 /* SnapKit */,
 				2EE99B642781361A0042CD29 /* IQKeyboardManagerSwift */,
+				2EE99BBF2782E3D70042CD29 /* SimpleCheckbox */,
 			);
 			productName = SeSAC_Farm;
 			productReference = 2EE99AD0277E94AD0042CD29 /* SeSAC_Farm.app */;
@@ -554,6 +557,7 @@
 			packageReferences = (
 				2EE99B08277E9FF10042CD29 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				2EE99B632781361A0042CD29 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+				2EE99BBE2782E3D70042CD29 /* XCRemoteSwiftPackageReference "SimpleCheckbox" */,
 			);
 			productRefGroup = 2EE99AD1277E94AD0042CD29 /* Products */;
 			projectDirPath = "";
@@ -984,6 +988,14 @@
 				kind = branch;
 			};
 		};
+		2EE99BBE2782E3D70042CD29 /* XCRemoteSwiftPackageReference "SimpleCheckbox" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/BeauNouvelle/SimpleCheckbox.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -996,6 +1008,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2EE99B632781361A0042CD29 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
 			productName = IQKeyboardManagerSwift;
+		};
+		2EE99BBF2782E3D70042CD29 /* SimpleCheckbox */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2EE99BBE2782E3D70042CD29 /* XCRemoteSwiftPackageReference "SimpleCheckbox" */;
+			productName = SimpleCheckbox;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

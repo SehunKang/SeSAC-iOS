@@ -22,7 +22,7 @@ class MainPostViewController: UIViewController {
       
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.prefersLargeTitles = true
+//        self.navigationController?.navigationBar.prefersLargeTitles = true
         title = "새싹농장"
         view.backgroundColor = .systemBackground
         
@@ -41,7 +41,7 @@ class MainPostViewController: UIViewController {
             self.tableView.reloadData()
         }
         
-        tableViewInit()
+        tableViewConfig()
         plusButtonConfig()
     }
     
@@ -51,7 +51,7 @@ class MainPostViewController: UIViewController {
         viewModel.postUpdate()
     }
     
-    private func tableViewInit() {
+    private func tableViewConfig() {
         tableView.separatorInset = UIEdgeInsets.init(top: 0, left: 20, bottom: 0, right: 20)
         
         view.addSubview(tableView)
@@ -65,6 +65,12 @@ class MainPostViewController: UIViewController {
         tableView.dataSource = self
         tableView.sectionFooterHeight = 2
         tableView.sectionHeaderHeight = 0
+        var frame = CGRect.zero
+        frame.size.height = .leastNormalMagnitude
+        tableView.tableHeaderView = UIView(frame: frame)
+        tableView.refreshControl = UIRefreshControl()
+        tableView.refreshControl?.addTarget(self, action: #selector(refreshPost(_:)), for: .valueChanged)
+        
     }
     
     private func plusButtonConfig() {
@@ -92,7 +98,10 @@ class MainPostViewController: UIViewController {
         vc.modalPresentationStyle = .fullScreen
         
         self.present(vc, animated: true, completion: nil)
-        
+    }
+    
+    @objc func refreshPost(_ sender: UIRefreshControl) {
+        viewModel.postUpdate(refresh: sender)
     }
 }
 

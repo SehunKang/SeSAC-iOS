@@ -23,10 +23,14 @@ class MainPostViewModel {
         }
     }
     
-    func postUpdate() {
+    func postUpdate(refresh: UIRefreshControl? = nil) {
         APIService.getPost { data, error in
             if data != nil {
                 self.post.value = data!
+                if refresh != nil {
+                    print("refresh")
+                    refresh?.endRefreshing()
+                }
             }
         }
     }
