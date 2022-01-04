@@ -19,7 +19,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         var rootViewController: UIViewController!
         
         if UserDefaults.standard.string(forKey: "token") != nil {
-            token = UserDefaults.standard.string(forKey: "token")!
+            g_token = UserDefaults.standard.string(forKey: "token")!
+            g_userId = UserDefaults.standard.integer(forKey: "userId")
+            print(g_token, g_userId)
             rootViewController = MainPostViewController()
         } else {
             rootViewController = InitialViewController()

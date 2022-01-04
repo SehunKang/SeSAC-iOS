@@ -25,7 +25,7 @@ class DetailPostViewController: UIViewController {
         view.backgroundColor = .systemBackground
         
         viewModel.getComment { error in
-            if let error = error {
+            if error != nil {
                 self.tokenExpired()
             }
         }
@@ -36,7 +36,9 @@ class DetailPostViewController: UIViewController {
         viewModel.post.bind { post in
             self.tableView.reloadSections(IndexSet(integer: 0), with: .none)
         }
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "ellipsis"), style: .plain, target: self, action: #selector(editOrDelete))
+        if viewModel.post.value.user.id == g_userId {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "ellipsis"), style: .plain, target: self, action: #selector(editOrDelete))
+        }
         toolbarConfig()
         tableViewInit()
     }
@@ -166,6 +168,11 @@ extension DetailPostViewController: UITableViewDelegate, UITableViewDataSource {
             cell.selectionStyle = UITableViewCell.SelectionStyle.none
             cell.button.tag = viewModel.comment.value[indexPath.row].id
             cell.button.addTarget(self, action: #selector(commentEdit(_:)), for: .touchUpInside)
+            if viewModel.comment.value[indexPath.row].user.id != g_userId {
+                cell.button.isHidden = true
+            } else {
+                cell.button.isHidden = false
+            }
             return cell
         default:
             return UITableViewCell()

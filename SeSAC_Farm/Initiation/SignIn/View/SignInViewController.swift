@@ -77,7 +77,7 @@ class SignInViewController: UIViewController {
     @objc private func requestSignIn() {
         
         viewModel.postSignIn { error in
-            if let error = error {
+            if error != nil {
                 let alert = UIAlertController(title: "오류", message: "잘못된 로그인 정보입니다.", preferredStyle: .alert)
                 let ok = UIAlertAction(title: "확인", style: .default, handler: nil)
                 alert.addAction(ok)

@@ -16,12 +16,13 @@ class MainPostViewModel {
         
         APIService.getPost { data, error in
             
-            if data != nil {
-                self.post.value = data!
-            }
             if refresh != nil {
                 refresh?.endRefreshing()
             }
+            if data != nil {
+                self.post.value = data!
+            }
+
             completion(error)
         }
     }

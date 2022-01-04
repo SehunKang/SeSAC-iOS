@@ -8,12 +8,6 @@
 import Foundation
 import UIKit
 
-var token: String = "" {
-    didSet {
-        UserDefaults.standard.set(token, forKey: "token")
-        print(token)
-    }
-}
 
 enum APIError: Error {
     case invalidResponse

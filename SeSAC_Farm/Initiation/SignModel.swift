@@ -20,8 +20,8 @@ struct User: Codable {
     let confirmed: Bool
     let role: Role
     let createdAt, updatedAt: String
-    let posts: [PostFromUser?]
-    let comments: [Comment?]
+    let posts: [PostFromUser]
+    let comments: [Comment]
 
     enum CodingKeys: String, CodingKey {
         case id, username, email, provider, confirmed, role
@@ -51,7 +51,8 @@ struct PostFromUser: Codable {
 struct Comment: Codable {
     let id: Int
     let comment: String
-    let user, post: Int
+    let user: Int
+    let post: Int?
     let createdAt, updatedAt: String
 
     enum CodingKeys: String, CodingKey {

@@ -51,6 +51,7 @@
 		2EE99B712781A9AB0042CD29 /* EditCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99B702781A9AB0042CD29 /* EditCommentViewController.swift */; };
 		2EE99B732781BADC0042CD29 /* modeltest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99B722781BADC0042CD29 /* modeltest.swift */; };
 		2EE99BC02782E3D70042CD29 /* SimpleCheckbox in Frameworks */ = {isa = PBXBuildFile; productRef = 2EE99BBF2782E3D70042CD29 /* SimpleCheckbox */; };
+		2EE99BC9278438F40042CD29 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99BC8278438F40042CD29 /* UserInfo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -116,6 +117,7 @@
 		2EE99B6E278172050042CD29 /* WritePostViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WritePostViewModel.swift; sourceTree = "<group>"; };
 		2EE99B702781A9AB0042CD29 /* EditCommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCommentViewController.swift; sourceTree = "<group>"; };
 		2EE99B722781BADC0042CD29 /* modeltest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = modeltest.swift; sourceTree = "<group>"; };
+		2EE99BC8278438F40042CD29 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +176,7 @@
 				2EE99B33277F0C7C0042CD29 /* Post */,
 				2EE99B03277E99940042CD29 /* Initiation */,
 				2EE99B2E277ECCF30042CD29 /* Endpoint.swift */,
+				2EE99BC8278438F40042CD29 /* UserInfo.swift */,
 				2EE99B28277EC8200042CD29 /* Observable.swift */,
 				2EE99B2C277EC9780042CD29 /* APIService.swift */,
 				2EE99B51278028560042CD29 /* Extension.swift */,
@@ -632,6 +635,7 @@
 				2EE99B1E277EC2D90042CD29 /* SignUpViewController.swift in Sources */,
 				2EE99B602780A9BF0042CD29 /* DetailPostModel.swift in Sources */,
 				2EE99B5C27803DDB0042CD29 /* CommentCell.swift in Sources */,
+				2EE99BC9278438F40042CD29 /* UserInfo.swift in Sources */,
 				2EE99B39277F0CC90042CD29 /* MainPostViewController.swift in Sources */,
 				2EE99B58278030380042CD29 /* DetailPostViewController.swift in Sources */,
 				2EE99B5027801DCC0042CD29 /* MainPostModel.swift in Sources */,

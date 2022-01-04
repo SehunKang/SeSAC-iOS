@@ -20,7 +20,8 @@ class SignUpViewModel {
         APIService.signUp(username: nickName.value, email: email.value, password: password.value) { SignUpData, error in
             
             if SignUpData != nil {
-                token = SignUpData!.jwt
+                g_token = SignUpData!.jwt
+                g_userId = SignUpData!.user.id
             }
             completion(error)
         }

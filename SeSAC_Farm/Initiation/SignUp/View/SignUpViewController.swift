@@ -29,7 +29,7 @@ class SignUpViewController: UIViewController {
     @objc private func requestSignUp() {
         
         viewModel.postSignUp { error in
-            if let error = error {
+            if error != nil {
                 let alert = UIAlertController(title: "오류", message: "이미 존재하는 아이디 혹은 이메일입니다.", preferredStyle: .alert)
                 let ok = UIAlertAction(title: "확인", style: .default, handler: nil)
                 alert.addAction(ok)
