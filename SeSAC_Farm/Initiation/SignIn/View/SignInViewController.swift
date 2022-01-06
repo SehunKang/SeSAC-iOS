@@ -30,8 +30,6 @@ class SignInViewController: UIViewController {
     }
     
     private func checkSaved() {
-        print(UserDefaults.standard.string(forKey: "email"))
-        print(UserDefaults.standard.string(forKey: "password"))
         if let savedEmail = UserDefaults.standard.string(forKey: "email"), let savedPass = UserDefaults.standard.string(forKey: "password") {
             self.viewModel.email.value = savedEmail
             self.viewModel.password.value = savedPass

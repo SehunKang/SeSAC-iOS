@@ -30,7 +30,6 @@ class MainPostViewModel {
             refresh?.endRefreshing()
             if data != nil {
                 self.currentPage += 1
-                print(data!)
                 if refresh == nil {
                     self.post.value.append(contentsOf: data!)
                 } else if isInitialCall == true || refresh != nil{

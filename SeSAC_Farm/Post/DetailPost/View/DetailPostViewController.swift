@@ -121,7 +121,8 @@ class DetailPostViewController: UIViewController {
         
 //        let flexible = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         textView.layer.cornerRadius = 10
-        textView.backgroundColor = .systemGreen
+        textView.layer.borderWidth = 2
+        textView.layer.borderColor = UIColor.systemGreen.cgColor
         textView.delegate = self
         textView.font = .systemFont(ofSize: 20)
         textView.text = "댓글을 입력해 주세요"
@@ -131,17 +132,16 @@ class DetailPostViewController: UIViewController {
         textView.translatesAutoresizingMaskIntoConstraints = true
 //        let textitem = UIBarButtonItem.init(customView: textView)
 //        toolbar.items = [flexible, textitem, flexible]
-        toolbar.backgroundColor = .systemPink
         view.addSubview(toolbar)
         toolbar.snp.makeConstraints { make in
             make.leading.trailing.bottom.equalToSuperview()
-            make.height.equalTo(44)
+            make.height.equalTo(55)
         }
         view.addSubview(textView)
         textView.snp.makeConstraints { make in
             make.bottom.equalTo(toolbar.snp.top)
-            make.leading.trailing.equalToSuperview()
-            make.height.greaterThanOrEqualTo(50)
+            make.leading.trailing.equalToSuperview().inset(50)
+            make.height.greaterThanOrEqualTo(44)
         }
     }
     
@@ -181,6 +181,7 @@ extension DetailPostViewController: UITableViewDelegate, UITableViewDataSource {
             } else {
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: TextCell.identifier, for: indexPath) as? TextCell else {return UITableViewCell()}
                 cell.mainTextLabel.text = viewModel.post.value.text
+                cell.layoutMargins = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
                 cell.selectionStyle = UITableViewCell.SelectionStyle.none
                 return cell
             }
@@ -268,3 +269,55 @@ extension DetailPostViewController: UITextViewDelegate {
     }
 }
 
+
+//extension DetailPostViewController {
+//
+//    override func viewWillAppear(_ animated: Bool) {
+//        becomeFirstResponder()
+//    }
+//
+//
+//    override var inputAccessoryView: UIView? {
+//        get {
+//            let containerView = UIView()
+//            containerView.backgroundColor = .lightGray
+//            containerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 100)
+//            let textView = UITextView()
+//            containerView.addSubview(textView)
+//            textView.backgroundColor = .systemBackground
+//            textView.layer.cornerRadius = 25
+//            textView.layer.masksToBounds = true
+//            textView.layer.borderWidth = 2
+//            textView.layer.borderColor = UIColor.systemGreen.cgColor
+//            textView.snp.makeConstraints { make in
+//                make.leading.equalTo(containerView.snp.leading).offset(20)
+//                make.top.equalTo(containerView.snp.top).offset(5)
+//                make.trailing.equalTo(containerView.snp.trailing).offset(-60)
+//                make.height.equalTo(44)
+//            }
+//
+//            let button = UIButton()
+//            containerView.addSubview(button)
+////            button.frame.size = CGSize(width: 44, height: 44)
+//            button.translatesAutoresizingMaskIntoConstraints = false
+//            button.setTitle("", for: .normal)
+//            button.setImage(UIImage(systemName: "arrow.up.circle"), for: .normal)
+//            button.snp.makeConstraints { make in
+//                make.centerY.equalTo(textView)
+//                make.leading.equalTo(textView.snp.trailing).offset(5)
+//            }
+//
+//
+//            return containerView
+//        }
+//    }
+//
+//
+//    override var canBecomeFirstResponder: Bool {
+//        return true
+//    }
+//
+//    override var canResignFirstResponder: Bool {
+//        return true
+//    }
+//}

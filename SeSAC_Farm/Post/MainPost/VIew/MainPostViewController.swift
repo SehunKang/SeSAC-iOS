@@ -43,7 +43,6 @@ class MainPostViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("main")
 
     }
     
@@ -133,12 +132,11 @@ extension MainPostViewController: UITableViewDelegate, UITableViewDataSource, UI
     
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         
-        print("index = \(indexPaths.last!.section)\ntotalpost = \(viewModel.totalPost)\ncurrentpost = \(viewModel.post.value.count)\ncurrentpage = \(viewModel.currentPage)\n=====================")
+//        print("index = \(indexPaths.last!.section)\ntotalpost = \(viewModel.totalPost)\ncurrentpost = \(viewModel.post.value.count)\ncurrentpage = \(viewModel.currentPage)\n=====================")
         
         if viewModel.post.value.count < viewModel.totalPost {
             if indexPaths.last!.section == viewModel.post.value.count - 1 {
                 viewModel.getPost(refresh: nil) { error in
-                    print("prefetchfunc called")
                     if let error = error {
                         if error == .tokenExpired {
                             self.tokenExpired()

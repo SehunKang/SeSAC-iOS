@@ -52,6 +52,8 @@
 		2EE99B732781BADC0042CD29 /* modeltest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99B722781BADC0042CD29 /* modeltest.swift */; };
 		2EE99BC02782E3D70042CD29 /* SimpleCheckbox in Frameworks */ = {isa = PBXBuildFile; productRef = 2EE99BBF2782E3D70042CD29 /* SimpleCheckbox */; };
 		2EE99BC9278438F40042CD29 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE99BC8278438F40042CD29 /* UserInfo.swift */; };
+		2EFB6AA12786DFBB00690DA5 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 2EFB6AA02786DFBB00690DA5 /* RxCocoa */; };
+		2EFB6AA32786DFBB00690DA5 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2EFB6AA22786DFBB00690DA5 /* RxSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -127,6 +129,8 @@
 			files = (
 				2EE99B0A277E9FF10042CD29 /* SnapKit in Frameworks */,
 				2EE99BC02782E3D70042CD29 /* SimpleCheckbox in Frameworks */,
+				2EFB6AA32786DFBB00690DA5 /* RxSwift in Frameworks */,
+				2EFB6AA12786DFBB00690DA5 /* RxCocoa in Frameworks */,
 				2EE99B652781361A0042CD29 /* IQKeyboardManagerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -256,7 +260,6 @@
 			children = (
 				2EE99B1C277EC2CE0042CD29 /* Model */,
 				2EE99B1B277EC2C50042CD29 /* View */,
-				2EE99B1A277EC2B80042CD29 /* ViewModel */,
 			);
 			path = SignUp;
 			sourceTree = "<group>";
@@ -386,6 +389,7 @@
 		2EE99B42277F22830042CD29 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
+				2EE99B1A277EC2B80042CD29 /* ViewModel */,
 				2EE99B47277F32EA0042CD29 /* FirstRowCell.swift */,
 				2EE99B49277F33390042CD29 /* SecondRowCell.swift */,
 				2EE99B4B277F34770042CD29 /* PlusButtonView.swift */,
@@ -484,6 +488,8 @@
 				2EE99B09277E9FF10042CD29 /* SnapKit */,
 				2EE99B642781361A0042CD29 /* IQKeyboardManagerSwift */,
 				2EE99BBF2782E3D70042CD29 /* SimpleCheckbox */,
+				2EFB6AA02786DFBB00690DA5 /* RxCocoa */,
+				2EFB6AA22786DFBB00690DA5 /* RxSwift */,
 			);
 			productName = SeSAC_Farm;
 			productReference = 2EE99AD0277E94AD0042CD29 /* SeSAC_Farm.app */;
@@ -561,6 +567,7 @@
 				2EE99B08277E9FF10042CD29 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				2EE99B632781361A0042CD29 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 				2EE99BBE2782E3D70042CD29 /* XCRemoteSwiftPackageReference "SimpleCheckbox" */,
+				2EFB6A9F2786DFBB00690DA5 /* XCRemoteSwiftPackageReference "RxSwift" */,
 			);
 			productRefGroup = 2EE99AD1277E94AD0042CD29 /* Products */;
 			projectDirPath = "";
@@ -1000,6 +1007,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		2EFB6A9F2786DFBB00690DA5 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1017,6 +1032,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2EE99BBE2782E3D70042CD29 /* XCRemoteSwiftPackageReference "SimpleCheckbox" */;
 			productName = SimpleCheckbox;
+		};
+		2EFB6AA02786DFBB00690DA5 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2EFB6A9F2786DFBB00690DA5 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		2EFB6AA22786DFBB00690DA5 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2EFB6A9F2786DFBB00690DA5 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

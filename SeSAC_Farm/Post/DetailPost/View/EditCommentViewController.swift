@@ -35,7 +35,6 @@ class EditCommentViewController: UIViewController {
         if originalText != textView.text {
             viewModel.editComment(commentId: commentId, text: textView.text, postId: viewModel.post.value.id) { error in
                 DispatchQueue.main.async {
-                    print("editcommentsent")
                     self.dismiss(animated: true) {
                         self.viewModel.updateComment()
                     }

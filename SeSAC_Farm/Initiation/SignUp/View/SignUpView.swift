@@ -13,6 +13,13 @@ class SignUpView: UIView {
     
     let signUpField = SignUpFieldView()
     
+    let validateLabel: UILabel = {
+        let label = UILabel()
+        label.text = "비밀번호가 다릅니다."
+        label.textAlignment = .center
+        return label
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -26,7 +33,12 @@ class SignUpView: UIView {
             make.centerX.equalToSuperview()
             make.height.equalToSuperview()
         }
-        
+        self.addSubview(validateLabel)
+        validateLabel.snp.makeConstraints { make in
+            make.top.equalTo(signUpField.snp.bottom).offset(10)
+            make.centerY.equalToSuperview()
+            make.width.equalTo(200)
+        }
         
     }
     

@@ -18,22 +18,24 @@ class SignInViewModel {
         
         APIService.signIn(email: email.value, password: password.value) { data, error in
             if data != nil {
-                print("data = \(data)")
                 g_token = data!.jwt
                 g_userId = data!.user.id
-                print(g_token)
                 if self.check.value == true {
                     UserDefaults.standard.set(self.email.value, forKey: "email")
                     UserDefaults.standard.set(self.password.value, forKey: "password")
-                    print(self.check.value)
                 } else {
                     UserDefaults.standard.set(nil, forKey: "email")
                     UserDefaults.standard.set(nil, forKey: "password")
                 }
             }
-            print("error = \(error)")
             completion(error)
         }
         
     }
+}
+
+extension SignInViewModel {
+    
+    
+    
 }

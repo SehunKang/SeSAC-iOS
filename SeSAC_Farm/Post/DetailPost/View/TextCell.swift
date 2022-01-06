@@ -28,7 +28,7 @@ class TextCell: UITableViewCell {
         mainTextLabel.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide).offset(20)
             make.leading.equalTo(safeAreaLayoutGuide).offset(20)
-            make.trailing.equalTo(safeAreaLayoutGuide).offset(20)
+            make.trailing.equalTo(safeAreaLayoutGuide).offset(-20)
             make.bottom.equalToSuperview().offset(-20)
         }
     }
