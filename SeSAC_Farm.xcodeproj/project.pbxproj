@@ -120,6 +120,7 @@
 		2EE99B702781A9AB0042CD29 /* EditCommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCommentViewController.swift; sourceTree = "<group>"; };
 		2EE99B722781BADC0042CD29 /* modeltest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = modeltest.swift; sourceTree = "<group>"; };
 		2EE99BC8278438F40042CD29 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		2EFB6AA42786FAA900690DA5 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +156,7 @@
 		2EE99AC7277E94AD0042CD29 = {
 			isa = PBXGroup;
 			children = (
+				2EFB6AA42786FAA900690DA5 /* README.md */,
 				2EE99AD2277E94AD0042CD29 /* SeSAC_Farm */,
 				2EE99AE9277E94AF0042CD29 /* SeSAC_FarmTests */,
 				2EE99AF3277E94AF0042CD29 /* SeSAC_FarmUITests */,

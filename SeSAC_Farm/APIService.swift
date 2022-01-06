@@ -112,7 +112,6 @@ class APIService {
         }
         let data = UploadData(comment: text, post: postId)
         guard let jsonData = try? JSONEncoder().encode(data) else {
-            print("error data convert")
             return
         }
         URLSession.shared.uploadTask(with: request, from: jsonData) { data, response, error in
@@ -154,7 +153,6 @@ class APIService {
 
         let data = UploadData(text: text)
         guard let jsonData = try? JSONEncoder().encode(data) else {
-            print("error data convert")
             return
         }
         
