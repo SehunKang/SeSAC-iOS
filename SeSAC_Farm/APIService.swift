@@ -38,9 +38,43 @@ class APIService {
 //        URLSession.request(endpoint: request, completion: completion)
 //    }
     
+    static func getPage(page: Int, completion: @escaping ([Post]?, APIError?) -> Void) {
+        let limit = 10
+        let startPage = page * 10
+        var component = URLComponents(string: "http://test.monocoding.com:1231/posts")!
+        component.queryItems = [
+            URLQueryItem(name: "_start", value: "\(startPage)"),
+            URLQueryItem(name: "_limit", value: "\(limit)"),
+            URLQueryItem(name: "_sort", value: "created_at:desc")
+        ]
+        var request = URLRequest(url: component.url!)
+        request.httpMethod = Method.GET.rawValue
+        request.setValue("Bearer \(g_token)", forHTTPHeaderField: "Authorization")
+        
+        URLSession.request(endpoint: request, completion: completion)
+    }
+    
+    static func getTotalPostCount(completion: @escaping (Int?, APIError?) -> Void) {
+        
+        var request = URLRequest(url: Endpoint.totalPost.url)
+        request.httpMethod = Method.GET.rawValue
+        request.setValue("Bearer \(g_token)", forHTTPHeaderField: "Authorization")
+        
+        URLSession.request(endpoint: request, completion: completion)
+    }
+    
     static func getPost(completion: @escaping ([Post]?, APIError?) -> Void) {
         
         var request = URLRequest(url: Endpoint.post.url)
+        request.httpMethod = Method.GET.rawValue
+        request.setValue("Bearer \(g_token)", forHTTPHeaderField: "Authorization")
+        
+        URLSession.request(endpoint: request, completion: completion)
+    }
+    
+    static func getOnePost(id: Int, completion: @escaping (Post?, APIError?) -> Void) {
+        
+        var request = URLRequest(url: Endpoint.onePost(id: id).url)
         request.httpMethod = Method.GET.rawValue
         request.setValue("Bearer \(g_token)", forHTTPHeaderField: "Authorization")
         

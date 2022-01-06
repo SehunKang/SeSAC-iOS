@@ -29,7 +29,9 @@ enum Endpoint {
     case login
     case changePassword
     case post
+    case totalPost
     case postDetail(id: Int)
+    case onePost(id: Int)
     case getComment(postId: Int) //??
     case comment
     case commentDetail(id: Int)
@@ -52,8 +54,10 @@ extension Endpoint {
         case .login: return .makeEndPoint("auth/local")
         case .changePassword: return .makeEndPoint("custom/change-password")
         case .post: return .makeEndPoint("posts")
+        case .totalPost: return .makeEndPoint("posts/count")
         case .postDetail(id: let id):
             return .makeEndPoint("posts/\(id)")
+        case .onePost(id: let id): return .makeEndPoint("posts/\(id)")
         case .getComment(postId: let postId): return .makeEndPoint("comments?post=\(postId)")
         case .comment: return .makeEndPoint("comments")
         case .commentDetail(id: let id): return .makeEndPoint("comments/\(id)")

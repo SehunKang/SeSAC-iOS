@@ -13,7 +13,7 @@ class EditCommentViewController: UIViewController {
     var viewModel: DetailPostViewModel!
     
     let textView = UITextView()
-    
+    var originalText: String!
     var commentId: Int!
     
     override func viewDidLoad() {
@@ -25,17 +25,24 @@ class EditCommentViewController: UIViewController {
             make.edges.equalTo(view.safeAreaLayoutGuide).inset(20)
         }
         textView.font = .systemFont(ofSize: 20)
+        textView.text = originalText
         textView.becomeFirstResponder()
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "완료", style: .plain, target: self, action: #selector(didEndEditing(_:)))
     }
     
     @objc private func didEndEditing(_ sender: UIBarButtonItem) {
-        viewModel.editComment(commentId: commentId, text: textView.text, postId: viewModel.postId) { error in
-            DispatchQueue.main.async {
-                self.dismiss(animated: true) {
-                    self.viewModel.updateComment()
+        //rx로 업데이트
+        if originalText != textView.text {
+            viewModel.editComment(commentId: commentId, text: textView.text, postId: viewModel.post.value.id) { error in
+                DispatchQueue.main.async {
+                    print("editcommentsent")
+                    self.dismiss(animated: true) {
+                        self.viewModel.updateComment()
+                    }
                 }
             }
+        } else {
+            self.dismiss(animated: true, completion: nil)
         }
     }
 }

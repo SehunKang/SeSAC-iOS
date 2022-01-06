@@ -22,22 +22,15 @@ class MainPostViewController: UIViewController {
       
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.navigationBar.prefersLargeTitles = true
-        title = "새싹농장"
         view.backgroundColor = .systemBackground
-        
         viewModel.post.bind { posts in
             self.tableView.reloadData()
         }
-        
+        navBarConfig()
         tableViewConfig()
         plusButtonConfig()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
-        viewModel.getPost { error in
+        viewModel.getPost(isInitialCall: true) { error in
             if let error = error {
                 if error == .tokenExpired {
                     self.tokenExpired()
@@ -46,6 +39,27 @@ class MainPostViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("main")
+
+    }
+    
+    private func navBarConfig() {
+        title = "새싹농장"
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithDefaultBackground()
+        
+        let navBar = self.navigationController?.navigationBar
+        navBar?.prefersLargeTitles = true
+        
+        navBar?.standardAppearance = appearance
+        navBar?.scrollEdgeAppearance = appearance
+        navBar?.compactAppearance = appearance
+        navBar?.compactScrollEdgeAppearance = appearance
+
     }
     
     private func tableViewConfig() {
@@ -61,12 +75,14 @@ class MainPostViewController: UIViewController {
         tableView.register(SecondRowCell.self, forCellReuseIdentifier: SecondRowCell.identifier)
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.prefetchDataSource = self
         tableView.sectionFooterHeight = 2
         tableView.sectionHeaderHeight = 0
         var frame = CGRect.zero
         frame.size.height = .leastNormalMagnitude
         tableView.tableHeaderView = UIView(frame: frame)
         tableView.refreshControl = UIRefreshControl()
+        tableView.refreshControl?.tintColor = .systemGreen
         tableView.refreshControl?.addTarget(self, action: #selector(refreshPost(_:)), for: .valueChanged)
         
     }
@@ -92,13 +108,15 @@ class MainPostViewController: UIViewController {
     }
     
     @objc func writePost(_ sender: UIButton) {
-        let vc = UINavigationController(rootViewController: WritePostViewController())
-        vc.modalPresentationStyle = .fullScreen
-        
-        self.present(vc, animated: true, completion: nil)
+        let writeVC = WritePostViewController()
+        let nav = UINavigationController(rootViewController: writeVC)
+        writeVC.modalPresentationStyle = .fullScreen
+        writeVC.mainViewController = self
+        self.present(nav, animated: true, completion: nil)
     }
     
     @objc func refreshPost(_ sender: UIRefreshControl) {
+        
         viewModel.getPost(refresh: sender) { error in
             if let error = error {
                 if error == .tokenExpired {
@@ -111,7 +129,28 @@ class MainPostViewController: UIViewController {
     }
 }
 
-extension MainPostViewController: UITableViewDelegate, UITableViewDataSource {
+extension MainPostViewController: UITableViewDelegate, UITableViewDataSource, UITableViewDataSourcePrefetching {
+    
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        
+        print("index = \(indexPaths.last!.section)\ntotalpost = \(viewModel.totalPost)\ncurrentpost = \(viewModel.post.value.count)\ncurrentpage = \(viewModel.currentPage)\n=====================")
+        
+        if viewModel.post.value.count < viewModel.totalPost {
+            if indexPaths.last!.section == viewModel.post.value.count - 1 {
+                viewModel.getPost(refresh: nil) { error in
+                    print("prefetchfunc called")
+                    if let error = error {
+                        if error == .tokenExpired {
+                            self.tokenExpired()
+                        } else {
+                            return
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 2
@@ -154,9 +193,12 @@ extension MainPostViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let vc = DetailPostViewController()
+        vc.mainPostViewModel = self.viewModel
+        vc.mainPostViewController = self
         vc.viewModel.postId = viewModel.post.value[indexPath.section].id
         vc.viewModel.post.value = viewModel.post.value[indexPath.section]
         vc.viewModel.postIndex = indexPath.section
+        
         
         self.navigationController?.pushViewController(vc, animated: true)
         

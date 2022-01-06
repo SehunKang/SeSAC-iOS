@@ -17,6 +17,16 @@ class DetailPostViewModel {
     
     var comment: Observable<[DetailComment]> = Observable([])
     
+    func getOnePost(completion: @escaping (APIError?) -> Void) {
+        
+        APIService.getOnePost(id: postId) { data, error in
+            if data != nil {
+                self.post.value = data!
+            }
+            completion(error)
+        }
+    }
+    
     func getComment(completion: @escaping (APIError?) -> Void) {
         
         APIService.getComment(id: postId) { data, error in
@@ -28,6 +38,7 @@ class DetailPostViewModel {
     }
     
     func updateComment() {
+        
         APIService.getComment(id: postId) { data, error in
             if data != nil {
                 self.comment.value = data!
@@ -36,6 +47,7 @@ class DetailPostViewModel {
     }
     
     func updatePost() {
+        
         APIService.getPost { data, error in
             if data != nil {
                 self.post.value = data![self.postIndex]
@@ -58,9 +70,8 @@ class DetailPostViewModel {
     }
     
     func editComment(commentId: Int, text: String, postId: Int, completion: @escaping (APIError?) -> Void) {
-        print(commentId, text, postId)
+        
         APIService.editComment(commentId: commentId, postId: postId, text: text) { error in
-            print(commentId, postId, text)
             completion(error)
         }
         

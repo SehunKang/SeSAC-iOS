@@ -55,3 +55,8 @@ public func pushCallBack(vc: UIViewController, completion: @escaping (UIViewCont
     windowScene.windows.first?.makeKeyAndVisible()
     completion(rootViewController)
 }
+
+public func popCallBack(from vc: UIViewController, completion: @escaping () -> ()) {
+    vc.navigationController?.popViewController(animated: true)
+    completion()
+}

@@ -10,21 +10,45 @@ import UIKit
 
 class MainPostViewModel {
     
+    var totalPost: Int = 0
+    var currentPage: Int = 0
+    
     var post: Observable<[Post]> = Observable([])
     
-    func getPost(refresh: UIRefreshControl? = nil, completion: @escaping (APIError?) -> Void) {
+    func getPost(refresh: UIRefreshControl? = nil, isInitialCall: Bool? = false, completion: @escaping (APIError?) -> Void) {
         
-        APIService.getPost { data, error in
-            
-            if refresh != nil {
-                refresh?.endRefreshing()
+        if isInitialCall == true || refresh != nil {
+            self.currentPage = 0
+            APIService.getTotalPostCount { count, error in
+                if let count = count {
+                    self.totalPost = count
+                }
             }
+        }
+        
+        APIService.getPage(page: currentPage) { data, error in
+            refresh?.endRefreshing()
             if data != nil {
-                self.post.value = data!
+                self.currentPage += 1
+                print(data!)
+                if refresh == nil {
+                    self.post.value.append(contentsOf: data!)
+                } else if isInitialCall == true || refresh != nil{
+                    self.post.value = data!
+                }
             }
-
             completion(error)
         }
+        
+//        APIService.getPost { data, error in
+//
+//            refresh?.endRefreshing()
+//            if data != nil {
+//                self.post.value = data!
+//            }
+//
+//            completion(error)
+//        }
     }
     
 }
@@ -40,7 +64,6 @@ extension MainPostViewModel {
     }
     
     func pushToDetailPost(_ navigationController: UINavigationController, to viewController: UIViewController, completion: () -> Void) {
-    
         
         navigationController.pushViewController(viewController, animated: true)
         completion()

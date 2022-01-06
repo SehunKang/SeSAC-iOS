@@ -12,6 +12,7 @@ class WritePostViewController: UIViewController {
     
     let viewModel = WritePostViewModel()
     var superViewModel: DetailPostViewModel!
+    var mainViewController: UIViewController!
     
     let textField = UITextView()
     
@@ -45,19 +46,20 @@ class WritePostViewController: UIViewController {
     }
     
     @objc func didEndEditing(_ sender: UIBarButtonItem) {
+        
         guard viewModel.postId != nil && textField.text != "" else {
             viewModel.writePost(text: textField.text) { error in
                 if error == nil {
-                    let vm = MainPostViewModel()
                     self.dismiss(animated: true) {
-                        vm.getPost { error in
-                        }
+                        let vc = self.mainViewController as! MainPostViewController
+                        vc.refreshPost(UIRefreshControl())
                     }
                 }
             }
             return
         }
         viewModel.editPost(text: textField.text) { error in
+            
             if error == nil {
                 DispatchQueue.main.async {
                     self.dismiss(animated: true) {
