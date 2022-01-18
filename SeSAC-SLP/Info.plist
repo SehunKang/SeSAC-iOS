@@ -2,6 +2,11 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>NotoSansKR-Medium</string>
+		<string>NotoSansKR-Regular</string>
+	</array>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -9,7 +14,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.284702801508-47t8gq6vvfka7edsud0e4apnelbd0n09</string>
+				<string>app-1-355153590205-ios-f593e8d5580ec9ad9e04d4</string>
 			</array>
 		</dict>
 	</array>

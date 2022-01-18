@@ -10,19 +10,26 @@ import FirebaseAuth
 import RxSwift
 import RxCocoa
 
-class ViewController: UIViewController {
+class PhoneAuthViewController: UIViewController {
     
     @IBOutlet weak var phoneNumField: UITextField!
     @IBOutlet weak var codeField: UITextField!
     @IBOutlet weak var requestCodeButton: UIButton!
     @IBOutlet weak var verifyCodeButton: UIButton!
+    @IBOutlet weak var testLabel: UILabel!
+    @IBOutlet weak var testLabel2: UILabel!
     
     let viewModel = PhoneAuthViewModel()
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         bind()
+        
+//        testLabel.font = UIFont(name: "Noto Sans KR", size: 20)
+        testLabel.text = "동해물과백두산이마르고닳도록"
+        testLabel2.text = "동해물과백두산이마르고닳도록"
+        testLabel2.font = UIFont(name: "NotoSansKR-Medium", size: 20)
+        
     }
     
     func bind() {
