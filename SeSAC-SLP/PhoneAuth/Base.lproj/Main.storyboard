@@ -104,29 +104,40 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Button"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FzV-gL-r8R" customClass="FilledButton" customModule="SeSAC_SLP" customModuleProvider="target">
-                                <rect key="frame" x="90" y="248" width="223" height="111"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oXt-OC-7wy" customClass="OutlineButton" customModule="SeSAC_SLP" customModuleProvider="target">
                                 <rect key="frame" x="90" y="367" width="223" height="111"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <connections>
+                                    <action selector="clickedSuc:" destination="Xhl-vt-gJG" eventType="touchUpInside" id="RqY-4D-p4V"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KAE-k7-2wD" customClass="CancelButton" customModule="SeSAC_SLP" customModuleProvider="target">
                                 <rect key="frame" x="96" y="486" width="223" height="111"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <connections>
+                                    <action selector="clicked:" destination="Xhl-vt-gJG" eventType="touchUpInside" id="Fhu-hP-C0N"/>
+                                </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="48C-zV-44f" customClass="FilledButton" customModule="SeSAC_SLP" customModuleProvider="target">
-                                <rect key="frame" x="90" y="624" width="223" height="111"/>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2TJ-Yk-zLb" customClass="MyTextField" customModule="SeSAC_SLP" customModuleProvider="target">
+                                <rect key="frame" x="90" y="637" width="223" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FzV-gL-r8R" customClass="FilledButton" customModule="SeSAC_SLP" customModuleProvider="target">
+                                <rect key="frame" x="90" y="248" width="223" height="111"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Button">
+                                    <fontDescription key="titleFontDescription" name="NotoSansKR-Regular" family="Noto Sans KR" pointSize="0.0"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="in:" destination="Xhl-vt-gJG" eventType="touchUpInside" id="5DV-ev-7dP"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="bVK-gr-g8e"/>
@@ -135,10 +146,10 @@
                     <navigationItem key="navigationItem" id="jhq-AD-i7u"/>
                     <connections>
                         <outlet property="canc" destination="KAE-k7-2wD" id="bJD-bB-DiC"/>
-                        <outlet property="dis" destination="48C-zV-44f" id="sxe-8M-7At"/>
                         <outlet property="fil" destination="FzV-gL-r8R" id="UL8-37-jdq"/>
                         <outlet property="inact" destination="rhG-ef-Idh" id="zNT-8Q-yht"/>
                         <outlet property="out" destination="oXt-OC-7wy" id="mPE-Ew-oTA"/>
+                        <outlet property="textfield" destination="2TJ-Yk-zLb" id="DQ5-4j-Zyp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e34-lv-jOh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

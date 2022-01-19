@@ -10,6 +10,7 @@
 		2EA963D52796D70100DA7C2E /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA963D42796D70100DA7C2E /* CustomButton.swift */; };
 		2EA963D72796EF7300DA7C2E /* CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA963D62796EF7300DA7C2E /* CustomColor.swift */; };
 		2EA963DB2796F23B00DA7C2E /* ButtonTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA963DA2796F23B00DA7C2E /* ButtonTestViewController.swift */; };
+		2EA963E02797A1F500DA7C2E /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA963DF2797A1F500DA7C2E /* CustomTextField.swift */; };
 		2EBAEF64279539ED00C2A089 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBAEF63279539ED00C2A089 /* AppDelegate.swift */; };
 		2EBAEF66279539ED00C2A089 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBAEF65279539ED00C2A089 /* SceneDelegate.swift */; };
 		2EBAEF68279539ED00C2A089 /* PhoneAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBAEF67279539ED00C2A089 /* PhoneAuthViewController.swift */; };
@@ -32,6 +33,7 @@
 		2EA963D42796D70100DA7C2E /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		2EA963D62796EF7300DA7C2E /* CustomColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColor.swift; sourceTree = "<group>"; };
 		2EA963DA2796F23B00DA7C2E /* ButtonTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTestViewController.swift; sourceTree = "<group>"; };
+		2EA963DF2797A1F500DA7C2E /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
 		2EBAEF60279539ED00C2A089 /* SeSAC-SLP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SeSAC-SLP.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EBAEF63279539ED00C2A089 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2EBAEF65279539ED00C2A089 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 				2EA963D42796D70100DA7C2E /* CustomButton.swift */,
 				2EA963D62796EF7300DA7C2E /* CustomColor.swift */,
 				2EBAEF90279692CA00C2A089 /* CustomFont.swift */,
+				2EA963DF2797A1F500DA7C2E /* CustomTextField.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -282,6 +285,7 @@
 				2EBAEF91279692CA00C2A089 /* CustomFont.swift in Sources */,
 				2EBAEF66279539ED00C2A089 /* SceneDelegate.swift in Sources */,
 				2EA963D52796D70100DA7C2E /* CustomButton.swift in Sources */,
+				2EA963E02797A1F500DA7C2E /* CustomTextField.swift in Sources */,
 				2EBAEF812795859800C2A089 /* PhoneAuthViewModel.swift in Sources */,
 				2EA963DB2796F23B00DA7C2E /* ButtonTestViewController.swift in Sources */,
 				2EBAEF83279585B700C2A089 /* Protocol.swift in Sources */,
