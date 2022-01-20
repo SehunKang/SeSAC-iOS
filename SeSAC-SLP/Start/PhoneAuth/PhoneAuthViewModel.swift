@@ -15,6 +15,7 @@ enum TextError: Error {
     case codeError
 }
 
+
 class PhoneAuthViewModel {
     
     var verifyId: String?
@@ -23,29 +24,37 @@ class PhoneAuthViewModel {
 
     struct Input {
         let text: ControlProperty<String?>
+        let tap: ControlEvent<Void>
     }
 
     struct Output {
         let validStatus: Observable<Bool>
+        let validCodeStatus: Observable<Bool>
         let newText: Observable<String>
+        let sceneTransition: ControlEvent<Void>
         
     }
 
     func transform(input: Input) -> Output {
-        let newText = input.text
-            .orEmpty
-            .map { text in
-                self.phoneNumberFormat(with: "XXX-XXXX-XXXX", phone: text)
-            }
-            .share(replay: 1, scope: .whileConnected)
-        
         let textToBool = input.text
             .orEmpty
-            .map { $0.count > 12 }
+            .map { $0.count < 13 }
             .share(replay: 1, scope: .whileConnected)
         
-        return Output(validStatus: textToBool, newText: newText)
+        let codeToBool = input.text
+            .orEmpty
+            .map { $0.count < 6 }
+            .share(replay: 1, scope: .whileConnected)
+        
+        let newText = input.text
+            .orEmpty
+            .asObservable()
+            .share(replay: 1, scope: .whileConnected)
+        
+                
+        return Output(validStatus: textToBool, validCodeStatus: codeToBool, newText: newText, sceneTransition: input.tap)
     }
+    
     
 }
 
@@ -53,19 +62,24 @@ extension PhoneAuthViewModel {
     
     
     func requestVerifyId(phoneNumber: String?, completion: @escaping (Error?) -> (Void) ) {
+        
+        Auth.auth().languageCode = "ko";
+        
         guard var num = phoneNumber else {return}
         num = "+82\(num)"
-        print(num)
         PhoneAuthProvider.provider()
             .verifyPhoneNumber(num, uiDelegate: nil) { id, error in
                 if error != nil {
                     completion(error)
                     return
                 } else {
-                    self.verifyId = id
-                    print("code = ", self.verifyId!)
+                    guard let id = id else {return}
+                    UserInfoManager.idtoken = id
+                    let toRemove: Set = [3, 6, 11]
+                    let phoneNumber = num.enumerated().filter { !toRemove.contains($0.offset) }.map { $0.element }
+                    UserInfoManager.phoneNumber = String(phoneNumber)
+                    completion(nil)
                 }
-                Auth.auth().languageCode = "kr"
             }
     }
     
@@ -85,12 +99,11 @@ extension PhoneAuthViewModel {
         Auth.auth().signIn(with: credential) { result, error in
             completion(error, result)
         }
-        
     }
     
     
-    func phoneNumberFormat(with mask: String, phone: String) -> String {
-        let numbers = phone.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
+    func validationNumberFormat(with mask: String, text: String) -> String {
+        let numbers = text.replacingOccurrences(of: "[^0-9]", with: "", options: .regularExpression)
         var result = ""
         var index = numbers.startIndex // numbers iterator
 
@@ -109,4 +122,10 @@ extension PhoneAuthViewModel {
         }
         return result
     }
+}
+
+enum validationFieldText: String {
+    
+    case phoneNumber = "XXX-XXXX-XXXX"
+    case code = "XXXXXX"
 }

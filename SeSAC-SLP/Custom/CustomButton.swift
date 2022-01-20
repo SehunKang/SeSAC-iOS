@@ -8,6 +8,11 @@
 import Foundation
 import UIKit
 
+extension UIControl.State {
+    static let fakeDisabled = UIControl.State(rawValue: 1 << 18)
+}
+
+
 class InactiveButton: UIButton {
     
     override func updateConfiguration() {
@@ -50,6 +55,29 @@ class InactiveButton: UIButton {
 
 class FilledButton: UIButton {
     
+    func setTitleWithFont(text: String, font: CustomFont) {
+        myFont = font.font
+        setTitle(text, for: .normal)
+    }
+        
+    var isFakeDisbaled = false {
+        didSet {
+            //이거 필수
+            setNeedsUpdateConfiguration()
+        }
+    }
+    
+    override var state: UIControl.State {
+        var s = super.state
+        if self.isFakeDisbaled {
+            s.insert(.fakeDisabled)
+            s.remove(.highlighted)
+        }
+        return s
+    }
+    
+    var myFont: UIFont = CustomFont.Body3_R14.font
+
     override func updateConfiguration() {
         guard let configuration = configuration else {
             return
@@ -64,6 +92,9 @@ class FilledButton: UIButton {
         let foregroundColor: UIColor
         let backgroundColor: UIColor
         
+        //for attributedString
+        var container = AttributeContainer()
+        
         switch self.state {
         case .normal:
             strokeColor = CustomColor.SLPGreen.color
@@ -73,17 +104,22 @@ class FilledButton: UIButton {
             strokeColor = CustomColor.SLPGray6.color
             foregroundColor = CustomColor.SLPGray3.color
             backgroundColor = CustomColor.SLPGray6.color
-            
-            var container = AttributeContainer()
             container.foregroundColor = CustomColor.SLPGray3.color
-            let title = updatedConfiguration.title!
-            updatedConfiguration.attributedTitle = AttributedString(title, attributes: container)
-            
+        case .fakeDisabled:
+            titleLabel?.font = self.titleLabel?.font
+            strokeColor = CustomColor.SLPGray6.color
+            foregroundColor = CustomColor.SLPGray3.color
+            backgroundColor = CustomColor.SLPGray6.color
+            container.foregroundColor = CustomColor.SLPGray3.color
         default:
             strokeColor = CustomColor.SLPGreen.color
             foregroundColor = CustomColor.SLPWhite.color
             backgroundColor = CustomColor.SLPGreen.color
         }
+        
+        let title = updatedConfiguration.title ?? ""
+        container.font = myFont
+        updatedConfiguration.attributedTitle = AttributedString(title, attributes: container)
         background.strokeColor = strokeColor
         background.backgroundColor = backgroundColor
         
@@ -92,6 +128,7 @@ class FilledButton: UIButton {
         
         self.configuration = updatedConfiguration
     }
+    
 
 }
 

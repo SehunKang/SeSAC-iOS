@@ -8,6 +8,7 @@
 import UIKit
 import Firebase
 import UserNotifications
+import Toast
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,8 +21,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UNUserNotificationCenter.current().requestAuthorization(options: [.badge,.sound,.alert], completionHandler: { (granted,error) in })
         application.registerForRemoteNotifications()
+        var style = ToastStyle()
+        style.backgroundColor = CustomColor.SLPWhite.color
+        style.messageColor = CustomColor.SLPGreen.color
+        style.messageFont = CustomFont.Body3_R14.font
+        style.cornerRadius = 8
+        style.displayShadow = true
+        style.shadowOpacity = 0.3
+        style.shadowOffset = CGSize(width: 0, height: 4)
+        ToastManager.shared.style = style
+        ToastManager.shared.duration = 2
+        
         return true
     }
+    
 
     // MARK: UISceneSession Lifecycle
 
@@ -39,4 +52,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 }
-
