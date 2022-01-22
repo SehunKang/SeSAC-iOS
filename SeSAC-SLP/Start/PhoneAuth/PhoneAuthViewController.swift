@@ -23,7 +23,8 @@ class PhoneAuthViewController: UIViewController {
         super.viewDidLoad()
         uiConfig()
         bind()
-        self.hideKeyboardOnTap()
+        hideKeyboardOnTap()
+        
     }
     
     private func uiConfig() {
@@ -44,15 +45,12 @@ class PhoneAuthViewController: UIViewController {
         requestCodeButton.setTitleWithFont(text: "인증 문자 받기", font: .Body3_R14)
     }
     
-    func bind() {
+    private func bind() {
         
         let input = PhoneAuthViewModel.Input(text: phoneNumField.rx.text, tap: requestCodeButton.rx.tap)
-        let output = viewModel.transform(input: input)
+        let output = viewModel.transform(input: input, valid: .phoneNum)
         
         output.newText
-            .map { text in
-                self.viewModel.validationNumberFormat(with: validationFieldText.phoneNumber.rawValue, text: text)
-            }
             .bind(to: phoneNumField.rx.text)
             .disposed(by: viewModel.disposeBag)
         
@@ -72,6 +70,7 @@ class PhoneAuthViewController: UIViewController {
                             return
                         } else {
                             self.requestCodeButton.isUserInteractionEnabled = false
+                            
                             self.view.makeToast("전화번호 인증 시작", duration: 2, position: .center, title: nil, image: nil, style: ToastManager.shared.style) { didTap in
                                 self.requestCodeButton.isUserInteractionEnabled = true
                                 let vc = self.storyboard?.instantiateViewController(withIdentifier: "PhoneAuthCheckViewController") as! PhoneAuthCheckViewController

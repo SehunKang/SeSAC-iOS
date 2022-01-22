@@ -22,7 +22,7 @@ enum CustomColor: String {
     case SLPGreen
     case SLPSuccess
     case SLPWhite
-    case SLPWhiteGreen
+    case SLPWhitegreen
     case SLPYellowgreen
 }
 

@@ -44,6 +44,14 @@ class MyTextField: UITextField, UITextFieldDelegate {
         border.frame = CGRect(x: -12, y: self.frame.size.height - lineHeight, width: self.frame.size.width + 24, height: lineHeight)
     }
     
+    // copy/paste 방지
+    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+        if action == #selector(UIResponderStandardEditActions.paste(_:)) {
+            return false
+        }
+        return super.canPerformAction(action, withSender: sender)
+    }
+    
     private func textFieldSet() {
         self.borderStyle = .none
         self.layer.cornerRadius = 8

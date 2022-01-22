@@ -28,8 +28,6 @@ class PhoneAuthCheckViewController: UIViewController {
         bind()
         hideKeyboardOnTap()
         
-        print(UserInfoManager.phoneNumber)
-        print(UserInfoManager.idtoken)
     }
     
     private func uiConfig() {
@@ -46,15 +44,17 @@ class PhoneAuthCheckViewController: UIViewController {
         setTimer(time: 60)
         
         textField.placeholder = "인증번호 입력"
+        textField.keyboardType = .numberPad
         
         resendButton.setTitleWithFont(text: "재전송", font: .Body3_R14)
+        resendButton.isEnabled = false
         
         doneButton.setTitleWithFont(text: "인증하고 시작하기", font: .Body3_R14)
     }
     
     private func bind() {
         let input = PhoneAuthViewModel.Input(text: textField.rx.text, tap: doneButton.rx.tap)
-        let output = viewModel.transform(input: input)
+        let output = viewModel.transform(input: input, valid: .code)
         
         output.newText
             .map { text in
@@ -63,7 +63,7 @@ class PhoneAuthCheckViewController: UIViewController {
             .bind(to: textField.rx.text)
             .disposed(by: viewModel.disposeBag)
         
-        output.validCodeStatus
+        output.validStatus
             .bind(to: doneButton.rx.isFakeDisbaled)
             .disposed(by: viewModel.disposeBag)
         
@@ -92,25 +92,34 @@ class PhoneAuthCheckViewController: UIViewController {
                 self.countDownLabel.text = text
             } onCompleted: {
                 self.view.makeToast("전화번호 인증 실패", duration: 1.5, position: .center, style: ToastManager.shared.style) { didTap in
-                    self.navigationController?.popViewController(animated: true)
+                    self.resendButton.isEnabled = true
                 }
             }
             .disposed(by: viewModel.disposeBag)
     }
     
-    func buttonClicked() {
+    private func buttonClicked() {
         if doneButton.state == UIControl.State.fakeDisabled {
             self.view.makeToast("잘못된 인증번호입니다.", duration: 1, position: .center, style: ToastManager.shared.style)
         } else {
             viewModel.credentialCheck(verifyCode: textField.text) { error, result in
                 if error != nil {
                     self.view.makeToast("에러가 발생했습니다. 잠시 후 다시 시도해주세요", duration: 1, position: .center, style: ToastManager.shared.style)
+                    print(error.debugDescription)
                 } else {
-                    
+                    self.viewModel.getUserData { code in
+                        switch code {
+                        case 200:
+                            print("***************200*********************")
+                        case 201:
+                            let vc = self.storyboard?.instantiateViewController(withIdentifier: NicknameViewController.identifier) as! NicknameViewController
+                            self.navigationController?.pushViewController(vc, animated: true)
+                        default:
+                            self.view.makeToast("에러가 발생했습니다. 잠시 후 다시 시도해주세요", duration: 1, position: .center, style: ToastManager.shared.style)
+                        }
+                    }
                 }
             }
         }
     }
-    
-
 }
