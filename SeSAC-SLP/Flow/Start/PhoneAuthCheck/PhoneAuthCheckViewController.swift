@@ -73,7 +73,15 @@ class PhoneAuthCheckViewController: UIViewController {
             }
             .disposed(by: viewModel.disposeBag)
         
+        resendButton.rx.tap
+            .subscribe { _ in
+                self.resendCode()
+            }
+            .disposed(by: viewModel.disposeBag)
+
+        
     }
+
     
     private func setTimer(time: Int) {
         Observable<Int>
@@ -98,13 +106,26 @@ class PhoneAuthCheckViewController: UIViewController {
             .disposed(by: viewModel.disposeBag)
     }
     
+    private func resendCode() {
+        
+        viewModel.resendRequest() { error in
+            if error != nil {
+                print("what error?", error?.localizedDescription as Any)
+                self.view.makeToast("에러가 발생했습니다. 다시 시도해주세요")
+            } else {
+                self.setTimer(time: 60)
+                self.resendButton.isEnabled = false
+            }
+        }
+    }
+    
     private func buttonClicked() {
         if doneButton.state == UIControl.State.fakeDisabled {
             self.view.makeToast("잘못된 인증번호입니다.", duration: 1, position: .center, style: ToastManager.shared.style)
         } else {
             viewModel.credentialCheck(verifyCode: textField.text) { error, result in
                 if error != nil {
-                    self.view.makeToast("에러가 발생했습니다. 잠시 후 다시 시도해주세요", duration: 1, position: .center, style: ToastManager.shared.style)
+                    self.view.makeToast("전화번호 인증 실패")
                     print(error.debugDescription)
                 } else {
                     self.viewModel.getUserData { code in
@@ -115,6 +136,7 @@ class PhoneAuthCheckViewController: UIViewController {
                             let vc = self.storyboard?.instantiateViewController(withIdentifier: NicknameViewController.identifier) as! NicknameViewController
                             self.navigationController?.pushViewController(vc, animated: true)
                         default:
+                            print("what code?:", code)
                             self.view.makeToast("에러가 발생했습니다. 잠시 후 다시 시도해주세요", duration: 1, position: .center, style: ToastManager.shared.style)
                         }
                     }

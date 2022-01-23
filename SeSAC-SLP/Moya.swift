@@ -10,7 +10,7 @@ import Moya
 
 enum APIService {
     case getUserData
-    case signIn
+    case signIn(data: SignInData)
 }
 
 extension APIService: TargetType {
@@ -40,15 +40,8 @@ extension APIService: TargetType {
         switch self {
         case .getUserData:
             return .requestPlain
-        case .signIn:
-            return .requestParameters(parameters: [
-                "phoneNumber": UserDefaultManager.phoneNumber,
-                "FCMtoken": UserDefaultManager.FCMtoken,
-                "nick": UserDefaultManager.nick,
-                "birth": UserDefaultManager.birth,
-                "email": UserDefaultManager.email,
-                "gender": UserDefaultManager.gender
-            ], encoding: JSONEncoding.default)
+        case .signIn(let data):
+            return .requestJSONEncodable(data)
         }
     }
     

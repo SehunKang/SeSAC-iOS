@@ -52,7 +52,6 @@ class GenderViewController: UIViewController {
         }
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -106,11 +105,21 @@ class GenderViewController: UIViewController {
             UserDefaultManager.gender = 2
         }
         
-        viewModel.signIn { response, error in
-            print(response?.debugDescription as Any)
-            print(error.debugDescription)
+        viewModel.signIn { statusCode in
+            switch statusCode {
+            case 200:
+                print("app start")
+            case 201:
+                print("이미가입한 유저??")
+            case 202:
+                print("invalidNickname")
+            case 401:
+                print("refresh token")
+            default:
+                self.view.makeToast("에러가 발생했습니다. 잠시 후 다시 시도해주세요.")
+                
+            }
         }
-        
     }
     
 

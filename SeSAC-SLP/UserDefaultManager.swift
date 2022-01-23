@@ -85,7 +85,13 @@ class UserDefaultManager {
     @UserDefault(key: "idtoken", defaultValue: "")
     static var idtoken: String
     
+    ///1일 경우 invalid
+    @UserDefault(key: "validNickFlag", defaultValue: 0)
+    static var validNickFlag: Int
+    
     @UserDefaultStruct(key: "userData", defaultValue: nil)
     static var userData: UserData?
     
+    @UserDefaultStruct(key: "signInData", defaultValue: nil)
+    static var signInData: SignInData?
 }

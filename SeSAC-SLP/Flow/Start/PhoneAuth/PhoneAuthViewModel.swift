@@ -130,6 +130,22 @@ extension PhoneAuthViewModel {
             }
     }
     
+    func resendRequest(completion: @escaping (Error?) -> Void) {
+        
+        Auth.auth().languageCode = "ko";
+        
+        PhoneAuthProvider.provider().verifyPhoneNumber(UserDefaultManager.phoneNumber, uiDelegate: nil) { id, error in
+            if error != nil {
+                completion(error)
+                return
+            } else {
+                guard let id = id else {return}
+                UserDefaultManager.verifyId = id
+                completion(nil)
+            }
+        }
+    }
+    
     func credentialCheck(verifyCode: String?, completion: @escaping (Error?, AuthDataResult?) -> (Void)) {
         
         let id = UserDefaultManager.verifyId
@@ -143,6 +159,7 @@ extension PhoneAuthViewModel {
         
         Auth.auth().signIn(with: credential) { result, error in
             if error != nil {
+                
                 completion(error, nil)
                 return
             } else {
