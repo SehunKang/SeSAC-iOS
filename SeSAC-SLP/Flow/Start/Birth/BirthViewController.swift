@@ -86,7 +86,7 @@ class BirthViewController: UIViewController {
                 self.view.makeToast("새싹친구는 만 17세 이상만 사용할 수 있습니다.")
             }
         } else {
-            UserDefaultManager.birth = datePicker.date
+            UserDefaultManager.signInData.birth = datePicker.date
             let vc = self.storyboard?.instantiateViewController(withIdentifier: EmailViewController.identifier) as! EmailViewController
             self.navigationController?.pushViewController(vc, animated: true)
         }

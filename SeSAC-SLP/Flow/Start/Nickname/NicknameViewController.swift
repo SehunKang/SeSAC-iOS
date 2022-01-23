@@ -64,7 +64,7 @@ class NicknameViewController: UIViewController {
         if doneButton.state == UIControl.State.fakeDisabled {
             self.view.makeToast("닉네임은 1자 이상 10자 이내로 부탁드려요.", duration: 1, position: .center, style: ToastManager.shared.style)
         } else {
-            UserDefaultManager.nick = textField.text!
+            UserDefaultManager.signInData.nick = textField.text!
             let vc = self.storyboard?.instantiateViewController(withIdentifier: BirthViewController.identifier) as! BirthViewController
             self.navigationController?.pushViewController(vc, animated: true)
 

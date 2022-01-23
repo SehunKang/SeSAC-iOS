@@ -8,10 +8,10 @@
 import Foundation
 
 struct SignInData: Codable {
-    let phoneNumber, fcMtoken, nick: String
-    let birth: Date
-    let email: String
-    let gender: Int
+    var phoneNumber, fcMtoken, nick: String
+    var birth: Date
+    var email: String
+    var gender: Int
 
     enum CodingKeys: String, CodingKey {
         case phoneNumber

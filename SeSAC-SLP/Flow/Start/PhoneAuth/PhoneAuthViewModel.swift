@@ -124,7 +124,7 @@ extension PhoneAuthViewModel {
                     UserDefaultManager.verifyId = id
                     let toRemove: Set = [3, 6, 11]
                     let phoneNumber = num.enumerated().filter { !toRemove.contains($0.offset) }.map { $0.element }
-                    UserDefaultManager.phoneNumber = String(phoneNumber)
+                    UserDefaultManager.signInData.phoneNumber = String(phoneNumber)
                     completion(nil)
                 }
             }
@@ -134,7 +134,7 @@ extension PhoneAuthViewModel {
         
         Auth.auth().languageCode = "ko";
         
-        PhoneAuthProvider.provider().verifyPhoneNumber(UserDefaultManager.phoneNumber, uiDelegate: nil) { id, error in
+        PhoneAuthProvider.provider().verifyPhoneNumber(UserDefaultManager.signInData.phoneNumber, uiDelegate: nil) { id, error in
             if error != nil {
                 completion(error)
                 return

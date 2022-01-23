@@ -98,11 +98,11 @@ class GenderViewController: UIViewController {
     
     private func doneButtonClicked() {
         if maleSelected {
-            UserDefaultManager.gender = 1
+            UserDefaultManager.signInData.gender = 1
         } else if femaleSelected {
-            UserDefaultManager.gender = 0
+            UserDefaultManager.signInData.gender = 0
         } else {
-            UserDefaultManager.gender = 2
+            UserDefaultManager.signInData.gender = 2
         }
         
         viewModel.signIn { statusCode in

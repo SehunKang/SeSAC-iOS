@@ -68,7 +68,7 @@ class EmailViewController: UIViewController {
                 self.view.makeToast("이메일 형식이 올바르지 않습니다.")
             }
         } else {
-            UserDefaultManager.email = email
+            UserDefaultManager.signInData.email = email
             let vc = self.storyboard?.instantiateViewController(withIdentifier: GenderViewController.identifier) as! GenderViewController
             self.navigationController?.pushViewController(vc, animated: true)
 

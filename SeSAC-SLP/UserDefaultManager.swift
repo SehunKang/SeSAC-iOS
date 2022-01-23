@@ -61,24 +61,6 @@ struct UserDefaultStruct<T: Codable> {
 
 class UserDefaultManager {
     
-    @UserDefault(key: "phoneNumber", defaultValue: "")
-    static var phoneNumber: String
-    
-    @UserDefault(key: "FCMtoken", defaultValue: "")
-    static var FCMtoken: String
-    
-    @UserDefault(key: "nick", defaultValue: "")
-    static var nick: String
-    
-    @UserDefault(key: "birth", defaultValue: Date())
-    static var birth: Date
-    
-    @UserDefault(key: "email", defaultValue: "")
-    static var email: String
-    
-    @UserDefault(key: "gender", defaultValue: 2)
-    static var gender: Int
-    
     @UserDefault(key: "verifyToken", defaultValue: "")
     static var verifyId: String
     
@@ -92,6 +74,6 @@ class UserDefaultManager {
     @UserDefaultStruct(key: "userData", defaultValue: nil)
     static var userData: UserData?
     
-    @UserDefaultStruct(key: "signInData", defaultValue: nil)
-    static var signInData: SignInData?
+    @UserDefaultStruct(key: "signInData", defaultValue: SignInData(phoneNumber: "", fcMtoken: "", nick: "", birth: Date(), email: "", gender: 2))
+    static var signInData: SignInData!
 }
