@@ -6,12 +6,13 @@
 //
 
 import UIKit
-import FirebaseAuth
 import RxSwift
 import RxCocoa
 import Toast
 
 class PhoneAuthViewController: UIViewController {
+    
+    static let identifier = "PhoneAuthViewController"
     
     @IBOutlet weak var phoneNumField: MyTextField!
     @IBOutlet weak var requestCodeButton: FilledButton!
@@ -24,7 +25,7 @@ class PhoneAuthViewController: UIViewController {
         uiConfig()
         bind()
         hideKeyboardOnTap()
-        
+        internetCheck()
     }
     
     private func uiConfig() {

@@ -40,8 +40,10 @@ class EmailViewController: UIViewController {
         
         textField.placeholder = "SeSAC@email.com"
         textField.keyboardType = .emailAddress
+        textField.becomeFirstResponder()
         
         doneButton.setTitleWithFont(text: "다음", font: .Body3_R14)
+        self.navigationItem.backButtonTitle = ""
     }
     
     private func bind() {

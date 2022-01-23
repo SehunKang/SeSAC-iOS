@@ -14,7 +14,7 @@ class NicknameViewController: UIViewController {
     
     static let identifier = "NicknameViewController"
     
-    let viewModel = PhoneAuthViewModel()
+    let viewModel = NickNameViewModel()
     
     @IBOutlet weak var guideLabel: UILabel!
     @IBOutlet weak var textField: MyTextField!
@@ -26,6 +26,7 @@ class NicknameViewController: UIViewController {
         uiConfig()
         bind()
         hideKeyboardOnTap()
+        validNickAlert()
     }
     
     private func uiConfig() {
@@ -38,11 +39,14 @@ class NicknameViewController: UIViewController {
         textField.becomeFirstResponder()
         
         doneButton.setTitleWithFont(text: "다음", font: .Body3_R14)
+        
+        self.navigationItem.setHidesBackButton(true, animated: false)
+        self.navigationItem.backButtonTitle = ""
     }
     
     private func bind() {
-        let input = PhoneAuthViewModel.Input(text: textField.rx.text, tap: doneButton.rx.tap)
-        let output = viewModel.transform(input: input, valid: .nickname)
+        let input = NickNameViewModel.Input(text: textField.rx.text, tap: doneButton.rx.tap)
+        let output = viewModel.transform(input: input)
         
         output.newText
             .bind(to: textField.rx.text)
@@ -60,14 +64,40 @@ class NicknameViewController: UIViewController {
         
     }
     
+    private func validNickAlert() {
+        if UserDefaultManager.validNickFlag == 1 {
+            easyAlert(vc: self, title: "닉네임 오류" , message: "\(UserDefaultManager.signInData.nick)은/는 사용하실 수 없는 닉네임입니다.")
+        }
+    }
+    
     private func buttonClicked() {
         if doneButton.state == UIControl.State.fakeDisabled {
             self.view.makeToast("닉네임은 1자 이상 10자 이내로 부탁드려요.", duration: 1, position: .center, style: ToastManager.shared.style)
         } else {
             UserDefaultManager.signInData.nick = textField.text!
-            let vc = self.storyboard?.instantiateViewController(withIdentifier: BirthViewController.identifier) as! BirthViewController
-            self.navigationController?.pushViewController(vc, animated: true)
-
+            if UserDefaultManager.validNickFlag == 1 {
+                APIServiceForStart.signIn { statusCode in
+                    switch statusCode {
+                    case 200:
+                        UserDefaultManager.validNickFlag = 0
+                        let sb = UIStoryboard(name: "Main", bundle: nil)
+                        let viewController = sb.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
+                        self.view.window?.rootViewController = viewController
+                        self.view.window?.makeKeyAndVisible()
+                    case 201:
+                        print("이미가입한 유저??")
+                    case 202:
+                        self.validNickAlert()
+                    case 401:
+                        print("refresh token")
+                    default:
+                        self.view.makeToast("에러가 발생했습니다. 잠시 후 다시 시도해주세요.")
+                    }
+                }
+            } else {
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: BirthViewController.identifier) as! BirthViewController
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
         }
     }
 

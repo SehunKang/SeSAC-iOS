@@ -14,7 +14,7 @@ class GenderViewController: UIViewController {
     
     static let identifier = "GenderViewController"
 
-    let viewModel = GenderViewModel()
+    let disposeBag = DisposeBag()
     
     @IBOutlet weak var guideLabel: UILabel!
     @IBOutlet weak var subLabel: UILabel!
@@ -84,7 +84,7 @@ class GenderViewController: UIViewController {
             .subscribe { _ in
                 self.doneButtonClicked()
             }
-            .disposed(by: viewModel.disposeBag)
+            .disposed(by: disposeBag)
         
     }
     
@@ -105,14 +105,19 @@ class GenderViewController: UIViewController {
             UserDefaultManager.signInData.gender = 2
         }
         
-        viewModel.signIn { statusCode in
+        APIServiceForStart.signIn { statusCode in
             switch statusCode {
             case 200:
-                print("app start")
+                let sb = UIStoryboard(name: "Main", bundle: nil)
+                let viewController = sb.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
+                self.view.window?.rootViewController = viewController
+                self.view.window?.makeKeyAndVisible()
             case 201:
                 print("이미가입한 유저??")
             case 202:
-                print("invalidNickname")
+                UserDefaultManager.validNickFlag = 1
+                let vc = self.storyboard?.instantiateViewController(withIdentifier: NicknameViewController.identifier) as! NicknameViewController
+                self.navigationController?.pushViewController(vc, animated: true)
             case 401:
                 print("refresh token")
             default:

@@ -48,7 +48,8 @@ class BirthViewController: UIViewController {
         doneButton.isFakeDisbaled = true
         
         datePicker.maximumDate = Date()
-        
+        self.navigationItem.backButtonTitle = ""
+
     }
     
     private func bind() {

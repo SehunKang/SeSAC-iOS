@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E35DBCC279D585200EFD884 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E35DBCB279D585200EFD884 /* Main.storyboard */; };
+		2E35DBCE279D586700EFD884 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E35DBCD279D586700EFD884 /* MainViewController.swift */; };
+		2E35DBD0279D632500EFD884 /* NetworkCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E35DBCF279D632500EFD884 /* NetworkCheck.swift */; };
 		2E92DFB62798EFC90020567B /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 2E92DFB52798EFC90020567B /* Toast */; };
 		2E92DFB927993E7C0020567B /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E92DFB827993E7C0020567B /* UIViewController+Extension.swift */; };
 		2E92DFBB279971E80020567B /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E92DFBA279971E80020567B /* UserDefaultManager.swift */; };
@@ -37,8 +40,9 @@
 		2EBAEF88279585F000C2A089 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2EBAEF87279585F000C2A089 /* RxSwift */; };
 		2EBAEF8A2796854400C2A089 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2EBAEF892796854400C2A089 /* GoogleService-Info.plist */; };
 		2EBAEF91279692CA00C2A089 /* CustomFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBAEF90279692CA00C2A089 /* CustomFont.swift */; };
-		2ED54EEE279C595B001AE07C /* GenderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED54EED279C595B001AE07C /* GenderViewModel.swift */; };
-		2ED54EF0279D3A84001AE07C /* GenderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED54EEF279D3A84001AE07C /* GenderModel.swift */; };
+		2ED54EF0279D3A84001AE07C /* APIModelForStart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED54EEF279D3A84001AE07C /* APIModelForStart.swift */; };
+		2ED54EF3279D4931001AE07C /* APIServiceForStart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED54EF2279D4931001AE07C /* APIServiceForStart.swift */; };
+		2ED54EF5279D4B93001AE07C /* NickNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED54EF4279D4B93001AE07C /* NickNameViewModel.swift */; };
 		2EDF693727982464005E3F93 /* NotoSansKR-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2EDF693527982464005E3F93 /* NotoSansKR-Medium.otf */; };
 		2EDF693827982464005E3F93 /* NotoSansKR-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2EDF693627982464005E3F93 /* NotoSansKR-Regular.otf */; };
 		2EDF693B27982800005E3F93 /* PhoneAuthCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF693A27982800005E3F93 /* PhoneAuthCheckViewController.swift */; };
@@ -46,6 +50,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2E35DBCB279D585200EFD884 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		2E35DBCD279D586700EFD884 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		2E35DBCF279D632500EFD884 /* NetworkCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCheck.swift; sourceTree = "<group>"; };
 		2E92DFB827993E7C0020567B /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		2E92DFBA279971E80020567B /* UserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
 		2E92DFC2279999DC0020567B /* Moya.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Moya.swift; sourceTree = "<group>"; };
@@ -71,8 +78,9 @@
 		2EBAEF82279585B700C2A089 /* Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocol.swift; sourceTree = "<group>"; };
 		2EBAEF892796854400C2A089 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2EBAEF90279692CA00C2A089 /* CustomFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFont.swift; sourceTree = "<group>"; };
-		2ED54EED279C595B001AE07C /* GenderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderViewModel.swift; sourceTree = "<group>"; };
-		2ED54EEF279D3A84001AE07C /* GenderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderModel.swift; sourceTree = "<group>"; };
+		2ED54EEF279D3A84001AE07C /* APIModelForStart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIModelForStart.swift; sourceTree = "<group>"; };
+		2ED54EF2279D4931001AE07C /* APIServiceForStart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServiceForStart.swift; sourceTree = "<group>"; };
+		2ED54EF4279D4B93001AE07C /* NickNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameViewModel.swift; sourceTree = "<group>"; };
 		2EDF693527982464005E3F93 /* NotoSansKR-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "NotoSansKR-Medium.otf"; path = "Noto_Sans_KR/NotoSansKR-Medium.otf"; sourceTree = SOURCE_ROOT; };
 		2EDF693627982464005E3F93 /* NotoSansKR-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "NotoSansKR-Regular.otf"; path = "Noto_Sans_KR/NotoSansKR-Regular.otf"; sourceTree = SOURCE_ROOT; };
 		2EDF693A27982800005E3F93 /* PhoneAuthCheckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneAuthCheckViewController.swift; sourceTree = "<group>"; };
@@ -111,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				2E92DFD1279BB6460020567B /* NicknameViewController.swift */,
+				2ED54EF4279D4B93001AE07C /* NickNameViewModel.swift */,
 			);
 			path = Nickname;
 			sourceTree = "<group>";
@@ -134,9 +143,7 @@
 		2E92DFDE279C3DE00020567B /* Gender */ = {
 			isa = PBXGroup;
 			children = (
-				2ED54EEF279D3A84001AE07C /* GenderModel.swift */,
 				2E92DFDC279C3D820020567B /* GenderViewController.swift */,
-				2ED54EED279C595B001AE07C /* GenderViewModel.swift */,
 			);
 			path = Gender;
 			sourceTree = "<group>";
@@ -149,6 +156,7 @@
 				2EBAEF90279692CA00C2A089 /* CustomFont.swift */,
 				2EA963DF2797A1F500DA7C2E /* CustomTextField.swift */,
 				2EDF693C27982A3C005E3F93 /* EasyAlert.swift */,
+				2E35DBCF279D632500EFD884 /* NetworkCheck.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -157,6 +165,8 @@
 			isa = PBXGroup;
 			children = (
 				2EBAEF69279539ED00C2A089 /* Start.storyboard */,
+				2ED54EF2279D4931001AE07C /* APIServiceForStart.swift */,
+				2ED54EEF279D3A84001AE07C /* APIModelForStart.swift */,
 				2EBAEF7F27957BA900C2A089 /* PhoneAuth */,
 				2EDF6939279827C3005E3F93 /* PhoneAuthCheck */,
 				2E92DFD0279BB5F20020567B /* Nickname */,
@@ -227,8 +237,18 @@
 			isa = PBXGroup;
 			children = (
 				2EA963E127981C0200DA7C2E /* Start */,
+				2ED54EF6279D5784001AE07C /* Main */,
 			);
 			path = Flow;
+			sourceTree = "<group>";
+		};
+		2ED54EF6279D5784001AE07C /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				2E35DBCB279D585200EFD884 /* Main.storyboard */,
+				2E35DBCD279D586700EFD884 /* MainViewController.swift */,
+			);
+			path = Main;
 			sourceTree = "<group>";
 		};
 		2EDF6939279827C3005E3F93 /* PhoneAuthCheck */ = {
@@ -315,6 +335,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E35DBCC279D585200EFD884 /* Main.storyboard in Resources */,
 				2EBAEF70279539EF00C2A089 /* LaunchScreen.storyboard in Resources */,
 				2EBAEF8A2796854400C2A089 /* GoogleService-Info.plist in Resources */,
 				2EDF693727982464005E3F93 /* NotoSansKR-Medium.otf in Resources */,
@@ -344,14 +365,17 @@
 				2EBAEF66279539ED00C2A089 /* SceneDelegate.swift in Sources */,
 				2EA963D52796D70100DA7C2E /* CustomButton.swift in Sources */,
 				2EA963E02797A1F500DA7C2E /* CustomTextField.swift in Sources */,
+				2ED54EF3279D4931001AE07C /* APIServiceForStart.swift in Sources */,
 				2E92DFC3279999DC0020567B /* Moya.swift in Sources */,
-				2ED54EEE279C595B001AE07C /* GenderViewModel.swift in Sources */,
+				2E35DBCE279D586700EFD884 /* MainViewController.swift in Sources */,
 				2E92DFDA279C2BA80020567B /* EmailViewController.swift in Sources */,
+				2ED54EF5279D4B93001AE07C /* NickNameViewModel.swift in Sources */,
 				2E92DFB927993E7C0020567B /* UIViewController+Extension.swift in Sources */,
 				2EBAEF812795859800C2A089 /* PhoneAuthViewModel.swift in Sources */,
 				2E92DFC527999D210020567B /* UserDataModel.swift in Sources */,
+				2E35DBD0279D632500EFD884 /* NetworkCheck.swift in Sources */,
 				2EBAEF83279585B700C2A089 /* Protocol.swift in Sources */,
-				2ED54EF0279D3A84001AE07C /* GenderModel.swift in Sources */,
+				2ED54EF0279D3A84001AE07C /* APIModelForStart.swift in Sources */,
 				2EA963D72796EF7300DA7C2E /* CustomColor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

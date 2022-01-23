@@ -107,7 +107,6 @@ class PhoneAuthViewModel {
 
 extension PhoneAuthViewModel {
     
-    
     func requestVerifyId(phoneNumber: String?, completion: @escaping (Error?) -> (Void) ) {
         
         Auth.auth().languageCode = "ko";
@@ -129,6 +128,7 @@ extension PhoneAuthViewModel {
                 }
             }
     }
+
     
     func resendRequest(completion: @escaping (Error?) -> Void) {
         
@@ -208,24 +208,6 @@ extension PhoneAuthViewModel {
         return result
     }
     
-    func getUserData(completion: @escaping (_ code: Int) -> Void) {
-        let provider = MoyaProvider<APIService>()
-        provider.request(.getUserData) { result in
-            
-            switch result {
-            case let .success(response):
-                if response.statusCode == 200 {
-                    let data = try? response.map(UserData.self)
-                    UserDefaultManager.userData = data
-                    completion(response.statusCode)
-                } else {
-                    completion(response.statusCode)
-                }
-            case let .failure(error):
-                completion(error.errorCode)
-            }
-        }
-    }
     
     func checkDateValue(_ date: String) -> Bool {
         

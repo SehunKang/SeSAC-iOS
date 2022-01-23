@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="RTK-mo-ahs">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
@@ -17,13 +17,13 @@
         <!--Phone Auth View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="PhoneAuthViewController" customModule="SeSAC_SLP" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PhoneAuthViewController" id="BYZ-38-t0r" customClass="PhoneAuthViewController" customModule="SeSAC_SLP" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lVR-uF-kzP" customClass="MyTextField" customModule="SeSAC_SLP" customModuleProvider="target">
-                                <rect key="frame" x="28" y="347" width="358" height="48"/>
+                                <rect key="frame" x="28" y="303" width="358" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="WJL-zu-jvk"/>
                                 </constraints>
@@ -31,7 +31,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="StL-FB-0Sy" customClass="FilledButton" customModule="SeSAC_SLP" customModuleProvider="target">
-                                <rect key="frame" x="16" y="467" width="382" height="48"/>
+                                <rect key="frame" x="16" y="423" width="382" height="48"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="LM5-LJ-AXi"/>
                                 </constraints>
@@ -39,7 +39,7 @@
                                 <buttonConfiguration key="configuration" style="plain" title="Button"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kDK-6U-hlh">
-                                <rect key="frame" x="186" y="213" width="42" height="21"/>
+                                <rect key="frame" x="186" y="169" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -157,25 +157,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="exU-ZB-hZo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1819" y="115"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="ffw-Tx-PsW">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="RTK-mo-ahs" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="X9g-w8-5VP">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" name="SLPBlack"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="7f2-w8-2N9"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ebr-yJ-0ag" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="121.73913043478262" y="114.50892857142857"/>
         </scene>
         <!--Nickname View Controller-->
         <scene sceneID="4dk-8j-deU">

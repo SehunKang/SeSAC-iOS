@@ -27,7 +27,7 @@ class PhoneAuthCheckViewController: UIViewController {
         uiConfig()
         bind()
         hideKeyboardOnTap()
-        
+        internetCheck()
     }
     
     private func uiConfig() {
@@ -128,10 +128,13 @@ class PhoneAuthCheckViewController: UIViewController {
                     self.view.makeToast("전화번호 인증 실패")
                     print(error.debugDescription)
                 } else {
-                    self.viewModel.getUserData { code in
+                    APIServiceForStart.getUserData { code in
                         switch code {
                         case 200:
-                            print("***************200*********************")
+                            let sb = UIStoryboard(name: "Main", bundle: nil)
+                            let viewController = sb.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
+                            self.view.window?.rootViewController = viewController
+                            self.view.window?.makeKeyAndVisible()
                         case 201:
                             let vc = self.storyboard?.instantiateViewController(withIdentifier: NicknameViewController.identifier) as! NicknameViewController
                             self.navigationController?.pushViewController(vc, animated: true)
