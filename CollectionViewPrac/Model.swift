@@ -8,13 +8,14 @@
 import Foundation
 
 struct UserData: Codable, Hashable {
+    let name: String
     let hobby: [String]
-    let comment: String?
+    let comment: [String]?
     let reputation: [Int]
     
     let identifier = UUID()
 
     enum CodingKeys: String, CodingKey {
-        case hobby, comment, reputation
+        case name, hobby, comment, reputation
     }
 }

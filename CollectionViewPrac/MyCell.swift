@@ -14,10 +14,12 @@ class MyCell: UIViewController {
     static let reuseIdentifier = "My-Cell"
     
     enum SectionLayoutKind: Int, Hashable, CaseIterable, CustomStringConvertible {
-        case title, hobby, review
+        case name, title, hobby, review
         
         var description: String {
             switch self {
+            case .name:
+                return "Name"
             case .title:
                 return "Title"
             case .hobby:
@@ -31,11 +33,13 @@ class MyCell: UIViewController {
     static let sectionheaderElementKind = "section-header-element-kind"
     
     struct Item: Hashable {
+        let name: String?
         let reputation: Int?
         let hobby: String?
         let comment: String?
         var isEmptyComment: Bool?
-        init(reputation: Int? = nil, hobby: String? = nil, comment: String? = nil, isEmptyComment: Bool? = nil) {
+        init(name: String? = nil, reputation: Int? = nil, hobby: String? = nil, comment: String? = nil, isEmptyComment: Bool? = nil) {
+            self.name = name
             self.reputation = reputation
             self.hobby = hobby
             self.comment = comment
@@ -44,22 +48,37 @@ class MyCell: UIViewController {
         private let identifier = UUID()
     }
     
-    var data = UserData(hobby: ["hobby one", "hobby two", "hobby three", "hobby fourfour"],comment: nil, reputation: [1,0,1,0,1,0])
+    var data = UserData(name: "고래밥", hobby: ["hobby one", "hobby two", "hobby three", "hobby fourfour"],comment: ["hi", "ho"], reputation: [1,0,1,0,1,0])
         
     
     var dataSource: UICollectionViewDiffableDataSource<SectionLayoutKind, Item>! = nil
     var collectionView: UICollectionView! = nil
+    
+    var closed = false {
+        didSet {
+            if closed == true {
+                self.openSections()
+            } else {
+                self.closeSections()
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureHierarchy()
         configureDataSource()
-        applyInitialSnapshots()
+        closeSections()
+//        openSections()
         
     }
     @objc func touchHeader() {
         print("touch!")
+    }
+    
+    @objc func nameClicked() {
+        closed = !closed
     }
 }
 
@@ -72,8 +91,15 @@ extension MyCell {
             guard let sectionKind = SectionLayoutKind(rawValue: sectionIndex) else {return nil}
             
             let section: NSCollectionLayoutSection
-            
-            if sectionKind == .title {
+            if sectionKind == .name{
+                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(58))
+                let item = NSCollectionLayoutItem(layoutSize: itemSize)
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: itemSize.heightDimension)
+                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+                section = NSCollectionLayoutSection(group: group)
+                section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 16, bottom: 10, trailing: 16)
+                
+            } else if sectionKind == .title {
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .absolute(34))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: itemSize.heightDimension)
@@ -94,6 +120,7 @@ extension MyCell {
                 section = NSCollectionLayoutSection(group: group)
                 section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 16, bottom: 10, trailing: 16)
                 section.interGroupSpacing = 8
+                
             } else if sectionKind == .review {
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(200))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
@@ -102,14 +129,18 @@ extension MyCell {
 //                group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16)
                 section = NSCollectionLayoutSection(group: group)
                 section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 16, bottom: 10, trailing: 16)
+                
             } else {
                 fatalError("Unknown section")
             }
             let headerSIze = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(44))
             let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSIze, elementKind: MyCell.sectionheaderElementKind, alignment: .top)
-            section.boundarySupplementaryItems = [header]
+            if sectionIndex != 0 {
+                section.boundarySupplementaryItems = [header]
+            }
             return section
         }
+        
         return UICollectionViewCompositionalLayout(sectionProvider: sectionProvider)
     }
 }
@@ -123,6 +154,19 @@ extension MyCell {
         view.addSubview(collectionView)
         collectionView.delegate = self
     }
+    
+    func createNameCellRegistration() -> UICollectionView.CellRegistration<UICollectionViewListCell, String> {
+        return UICollectionView.CellRegistration<UICollectionViewListCell, String> { cell, indexPath, item in
+            var content = UIListContentConfiguration.cell()
+            content.text = item
+            cell.contentConfiguration = content
+            cell.accessories = [.disclosureIndicator()]
+            cell.contentView.isUserInteractionEnabled = true
+            let gesture = UITapGestureRecognizer(target: self, action: #selector(self.nameClicked))
+            cell.contentView.addGestureRecognizer(gesture)
+        }
+    }
+    
     
     func createTitleCellRegistration() -> UICollectionView.CellRegistration<UICollectionViewCell, Int> {
         return UICollectionView.CellRegistration<UICollectionViewCell, Int> { cell, indexPath, item in
@@ -174,7 +218,9 @@ extension MyCell {
             var content = supplementaryView.defaultContentConfiguration()
             content.text = "Header at \(indexPath.section)"
             supplementaryView.contentConfiguration = content
-            if indexPath.section == 2 {
+            
+            let commentCount = self.data.comment?.count ?? 0
+            if indexPath.section == SectionLayoutKind.review.rawValue && commentCount >= 2 {
                 supplementaryView.accessories = [.disclosureIndicator()]
             }
             let gesture = UITapGestureRecognizer(target: self, action: #selector(self.touchHeader))
@@ -182,8 +228,10 @@ extension MyCell {
         }
     }
     
+    
     func configureDataSource() {
         
+        let nameCellRegistration = createNameCellRegistration()
         let titleCellRegistration = createTitleCellRegistration()
         let hobbyCellRegistration = createHobbyCellRegistration()
         let reviewCellRegistration = createReviewCellRegistration()
@@ -193,6 +241,8 @@ extension MyCell {
             
             guard let section = SectionLayoutKind(rawValue: indexPath.section) else {fatalError("unknown Section")}
             switch section {
+            case .name:
+                return collectionView.dequeueConfiguredReusableCell(using: nameCellRegistration, for: indexPath, item: itemIdentifier.name)
             case .title:
                 return collectionView.dequeueConfiguredReusableCell(using: titleCellRegistration, for: indexPath, item: itemIdentifier.reputation)
             case .hobby:
@@ -201,19 +251,22 @@ extension MyCell {
                 return collectionView.dequeueConfiguredReusableCell(using: reviewCellRegistration, for: indexPath, item: itemIdentifier)
             }
         }
-        
-        dataSource.supplementaryViewProvider = { supplementaryView, elementKind, indexPath in
+        dataSource.supplementaryViewProvider = { collectionView, elementKind, indexPath in
             return self.collectionView.dequeueConfiguredReusableSupplementary(using: headerRegistration, for: indexPath)
         }
     }
     
     
-    func applyInitialSnapshots() {
+    func openSections() {
      
         let sections = SectionLayoutKind.allCases
         var snapshot = NSDiffableDataSourceSnapshot<SectionLayoutKind, Item>()
         snapshot.appendSections(sections)
         dataSource.apply(snapshot, animatingDifferences: true)
+        
+        let nameItem = Item(name: data.name)
+        var nameSS = NSDiffableDataSourceSectionSnapshot<Item>()
+        nameSS.append([nameItem])
         
         let titleItems = data.reputation.map { Item(reputation: $0)}
         var titleSS = NSDiffableDataSourceSectionSnapshot<Item>()
@@ -223,14 +276,32 @@ extension MyCell {
         var hobbySS = NSDiffableDataSourceSectionSnapshot<Item>()
         hobbySS.append(hobbyItems)
         
-        let commentItems = Item()
+        let commentItems = Item(comment: data.comment?.first)
         var commentSS = NSDiffableDataSourceSectionSnapshot<Item>()
         commentSS.append([commentItems])
         
+        dataSource.apply(nameSS, to: .name)
         dataSource.apply(titleSS, to: .title)
         dataSource.apply(hobbySS, to: .hobby)
         dataSource.apply(commentSS, to: .review)
-        
+        let headers = collectionView.visibleSupplementaryViews(ofKind: MyCell.sectionheaderElementKind)
+        headers.forEach {$0.isHidden = false}
+
+    }
+    
+    func closeSections() {
+        let sections = SectionLayoutKind.allCases
+        var snapshot = NSDiffableDataSourceSnapshot<SectionLayoutKind, Item>()
+        snapshot.appendSections(sections)
+        dataSource.apply(snapshot, animatingDifferences: true)
+
+        let nameItem = Item(name: data.name)
+        var nameSS = NSDiffableDataSourceSectionSnapshot<Item>()
+        nameSS.append([nameItem])
+        dataSource.apply(nameSS, to: .name)
+        let headers = collectionView.visibleSupplementaryViews(ofKind: MyCell.sectionheaderElementKind)
+        headers.forEach {$0.isHidden = true}
+
     }
         
 }
