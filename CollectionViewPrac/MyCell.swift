@@ -8,12 +8,13 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import SnapKit
 
-class MyCell: UIViewController {
+class MyCell: UICollectionViewCell{
     
     static let reuseIdentifier = "My-Cell"
     
-    enum SectionLayoutKind: Int, Hashable, CaseIterable, CustomStringConvertible {
+    enum SectionLayoutKind: Int, Hashable, CaseIterable, CustomStringConvertible, Equatable {
         case name, title, hobby, review
         
         var description: String {
@@ -29,6 +30,9 @@ class MyCell: UIViewController {
             }
         }
     }
+    
+    var mainSnapshot = NSDiffableDataSourceSnapshot<SectionLayoutKind, Item>()
+
     
     static let sectionheaderElementKind = "section-header-element-kind"
     
@@ -48,36 +52,57 @@ class MyCell: UIViewController {
         private let identifier = UUID()
     }
     
-    var data = UserData(name: "고래밥", hobby: ["hobby one", "hobby two", "hobby three", "hobby fourfour"],comment: ["hi", "ho"], reputation: [1,0,1,0,1,0])
+    var data = UserData(name: "고래밥", hobby: ["hobby one", "hobby two", "hobby three", "hobby fourfour"],comment: ["hi", "ho"], reputation: [1,0,1,0,1,0]) {
+        didSet {
+            initiateSections()
+        }
+    }
         
-    
     var dataSource: UICollectionViewDiffableDataSource<SectionLayoutKind, Item>! = nil
+    
     var collectionView: UICollectionView! = nil
     
-    var closed = false {
+    var closed = true {
         didSet {
-            if closed == true {
+            if closed == false {
                 self.openSections()
             } else {
                 self.closeSections()
             }
+            let newHeight = collectionView.collectionViewLayout.collectionViewContentSize.height
+            print(newHeight)
+            collectionView.snp.makeConstraints { make in
+                make.height.equalTo(newHeight)
+            }
+            collectionView.layoutSubviews()
+            super.layoutSubviews()
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        print("in cell", #function)
         configureHierarchy()
         configureDataSource()
-        closeSections()
+//        closeSections()
 //        openSections()
-        
+        collectionView.layer.borderColor = UIColor.black.cgColor
+        collectionView.layer.cornerRadius = 8
+        collectionView.layer.borderWidth = 1
+        print(collectionView.contentSize.height)
     }
+    
+    required init?(coder: NSCoder) {
+        fatalError()
+    }
+    
+    
     @objc func touchHeader() {
         print("touch!")
     }
     
     @objc func nameClicked() {
+        print("nameClicked")
         closed = !closed
     }
 }
@@ -85,7 +110,8 @@ class MyCell: UIViewController {
 extension MyCell {
     
     func createLayout() -> UICollectionViewLayout {
-     
+        print("in cell", #function)
+
         let sectionProvider = { (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
             
             guard let sectionKind = SectionLayoutKind(rawValue: sectionIndex) else {return nil}
@@ -97,7 +123,7 @@ extension MyCell {
                 let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: itemSize.heightDimension)
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
                 section = NSCollectionLayoutSection(group: group)
-                section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 16, bottom: 10, trailing: 16)
+                section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16, bottom: 10, trailing: 16)
                 
             } else if sectionKind == .title {
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .absolute(34))
@@ -148,10 +174,41 @@ extension MyCell {
 extension MyCell {
     
     func configureHierarchy() {
-        collectionView = UICollectionView(frame: self.view.bounds, collectionViewLayout: createLayout())
-        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        collectionView.backgroundColor = .systemBackground
-        view.addSubview(collectionView)
+        print("in cell", #function)
+        collectionView = UICollectionView(frame: .zero , collectionViewLayout: createLayout())
+        
+        self.invalidateIntrinsicContentSize()
+        collectionView.invalidateIntrinsicContentSize()
+//        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        
+        addSubview(collectionView)
+        collectionView.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(collectionView.contentSize.height)
+        }
+        
+//        contentView.translatesAutoresizingMaskIntoConstraints = false
+//        collectionView.translatesAutoresizingMaskIntoConstraints = false
+//
+//        NSLayoutConstraint.activate([
+//            contentView.leadingAnchor.constraint(equalTo: leadingAnchor),
+//            contentView.trailingAnchor.constraint(equalTo: trailingAnchor),
+//            contentView.topAnchor.constraint(equalTo: topAnchor),
+//            contentView.bottomAnchor.constraint(equalTo: collectionView.bottomAnchor),
+//            collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+//            collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+//            collectionView.topAnchor.constraint(equalTo: contentView.topAnchor),
+//            collectionView.heightAnchor.constraint(greaterThanOrEqualToConstant: 58)
+//        ])
+//        collectionView.setContentHuggingPriority(.init(rawValue: 999), for: .vertical)
+//        let constraints = [
+//            collectionView.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
+//            collectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10),
+//            collectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
+//            collectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10)
+//        ]
+//        NSLayoutConstraint.activate(constraints)
         collectionView.delegate = self
     }
     
@@ -164,6 +221,7 @@ extension MyCell {
             cell.contentView.isUserInteractionEnabled = true
             let gesture = UITapGestureRecognizer(target: self, action: #selector(self.nameClicked))
             cell.contentView.addGestureRecognizer(gesture)
+
         }
     }
     
@@ -189,7 +247,6 @@ extension MyCell {
             content.text = item
 //            content.textProperties.alignment = .center 이렇게 하면 오류 생김
             cell.contentConfiguration = content
-            cell.sizeToFit()
             
             var background = UIBackgroundConfiguration.listPlainCell()
             background.cornerRadius = 8
@@ -230,7 +287,8 @@ extension MyCell {
     
     
     func configureDataSource() {
-        
+        print("in cell", #function)
+
         let nameCellRegistration = createNameCellRegistration()
         let titleCellRegistration = createTitleCellRegistration()
         let hobbyCellRegistration = createHobbyCellRegistration()
@@ -256,18 +314,33 @@ extension MyCell {
         }
     }
     
+    func initiateSections() {
+        print(#function)
+        //superview의 컬렉션뷰가 범위를 벗어나려 할 때마다 datasource가 콜된다. 아마도 prefetching 하는 것 같은데. 그래서 아래처럼 처리해줘야된다
+        let section = SectionLayoutKind.name
+        if mainSnapshot.numberOfSections < 1 {
+            mainSnapshot.appendSections([section])
+            dataSource.apply(mainSnapshot)
+
+        }
+        if dataSource.snapshot(for: .name).items.isEmpty {
+            var nameSnapshot = NSDiffableDataSourceSectionSnapshot<Item>()
+            let nameItem = Item(name: data.name)
+            nameSnapshot.append([nameItem])
+            dataSource.apply(nameSnapshot, to: .name)
+        }
+    }
     
     func openSections() {
-     
-        let sections = SectionLayoutKind.allCases
-        var snapshot = NSDiffableDataSourceSnapshot<SectionLayoutKind, Item>()
-        snapshot.appendSections(sections)
-        dataSource.apply(snapshot, animatingDifferences: true)
+        print("in cell", #function)
+
+        mainSnapshot.appendSections([.title, .hobby, .review])
+        dataSource.apply(mainSnapshot)
         
+        var nameSnapshot = NSDiffableDataSourceSectionSnapshot<Item>()
         let nameItem = Item(name: data.name)
-        var nameSS = NSDiffableDataSourceSectionSnapshot<Item>()
-        nameSS.append([nameItem])
-        
+        nameSnapshot.append([nameItem])
+
         let titleItems = data.reputation.map { Item(reputation: $0)}
         var titleSS = NSDiffableDataSourceSectionSnapshot<Item>()
         titleSS.append(titleItems)
@@ -280,28 +353,20 @@ extension MyCell {
         var commentSS = NSDiffableDataSourceSectionSnapshot<Item>()
         commentSS.append([commentItems])
         
-        dataSource.apply(nameSS, to: .name)
+        dataSource.apply(nameSnapshot, to: .name)
         dataSource.apply(titleSS, to: .title)
         dataSource.apply(hobbySS, to: .hobby)
         dataSource.apply(commentSS, to: .review)
-        let headers = collectionView.visibleSupplementaryViews(ofKind: MyCell.sectionheaderElementKind)
-        headers.forEach {$0.isHidden = false}
-
     }
     
     func closeSections() {
-        let sections = SectionLayoutKind.allCases
-        var snapshot = NSDiffableDataSourceSnapshot<SectionLayoutKind, Item>()
-        snapshot.appendSections(sections)
-        dataSource.apply(snapshot, animatingDifferences: true)
-
+        mainSnapshot.deleteSections([.title, .hobby, .review])
+        dataSource.apply(mainSnapshot)
+        
+        var nameSnapshot = NSDiffableDataSourceSectionSnapshot<Item>()
         let nameItem = Item(name: data.name)
-        var nameSS = NSDiffableDataSourceSectionSnapshot<Item>()
-        nameSS.append([nameItem])
-        dataSource.apply(nameSS, to: .name)
-        let headers = collectionView.visibleSupplementaryViews(ofKind: MyCell.sectionheaderElementKind)
-        headers.forEach {$0.isHidden = true}
-
+        nameSnapshot.append([nameItem])
+        dataSource.apply(nameSnapshot, to: .name)
     }
         
 }
