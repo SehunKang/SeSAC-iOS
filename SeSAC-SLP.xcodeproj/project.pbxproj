@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E308E5827AAC86100AD08CC /* MyInfoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E308E5727AAC86100AD08CC /* MyInfoDetailViewController.swift */; };
 		2E35DBCC279D585200EFD884 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E35DBCB279D585200EFD884 /* Main.storyboard */; };
 		2E35DBCE279D586700EFD884 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E35DBCD279D586700EFD884 /* MainViewController.swift */; };
 		2E35DBD0279D632500EFD884 /* NetworkCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E35DBCF279D632500EFD884 /* NetworkCheck.swift */; };
@@ -24,6 +25,10 @@
 		2E92DFD8279BC5F90020567B /* BirthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E92DFD7279BC5F90020567B /* BirthViewController.swift */; };
 		2E92DFDA279C2BA80020567B /* EmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E92DFD9279C2BA70020567B /* EmailViewController.swift */; };
 		2E92DFDD279C3D830020567B /* GenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E92DFDC279C3D820020567B /* GenderViewController.swift */; };
+		2EA6657027AA94C500FD47B0 /* MyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA6656F27AA94C500FD47B0 /* MyInfoViewController.swift */; };
+		2EA6657227AA94D500FD47B0 /* MyInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA6657127AA94D500FD47B0 /* MyInfoViewModel.swift */; };
+		2EA6657427AA94F100FD47B0 /* MyInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EA6657327AA94F100FD47B0 /* MyInfo.storyboard */; };
+		2EA6657627AA99AD00FD47B0 /* MyInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA6657527AA99AD00FD47B0 /* MyInfoModel.swift */; };
 		2EA963D52796D70100DA7C2E /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA963D42796D70100DA7C2E /* CustomButton.swift */; };
 		2EA963D72796EF7300DA7C2E /* CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA963D62796EF7300DA7C2E /* CustomColor.swift */; };
 		2EA963E02797A1F500DA7C2E /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA963DF2797A1F500DA7C2E /* CustomTextField.swift */; };
@@ -50,6 +55,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2E308E5727AAC86100AD08CC /* MyInfoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoDetailViewController.swift; sourceTree = "<group>"; };
 		2E35DBCB279D585200EFD884 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		2E35DBCD279D586700EFD884 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		2E35DBCF279D632500EFD884 /* NetworkCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCheck.swift; sourceTree = "<group>"; };
@@ -62,6 +68,10 @@
 		2E92DFD7279BC5F90020567B /* BirthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthViewController.swift; sourceTree = "<group>"; };
 		2E92DFD9279C2BA70020567B /* EmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailViewController.swift; sourceTree = "<group>"; };
 		2E92DFDC279C3D820020567B /* GenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderViewController.swift; sourceTree = "<group>"; };
+		2EA6656F27AA94C500FD47B0 /* MyInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoViewController.swift; sourceTree = "<group>"; };
+		2EA6657127AA94D500FD47B0 /* MyInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoViewModel.swift; sourceTree = "<group>"; };
+		2EA6657327AA94F100FD47B0 /* MyInfo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyInfo.storyboard; sourceTree = "<group>"; };
+		2EA6657527AA99AD00FD47B0 /* MyInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoModel.swift; sourceTree = "<group>"; };
 		2EA963D42796D70100DA7C2E /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		2EA963D62796EF7300DA7C2E /* CustomColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColor.swift; sourceTree = "<group>"; };
 		2EA963DF2797A1F500DA7C2E /* CustomTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
@@ -106,6 +116,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2E35DBD1279E78C400EFD884 /* Card */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Card;
+			sourceTree = "<group>";
+		};
 		2E92DFB727993E410020567B /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -148,6 +165,34 @@
 			path = Gender;
 			sourceTree = "<group>";
 		};
+		2EA6656C27AA941E00FD47B0 /* MyInfo */ = {
+			isa = PBXGroup;
+			children = (
+				2EA6657327AA94F100FD47B0 /* MyInfo.storyboard */,
+				2EA6656D27AA948E00FD47B0 /* MyInfo */,
+				2EA6656E27AA94A300FD47B0 /* MyInfoDetail */,
+			);
+			path = MyInfo;
+			sourceTree = "<group>";
+		};
+		2EA6656D27AA948E00FD47B0 /* MyInfo */ = {
+			isa = PBXGroup;
+			children = (
+				2EA6657527AA99AD00FD47B0 /* MyInfoModel.swift */,
+				2EA6656F27AA94C500FD47B0 /* MyInfoViewController.swift */,
+				2EA6657127AA94D500FD47B0 /* MyInfoViewModel.swift */,
+			);
+			path = MyInfo;
+			sourceTree = "<group>";
+		};
+		2EA6656E27AA94A300FD47B0 /* MyInfoDetail */ = {
+			isa = PBXGroup;
+			children = (
+				2E308E5727AAC86100AD08CC /* MyInfoDetailViewController.swift */,
+			);
+			path = MyInfoDetail;
+			sourceTree = "<group>";
+		};
 		2EA963DC2796FAF600DA7C2E /* Custom */ = {
 			isa = PBXGroup;
 			children = (
@@ -157,6 +202,7 @@
 				2EA963DF2797A1F500DA7C2E /* CustomTextField.swift */,
 				2EDF693C27982A3C005E3F93 /* EasyAlert.swift */,
 				2E35DBCF279D632500EFD884 /* NetworkCheck.swift */,
+				2E35DBD1279E78C400EFD884 /* Card */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -236,6 +282,7 @@
 		2ED54EF1279D3C4E001AE07C /* Flow */ = {
 			isa = PBXGroup;
 			children = (
+				2EA6656C27AA941E00FD47B0 /* MyInfo */,
 				2EA963E127981C0200DA7C2E /* Start */,
 				2ED54EF6279D5784001AE07C /* Main */,
 			);
@@ -269,6 +316,7 @@
 				2EBAEF5C279539ED00C2A089 /* Sources */,
 				2EBAEF5D279539ED00C2A089 /* Frameworks */,
 				2EBAEF5E279539ED00C2A089 /* Resources */,
+				2EA6657727AAA14A00FD47B0 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -337,6 +385,7 @@
 			files = (
 				2E35DBCC279D585200EFD884 /* Main.storyboard in Resources */,
 				2EBAEF70279539EF00C2A089 /* LaunchScreen.storyboard in Resources */,
+				2EA6657427AA94F100FD47B0 /* MyInfo.storyboard in Resources */,
 				2EBAEF8A2796854400C2A089 /* GoogleService-Info.plist in Resources */,
 				2EDF693727982464005E3F93 /* NotoSansKR-Medium.otf in Resources */,
 				2EBAEF6D279539EF00C2A089 /* Assets.xcassets in Resources */,
@@ -347,6 +396,26 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2EA6657727AAA14A00FD47B0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		2EBAEF5C279539ED00C2A089 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -355,6 +424,7 @@
 				2E92DFCF279B0BF20020567B /* String+Extension.swift in Sources */,
 				2E92DFDD279C3D830020567B /* GenderViewController.swift in Sources */,
 				2EDF693D27982A3C005E3F93 /* EasyAlert.swift in Sources */,
+				2EA6657627AA99AD00FD47B0 /* MyInfoModel.swift in Sources */,
 				2E92DFD8279BC5F90020567B /* BirthViewController.swift in Sources */,
 				2EDF693B27982800005E3F93 /* PhoneAuthCheckViewController.swift in Sources */,
 				2EBAEF68279539ED00C2A089 /* PhoneAuthViewController.swift in Sources */,
@@ -368,12 +438,15 @@
 				2ED54EF3279D4931001AE07C /* APIServiceForStart.swift in Sources */,
 				2E92DFC3279999DC0020567B /* Moya.swift in Sources */,
 				2E35DBCE279D586700EFD884 /* MainViewController.swift in Sources */,
+				2EA6657027AA94C500FD47B0 /* MyInfoViewController.swift in Sources */,
 				2E92DFDA279C2BA80020567B /* EmailViewController.swift in Sources */,
 				2ED54EF5279D4B93001AE07C /* NickNameViewModel.swift in Sources */,
 				2E92DFB927993E7C0020567B /* UIViewController+Extension.swift in Sources */,
 				2EBAEF812795859800C2A089 /* PhoneAuthViewModel.swift in Sources */,
 				2E92DFC527999D210020567B /* UserDataModel.swift in Sources */,
 				2E35DBD0279D632500EFD884 /* NetworkCheck.swift in Sources */,
+				2E308E5827AAC86100AD08CC /* MyInfoDetailViewController.swift in Sources */,
+				2EA6657227AA94D500FD47B0 /* MyInfoViewModel.swift in Sources */,
 				2EBAEF83279585B700C2A089 /* Protocol.swift in Sources */,
 				2ED54EF0279D3A84001AE07C /* APIModelForStart.swift in Sources */,
 				2EA963D72796EF7300DA7C2E /* CustomColor.swift in Sources */,

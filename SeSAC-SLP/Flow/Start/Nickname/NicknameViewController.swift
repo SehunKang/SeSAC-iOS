@@ -27,6 +27,7 @@ class NicknameViewController: UIViewController {
         bind()
         hideKeyboardOnTap()
         validNickAlert()
+        print(UserDefaultManager.idtoken)
     }
     
     private func uiConfig() {

@@ -24,7 +24,6 @@ struct UserData: Codable {
     let reportedNum: Int
     let reportedUser: [String]
     let dodgepenalty: Int
-    let dodgepenaltyGetAt: String
     let dodgeNum: Int
     let dodgeNumGetAt: String
     let ageMin, ageMax, searchable: Int
@@ -38,7 +37,6 @@ struct UserData: Codable {
         case nick, birth, gender, hobby, comment, reputation, sesac, sesacCollection, background, backgroundCollection, purchaseToken
         case transactionID = "transactionId"
         case reviewedBefore, reportedNum, reportedUser, dodgepenalty
-        case dodgepenaltyGetAt = "dodgepenalty_getAt"
         case dodgeNum
         case dodgeNumGetAt = "dodgeNum_getAt"
         case ageMin, ageMax, searchable, createdAt

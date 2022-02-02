@@ -102,7 +102,7 @@ class GenderViewController: UIViewController {
         } else if femaleSelected {
             UserDefaultManager.signInData.gender = 0
         } else {
-            UserDefaultManager.signInData.gender = 2
+            UserDefaultManager.signInData.gender = -1
         }
         
         APIServiceForStart.signIn { statusCode in

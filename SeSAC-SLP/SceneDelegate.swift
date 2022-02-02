@@ -17,14 +17,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
         
-        let sb = UIStoryboard(name: "Start", bundle: nil)
+//        let sb = UIStoryboard(name: "Start", bundle: nil)
         
-        let viewController: UIViewController
-        if UserDefaultManager.signInData.phoneNumber == "" {
-            viewController = sb.instantiateViewController(withIdentifier: PhoneAuthViewController.identifier) as! PhoneAuthViewController
-        } else {
-            viewController = sb.instantiateViewController(withIdentifier: NicknameViewController.identifier) as! NicknameViewController
-        }
+//        let viewController: UIViewController
+//        if UserDefaultManager.signInData.phoneNumber == "" {
+//            viewController = sb.instantiateViewController(withIdentifier: PhoneAuthViewController.identifier) as! PhoneAuthViewController
+//        } else {
+//            viewController = sb.instantiateViewController(withIdentifier: NicknameViewController.identifier) as! NicknameViewController
+//        }
+        let sb = UIStoryboard(name: "MyInfo", bundle: nil)
+        let viewController = sb.instantiateViewController(withIdentifier: MyInfoViewController.identifier) as! MyInfoViewController
         
         window?.rootViewController = UINavigationController(rootViewController: viewController)
         window?.makeKeyAndVisible()

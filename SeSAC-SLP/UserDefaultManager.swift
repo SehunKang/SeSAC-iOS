@@ -74,6 +74,6 @@ class UserDefaultManager {
     @UserDefaultStruct(key: "userData", defaultValue: nil)
     static var userData: UserData?
     
-    @UserDefaultStruct(key: "signInData", defaultValue: SignInData(phoneNumber: "", fcMtoken: "", nick: "", birth: Date(), email: "", gender: 2))
+    @UserDefaultStruct(key: "signInData", defaultValue: SignInData(phoneNumber: "", fcMtoken: "", nick: "", birth: Date(), email: "", gender: -1))
     static var signInData: SignInData!
 }
