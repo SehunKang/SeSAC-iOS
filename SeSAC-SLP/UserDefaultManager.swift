@@ -8,6 +8,11 @@
 import Foundation
 import SwiftUI
 
+enum Gender: Int {
+    case none = -1
+    case male = 1
+    case female = 0
+}
 
 @propertyWrapper
 struct UserDefault<T> {
@@ -74,6 +79,6 @@ class UserDefaultManager {
     @UserDefaultStruct(key: "userData", defaultValue: nil)
     static var userData: UserData?
     
-    @UserDefaultStruct(key: "signInData", defaultValue: SignInData(phoneNumber: "", fcMtoken: "", nick: "", birth: Date(), email: "", gender: -1))
+    @UserDefaultStruct(key: "signInData", defaultValue: SignInData(phoneNumber: "", fcMtoken: "", nick: "", birth: Date(), email: "", gender: Gender.none.rawValue))
     static var signInData: SignInData!
 }

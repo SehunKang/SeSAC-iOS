@@ -85,7 +85,6 @@ class GenderViewController: UIViewController {
                 self.doneButtonClicked()
             }
             .disposed(by: disposeBag)
-        
     }
     
     @objc func maleTap() {
@@ -98,35 +97,24 @@ class GenderViewController: UIViewController {
     
     private func doneButtonClicked() {
         if maleSelected {
-            UserDefaultManager.signInData.gender = 1
+            UserDefaultManager.signInData.gender = Gender.male.rawValue
         } else if femaleSelected {
-            UserDefaultManager.signInData.gender = 0
+            UserDefaultManager.signInData.gender = Gender.female.rawValue
         } else {
-            UserDefaultManager.signInData.gender = -1
+            UserDefaultManager.signInData.gender = Gender.none.rawValue
         }
         
         APIServiceForStart.signIn { statusCode in
             switch statusCode {
             case 200:
-                let sb = UIStoryboard(name: "Main", bundle: nil)
-                let viewController = sb.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
-                self.view.window?.rootViewController = viewController
-                self.view.window?.makeKeyAndVisible()
-            case 201:
-                print("이미가입한 유저??")
+                self.goToMainRootViewController()
             case 202:
                 UserDefaultManager.validNickFlag = 1
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: NicknameViewController.identifier) as! NicknameViewController
                 self.navigationController?.pushViewController(vc, animated: true)
-            case 401:
-                print("refresh token")
             default:
-                self.view.makeToast("에러가 발생했습니다. 잠시 후 다시 시도해주세요.")
-                
+                self.errorHandler(with: statusCode)
             }
         }
     }
-    
-
-
 }

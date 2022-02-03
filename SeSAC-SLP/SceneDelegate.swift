@@ -13,11 +13,28 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        guard let _ = (scene as? UIWindowScene) else { return }
         
-        guard let windowScene = (scene as? UIWindowScene) else { return }
-        window = UIWindow(windowScene: windowScene)
+        let mainSb = UIStoryboard(name: "Main", bundle: nil)
+        let mainVc = mainSb.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
+        let mainNav = UINavigationController(rootViewController: mainVc)
         
-//        let sb = UIStoryboard(name: "Start", bundle: nil)
+        let infoSb = UIStoryboard(name: "MyInfo", bundle: nil)
+        let infoVc = infoSb.instantiateViewController(withIdentifier: MyInfoViewController.identifier) as! MyInfoViewController
+        let infoNav = UINavigationController(rootViewController: infoVc)
+        
+        let tabBarController = UITabBarController()
+        
+        tabBarController.viewControllers = [mainNav, infoNav]
+        
+        window?.rootViewController = tabBarController
+        window?.makeKeyAndVisible()
+
+
+//        guard let windowScene = (scene as? UIWindowScene) else { return }
+//        window = UIWindow(windowScene: windowScene)
+//
+//        let sb = UIStoryboard(name: "Main", bundle: nil)
         
 //        let viewController: UIViewController
 //        if UserDefaultManager.signInData.phoneNumber == "" {
@@ -25,11 +42,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //        } else {
 //            viewController = sb.instantiateViewController(withIdentifier: NicknameViewController.identifier) as! NicknameViewController
 //        }
-        let sb = UIStoryboard(name: "MyInfo", bundle: nil)
-        let viewController = sb.instantiateViewController(withIdentifier: MyInfoViewController.identifier) as! MyInfoViewController
-        
-        window?.rootViewController = UINavigationController(rootViewController: viewController)
-        window?.makeKeyAndVisible()
+//        let sb = UIStoryboard(name: "MyInfo", bundle: nil)
+//        let viewController = sb.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
+//
+//        window?.rootViewController = UINavigationController(rootViewController: viewController)
+//        window?.makeKeyAndVisible()
 
         
     }

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2E308E5827AAC86100AD08CC /* MyInfoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E308E5727AAC86100AD08CC /* MyInfoDetailViewController.swift */; };
+		2E308E5A27AB9E6B00AD08CC /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E308E5927AB9E6A00AD08CC /* UILabel+Extension.swift */; };
+		2E308E5C27ABAF3F00AD08CC /* MyInfoDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E308E5B27ABAF3F00AD08CC /* MyInfoDetailViewModel.swift */; };
 		2E35DBCC279D585200EFD884 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E35DBCB279D585200EFD884 /* Main.storyboard */; };
 		2E35DBCE279D586700EFD884 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E35DBCD279D586700EFD884 /* MainViewController.swift */; };
 		2E35DBD0279D632500EFD884 /* NetworkCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E35DBCF279D632500EFD884 /* NetworkCheck.swift */; };
@@ -45,6 +47,7 @@
 		2EBAEF88279585F000C2A089 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2EBAEF87279585F000C2A089 /* RxSwift */; };
 		2EBAEF8A2796854400C2A089 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2EBAEF892796854400C2A089 /* GoogleService-Info.plist */; };
 		2EBAEF91279692CA00C2A089 /* CustomFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBAEF90279692CA00C2A089 /* CustomFont.swift */; };
+		2ED1211927AC3BC600A3C8D5 /* MyInfoDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED1211827AC3BC500A3C8D5 /* MyInfoDetailModel.swift */; };
 		2ED54EF0279D3A84001AE07C /* APIModelForStart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED54EEF279D3A84001AE07C /* APIModelForStart.swift */; };
 		2ED54EF3279D4931001AE07C /* APIServiceForStart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED54EF2279D4931001AE07C /* APIServiceForStart.swift */; };
 		2ED54EF5279D4B93001AE07C /* NickNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED54EF4279D4B93001AE07C /* NickNameViewModel.swift */; };
@@ -52,10 +55,13 @@
 		2EDF693827982464005E3F93 /* NotoSansKR-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 2EDF693627982464005E3F93 /* NotoSansKR-Regular.otf */; };
 		2EDF693B27982800005E3F93 /* PhoneAuthCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF693A27982800005E3F93 /* PhoneAuthCheckViewController.swift */; };
 		2EDF693D27982A3C005E3F93 /* EasyAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF693C27982A3C005E3F93 /* EasyAlert.swift */; };
+		6464A95035D978547B74AB6C /* Pods_SeSAC_SLP.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9DB06FA5D6BA0CAA43671BB1 /* Pods_SeSAC_SLP.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2E308E5727AAC86100AD08CC /* MyInfoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoDetailViewController.swift; sourceTree = "<group>"; };
+		2E308E5927AB9E6A00AD08CC /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
+		2E308E5B27ABAF3F00AD08CC /* MyInfoDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoDetailViewModel.swift; sourceTree = "<group>"; };
 		2E35DBCB279D585200EFD884 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		2E35DBCD279D586700EFD884 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		2E35DBCF279D632500EFD884 /* NetworkCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCheck.swift; sourceTree = "<group>"; };
@@ -88,6 +94,7 @@
 		2EBAEF82279585B700C2A089 /* Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocol.swift; sourceTree = "<group>"; };
 		2EBAEF892796854400C2A089 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2EBAEF90279692CA00C2A089 /* CustomFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFont.swift; sourceTree = "<group>"; };
+		2ED1211827AC3BC500A3C8D5 /* MyInfoDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoDetailModel.swift; sourceTree = "<group>"; };
 		2ED54EEF279D3A84001AE07C /* APIModelForStart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIModelForStart.swift; sourceTree = "<group>"; };
 		2ED54EF2279D4931001AE07C /* APIServiceForStart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServiceForStart.swift; sourceTree = "<group>"; };
 		2ED54EF4279D4B93001AE07C /* NickNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameViewModel.swift; sourceTree = "<group>"; };
@@ -95,6 +102,9 @@
 		2EDF693627982464005E3F93 /* NotoSansKR-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "NotoSansKR-Regular.otf"; path = "Noto_Sans_KR/NotoSansKR-Regular.otf"; sourceTree = SOURCE_ROOT; };
 		2EDF693A27982800005E3F93 /* PhoneAuthCheckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneAuthCheckViewController.swift; sourceTree = "<group>"; };
 		2EDF693C27982A3C005E3F93 /* EasyAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EasyAlert.swift; sourceTree = "<group>"; };
+		9DB06FA5D6BA0CAA43671BB1 /* Pods_SeSAC_SLP.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SeSAC_SLP.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DD54A96B0E933ECC2A4C53F8 /* Pods-SeSAC-SLP.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeSAC-SLP.debug.xcconfig"; path = "Target Support Files/Pods-SeSAC-SLP/Pods-SeSAC-SLP.debug.xcconfig"; sourceTree = "<group>"; };
+		F733EAF2DCFCF3127B592F55 /* Pods-SeSAC-SLP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeSAC-SLP.release.xcconfig"; path = "Target Support Files/Pods-SeSAC-SLP/Pods-SeSAC-SLP.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +120,7 @@
 				2E92DFC82799AD320020567B /* Moya in Frameworks */,
 				2E92DFCB279AF00F0020567B /* FirebaseAuth in Frameworks */,
 				2EBAEF7E2795468100C2A089 /* SnapKit in Frameworks */,
+				6464A95035D978547B74AB6C /* Pods_SeSAC_SLP.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,6 +139,7 @@
 			children = (
 				2E92DFB827993E7C0020567B /* UIViewController+Extension.swift */,
 				2E92DFCE279B0BF20020567B /* String+Extension.swift */,
+				2E308E5927AB9E6A00AD08CC /* UILabel+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -189,6 +201,8 @@
 			isa = PBXGroup;
 			children = (
 				2E308E5727AAC86100AD08CC /* MyInfoDetailViewController.swift */,
+				2E308E5B27ABAF3F00AD08CC /* MyInfoDetailViewModel.swift */,
+				2ED1211827AC3BC500A3C8D5 /* MyInfoDetailModel.swift */,
 			);
 			path = MyInfoDetail;
 			sourceTree = "<group>";
@@ -200,8 +214,8 @@
 				2EA963D62796EF7300DA7C2E /* CustomColor.swift */,
 				2EBAEF90279692CA00C2A089 /* CustomFont.swift */,
 				2EA963DF2797A1F500DA7C2E /* CustomTextField.swift */,
-				2EDF693C27982A3C005E3F93 /* EasyAlert.swift */,
 				2E35DBCF279D632500EFD884 /* NetworkCheck.swift */,
+				2EDF693C27982A3C005E3F93 /* EasyAlert.swift */,
 				2E35DBD1279E78C400EFD884 /* Card */,
 			);
 			path = Custom;
@@ -228,6 +242,8 @@
 			children = (
 				2EBAEF62279539ED00C2A089 /* SeSAC-SLP */,
 				2EBAEF61279539ED00C2A089 /* Products */,
+				90ABAD75B2FE6CBBC80E4EA8 /* Pods */,
+				6BD13AE57727FA0E56C666EF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -306,6 +322,23 @@
 			path = PhoneAuthCheck;
 			sourceTree = "<group>";
 		};
+		6BD13AE57727FA0E56C666EF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9DB06FA5D6BA0CAA43671BB1 /* Pods_SeSAC_SLP.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		90ABAD75B2FE6CBBC80E4EA8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DD54A96B0E933ECC2A4C53F8 /* Pods-SeSAC-SLP.debug.xcconfig */,
+				F733EAF2DCFCF3127B592F55 /* Pods-SeSAC-SLP.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -313,10 +346,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2EBAEF74279539EF00C2A089 /* Build configuration list for PBXNativeTarget "SeSAC-SLP" */;
 			buildPhases = (
+				0DE3F38396CDE9B5E97DB521 /* [CP] Check Pods Manifest.lock */,
 				2EBAEF5C279539ED00C2A089 /* Sources */,
 				2EBAEF5D279539ED00C2A089 /* Frameworks */,
 				2EBAEF5E279539ED00C2A089 /* Resources */,
-				2EA6657727AAA14A00FD47B0 /* ShellScript */,
+				76318DB24DC951FBDB3C8C7C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -397,7 +431,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2EA6657727AAA14A00FD47B0 /* ShellScript */ = {
+		0DE3F38396CDE9B5E97DB521 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -405,14 +439,36 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
+			name = "[CP] Check Pods Manifest.lock";
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SeSAC-SLP-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		76318DB24DC951FBDB3C8C7C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SeSAC-SLP/Pods-SeSAC-SLP-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SeSAC-SLP/Pods-SeSAC-SLP-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SeSAC-SLP/Pods-SeSAC-SLP-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -423,11 +479,13 @@
 			files = (
 				2E92DFCF279B0BF20020567B /* String+Extension.swift in Sources */,
 				2E92DFDD279C3D830020567B /* GenderViewController.swift in Sources */,
+				2E308E5A27AB9E6B00AD08CC /* UILabel+Extension.swift in Sources */,
 				2EDF693D27982A3C005E3F93 /* EasyAlert.swift in Sources */,
 				2EA6657627AA99AD00FD47B0 /* MyInfoModel.swift in Sources */,
 				2E92DFD8279BC5F90020567B /* BirthViewController.swift in Sources */,
 				2EDF693B27982800005E3F93 /* PhoneAuthCheckViewController.swift in Sources */,
 				2EBAEF68279539ED00C2A089 /* PhoneAuthViewController.swift in Sources */,
+				2ED1211927AC3BC600A3C8D5 /* MyInfoDetailModel.swift in Sources */,
 				2E92DFD2279BB6460020567B /* NicknameViewController.swift in Sources */,
 				2EBAEF64279539ED00C2A089 /* AppDelegate.swift in Sources */,
 				2E92DFBB279971E80020567B /* UserDefaultManager.swift in Sources */,
@@ -445,6 +503,7 @@
 				2EBAEF812795859800C2A089 /* PhoneAuthViewModel.swift in Sources */,
 				2E92DFC527999D210020567B /* UserDataModel.swift in Sources */,
 				2E35DBD0279D632500EFD884 /* NetworkCheck.swift in Sources */,
+				2E308E5C27ABAF3F00AD08CC /* MyInfoDetailViewModel.swift in Sources */,
 				2E308E5827AAC86100AD08CC /* MyInfoDetailViewController.swift in Sources */,
 				2EA6657227AA94D500FD47B0 /* MyInfoViewModel.swift in Sources */,
 				2EBAEF83279585B700C2A089 /* Protocol.swift in Sources */,
@@ -593,6 +652,7 @@
 		};
 		2EBAEF75279539EF00C2A089 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DD54A96B0E933ECC2A4C53F8 /* Pods-SeSAC-SLP.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -605,7 +665,7 @@
 				INFOPLIST_FILE = "SeSAC-SLP/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Start;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -624,6 +684,7 @@
 		};
 		2EBAEF76279539EF00C2A089 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F733EAF2DCFCF3127B592F55 /* Pods-SeSAC-SLP.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -636,7 +697,7 @@
 				INFOPLIST_FILE = "SeSAC-SLP/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Start;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

@@ -11,6 +11,7 @@ import Moya
 enum APIService {
     case getUserData
     case signIn(data: SignInData)
+    case updateMyPage(data: [String: Any])
 }
 
 extension APIService: TargetType {
@@ -24,6 +25,8 @@ extension APIService: TargetType {
             return "/user"
         case .signIn:
             return "/user"
+        case .updateMyPage:
+            return "/user/update/mypage"
         }
     }
     
@@ -33,6 +36,8 @@ extension APIService: TargetType {
             return .get
         case .signIn:
             return .post
+        case .updateMyPage:
+            return .post
         }
     }
     
@@ -41,7 +46,9 @@ extension APIService: TargetType {
         case .getUserData:
             return .requestPlain
         case .signIn(let data):
-            return .requestJSONEncodable(data)
+            return .requestParameters(parameters: ["phoneNumber": data.phoneNumber, "FCMtoken": data.fcMtoken, "nick": data.nick, "birth": data.birth, "email": data.email, "gender": data.gender], encoding: URLEncoding.httpBody)
+        case .updateMyPage(let data):
+            return .requestParameters(parameters: data, encoding: URLEncoding.httpBody)
         }
     }
     
@@ -50,6 +57,8 @@ extension APIService: TargetType {
         case .getUserData:
             return ["idtoken": UserDefaultManager.idtoken]
         case .signIn:
+            return ["idtoken": UserDefaultManager.idtoken]
+        case .updateMyPage:
             return ["idtoken": UserDefaultManager.idtoken]
         }
     }

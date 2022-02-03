@@ -18,7 +18,10 @@ class MyInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.tabBarController?.tabBar.isHidden = false
+        title = "내 정보"
         tableViewConfig()
+        navBarBackButtonConfigure()
     }
     
     private func tableViewConfig() {
@@ -68,17 +71,23 @@ extension MyInfoViewController: UITableViewDelegate, UITableViewDataSource {
         
         cell.separatorInset = UIEdgeInsets(top: 0, left: 17, bottom: 0, right: 15)
         
+
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
         if indexPath.row == 0 {
-            APIServiceForStart.getUserData { code in
-                
+            viewModel.getUserData { code in
+                switch code {
+                case 200:
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: MyInfoDetailViewController.identifier) as! MyInfoDetailViewController
+                    self.navigationController?.pushViewController(vc, animated: true)
+                default:
+                    self.errorHandler(with: code)
+                }
             }
         }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
 }

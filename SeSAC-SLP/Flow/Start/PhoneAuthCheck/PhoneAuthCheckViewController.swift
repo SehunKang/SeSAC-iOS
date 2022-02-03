@@ -131,16 +131,12 @@ class PhoneAuthCheckViewController: UIViewController {
                     APIServiceForStart.getUserData { code in
                         switch code {
                         case 200:
-                            let sb = UIStoryboard(name: "Main", bundle: nil)
-                            let viewController = sb.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
-                            self.view.window?.rootViewController = viewController
-                            self.view.window?.makeKeyAndVisible()
-                        case 201:
+                            self.goToMainRootViewController()
+                        case 406:
                             let vc = self.storyboard?.instantiateViewController(withIdentifier: NicknameViewController.identifier) as! NicknameViewController
                             self.navigationController?.pushViewController(vc, animated: true)
                         default:
-                            print("what code?:", code)
-                            self.view.makeToast("에러가 발생했습니다. 잠시 후 다시 시도해주세요", duration: 1, position: .center, style: ToastManager.shared.style)
+                            self.errorHandler(with: code)
                         }
                     }
                 }

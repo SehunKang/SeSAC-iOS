@@ -15,12 +15,22 @@ extension UIControl.State {
 
 class InactiveButton: UIButton {
     
+    func setTitleWithFont(text: String, font: CustomFont) {
+        myFont = font.font
+        myText = text
+        setNeedsUpdateConfiguration()
+    }
+    
+    var myText: String?
+    var myFont: UIFont = CustomFont.Body3_R14.font
+    
     override func updateConfiguration() {
         guard let configuration = configuration else {
             return
         }
         var updatedConfiguration = configuration
         var background = UIButton.Configuration.plain().background
+        
         
         background.cornerRadius = 8
         background.strokeWidth = 1
@@ -46,6 +56,10 @@ class InactiveButton: UIButton {
         background.strokeColor = strokeColor
         background.backgroundColor = backgroundColor
         
+        var container = AttributeContainer()
+        container.font = myFont
+        let title = myText ?? ""
+        updatedConfiguration.attributedTitle = AttributedString(title, attributes: container)
         updatedConfiguration.baseForegroundColor = foregroundColor
         updatedConfiguration.background = background
         

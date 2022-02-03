@@ -19,3 +19,5 @@ struct SignInData: Codable {
         case nick, birth, email, gender
     }
 }
+
+
