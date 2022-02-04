@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         var style = ToastStyle()
         style.backgroundColor = CustomColor.SLPWhite.color
-        style.messageColor = CustomColor.SLPGreen.color
+        style.messageColor = CustomColor.SLPBlack.color
         style.messageFont = CustomFont.Body3_R14.font
         style.cornerRadius = 8
         style.displayShadow = true

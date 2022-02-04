@@ -12,6 +12,7 @@ enum APIService {
     case getUserData
     case signIn(data: SignInData)
     case updateMyPage(data: [String: Any])
+    case withdraw
 }
 
 extension APIService: TargetType {
@@ -27,6 +28,8 @@ extension APIService: TargetType {
             return "/user"
         case .updateMyPage:
             return "/user/update/mypage"
+        case .withdraw:
+            return "/user/withdraw"
         }
     }
     
@@ -37,6 +40,8 @@ extension APIService: TargetType {
         case .signIn:
             return .post
         case .updateMyPage:
+            return .post
+        case .withdraw:
             return .post
         }
     }
@@ -49,6 +54,8 @@ extension APIService: TargetType {
             return .requestParameters(parameters: ["phoneNumber": data.phoneNumber, "FCMtoken": data.fcMtoken, "nick": data.nick, "birth": data.birth, "email": data.email, "gender": data.gender], encoding: URLEncoding.httpBody)
         case .updateMyPage(let data):
             return .requestParameters(parameters: data, encoding: URLEncoding.httpBody)
+        case .withdraw:
+            return .requestPlain
         }
     }
     
@@ -59,6 +66,8 @@ extension APIService: TargetType {
         case .signIn:
             return ["idtoken": UserDefaultManager.idtoken]
         case .updateMyPage:
+            return ["idtoken": UserDefaultManager.idtoken]
+        case .withdraw:
             return ["idtoken": UserDefaultManager.idtoken]
         }
     }

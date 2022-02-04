@@ -29,7 +29,23 @@ class MyInfoDetailViewModel {
                 completion(error.errorCode)
             }
         }
+    }
+    
+    func withdraw(completion: @escaping (_ code: Int) -> Void) {
+        
+        let provider = MoyaProvider<APIService>()
+        
+        provider.request(.withdraw) { result in
+            switch result {
+            case let .success(response):
+                completion(response.statusCode)
+            case let .failure(error):
+                completion(error.errorCode)
+            }
+        }
         
     }
+    
+    
 }
 

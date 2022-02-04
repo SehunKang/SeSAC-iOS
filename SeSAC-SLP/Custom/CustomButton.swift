@@ -216,4 +216,56 @@ class CancelButton: UIButton {
         
         self.configuration = updatedConfiguration
     }
+    
+}
+
+class SegmentedButton: UIButton {
+    
+    func setOnlyTitle(text: String) {
+        myText = text
+        setNeedsUpdateConfiguration()
+    }
+    
+    var myText: String?
+    var myFont: UIFont = CustomFont.Title4_R14.font
+    
+    override func updateConfiguration() {
+        guard let configuration = configuration else {
+            return
+        }
+        var updatedConfiguration = configuration
+        var background = UIButton.Configuration.plain().background
+        
+        background.cornerRadius = 0
+        
+        let strokeColor: UIColor
+        let foregroundColor: UIColor
+        let backgroundColor: UIColor
+        
+        switch self.state {
+        case .normal:
+            strokeColor = CustomColor.SLPWhite.color
+            foregroundColor = CustomColor.SLPBlack.color
+            backgroundColor = CustomColor.SLPWhite.color
+        case .selected:
+            strokeColor = CustomColor.SLPGreen.color
+            foregroundColor = CustomColor.SLPWhite.color
+            backgroundColor = CustomColor.SLPGreen.color
+        default:
+            strokeColor = CustomColor.SLPGray4.color
+            foregroundColor = CustomColor.SLPBlack.color
+            backgroundColor = .clear
+        }
+        background.strokeColor = strokeColor
+        background.backgroundColor = backgroundColor
+        
+        var container = AttributeContainer()
+        container.font = myFont
+        let title = myText ?? ""
+        updatedConfiguration.attributedTitle = AttributedString(title, attributes: container)
+        updatedConfiguration.baseForegroundColor = foregroundColor
+        updatedConfiguration.background = background
+        
+        self.configuration = updatedConfiguration
+    }
 }

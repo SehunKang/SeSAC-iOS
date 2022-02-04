@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--My Info View Controller-->
+        <!--내정보-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
                 <viewController storyboardIdentifier="MyInfoViewController" id="Y6W-OH-hqX" customClass="MyInfoViewController" customModule="SeSAC_SLP" customModuleProvider="target" sceneMemberID="viewController">
@@ -32,7 +32,7 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="p9B-21-Jl8" secondAttribute="bottom" id="xXn-Oh-0Ov"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="my_inact" id="EOp-od-ocX"/>
+                    <tabBarItem key="tabBarItem" title="내정보" image="my_inact" selectedImage="my_act" id="EOp-od-ocX"/>
                     <navigationItem key="navigationItem" id="D08-2T-m0v"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -323,13 +323,13 @@
             <point key="canvasLocation" x="1900.0000000000002" y="95.758928571428569"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="csr-Sh-azK">
-            <size key="intrinsicContentSize" width="-1" height="65"/>
-        </designable>
-    </designables>
+    <color key="tintColor" name="SLPBlack"/>
     <resources>
+        <image name="my_act" width="24" height="24"/>
         <image name="my_inact" width="24" height="24"/>
+        <namedColor name="SLPBlack">
+            <color red="0.20000000298023224" green="0.20000000298023224" blue="0.20000000298023224" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="SLPGray2">
             <color red="0.93699997663497925" green="0.93699997663497925" blue="0.93699997663497925" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -82,7 +82,7 @@ class NicknameViewController: UIViewController {
                     case 200:
                         UserDefaultManager.validNickFlag = 0
                         let sb = UIStoryboard(name: "Main", bundle: nil)
-                        let viewController = sb.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
+                        let viewController = sb.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
                         self.view.window?.rootViewController = viewController
                         self.view.window?.makeKeyAndVisible()
                     case 201:

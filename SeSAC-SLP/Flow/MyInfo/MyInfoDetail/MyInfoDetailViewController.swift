@@ -46,6 +46,7 @@ class MyInfoDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.tabBarController?.tabBar.isHidden = true
         title = "정보 관리"
         basicUIConfigure()
@@ -126,18 +127,35 @@ class MyInfoDetailViewController: UIViewController {
             }
             .disposed(by: viewModel.disposeBag)
 
+        buttonWithdraw.rx.tap
+            .subscribe { _ in
+                self.withdraw()
+            }
+            .disposed(by: viewModel.disposeBag)
+    }
+    
+    private func withdraw() {
+        viewModel.withdraw { code in
+            switch code {
+            case 200, 406:
+                print("goto onboarding")
+            default:
+                self.errorHandler(with: code)
+            }
+        }
     }
     
     @objc func saveButtonClicekd() {
         let searchable = switchPhonenumSearchable.isOn ? 1 : 0
-        let ageMin = Int(rangeSeeker.minValue)
-        let ageMax = Int(rangeSeeker.maxValue)
+        let ageMin = Int(rangeSeeker.selectedMinValue)
+        let ageMax = Int(rangeSeeker.selectedMaxValue)
         let gender = genderValue.rawValue
         let hobby = textFieldMyHobby.text ?? ""
         
         let dataForUpdate = DataForUpdate(searchable: searchable, ageMin: ageMin, ageMax: ageMax, gender: gender, hobby: hobby)
         
         viewModel.updateMyPage(data: dataForUpdate) { code in
+            print("updatemypagecode??", code)
             switch code {
             case 200:
                 self.navigationController?.popViewController(animated: true)

@@ -28,6 +28,7 @@ extension UIViewController {
     
     func navBarBackButtonConfigure() {
         let image = UIImage(named: "arrow")
+        self.navigationController?.navigationBar.tintColor = CustomColor.SLPBlack.color
         self.navigationController?.navigationBar.backIndicatorImage = image
         self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = image
         self.navigationController?.navigationBar.topItem?.backButtonTitle = ""
@@ -35,7 +36,7 @@ extension UIViewController {
     
     func goToMainRootViewController() {
         let mainSb = UIStoryboard(name: "Main", bundle: nil)
-        let mainVc = mainSb.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
+        let mainVc = mainSb.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
         let mainNav = UINavigationController(rootViewController: mainVc)
         
         let infoSb = UIStoryboard(name: "MyInfo", bundle: nil)

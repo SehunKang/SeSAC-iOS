@@ -18,12 +18,14 @@ class MyInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.tabBarController?.tabBar.isHidden = false
         title = "내 정보"
         tableViewConfig()
         navBarBackButtonConfigure()
     }
-    
+    override func viewDidAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
+    }
+        
     private func tableViewConfig() {
         
         tableView.delegate = self
