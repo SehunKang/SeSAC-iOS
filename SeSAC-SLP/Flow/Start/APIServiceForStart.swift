@@ -12,7 +12,7 @@ class APIServiceForStart {
     
     static func signIn(completion: @escaping (_ statusCode: Int) -> Void) {
         
-        let provider = MoyaProvider<APIService>()
+        let provider = MoyaProvider<APIServiceUser>()
         provider.request(.signIn(data: UserDefaultManager.signInData)) { result in
             
             let res = result.map { response in
@@ -30,7 +30,7 @@ class APIServiceForStart {
     }
     
     static func getUserData(completion: @escaping (_ code: Int) -> Void) {
-        let provider = MoyaProvider<APIService>()
+        let provider = MoyaProvider<APIServiceUser>()
         provider.request(.getUserData) { result in
             
             switch result {

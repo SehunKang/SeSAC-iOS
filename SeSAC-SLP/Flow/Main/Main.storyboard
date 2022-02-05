@@ -81,10 +81,18 @@
                                     <constraint firstAttribute="height" constant="144" id="qmP-Vm-dfC"/>
                                 </constraints>
                             </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="map_marker" translatesAutoresizingMaskIntoConstraints="NO" id="nJb-dW-QIg">
+                                <rect key="frame" x="190" y="425.5" width="34" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="45" id="jy6-gt-LpZ"/>
+                                    <constraint firstAttribute="width" constant="34" id="qzy-7d-UKZ"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="nJb-dW-QIg" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="2ve-CU-Fbm"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="9sf-73-udX" secondAttribute="bottom" constant="16" id="FVJ-Th-cFv"/>
                             <constraint firstItem="Xgs-sd-Grh" firstAttribute="top" secondItem="1NH-CB-gjj" secondAttribute="bottom" constant="14" id="Hf6-WV-Buz"/>
                             <constraint firstItem="KFO-Zh-oO3" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" id="JLy-8m-a5I"/>
@@ -93,6 +101,7 @@
                             <constraint firstItem="Xgs-sd-Grh" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="dv2-d9-iKL"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="KFO-Zh-oO3" secondAttribute="trailing" id="x8C-8P-5PB"/>
                             <constraint firstItem="1NH-CB-gjj" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="54" id="xpT-8d-Vol"/>
+                            <constraint firstItem="nJb-dW-QIg" firstAttribute="centerY" secondItem="5EZ-qb-Rvc" secondAttribute="centerY" id="yRG-D2-UP8"/>
                             <constraint firstItem="KFO-Zh-oO3" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="yU8-b5-p2z"/>
                             <constraint firstItem="1NH-CB-gjj" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="yk6-HU-kVe"/>
                         </constraints>
@@ -122,6 +131,7 @@
         <image name="default" width="62" height="62"/>
         <image name="home_act" width="24" height="24"/>
         <image name="home_inact" width="24" height="24"/>
+        <image name="map_marker" width="48" height="48"/>
         <image name="place" width="24" height="24"/>
         <namedColor name="SLPBlack">
             <color red="0.20000000298023224" green="0.20000000298023224" blue="0.20000000298023224" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

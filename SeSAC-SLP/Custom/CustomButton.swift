@@ -254,7 +254,7 @@ class SegmentedButton: UIButton {
         default:
             strokeColor = CustomColor.SLPGray4.color
             foregroundColor = CustomColor.SLPBlack.color
-            backgroundColor = .clear
+            backgroundColor = CustomColor.SLPGray4.color
         }
         background.strokeColor = strokeColor
         background.backgroundColor = backgroundColor

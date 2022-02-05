@@ -8,14 +8,14 @@
 import Foundation
 import Moya
 
-enum APIService {
+enum APIServiceUser {
     case getUserData
     case signIn(data: SignInData)
     case updateMyPage(data: [String: Any])
     case withdraw
 }
 
-extension APIService: TargetType {
+extension APIServiceUser: TargetType {
     public var baseURL: URL {
         return URL(string: "http://test.monocoding.com:35484")!
     }

@@ -24,7 +24,7 @@ class MyInfoViewModel {
     }
     
     func getUserData(completion: @escaping (_ code: Int) -> Void) {
-        let provider = MoyaProvider<APIService>()
+        let provider = MoyaProvider<APIServiceUser>()
         provider.request(.getUserData) { result in
             switch result {
             case let .success(response):

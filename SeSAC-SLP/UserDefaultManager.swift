@@ -14,6 +14,12 @@ enum Gender: Int {
     case female = 0
 }
 
+enum UserStatus: String {
+    case normal = "normal"
+    case searching = "searching"
+    case doneMatching = "doneMatching"
+}
+
 @propertyWrapper
 struct UserDefault<T> {
     
@@ -75,6 +81,9 @@ class UserDefaultManager {
     ///1일 경우 invalid
     @UserDefault(key: "validNickFlag", defaultValue: 0)
     static var validNickFlag: Int
+    
+    @UserDefault(key: "userStatus", defaultValue: UserStatus.normal.rawValue)
+    static var userStatus: UserStatus.RawValue
     
     @UserDefaultStruct(key: "userData", defaultValue: nil)
     static var userData: UserData?

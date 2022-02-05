@@ -19,7 +19,7 @@ class MyInfoDetailViewModel {
         
         let updateData = ["searchable": data.searchable, "ageMin": data.ageMin, "ageMax": data.ageMax, "gender": data.gender, "hobby": data.hobby] as [String : Any]
         
-        let provider = MoyaProvider<APIService>()
+        let provider = MoyaProvider<APIServiceUser>()
         
         provider.request(.updateMyPage(data: updateData)) { result in
             switch result {
@@ -33,7 +33,7 @@ class MyInfoDetailViewModel {
     
     func withdraw(completion: @escaping (_ code: Int) -> Void) {
         
-        let provider = MoyaProvider<APIService>()
+        let provider = MoyaProvider<APIServiceUser>()
         
         provider.request(.withdraw) { result in
             switch result {

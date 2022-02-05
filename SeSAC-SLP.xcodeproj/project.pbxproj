@@ -12,11 +12,14 @@
 		2E308E5C27ABAF3F00AD08CC /* MyInfoDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E308E5B27ABAF3F00AD08CC /* MyInfoDetailViewModel.swift */; };
 		2E35DBCC279D585200EFD884 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E35DBCB279D585200EFD884 /* Main.storyboard */; };
 		2E35DBD0279D632500EFD884 /* NetworkCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E35DBCF279D632500EFD884 /* NetworkCheck.swift */; };
+		2E6DC70827AE3C6D00A049CC /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6DC70727AE3C6D00A049CC /* CustomAnnotation.swift */; };
+		2E6DC70A27AE97D500A049CC /* Moya_QueueAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6DC70927AE97D500A049CC /* Moya_QueueAPI.swift */; };
+		2E6DC70C27AE9CD900A049CC /* Float+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6DC70B27AE9CD900A049CC /* Float+Extension.swift */; };
 		2E92DFB62798EFC90020567B /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 2E92DFB52798EFC90020567B /* Toast */; };
 		2E92DFB927993E7C0020567B /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E92DFB827993E7C0020567B /* UIViewController+Extension.swift */; };
 		2E92DFBB279971E80020567B /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E92DFBA279971E80020567B /* UserDefaultManager.swift */; };
 		2E92DFBE27997F3F0020567B /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 2E92DFBD27997F3F0020567B /* Alamofire */; };
-		2E92DFC3279999DC0020567B /* Moya.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E92DFC2279999DC0020567B /* Moya.swift */; };
+		2E92DFC3279999DC0020567B /* Moya_UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E92DFC2279999DC0020567B /* Moya_UserAPI.swift */; };
 		2E92DFC527999D210020567B /* UserDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E92DFC427999D210020567B /* UserDataModel.swift */; };
 		2E92DFC82799AD320020567B /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 2E92DFC72799AD320020567B /* Moya */; };
 		2E92DFCB279AF00F0020567B /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 2E92DFCA279AF00F0020567B /* FirebaseAuth */; };
@@ -65,9 +68,12 @@
 		2E308E5B27ABAF3F00AD08CC /* MyInfoDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoDetailViewModel.swift; sourceTree = "<group>"; };
 		2E35DBCB279D585200EFD884 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		2E35DBCF279D632500EFD884 /* NetworkCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCheck.swift; sourceTree = "<group>"; };
+		2E6DC70727AE3C6D00A049CC /* CustomAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
+		2E6DC70927AE97D500A049CC /* Moya_QueueAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Moya_QueueAPI.swift; sourceTree = "<group>"; };
+		2E6DC70B27AE9CD900A049CC /* Float+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Float+Extension.swift"; sourceTree = "<group>"; };
 		2E92DFB827993E7C0020567B /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		2E92DFBA279971E80020567B /* UserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
-		2E92DFC2279999DC0020567B /* Moya.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Moya.swift; sourceTree = "<group>"; };
+		2E92DFC2279999DC0020567B /* Moya_UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Moya_UserAPI.swift; sourceTree = "<group>"; };
 		2E92DFC427999D210020567B /* UserDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataModel.swift; sourceTree = "<group>"; };
 		2E92DFCE279B0BF20020567B /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		2E92DFD1279BB6460020567B /* NicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameViewController.swift; sourceTree = "<group>"; };
@@ -141,6 +147,7 @@
 			children = (
 				2E92DFB827993E7C0020567B /* UIViewController+Extension.swift */,
 				2E92DFCE279B0BF20020567B /* String+Extension.swift */,
+				2E6DC70B27AE9CD900A049CC /* Float+Extension.swift */,
 				2E308E5927AB9E6A00AD08CC /* UILabel+Extension.swift */,
 				2ED1211F27AD1AA100A3C8D5 /* UIView+Extension.swift */,
 			);
@@ -269,7 +276,8 @@
 				2E92DFB727993E410020567B /* Extension */,
 				2EBAEF82279585B700C2A089 /* Protocol.swift */,
 				2E92DFBA279971E80020567B /* UserDefaultManager.swift */,
-				2E92DFC2279999DC0020567B /* Moya.swift */,
+				2E92DFC2279999DC0020567B /* Moya_UserAPI.swift */,
+				2E6DC70927AE97D500A049CC /* Moya_QueueAPI.swift */,
 				2EBAEF6C279539EF00C2A089 /* Assets.xcassets */,
 				2EBAEF6E279539EF00C2A089 /* LaunchScreen.storyboard */,
 				2EBAEF71279539EF00C2A089 /* Info.plist */,
@@ -302,6 +310,7 @@
 			isa = PBXGroup;
 			children = (
 				2ED1211B27ACFA2100A3C8D5 /* HomeViewController.swift */,
+				2E6DC70727AE3C6D00A049CC /* CustomAnnotation.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -506,13 +515,15 @@
 				2EA963D52796D70100DA7C2E /* CustomButton.swift in Sources */,
 				2EA963E02797A1F500DA7C2E /* CustomTextField.swift in Sources */,
 				2ED54EF3279D4931001AE07C /* APIServiceForStart.swift in Sources */,
-				2E92DFC3279999DC0020567B /* Moya.swift in Sources */,
+				2E92DFC3279999DC0020567B /* Moya_UserAPI.swift in Sources */,
 				2EA6657027AA94C500FD47B0 /* MyInfoViewController.swift in Sources */,
 				2E92DFDA279C2BA80020567B /* EmailViewController.swift in Sources */,
 				2ED54EF5279D4B93001AE07C /* NickNameViewModel.swift in Sources */,
 				2E92DFB927993E7C0020567B /* UIViewController+Extension.swift in Sources */,
 				2EBAEF812795859800C2A089 /* PhoneAuthViewModel.swift in Sources */,
+				2E6DC70827AE3C6D00A049CC /* CustomAnnotation.swift in Sources */,
 				2E92DFC527999D210020567B /* UserDataModel.swift in Sources */,
+				2E6DC70A27AE97D500A049CC /* Moya_QueueAPI.swift in Sources */,
 				2E35DBD0279D632500EFD884 /* NetworkCheck.swift in Sources */,
 				2E308E5C27ABAF3F00AD08CC /* MyInfoDetailViewModel.swift in Sources */,
 				2E308E5827AAC86100AD08CC /* MyInfoDetailViewController.swift in Sources */,
@@ -520,6 +531,7 @@
 				2EA6657227AA94D500FD47B0 /* MyInfoViewModel.swift in Sources */,
 				2EBAEF83279585B700C2A089 /* Protocol.swift in Sources */,
 				2ED54EF0279D3A84001AE07C /* APIModelForStart.swift in Sources */,
+				2E6DC70C27AE9CD900A049CC /* Float+Extension.swift in Sources */,
 				2EA963D72796EF7300DA7C2E /* CustomColor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
