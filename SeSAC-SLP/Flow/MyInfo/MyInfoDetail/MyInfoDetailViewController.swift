@@ -47,7 +47,6 @@ class MyInfoDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.tabBarController?.tabBar.isHidden = true
         title = "정보 관리"
         basicUIConfigure()
         uiConfigureWithData()

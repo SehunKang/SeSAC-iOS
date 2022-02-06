@@ -25,8 +25,27 @@ class MyInfoDetailViewModel {
             switch result {
             case let .success(response):
                 completion(response.statusCode)
+                self.getUserData()
             case let .failure(error):
                 completion(error.errorCode)
+            }
+        }
+    }
+    
+    func getUserData() {
+        let provider = MoyaProvider<APIServiceUser>()
+        provider.request(.getUserData) { result in
+            switch result {
+            case let .success(response):
+                switch response.statusCode {
+                case 200:
+                    let data = try? response.map(UserData.self)
+                    UserDefaultManager.userData = data
+                default:
+                    print(response)
+                }
+            case let .failure(error):
+                print(error)
             }
         }
     }

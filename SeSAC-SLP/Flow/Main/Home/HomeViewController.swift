@@ -148,6 +148,23 @@ class HomeViewController: UIViewController {
             default: break
             }
         }.disposed(by: disposeBag)
+        
+        statusButton.rx.tap
+            .subscribe { _ in
+                let status = UserDefaultManager.userStatus
+                switch status {
+                case UserStatus.normal.rawValue:
+                    UserDefaultManager.queueData = self.currentQueueData
+                    let vc = self.storyboard?.instantiateViewController(withIdentifier: SearchHobbyViewController.identifier) as! SearchHobbyViewController
+                    vc.hidesBottomBarWhenPushed = true // MAGIC!!
+                    self.navigationController?.pushViewController(vc, animated: true)
+//                case UserStatus.searching.rawValue:
+//                case UserStatus.doneMatching.rawValue:
+                default: break
+                }
+            }
+            .disposed(by: disposeBag)
+
     }
     
     private func findFriend() {

@@ -15,6 +15,8 @@
 		2E6DC70827AE3C6D00A049CC /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6DC70727AE3C6D00A049CC /* CustomAnnotation.swift */; };
 		2E6DC70A27AE97D500A049CC /* Moya_QueueAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6DC70927AE97D500A049CC /* Moya_QueueAPI.swift */; };
 		2E6DC70C27AE9CD900A049CC /* Float+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6DC70B27AE9CD900A049CC /* Float+Extension.swift */; };
+		2E6DC70F27AFBBD300A049CC /* SearchHobbyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6DC70E27AFBBD300A049CC /* SearchHobbyViewController.swift */; };
+		2E6DC71127AFF73600A049CC /* MyHobbyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6DC71027AFF73600A049CC /* MyHobbyCell.swift */; };
 		2E92DFB62798EFC90020567B /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 2E92DFB52798EFC90020567B /* Toast */; };
 		2E92DFB927993E7C0020567B /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E92DFB827993E7C0020567B /* UIViewController+Extension.swift */; };
 		2E92DFBB279971E80020567B /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E92DFBA279971E80020567B /* UserDefaultManager.swift */; };
@@ -71,6 +73,8 @@
 		2E6DC70727AE3C6D00A049CC /* CustomAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
 		2E6DC70927AE97D500A049CC /* Moya_QueueAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Moya_QueueAPI.swift; sourceTree = "<group>"; };
 		2E6DC70B27AE9CD900A049CC /* Float+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Float+Extension.swift"; sourceTree = "<group>"; };
+		2E6DC70E27AFBBD300A049CC /* SearchHobbyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHobbyViewController.swift; sourceTree = "<group>"; };
+		2E6DC71027AFF73600A049CC /* MyHobbyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyHobbyCell.swift; sourceTree = "<group>"; };
 		2E92DFB827993E7C0020567B /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		2E92DFBA279971E80020567B /* UserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
 		2E92DFC2279999DC0020567B /* Moya_UserAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Moya_UserAPI.swift; sourceTree = "<group>"; };
@@ -140,6 +144,15 @@
 			children = (
 			);
 			path = Card;
+			sourceTree = "<group>";
+		};
+		2E6DC70D27AFBBB400A049CC /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				2E6DC70E27AFBBD300A049CC /* SearchHobbyViewController.swift */,
+				2E6DC71027AFF73600A049CC /* MyHobbyCell.swift */,
+			);
+			path = Search;
 			sourceTree = "<group>";
 		};
 		2E92DFB727993E410020567B /* Extension */ = {
@@ -330,6 +343,7 @@
 			children = (
 				2E35DBCB279D585200EFD884 /* Main.storyboard */,
 				2ED1211A27ACF9E000A3C8D5 /* Home */,
+				2E6DC70D27AFBBB400A049CC /* Search */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -529,7 +543,9 @@
 				2E308E5827AAC86100AD08CC /* MyInfoDetailViewController.swift in Sources */,
 				2ED1211C27ACFA2100A3C8D5 /* HomeViewController.swift in Sources */,
 				2EA6657227AA94D500FD47B0 /* MyInfoViewModel.swift in Sources */,
+				2E6DC71127AFF73600A049CC /* MyHobbyCell.swift in Sources */,
 				2EBAEF83279585B700C2A089 /* Protocol.swift in Sources */,
+				2E6DC70F27AFBBD300A049CC /* SearchHobbyViewController.swift in Sources */,
 				2ED54EF0279D3A84001AE07C /* APIModelForStart.swift in Sources */,
 				2E6DC70C27AE9CD900A049CC /* Float+Extension.swift in Sources */,
 				2EA963D72796EF7300DA7C2E /* CustomColor.swift in Sources */,

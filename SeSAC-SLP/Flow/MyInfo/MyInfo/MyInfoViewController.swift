@@ -21,9 +21,7 @@ class MyInfoViewController: UIViewController {
         title = "내 정보"
         tableViewConfig()
         navBarBackButtonConfigure()
-    }
-    override func viewDidAppear(_ animated: Bool) {
-        self.tabBarController?.tabBar.isHidden = false
+        print(UserDefaultManager.userData as Any)
     }
         
     private func tableViewConfig() {
@@ -83,6 +81,7 @@ extension MyInfoViewController: UITableViewDelegate, UITableViewDataSource {
                 switch code {
                 case 200:
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: MyInfoDetailViewController.identifier) as! MyInfoDetailViewController
+                    vc.hidesBottomBarWhenPushed = true
                     self.navigationController?.pushViewController(vc, animated: true)
                 default:
                     self.errorHandler(with: code)

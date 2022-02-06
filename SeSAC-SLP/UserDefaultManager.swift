@@ -90,4 +90,7 @@ class UserDefaultManager {
     
     @UserDefaultStruct(key: "signInData", defaultValue: SignInData(phoneNumber: "", fcMtoken: "", nick: "", birth: Date(), email: "", gender: Gender.none.rawValue))
     static var signInData: SignInData!
+    
+    @UserDefaultStruct(key: "QueueData", defaultValue: nil)
+    static var queueData: QueueData?
 }
