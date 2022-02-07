@@ -37,8 +37,10 @@ class MyTextField: UITextField, UITextFieldDelegate {
         textFieldSet()
         alertLabelSet()
         bringSubviewToFront(alertLabel)
+        autocorrectionType = .no
 
     }
+    
 
     override func draw(_ rect: CGRect) {
         border.frame = CGRect(x: -12, y: self.frame.size.height - lineHeight, width: self.frame.size.width + 24, height: lineHeight)

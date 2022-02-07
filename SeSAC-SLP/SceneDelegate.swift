@@ -17,36 +17,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let mainSb = UIStoryboard(name: "Main", bundle: nil)
         let mainVc = mainSb.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
         let mainNav = UINavigationController(rootViewController: mainVc)
-        
+
         let infoSb = UIStoryboard(name: "MyInfo", bundle: nil)
         let infoVc = infoSb.instantiateViewController(withIdentifier: MyInfoViewController.identifier) as! MyInfoViewController
         let infoNav = UINavigationController(rootViewController: infoVc)
-        
+
         let tabBarController = UITabBarController()
-        
+
         tabBarController.viewControllers = [mainNav, infoNav]
         
         window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
-
-
-//        guard let windowScene = (scene as? UIWindowScene) else { return }
-//        window = UIWindow(windowScene: windowScene)
-//
-//        let sb = UIStoryboard(name: "Main", bundle: nil)
-        
-//        let viewController: UIViewController
-//        if UserDefaultManager.signInData.phoneNumber == "" {
-//            viewController = sb.instantiateViewController(withIdentifier: PhoneAuthViewController.identifier) as! PhoneAuthViewController
-//        } else {
-//            viewController = sb.instantiateViewController(withIdentifier: NicknameViewController.identifier) as! NicknameViewController
-//        }
-//        let sb = UIStoryboard(name: "MyInfo", bundle: nil)
-//        let viewController = sb.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
-//
-//        window?.rootViewController = UINavigationController(rootViewController: viewController)
-//        window?.makeKeyAndVisible()
-
         
     }
 

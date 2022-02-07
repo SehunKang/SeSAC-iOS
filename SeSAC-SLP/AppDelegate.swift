@@ -33,6 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 UserDefaultManager.signInData.fcMtoken = token
             }
         }
+        idtokenRefresh()
         
         var style = ToastStyle()
         style.backgroundColor = CustomColor.SLPWhite.color
@@ -65,6 +66,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     
+}
+
+extension AppDelegate {
+    
+    func idtokenRefresh() {
+//        let currentUser = Auth.auth().currentUser
+//        currentUser?.getIDTokenForcingRefresh(true) { idToken, error in
+//            if let error = error {
+//                print(error.localizedDescription)
+//                return;
+//            }
+//            UserDefaultManager.idtoken = idToken!
+//        }
+    }
 }
 
 extension AppDelegate: UNUserNotificationCenterDelegate {

@@ -29,7 +29,7 @@ class MyInfoDetailViewController: UIViewController {
     @IBOutlet var buttonWithdraw: UIButton!
     @IBOutlet var cardView: UILabel!
     
-    private var genderValue: Gender = .none {
+    private var genderValue: Gender = Gender(rawValue: UserDefaultManager.userData?.gender ?? -1)! {
         didSet {
             switch genderValue {
             case .male:

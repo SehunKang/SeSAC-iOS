@@ -47,7 +47,11 @@ class BirthViewController: UIViewController {
         doneButton.setTitleWithFont(text: "다음", font: .Body3_R14)
         doneButton.isFakeDisbaled = true
         
-        datePicker.maximumDate = Date()
+        let minAge = Calendar.current.date(byAdding: .year, value: -17, to: Date())
+        let maxAge = Calendar.current.date(byAdding: .year, value: -65, to: Date())
+        datePicker.maximumDate = minAge
+        datePicker.minimumDate = maxAge
+        
         self.navigationItem.backButtonTitle = ""
 
     }
