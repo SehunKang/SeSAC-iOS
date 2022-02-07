@@ -31,6 +31,7 @@
 		2E92DFD8279BC5F90020567B /* BirthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E92DFD7279BC5F90020567B /* BirthViewController.swift */; };
 		2E92DFDA279C2BA80020567B /* EmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E92DFD9279C2BA70020567B /* EmailViewController.swift */; };
 		2E92DFDD279C3D830020567B /* GenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E92DFDC279C3D820020567B /* GenderViewController.swift */; };
+		2E97A1CA27B1540900A0A057 /* SearchFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E97A1C927B1540800A0A057 /* SearchFriendViewController.swift */; };
 		2EA6657027AA94C500FD47B0 /* MyInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA6656F27AA94C500FD47B0 /* MyInfoViewController.swift */; };
 		2EA6657227AA94D500FD47B0 /* MyInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA6657127AA94D500FD47B0 /* MyInfoViewModel.swift */; };
 		2EA6657427AA94F100FD47B0 /* MyInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2EA6657327AA94F100FD47B0 /* MyInfo.storyboard */; };
@@ -84,6 +85,7 @@
 		2E92DFD7279BC5F90020567B /* BirthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthViewController.swift; sourceTree = "<group>"; };
 		2E92DFD9279C2BA70020567B /* EmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailViewController.swift; sourceTree = "<group>"; };
 		2E92DFDC279C3D820020567B /* GenderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenderViewController.swift; sourceTree = "<group>"; };
+		2E97A1C927B1540800A0A057 /* SearchFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFriendViewController.swift; sourceTree = "<group>"; };
 		2EA6656F27AA94C500FD47B0 /* MyInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoViewController.swift; sourceTree = "<group>"; };
 		2EA6657127AA94D500FD47B0 /* MyInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoViewModel.swift; sourceTree = "<group>"; };
 		2EA6657327AA94F100FD47B0 /* MyInfo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MyInfo.storyboard; sourceTree = "<group>"; };
@@ -149,8 +151,8 @@
 		2E6DC70D27AFBBB400A049CC /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				2E6DC70E27AFBBD300A049CC /* SearchHobbyViewController.swift */,
-				2E6DC71027AFF73600A049CC /* MyHobbyCell.swift */,
+				2E97A1C827B153E900A0A057 /* SearchFriend */,
+				2E97A1C727B153D400A0A057 /* SetHobby */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -198,6 +200,23 @@
 				2E92DFDC279C3D820020567B /* GenderViewController.swift */,
 			);
 			path = Gender;
+			sourceTree = "<group>";
+		};
+		2E97A1C727B153D400A0A057 /* SetHobby */ = {
+			isa = PBXGroup;
+			children = (
+				2E6DC70E27AFBBD300A049CC /* SearchHobbyViewController.swift */,
+				2E6DC71027AFF73600A049CC /* MyHobbyCell.swift */,
+			);
+			path = SetHobby;
+			sourceTree = "<group>";
+		};
+		2E97A1C827B153E900A0A057 /* SearchFriend */ = {
+			isa = PBXGroup;
+			children = (
+				2E97A1C927B1540800A0A057 /* SearchFriendViewController.swift */,
+			);
+			path = SearchFriend;
 			sourceTree = "<group>";
 		};
 		2EA6656C27AA941E00FD47B0 /* MyInfo */ = {
@@ -515,6 +534,7 @@
 				2E92DFCF279B0BF20020567B /* String+Extension.swift in Sources */,
 				2E92DFDD279C3D830020567B /* GenderViewController.swift in Sources */,
 				2E308E5A27AB9E6B00AD08CC /* UILabel+Extension.swift in Sources */,
+				2E97A1CA27B1540900A0A057 /* SearchFriendViewController.swift in Sources */,
 				2EDF693D27982A3C005E3F93 /* EasyAlert.swift in Sources */,
 				2EA6657627AA99AD00FD47B0 /* MyInfoModel.swift in Sources */,
 				2E92DFD8279BC5F90020567B /* BirthViewController.swift in Sources */,

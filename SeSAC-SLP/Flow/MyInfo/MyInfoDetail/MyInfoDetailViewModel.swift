@@ -64,6 +64,11 @@ class MyInfoDetailViewModel {
         }
         
     }
+    // 유저디폴트 삭제
+//    for key in UserDefaults.standard.dictionaryRepresentation().keys {
+//        UserDefaults.standard.removeObject(forKey: key.description)
+//    }
+
     
     
 }

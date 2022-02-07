@@ -160,6 +160,21 @@
             </objects>
             <point key="canvasLocation" x="4492.753623188406" y="91.741071428571431"/>
         </scene>
+        <!--Search Friend View Controller-->
+        <scene sceneID="VKl-e9-Qhp">
+            <objects>
+                <viewController storyboardIdentifier="SearchFriendViewController" id="BdZ-0k-rvC" customClass="SearchFriendViewController" customModule="SeSAC_SLP" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Mqx-ka-hEE">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="fgZ-FL-xEL"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Kew-DR-zmU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5307" y="92"/>
+        </scene>
     </scenes>
     <color key="tintColor" name="SLPBlack"/>
     <resources>

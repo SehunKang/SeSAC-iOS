@@ -32,6 +32,7 @@ struct FromQueueDB: Codable {
     let gender, type, sesac, background: Int
 }
 
+
 class HomeViewController: UIViewController {
 
     @IBOutlet var mapView: MKMapView!
@@ -157,6 +158,7 @@ class HomeViewController: UIViewController {
                     UserDefaultManager.queueData = self.currentQueueData
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: SearchHobbyViewController.identifier) as! SearchHobbyViewController
                     vc.hidesBottomBarWhenPushed = true // MAGIC!!
+                    vc.currentLocation = self.mapView.region.center
                     self.navigationController?.pushViewController(vc, animated: true)
 //                case UserStatus.searching.rawValue:
 //                case UserStatus.doneMatching.rawValue:
@@ -168,10 +170,8 @@ class HomeViewController: UIViewController {
     }
     
     private func findFriend() {
-        let latitude = mapView.region.center.latitude
-        let longitude = mapView.region.center.longitude
-        let region: Int = Int((trunc((latitude + 90) * 100) * 100000) + (trunc((longitude + 180) * 100)))
-        let data = ["region": region, "lat": latitude, "long": longitude] as [String : Any]
+        let data = getDataForAPI(location: mapView.region.center)
+        
         let provider = MoyaProvider<APIServiceQueue>()
         provider.request(.onqueue(data: data)) { result in
             switch result {
@@ -183,6 +183,14 @@ class HomeViewController: UIViewController {
                 self.errorHandler(with: error.errorCode)
             }
         }
+    }
+    private func getDataForAPI(location: CLLocationCoordinate2D) -> [String: Any] {
+        
+        let latitude = location.latitude
+        let longitude = location.longitude
+        let region: Int = Int((trunc((latitude + 90) * 100) * 100000) + (trunc((longitude + 180) * 100)))
+        let data = ["region": region, "lat": latitude, "long": longitude] as [String : Any]
+        return data
     }
     
     private func showFriend() {
