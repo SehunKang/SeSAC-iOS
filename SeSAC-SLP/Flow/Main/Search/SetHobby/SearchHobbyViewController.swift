@@ -354,6 +354,7 @@ extension SearchHobbyViewController {
         case 200:
             let vc = self.storyboard?.instantiateViewController(withIdentifier: SearchFriendViewController.identifier)
             self.navigationController?.pushViewController(vc!, animated: true)
+            UserDefaultManager.userStatus = UserStatus.searching.rawValue
         case 201:
             view.makeToast("신고가 누적되어 이용하실 수 없습니다.")
         case 203:

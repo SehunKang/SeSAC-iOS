@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BackgroundView" customModule="SeSAC_SLP" customModuleProvider="target">
+            <connections>
+                <outlet property="buttonChangeHobby" destination="Fc8-c1-TJC" id="ZqH-NR-LDh"/>
+                <outlet property="buttonRefresh" destination="4JE-Dx-GHr" id="w8R-QF-yT8"/>
+                <outlet property="contentView" destination="iN0-l3-epB" id="UGJ-c5-TZd"/>
+                <outlet property="labelMainTitle" destination="SXf-h8-epS" id="jXk-yT-ihc"/>
+                <outlet property="labelSubTitle" destination="TYP-gX-Juc" id="9mR-YS-Ofh"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="633"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" image="img_gray" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vOh-VI-Sx0">
+                    <rect key="frame" x="175" y="284.5" width="64" height="64"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="64" id="1Ac-1P-S1R"/>
+                        <constraint firstAttribute="height" constant="64" id="jFT-pK-MzW"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SXf-h8-epS">
+                    <rect key="frame" x="186" y="384.5" width="42" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TYP-gX-Juc">
+                    <rect key="frame" x="186" y="413.5" width="42" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fc8-c1-TJC" customClass="FilledButton" customModule="SeSAC_SLP" customModuleProvider="target">
+                    <rect key="frame" x="16" y="569" width="326" height="48"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="48" id="Y9J-F0-X8R"/>
+                    </constraints>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="취미 변경하기"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4JE-Dx-GHr" customClass="OutlineButton" customModule="SeSAC_SLP" customModuleProvider="target">
+                    <rect key="frame" x="350" y="569" width="48" height="48"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="48" id="P6Y-q2-t56"/>
+                        <constraint firstAttribute="height" constant="48" id="cXw-ZS-lA4"/>
+                    </constraints>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" image="clarity_refresh-line"/>
+                </button>
+            </subviews>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="4JE-Dx-GHr" firstAttribute="centerY" secondItem="Fc8-c1-TJC" secondAttribute="centerY" id="3yr-Dx-fhG"/>
+                <constraint firstItem="4JE-Dx-GHr" firstAttribute="leading" secondItem="Fc8-c1-TJC" secondAttribute="trailing" constant="8" id="6hq-pF-7Hz"/>
+                <constraint firstItem="SXf-h8-epS" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="IDc-nm-tGv"/>
+                <constraint firstItem="TYP-gX-Juc" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="PaM-Nt-HM8"/>
+                <constraint firstItem="TYP-gX-Juc" firstAttribute="top" secondItem="SXf-h8-epS" secondAttribute="bottom" constant="8" id="Py5-1x-N4P"/>
+                <constraint firstItem="vOh-VI-Sx0" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="RPP-1e-SL1"/>
+                <constraint firstItem="vOh-VI-Sx0" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Yby-sb-3FJ"/>
+                <constraint firstAttribute="trailing" secondItem="4JE-Dx-GHr" secondAttribute="trailing" constant="16" id="kRe-ke-UrD"/>
+                <constraint firstItem="Fc8-c1-TJC" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="qfK-XB-GQA"/>
+                <constraint firstAttribute="bottom" secondItem="Fc8-c1-TJC" secondAttribute="bottom" constant="16" id="t2z-ra-F3s"/>
+                <constraint firstItem="SXf-h8-epS" firstAttribute="top" secondItem="vOh-VI-Sx0" secondAttribute="bottom" constant="36" id="yUR-69-DiE"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="100" y="33"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="clarity_refresh-line" width="23" height="24"/>
+        <image name="img_gray" width="64" height="64"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
