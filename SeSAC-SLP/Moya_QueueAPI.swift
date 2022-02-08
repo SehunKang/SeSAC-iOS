@@ -42,7 +42,7 @@ extension APIServiceQueue: TargetType {
         case .onqueue(let data):
             return .requestParameters(parameters: data, encoding: URLEncoding.httpBody)
         case .queue(let data):
-            return .requestParameters(parameters: data, encoding: URLEncoding.httpBody)
+            return .requestParameters(parameters: data, encoding: URLEncoding.init(destination: .httpBody, arrayEncoding: .noBrackets, boolEncoding: .literal))
         }
     }
     
