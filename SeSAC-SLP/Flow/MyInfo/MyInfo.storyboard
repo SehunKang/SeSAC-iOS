@@ -323,6 +323,11 @@
             <point key="canvasLocation" x="1900.0000000000002" y="95.758928571428569"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="csr-Sh-azK">
+            <size key="intrinsicContentSize" width="-1" height="65"/>
+        </designable>
+    </designables>
     <color key="tintColor" name="SLPBlack"/>
     <resources>
         <image name="my_act" width="24" height="24"/>

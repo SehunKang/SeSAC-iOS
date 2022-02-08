@@ -13,22 +13,6 @@ import CoreLocation
 import Moya
 import Toast
 
-//struct RequestQueueData: Codable {
-//    let type: Int
-//    let region: Int
-//    let long: Double
-//    let lat: Double
-//    let hf: [String]
-//
-//    init(type: Int, region: Int, long: Double, lat: Double, hf: [String]) {
-//        self.type = type
-//        self.region = region
-//        self.long = long
-//        self.lat = lat
-//        self.hf = hf
-//    }
-//}
-
 
 class SearchHobbyViewController: UIViewController {
     
@@ -345,6 +329,12 @@ extension SearchHobbyViewController: UISearchBarDelegate {
 extension SearchHobbyViewController {
 
     private func requestQueue() {
+        
+        if collectionView.numberOfItems(inSection: Section.mine.rawValue) == 0 {
+            view.makeToast("취미를 입력해 주세요!")
+            return
+        }
+        
         let requestData = getDataForAPI()
         
         let provider = MoyaProvider<APIServiceQueue>()
@@ -361,9 +351,9 @@ extension SearchHobbyViewController {
     
     private func responseHandlerForRequestQueue(statusCode: Int) {
         switch statusCode {
-//        case 200:
-//            let vc = self.storyboard?.instantiateViewController(withIdentifier: SearchFriendViewController.identifier)
-//            self.navigationController?.pushViewController(vc!, animated: true)
+        case 200:
+            let vc = self.storyboard?.instantiateViewController(withIdentifier: SearchFriendViewController.identifier)
+            self.navigationController?.pushViewController(vc!, animated: true)
         case 201:
             view.makeToast("신고가 누적되어 이용하실 수 없습니다.")
         case 203:
@@ -372,11 +362,13 @@ extension SearchHobbyViewController {
             view.makeToast("약속 취소 페널티로, 2분동안 이용하실 수 없습니다.")
         case 205:
             view.makeToast("연속으로 약속을 취소하셔서 3분동안 이용하실 수 없습니다.")
-        case 200:
+        case 206:
             view.makeToast("새싹 찾기 기능을 이용하기 위해서는 성별이 필요해요!", duration: 1.0, position: .center, style: ToastManager.shared.style) { _ in
                 let sb = UIStoryboard(name: "MyInfo", bundle: nil)
                 let vc = sb.instantiateViewController(withIdentifier: MyInfoDetailViewController.identifier)
-                self.present(vc, animated: true, completion: nil)
+                let nav = UINavigationController(rootViewController: vc)
+                self.present(nav, animated: true, completion: nil)
+                
             }
         default:
             print("responsehandlerForRequestQueue spit default", statusCode)
