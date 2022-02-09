@@ -13,6 +13,7 @@
 		2E35519227B2B3B2008912C9 /* Tabman in Frameworks */ = {isa = PBXBuildFile; productRef = 2E35519127B2B3B2008912C9 /* Tabman */; };
 		2E35DBCC279D585200EFD884 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E35DBCB279D585200EFD884 /* Main.storyboard */; };
 		2E35DBD0279D632500EFD884 /* NetworkCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E35DBCF279D632500EFD884 /* NetworkCheck.swift */; };
+		2E6BB15527B3F7CE0095ADE4 /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6BB15427B3F7CE0095ADE4 /* CardCell.swift */; };
 		2E6DC70827AE3C6D00A049CC /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6DC70727AE3C6D00A049CC /* CustomAnnotation.swift */; };
 		2E6DC70A27AE97D500A049CC /* Moya_QueueAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6DC70927AE97D500A049CC /* Moya_QueueAPI.swift */; };
 		2E6DC70C27AE9CD900A049CC /* Float+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6DC70B27AE9CD900A049CC /* Float+Extension.swift */; };
@@ -76,6 +77,7 @@
 		2E308E5B27ABAF3F00AD08CC /* MyInfoDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoDetailViewModel.swift; sourceTree = "<group>"; };
 		2E35DBCB279D585200EFD884 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		2E35DBCF279D632500EFD884 /* NetworkCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCheck.swift; sourceTree = "<group>"; };
+		2E6BB15427B3F7CE0095ADE4 /* CardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
 		2E6DC70727AE3C6D00A049CC /* CustomAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
 		2E6DC70927AE97D500A049CC /* Moya_QueueAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Moya_QueueAPI.swift; sourceTree = "<group>"; };
 		2E6DC70B27AE9CD900A049CC /* Float+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Float+Extension.swift"; sourceTree = "<group>"; };
@@ -225,28 +227,13 @@
 			isa = PBXGroup;
 			children = (
 				2E97A1C927B1540800A0A057 /* SearchFriendViewController.swift */,
-				2E97A1CB27B2993C00A0A057 /* Around */,
-				2E97A1CC27B2995100A0A057 /* RequestReceived */,
-			);
-			path = SearchFriend;
-			sourceTree = "<group>";
-		};
-		2E97A1CB27B2993C00A0A057 /* Around */ = {
-			isa = PBXGroup;
-			children = (
 				2E97A1CF27B2999900A0A057 /* AroundViewController.swift */,
+				2E6BB15427B3F7CE0095ADE4 /* CardCell.swift */,
+				2E97A1CD27B2997D00A0A057 /* RequestReceivedViewController.swift */,
 				2E97A1D327B2A19C00A0A057 /* BackgroundView.swift */,
 				2E97A1D527B2A4A400A0A057 /* BackgroundView.xib */,
 			);
-			path = Around;
-			sourceTree = "<group>";
-		};
-		2E97A1CC27B2995100A0A057 /* RequestReceived */ = {
-			isa = PBXGroup;
-			children = (
-				2E97A1CD27B2997D00A0A057 /* RequestReceivedViewController.swift */,
-			);
-			path = RequestReceived;
+			path = SearchFriend;
 			sourceTree = "<group>";
 		};
 		2EA6656C27AA941E00FD47B0 /* MyInfo */ = {
@@ -599,6 +586,7 @@
 				2ED1211C27ACFA2100A3C8D5 /* HomeViewController.swift in Sources */,
 				2EA6657227AA94D500FD47B0 /* MyInfoViewModel.swift in Sources */,
 				2E6DC71127AFF73600A049CC /* MyHobbyCell.swift in Sources */,
+				2E6BB15527B3F7CE0095ADE4 /* CardCell.swift in Sources */,
 				2E97A1D027B2999900A0A057 /* AroundViewController.swift in Sources */,
 				2EBAEF83279585B700C2A089 /* Protocol.swift in Sources */,
 				2E6DC70F27AFBBD300A049CC /* SearchHobbyViewController.swift in Sources */,

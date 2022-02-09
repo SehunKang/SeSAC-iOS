@@ -24,7 +24,7 @@ struct QueueData: Codable {
     let fromRecommend: [String]
 }
 
-struct FromQueueDB: Codable {
+struct FromQueueDB: Codable, Hashable {
     let uid, nick: String
     let lat, long: Double
     let reputation: [Int]

@@ -19,7 +19,9 @@ class SearchFriendViewController: TabmanViewController {
         super.viewDidLoad()
         
         title = "새싹 찾기"
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "찾기중단", style: .plain, target: self, action: #selector(stopFind))
+        let rightBarButtonItem = UIBarButtonItem(title: "찾기중단", style: .plain, target: self, action: #selector(stopFind))
+//        rightBarButtonItem.setTitleTextAttributes([NSAttributedString.Key.font: CustomFont.Title3_M14.font], for: .normal)
+        self.navigationItem.rightBarButtonItem = rightBarButtonItem
         
         self.dataSource = self
         self.automaticallyAdjustsChildInsets = true
