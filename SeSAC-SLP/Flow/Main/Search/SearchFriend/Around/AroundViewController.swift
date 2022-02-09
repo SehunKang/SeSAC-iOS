@@ -10,16 +10,13 @@ import SnapKit
 
 class AroundViewController: UIViewController {
     
-    lazy var collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height - 100), collectionViewLayout: createLayout())
+    lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
 
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
         configureHierarchy()
-        
         
     }
     
@@ -43,13 +40,17 @@ extension AroundViewController {
     
     private func configureHierarchy() {
         
-        view.addSubview(collectionView)
         
+        view.addSubview(collectionView)
         
         collectionView.snp.makeConstraints { make in
             make.leading.trailing.top.bottom.equalToSuperview()
         }
-//        let backgroundView = BackgroundView()
-        collectionView.backgroundView = BackgroundView()
+        collectionView.layoutIfNeeded()
+
+        let backgroundView = BackgroundView()
+        collectionView.backgroundView = backgroundView
+        collectionView.contentInsetAdjustmentBehavior = .never
     }
+    
 }

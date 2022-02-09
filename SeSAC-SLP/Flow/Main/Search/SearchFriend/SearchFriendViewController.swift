@@ -22,6 +22,7 @@ class SearchFriendViewController: TabmanViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "찾기중단", style: .plain, target: self, action: #selector(stopFind))
         
         self.dataSource = self
+        self.automaticallyAdjustsChildInsets = true
         
         let bar = TMBar.ButtonBar()
         bar.layout.transitionStyle = .snap
@@ -32,7 +33,6 @@ class SearchFriendViewController: TabmanViewController {
         bar.indicator.weight = .light
         bar.layer.borderColor = CustomColor.SLPGray2.color.cgColor
         bar.layer.borderWidth = 1
-        
         
         bar.buttons.customize { button in
             button.tintColor = CustomColor.SLPGray6.color
