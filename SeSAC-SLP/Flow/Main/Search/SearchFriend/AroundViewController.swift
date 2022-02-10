@@ -15,6 +15,8 @@ class AroundViewController: UIViewController {
         case main
     }
     
+    static let badgeElementKind = "badge-element-kind"
+    
     lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
 
     let backgroundView: BackgroundView = {
@@ -27,7 +29,7 @@ class AroundViewController: UIViewController {
     //완료 하고 FromQueueDB hashable 바꿔줄까?
     var dataSource: UICollectionViewDiffableDataSource<Section, FromQueueDB>! = nil
     
-    let data = [FromQueueDB(uid: "aabc", nick: "nick", lat: 10, long: 10, reputation: [0,0,0,0,0,0,0,0], hf: ["hobby1", "hobby2", "hobby3", "hobby4", "hobby5", "hobby6"], reviews: ["good", "very good"], gender: 0, type: 0, sesac: 0, background: 0), FromQueueDB(uid: "aabcds", nick: "nick", lat: 10, long: 10, reputation: [0,0,0,0,0,0,0,0], hf: ["hobby1", "hobby2", "hobby3", "hobby4", "hobby5", "hobby6"], reviews: ["goodasdklfnk\nasdklfnmalksdnf\nalmsnkdfnalksd\nanklsdfnlaksdfn\nalkdnsflkasndflkdsa\nalnskdfnalskdfnaslkdfnskla", "very good"], gender: 0, type: 0, sesac: 0, background: 0)]
+    let data = [FromQueueDB(uid: "aabc", nick: "nick", lat: 10, long: 10, reputation: [0,0,0,0,0,0,0,0], hf: ["hobby1", "hobby2", "hobby3", "hobby4", "hobby5", "hobby6"], reviews: ["good", "very good"], gender: 0, type: 0, sesac: 0, background: 0), FromQueueDB(uid: "aabcds", nick: "nick", lat: 10, long: 10, reputation: [4,0,1,0,2,0,3,0], hf: ["hobby1", "hobby2", "hobby3", "hobby4", "hobby5", "hobby6"], reviews: ["goodasdklfnk\nasdklfnmalksdnf\nalmsnkdfnalksd\nanklsdfnlaksdfn\nalkdnsflkasndflkdsa\nalnskdfnalskdfnaslkdfnskla", "very good"], gender: 0, type: 0, sesac: 0, background: 0)]
 //    let data: [FromQueueDB] = []
 
     override func viewDidLoad() {
@@ -45,8 +47,12 @@ extension AroundViewController {
     
     private func createLayout() -> UICollectionViewLayout {
         
+        let badgeAnchor = NSCollectionLayoutAnchor(edges: [.top, .trailing], absoluteOffset: CGPoint(x: -20, y: 20))
+        let badgeSize = NSCollectionLayoutSize(widthDimension: .absolute(80), heightDimension: .absolute(40))
+        let badge = NSCollectionLayoutSupplementaryItem(layoutSize: badgeSize, elementKind: AroundViewController.badgeElementKind, containerAnchor: badgeAnchor)
+        
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(252))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        let item = NSCollectionLayoutItem(layoutSize: itemSize, supplementaryItems: [badge])
         let group = NSCollectionLayoutGroup.vertical(layoutSize: itemSize, subitems: [item])
         let section = NSCollectionLayoutSection(group: group)
         let layout = UICollectionViewCompositionalLayout(section: section)
@@ -57,8 +63,6 @@ extension AroundViewController {
 extension AroundViewController {
     
     private func configureHierarchy() {
-        
-        
         collectionView.register(CardCell.self, forCellWithReuseIdentifier: "CardCell")
         view.addSubview(collectionView)
         
@@ -78,8 +82,19 @@ extension AroundViewController {
             collectionView.backgroundView?.isHidden = true
         }
     }
+    @objc func badgeClicked(_ sender: UIButton) {
+        print(sender.tag)
+    }
     
     func configureDataSource() {
+        let badgeRegistration = UICollectionView.SupplementaryRegistration<BadgeView>(elementKind: BadgeView.reuseIdentifier) { supplementaryView, elementKind, indexPath in
+            
+            supplementaryView.badge.setAttributedTitle(NSAttributedString(string: "요청하기", attributes: [NSAttributedString.Key.font: CustomFont.Title3_M14.font, NSAttributedString.Key.foregroundColor: CustomColor.SLPWhite.color]), for: .normal)
+            supplementaryView.badge.backgroundColor = CustomColor.SLPError.color
+            supplementaryView.badge.tag = indexPath.item
+            supplementaryView.badge.addTarget(self, action: #selector(self.badgeClicked(_:)), for: .touchUpInside)
+            
+        }
 
         dataSource = UICollectionViewDiffableDataSource<Section, FromQueueDB>(collectionView: collectionView){ (collectionView, indexPath, itemIdentifier) -> UICollectionViewCell? in
             
@@ -87,8 +102,15 @@ extension AroundViewController {
                 fatalError()
             }
             cell.data = itemIdentifier
+            cell.imageView.image = UIImage(named: "sesac_background_\(itemIdentifier.background)")
+            cell.sesacImageView.image = UIImage(named: "sesac_face_\(itemIdentifier.sesac)")
             return cell
         }
+        
+        dataSource.supplementaryViewProvider = {
+            return self.collectionView.dequeueConfiguredReusableSupplementary(using: badgeRegistration, for: $2)
+        }
+        
         collectionView.dataSource = dataSource
 
         var snapshot = NSDiffableDataSourceSnapshot<Section, FromQueueDB>()
@@ -103,15 +125,27 @@ extension AroundViewController {
 
 extension AroundViewController: UICollectionViewDelegate {
     
+    
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        if collectionView.indexPathsForSelectedItems?.contains(indexPath) ?? false {
+        //한 셀만 선택 가능하게
+//        if collectionView.indexPathsForSelectedItems?.contains(indexPath) ?? false {
+//            collectionView.deselectItem(at: indexPath, animated: true)
+//        } else {
+//            collectionView.selectItem(at: indexPath, animated: true, scrollPosition: [])
+//        }
+        //근데 왜 위와 같은 결과?? collectionView.allowsMultipleSelection 메서드를 건드려야 되는데 하니까 이상해짐..
+        if collectionView.cellForItem(at: indexPath)?.isSelected == true {
+            print(indexPath)
             collectionView.deselectItem(at: indexPath, animated: true)
         } else {
+            print(indexPath)
             collectionView.selectItem(at: indexPath, animated: true, scrollPosition: [])
         }
+
         dataSource.refresh()
         return false
     }
+    
 }
 
 extension UICollectionViewDiffableDataSource {

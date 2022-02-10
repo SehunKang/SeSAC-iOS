@@ -23,6 +23,8 @@ class CardCell: UICollectionViewCell {
         return view
     }()
     
+    let sesacImageView = UIImageView()
+    
     let container = UIView()
     
     
@@ -141,12 +143,14 @@ class CardCell: UICollectionViewCell {
 //        contentView.addSubview(mainStack)
         contentView.addSubview(imageView)
         contentView.addSubview(container)
+        imageView.addSubview(sesacImageView)
         container.addSubview(mainStack)
 
         container.translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false
         mainStack.translatesAutoresizingMaskIntoConstraints = false
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        sesacImageView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             contentView.topAnchor.constraint(equalTo: topAnchor),
@@ -175,7 +179,12 @@ class CardCell: UICollectionViewCell {
             
             collectionView.topAnchor.constraint(equalTo: nameLabel.bottomAnchor),
             //contentsize로 하면 처음엔 컨텐츠보다 height이 더 길다. 일단 제일 적절한 472로 고정
-            collectionView.heightAnchor.constraint(equalToConstant: 472)
+            collectionView.heightAnchor.constraint(equalToConstant: 472),
+            
+            sesacImageView.widthAnchor.constraint(equalToConstant: 184),
+            sesacImageView.heightAnchor.constraint(equalToConstant: 184),
+            sesacImageView.centerXAnchor.constraint(equalTo: imageView.centerXAnchor),
+            sesacImageView.centerYAnchor.constraint(equalTo: imageView.centerYAnchor)
         ])
                                                                     
         
@@ -216,7 +225,7 @@ extension CardCell {
             let section: NSCollectionLayoutSection
             
             if sectionKind == .title {
-                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .absolute(34))
+                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .absolute(38))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: itemSize.heightDimension)
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 2)
@@ -227,7 +236,7 @@ extension CardCell {
                 section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 16, bottom: 10, trailing: 16)
 
             } else if sectionKind == .hobby {
-                let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(50), heightDimension: .absolute(34))
+                let itemSize = NSCollectionLayoutSize(widthDimension: .estimated(50), heightDimension: .absolute(38))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: itemSize.heightDimension)
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
@@ -261,14 +270,17 @@ extension CardCell {
         return UICollectionView.CellRegistration<UICollectionViewCell, Int> { cell, indexPath, item in
 
             var content = UIListContentConfiguration.cell()
-            content.text = "item is \(item)"
+            content.text = ["좋은 매너", "정확한 시간 약속", "빠른 응답", "친절한 성격", "능숙한 취미 실력", "유익한 시간"][indexPath.item]
             content.textProperties.alignment = .center
+            content.textProperties.font = CustomFont.Title4_R14.font
             content.directionalLayoutMargins = .zero
-            cell.contentConfiguration = content
             var background = UIBackgroundConfiguration.listPlainCell()
             background.cornerRadius = 8
-            background.strokeColor = .systemGray3
             background.strokeWidth = 1.0
+            background.backgroundColor = item > 0 ? CustomColor.SLPGreen.color : .clear
+            background.strokeColor = item > 0 ? CustomColor.SLPGreen.color : .systemGray3
+            content.textProperties.color = item > 0 ? CustomColor.SLPWhite.color : CustomColor.SLPBlack.color
+            cell.contentConfiguration = content
             cell.backgroundConfiguration = background
         }
     }
@@ -279,13 +291,14 @@ extension CardCell {
             var content = UIListContentConfiguration.cell()
             content.text = item
 //            content.textProperties.alignment = .center 이렇게 하면 오류 생김
-            cell.contentConfiguration = content
-            
+            content.textProperties.font = CustomFont.Title4_R14.font
+            content.textProperties.allowsDefaultTighteningForTruncation = true
             var background = UIBackgroundConfiguration.listPlainCell()
             background.cornerRadius = 8
-            background.strokeColor = .systemGreen
+            background.strokeColor = CustomColor.SLPGray2.color
             background.strokeWidth = 1.0
             cell.backgroundConfiguration = background
+            cell.contentConfiguration = content
         }
     }
     
@@ -298,7 +311,8 @@ extension CardCell {
             } else {
                 content.attributedText = NSAttributedString(string: "첫 리뷰를 기다리는 중이에요!", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray.cgColor])
             }
-            content.textProperties.numberOfLines = 4
+            content.textProperties.numberOfLines = 2
+            content.textProperties.font = CustomFont.Body3_R14.font
             cell.contentConfiguration = content
             
         }
@@ -308,7 +322,16 @@ extension CardCell {
         return UICollectionView.SupplementaryRegistration<UICollectionViewListCell>(elementKind: CardCell.sectionHeaderElement) { supplementaryView, elementKind, indexPath in
 
             var content = supplementaryView.defaultContentConfiguration()
-            content.text = "Header at \(indexPath.section)"
+            let headerText: String
+            switch indexPath.section {
+            case SectionLayoutKind.title.rawValue: headerText = "새싹 타이틀"
+            case SectionLayoutKind.hobby.rawValue: headerText = "하고 싶은 취미"
+            case SectionLayoutKind.review.rawValue: headerText = "새싹 리뷰"
+            default:
+                return
+            }
+            content.text = headerText
+            content.textProperties.font = CustomFont.Title6_R12.font
             supplementaryView.contentConfiguration = content
             
             let commentCount = self.data?.reviews.count ?? 0
@@ -357,7 +380,7 @@ extension CardCell {
             
             let titleItems = data.reputation.map { Item(reputation: $0)}
             var titleSS = NSDiffableDataSourceSectionSnapshot<Item>()
-            titleSS.append(titleItems)
+            titleSS.append(Array(titleItems[0...5]))
             
             let hobbyItems = data.hf.map { Item(hobby: $0)}
             var hobbySS = NSDiffableDataSourceSectionSnapshot<Item>()
