@@ -10,8 +10,9 @@ import UIKit
 class CardCell: UICollectionViewCell {
     
     private let nameLabel: UILabel = {
-        let label = UILabel()
-        label.font = .preferredFont(forTextStyle: .headline)
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 44))
+        label.font = CustomFont.Title1_M16.font
+        label.sizeToFit()
         return label
     }()
     
@@ -22,6 +23,9 @@ class CardCell: UICollectionViewCell {
         return view
     }()
     
+    let container = UIView()
+    
+    
     private let disclosureIndicator: UIImageView = {
         let disclosureIndicator = UIImageView()
         disclosureIndicator.image = UIImage(systemName: "chevron.down")
@@ -30,12 +34,15 @@ class CardCell: UICollectionViewCell {
         return disclosureIndicator
     }()
     
-    private lazy var collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: bounds.width, height: 100), collectionViewLayout: createLayout())
+    private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
     
     private lazy var rootStack: UIStackView = {
         let rootStack = UIStackView(arrangedSubviews: [nameLabel, disclosureIndicator])
-        rootStack.alignment = .top
+        rootStack.alignment = .center
         rootStack.distribution = .fillProportionally
+        rootStack.spacing = 40
+        rootStack.layoutMargins = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+        rootStack.isLayoutMarginsRelativeArrangement = true
         return rootStack
     }()
     
@@ -90,10 +97,13 @@ class CardCell: UICollectionViewCell {
         didSet {
             nameInit()
             print(collectionView.collectionViewLayout.collectionViewContentSize.height)
-            collectionView.heightAnchor.constraint(equalToConstant: collectionView.collectionViewLayout.collectionViewContentSize.height).isActive = true
+//            collectionView.heightAnchor.constraint(equalToConstant: collectionView.collectionViewLayout.collectionViewContentSize.height).isActive = true
+//            collectionView.heightAnchor.constraint(equalToConstant: 472).isActive = true
+//            collectionView.layoutIfNeeded()
 
         }
     }
+    
     override var isSelected: Bool {
         didSet {
             updateAppearance()
@@ -124,12 +134,16 @@ class CardCell: UICollectionViewCell {
         
         setUpConstraints()
         configureDataSource()
+        collectionView.delegate = self
     }
     
     private func setUpConstraints() {
-        contentView.addSubview(mainStack)
+//        contentView.addSubview(mainStack)
         contentView.addSubview(imageView)
+        contentView.addSubview(container)
+        container.addSubview(mainStack)
 
+        container.translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false
         mainStack.translatesAutoresizingMaskIntoConstraints = false
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -139,14 +153,31 @@ class CardCell: UICollectionViewCell {
             contentView.leadingAnchor.constraint(equalTo: leadingAnchor),
             contentView.trailingAnchor.constraint(equalTo: trailingAnchor),
             contentView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            
             imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: padding),
             imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
             imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
             imageView.heightAnchor.constraint(equalToConstant: 194),
-            mainStack.topAnchor.constraint(equalTo: imageView.bottomAnchor),
+            imageView.bottomAnchor.constraint(equalTo: mainStack.topAnchor),
+            
+//            mainStack.topAnchor.constraint(equalTo: imageView.bottomAnchor),
             mainStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: padding),
             mainStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -padding),
+            
+            container.leadingAnchor.constraint(equalTo: mainStack.leadingAnchor),
+            container.trailingAnchor.constraint(equalTo: mainStack.trailingAnchor),
+            container.topAnchor.constraint(equalTo: mainStack.topAnchor),
+            container.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            
+            nameLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor),
+            nameLabel.heightAnchor.constraint(equalToConstant: 50),
+            nameLabel.widthAnchor.constraint(equalToConstant: 287),
+            
+            collectionView.topAnchor.constraint(equalTo: nameLabel.bottomAnchor),
+            //contentsize로 하면 처음엔 컨텐츠보다 height이 더 길다. 일단 제일 적절한 472로 고정
+            collectionView.heightAnchor.constraint(equalToConstant: 472)
         ])
+                                                                    
         
         closedConstraint = nameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -padding)
         closedConstraint?.priority = .defaultLow
@@ -154,12 +185,17 @@ class CardCell: UICollectionViewCell {
         openConstraint = collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -padding)
         openConstraint?.priority = .defaultLow
         
+        container.layer.borderWidth = 1
+        container.layer.borderColor = CustomColor.SLPGray2.color.cgColor
+        container.layer.cornerRadius = 8
+        
     }
     
     private func updateAppearance() {
 
         closedConstraint?.isActive = !isSelected
         openConstraint?.isActive = isSelected
+        
         
         UIView.animate(withDuration: 0.3) {
             let upsideDown = CGAffineTransform(rotationAngle: .pi * 0.999)
@@ -262,7 +298,7 @@ extension CardCell {
             } else {
                 content.attributedText = NSAttributedString(string: "첫 리뷰를 기다리는 중이에요!", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray.cgColor])
             }
-            content.textProperties.numberOfLines = 0
+            content.textProperties.numberOfLines = 4
             cell.contentConfiguration = content
             
         }
@@ -314,28 +350,38 @@ extension CardCell {
         }
         nameLabel.text = data.nick
         
-        
-        
-        mainSnapshot.appendSections(SectionLayoutKind.allCases)
-        dataSource.apply(mainSnapshot)
+        if mainSnapshot.numberOfSections == 0 {
+            
+            mainSnapshot.appendSections(SectionLayoutKind.allCases)
+            dataSource.apply(mainSnapshot)
+            
+            let titleItems = data.reputation.map { Item(reputation: $0)}
+            var titleSS = NSDiffableDataSourceSectionSnapshot<Item>()
+            titleSS.append(titleItems)
+            
+            let hobbyItems = data.hf.map { Item(hobby: $0)}
+            var hobbySS = NSDiffableDataSourceSectionSnapshot<Item>()
+            hobbySS.append(hobbyItems)
+            
+            let commentItems = Item(comment: data.reviews.first)
+            var commentSS = NSDiffableDataSourceSectionSnapshot<Item>()
+            commentSS.append([commentItems])
+            
+            dataSource.apply(titleSS, to: .title)
+            dataSource.apply(hobbySS, to: .hobby)
+            dataSource.apply(commentSS, to: .review)
+        }
 
-        let titleItems = data.reputation.map { Item(reputation: $0)}
-        var titleSS = NSDiffableDataSourceSectionSnapshot<Item>()
-        titleSS.append(titleItems)
-        
-        let hobbyItems = data.hf.map { Item(hobby: $0)}
-        var hobbySS = NSDiffableDataSourceSectionSnapshot<Item>()
-        hobbySS.append(hobbyItems)
-        
-        let commentItems = Item(comment: data.reviews.first)
-        var commentSS = NSDiffableDataSourceSectionSnapshot<Item>()
-        commentSS.append([commentItems])
-        
-        dataSource.apply(titleSS, to: .title)
-        dataSource.apply(hobbySS, to: .hobby)
-        dataSource.apply(commentSS, to: .review)
     }
+}
 
+extension CardCell: UICollectionViewDelegate {
     
+    
+    // header 클릭은 delegate
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        collectionView.deselectItem(at: indexPath, animated: true)
+    }
 }
 

@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Tabman
 
 class AroundViewController: UIViewController {
     
@@ -26,7 +27,8 @@ class AroundViewController: UIViewController {
     //완료 하고 FromQueueDB hashable 바꿔줄까?
     var dataSource: UICollectionViewDiffableDataSource<Section, FromQueueDB>! = nil
     
-    let data = [FromQueueDB(uid: "aabc", nick: "nick", lat: 10, long: 10, reputation: [0,0,0,0,0,0,0,0], hf: ["hobby1", "hobby2", "hobby3", "hobby4", "hobby5", "hobby6"], reviews: ["good", "very good"], gender: 0, type: 0, sesac: 0, background: 0)]
+    let data = [FromQueueDB(uid: "aabc", nick: "nick", lat: 10, long: 10, reputation: [0,0,0,0,0,0,0,0], hf: ["hobby1", "hobby2", "hobby3", "hobby4", "hobby5", "hobby6"], reviews: ["good", "very good"], gender: 0, type: 0, sesac: 0, background: 0), FromQueueDB(uid: "aabcds", nick: "nick", lat: 10, long: 10, reputation: [0,0,0,0,0,0,0,0], hf: ["hobby1", "hobby2", "hobby3", "hobby4", "hobby5", "hobby6"], reviews: ["goodasdklfnk\nasdklfnmalksdnf\nalmsnkdfnalksd\nanklsdfnlaksdfn\nalkdnsflkasndflkdsa\nalnskdfnalskdfnaslkdfnskla", "very good"], gender: 0, type: 0, sesac: 0, background: 0)]
+//    let data: [FromQueueDB] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +36,6 @@ class AroundViewController: UIViewController {
         configureHierarchy()
         configureDataSource()
         collectionView.delegate = self
-        
     }
     
 
@@ -62,13 +63,14 @@ extension AroundViewController {
         view.addSubview(collectionView)
         
         collectionView.snp.makeConstraints { make in
-            make.leading.trailing.top.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
+            //navbar, tabmanbar height을 합친 값... 이렇게 해야되나..?
+            make.top.equalToSuperview().inset(138)
             make.bottom.equalToSuperview().inset(34)
         }
         collectionView.layoutIfNeeded()
 
         collectionView.backgroundView = backgroundView
-//        collectionView.contentInsetAdjustmentBehavior = .never
         
         if data.isEmpty {
             collectionView.backgroundView?.isHidden = false
