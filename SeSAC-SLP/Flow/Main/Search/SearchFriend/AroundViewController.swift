@@ -68,7 +68,7 @@ extension AroundViewController {
         collectionView.layoutIfNeeded()
 
         collectionView.backgroundView = backgroundView
-        collectionView.contentInsetAdjustmentBehavior = .never
+//        collectionView.contentInsetAdjustmentBehavior = .never
         
         if data.isEmpty {
             collectionView.backgroundView?.isHidden = false

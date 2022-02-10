@@ -15,7 +15,12 @@ class CardCell: UICollectionViewCell {
         return label
     }()
     
-    let imageView = UIImageView()
+    let imageView: UIImageView = {
+        let view = UIImageView()
+        view.layer.cornerRadius = 8
+        view.clipsToBounds = true
+        return view
+    }()
     
     private let disclosureIndicator: UIImageView = {
         let disclosureIndicator = UIImageView()
