@@ -131,7 +131,7 @@ class PhoneAuthCheckViewController: UIViewController {
                     APIServiceForStart.getUserData { code in
                         switch code {
                         case 200:
-                            self.goToMainRootViewController()
+                            self.goHome()
                         case 406:
                             let vc = self.storyboard?.instantiateViewController(withIdentifier: NicknameViewController.identifier) as! NicknameViewController
                             self.navigationController?.pushViewController(vc, animated: true)

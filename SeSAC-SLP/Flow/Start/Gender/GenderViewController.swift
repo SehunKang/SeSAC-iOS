@@ -107,7 +107,7 @@ class GenderViewController: UIViewController {
         APIServiceForStart.signIn { statusCode in
             switch statusCode {
             case 200:
-                self.goToMainRootViewController()
+                self.goHome()
             case 202:
                 UserDefaultManager.validNickFlag = 1
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: NicknameViewController.identifier) as! NicknameViewController

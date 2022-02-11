@@ -63,8 +63,6 @@ class SearchHobbyViewController: UIViewController {
     @IBOutlet var buttonFind: FilledButton!
     let searchBar = UISearchBar(frame: .infinite)
     
-    var currentLocation: CLLocationCoordinate2D!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
     
@@ -97,7 +95,7 @@ class SearchHobbyViewController: UIViewController {
         searchBar.resignFirstResponder()
         //신기방기.. 이래두 되나.?
         view.addSubview(buttonFind)
-        buttonFind.snp.makeConstraints { make in
+        buttonFind.snp.remakeConstraints { make in
             make.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide).inset(16)
             make.height.equalTo(48)
         }
@@ -119,8 +117,8 @@ extension SearchHobbyViewController {
         collectionView.delegate = self
         view.addSubview(collectionView)
         collectionView.snp.makeConstraints { make in
-            make.leading.trailing.bottom.equalToSuperview()
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            make.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+            make.top.equalToSuperview().inset(91)
         }
     }
     
@@ -329,16 +327,16 @@ extension SearchHobbyViewController: UISearchBarDelegate {
 extension SearchHobbyViewController {
 
     private func requestQueue() {
+        viewTap()
         
         if collectionView.numberOfItems(inSection: Section.mine.rawValue) == 0 {
             view.makeToast("취미를 입력해 주세요!")
             return
         }
         
-        let requestData = getDataForAPI()
+        let requestData = getDataForQueueAPI()
         
-        let provider = MoyaProvider<APIServiceQueue>()
-        provider.request(.queue(data: requestData)) { result in
+        APIServiceForSearch.queue(data: requestData) { result in
             switch result {
             case let .success(response):
                 print(response.debugDescription)
@@ -347,6 +345,16 @@ extension SearchHobbyViewController {
                 self.errorHandler(with: error.errorCode)
             }
         }
+    }
+    
+    private func getDataForQueueAPI() -> [String: Any] {
+        
+        guard let location = UserDefaultManager.userLocation else {return [:]}
+        let type = 2
+        let hf = getHobby()
+        let requestData = ["type": type, "region": location.region, "long": location.long, "lat": location.lat, "hf": hf] as [String : Any]
+        return requestData
+        
     }
     
     private func responseHandlerForRequestQueue(statusCode: Int) {
@@ -376,17 +384,7 @@ extension SearchHobbyViewController {
         }
     }
     
-    private func getDataForAPI() -> [String: Any] {
-        
-        let latitude: Double = currentLocation.latitude
-        let longitude: Double = currentLocation.longitude
-        let region: Int = Int((trunc((latitude + 90) * 100) * 100000) + (trunc((longitude + 180) * 100)))
-        let type = 2
-        let hf = getHobby()
-        let requestData = ["type": type, "region": region, "long": longitude, "lat": latitude, "hf": hf] as [String : Any]
-        return requestData
-        
-    }
+
     
     ///'내가 하고 싶은' 섹션의 아이템들의 텍스트를 리턴해준다
     private func getHobby() -> [String] {

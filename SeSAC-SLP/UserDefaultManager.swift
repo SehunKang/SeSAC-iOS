@@ -93,4 +93,7 @@ class UserDefaultManager {
     
     @UserDefaultStruct(key: "QueueData", defaultValue: nil)
     static var queueData: QueueData?
+    
+    @UserDefaultStruct(key: "UserLocation", defaultValue: UserLocation(region: 0, lat: 0, long: 0))
+    static var userLocation: UserLocation!
 }

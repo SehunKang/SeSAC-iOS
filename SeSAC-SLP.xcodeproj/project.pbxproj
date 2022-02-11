@@ -14,6 +14,8 @@
 		2E35DBCC279D585200EFD884 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E35DBCB279D585200EFD884 /* Main.storyboard */; };
 		2E35DBD0279D632500EFD884 /* NetworkCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E35DBCF279D632500EFD884 /* NetworkCheck.swift */; };
 		2E394F6327B54F6D0009F98B /* BadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E394F6227B54F6D0009F98B /* BadgeView.swift */; };
+		2E394F6527B63C720009F98B /* UserLocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E394F6427B63C710009F98B /* UserLocationModel.swift */; };
+		2E394F6727B647320009F98B /* APIServiceForSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E394F6627B647310009F98B /* APIServiceForSearch.swift */; };
 		2E6BB15527B3F7CE0095ADE4 /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6BB15427B3F7CE0095ADE4 /* CardCell.swift */; };
 		2E6DC70827AE3C6D00A049CC /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6DC70727AE3C6D00A049CC /* CustomAnnotation.swift */; };
 		2E6DC70A27AE97D500A049CC /* Moya_QueueAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6DC70927AE97D500A049CC /* Moya_QueueAPI.swift */; };
@@ -79,6 +81,8 @@
 		2E35DBCB279D585200EFD884 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		2E35DBCF279D632500EFD884 /* NetworkCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCheck.swift; sourceTree = "<group>"; };
 		2E394F6227B54F6D0009F98B /* BadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeView.swift; sourceTree = "<group>"; };
+		2E394F6427B63C710009F98B /* UserLocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocationModel.swift; sourceTree = "<group>"; };
+		2E394F6627B647310009F98B /* APIServiceForSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServiceForSearch.swift; sourceTree = "<group>"; };
 		2E6BB15427B3F7CE0095ADE4 /* CardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
 		2E6DC70727AE3C6D00A049CC /* CustomAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
 		2E6DC70927AE97D500A049CC /* Moya_QueueAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Moya_QueueAPI.swift; sourceTree = "<group>"; };
@@ -230,8 +234,8 @@
 			children = (
 				2E97A1C927B1540800A0A057 /* SearchFriendViewController.swift */,
 				2E97A1CF27B2999900A0A057 /* AroundViewController.swift */,
-				2E6BB15427B3F7CE0095ADE4 /* CardCell.swift */,
 				2E97A1CD27B2997D00A0A057 /* RequestReceivedViewController.swift */,
+				2E6BB15427B3F7CE0095ADE4 /* CardCell.swift */,
 				2E394F6227B54F6D0009F98B /* BadgeView.swift */,
 				2E97A1D327B2A19C00A0A057 /* BackgroundView.swift */,
 				2E97A1D527B2A4A400A0A057 /* BackgroundView.xib */,
@@ -361,6 +365,7 @@
 		2ED1211A27ACF9E000A3C8D5 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				2E394F6427B63C710009F98B /* UserLocationModel.swift */,
 				2ED1211B27ACFA2100A3C8D5 /* HomeViewController.swift */,
 				2E6DC70727AE3C6D00A049CC /* CustomAnnotation.swift */,
 			);
@@ -381,6 +386,7 @@
 			isa = PBXGroup;
 			children = (
 				2E35DBCB279D585200EFD884 /* Main.storyboard */,
+				2E394F6627B647310009F98B /* APIServiceForSearch.swift */,
 				2ED1211A27ACF9E000A3C8D5 /* Home */,
 				2E6DC70D27AFBBB400A049CC /* Search */,
 			);
@@ -593,7 +599,9 @@
 				2E6BB15527B3F7CE0095ADE4 /* CardCell.swift in Sources */,
 				2E97A1D027B2999900A0A057 /* AroundViewController.swift in Sources */,
 				2EBAEF83279585B700C2A089 /* Protocol.swift in Sources */,
+				2E394F6727B647320009F98B /* APIServiceForSearch.swift in Sources */,
 				2E6DC70F27AFBBD300A049CC /* SearchHobbyViewController.swift in Sources */,
+				2E394F6527B63C720009F98B /* UserLocationModel.swift in Sources */,
 				2ED54EF0279D3A84001AE07C /* APIModelForStart.swift in Sources */,
 				2E6DC70C27AE9CD900A049CC /* Float+Extension.swift in Sources */,
 				2EA963D72796EF7300DA7C2E /* CustomColor.swift in Sources */,

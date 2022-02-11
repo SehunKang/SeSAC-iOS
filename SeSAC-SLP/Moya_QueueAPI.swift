@@ -11,6 +11,12 @@ import Moya
 enum APIServiceQueue {
     case onqueue(data: [String: Any])
     case queue(data: [String: Any])
+    case delete
+    case hobbyRequest(data: [String: String])
+    case hobbyAccept(data: [String: String])
+    case myQueueState
+    case rate(data: [String: Any], id: String)
+    case dodge(data: [String: String])
 }
 
 extension APIServiceQueue: TargetType {
@@ -23,8 +29,18 @@ extension APIServiceQueue: TargetType {
         switch self {
         case .onqueue:
             return "/queue/onqueue"
-        case .queue:
+        case .queue, .delete:
             return "/queue"
+        case .hobbyRequest:
+            return "/queue/hobbyrequest"
+        case .hobbyAccept:
+            return "/queue/hobbyaccept"
+        case .myQueueState:
+            return "/queue/myQueueState"
+        case .rate(_, let id):
+            return "/queue/rate/\(id)"
+        case .dodge:
+            return "/queue/dodge"
         }
     }
     
@@ -33,6 +49,18 @@ extension APIServiceQueue: TargetType {
         case .onqueue:
             return .post
         case .queue:
+            return .post
+        case .delete:
+            return .delete
+        case .hobbyRequest:
+            return .post
+        case .hobbyAccept:
+            return .post
+        case .myQueueState:
+            return .get
+        case .rate:
+            return .post
+        case .dodge:
             return .post
         }
     }
@@ -43,14 +71,24 @@ extension APIServiceQueue: TargetType {
             return .requestParameters(parameters: data, encoding: URLEncoding.httpBody)
         case .queue(let data):
             return .requestParameters(parameters: data, encoding: URLEncoding.init(destination: .httpBody, arrayEncoding: .noBrackets, boolEncoding: .literal))
+        case .delete:
+            return .requestPlain
+        case .hobbyRequest(let data):
+            return .requestParameters(parameters: data, encoding: URLEncoding.httpBody)
+        case .hobbyAccept(let data):
+            return .requestParameters(parameters: data, encoding: URLEncoding.httpBody)
+        case .myQueueState:
+            return .requestPlain
+        case .rate(let data, _):
+            return .requestParameters(parameters: data, encoding: URLEncoding.init(destination: .httpBody, arrayEncoding: .noBrackets, boolEncoding: .literal))
+        case .dodge(let data):
+            return .requestParameters(parameters: data, encoding: URLEncoding.httpBody)
         }
     }
     
     var headers: [String : String]? {
         switch self {
-        case .onqueue:
-            return ["idtoken": UserDefaultManager.idtoken]
-        case .queue:
+        default:
             return ["idtoken": UserDefaultManager.idtoken]
         }
     }

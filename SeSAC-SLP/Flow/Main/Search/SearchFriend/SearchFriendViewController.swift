@@ -17,11 +17,8 @@ class SearchFriendViewController: TabmanViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        title = "새싹 찾기"
-        let rightBarButtonItem = UIBarButtonItem(title: "찾기중단", style: .plain, target: self, action: #selector(stopFind))
+        navBarConfig()
 //        rightBarButtonItem.setTitleTextAttributes([NSAttributedString.Key.font: CustomFont.Title3_M14.font], for: .normal)
-        self.navigationItem.rightBarButtonItem = rightBarButtonItem
         
         self.dataSource = self
         self.automaticallyAdjustsChildInsets = true
@@ -45,8 +42,24 @@ class SearchFriendViewController: TabmanViewController {
         }
         
         addBar(bar, dataSource: self, at: .top)
-        navBarBackButtonConfigure()
     }
+    
+    private func navBarConfig() {
+        title = "새싹 찾기"
+        navigationItem.hidesBackButton = true
+        
+        let backButton = UIBarButtonItem(image: UIImage(named: "arrow"), style: .plain, target: self, action: #selector(backButtonInNavigationBarClicked) )
+        self.navigationItem.leftBarButtonItem = backButton
+        
+        let rightBarButtonItem = UIBarButtonItem(title: "찾기중단", style: .plain, target: self, action: #selector(stopFind))
+        self.navigationItem.rightBarButtonItem = rightBarButtonItem
+
+    }
+    
+    @objc func backButtonInNavigationBarClicked() {
+        self.navigationController?.popToRootViewController(animated: true)
+    }
+
     
     @objc func stopFind() {
         

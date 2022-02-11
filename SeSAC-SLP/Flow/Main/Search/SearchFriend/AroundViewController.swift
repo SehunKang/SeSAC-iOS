@@ -8,8 +8,14 @@
 import UIKit
 import SnapKit
 import Tabman
+import RxSwift
+import RxCocoa
 
 class AroundViewController: UIViewController {
+    
+    static let identifier = "AroundViewController"
+    
+    let disposeBag = DisposeBag()
     
     enum Section {
         case main
@@ -29,17 +35,75 @@ class AroundViewController: UIViewController {
     //완료 하고 FromQueueDB hashable 바꿔줄까?
     var dataSource: UICollectionViewDiffableDataSource<Section, FromQueueDB>! = nil
     
-    let data = [FromQueueDB(uid: "aabc", nick: "nick", lat: 10, long: 10, reputation: [0,0,0,0,0,0,0,0], hf: ["hobby1", "hobby2", "hobby3", "hobby4", "hobby5", "hobby6"], reviews: ["good", "very good"], gender: 0, type: 0, sesac: 0, background: 0), FromQueueDB(uid: "aabcds", nick: "nick", lat: 10, long: 10, reputation: [4,0,1,0,2,0,3,0], hf: ["hobby1", "hobby2", "hobby3", "hobby4", "hobby5", "hobby6"], reviews: ["goodasdklfnk\nasdklfnmalksdnf\nalmsnkdfnalksd\nanklsdfnlaksdfn\nalkdnsflkasndflkdsa\nalnskdfnalskdfnaslkdfnskla", "very good"], gender: 0, type: 0, sesac: 0, background: 0)]
+//    let data = [FromQueueDB(uid: "aabc", nick: "nick", lat: 10, long: 10, reputation: [0,0,0,0,0,0,0,0], hf: ["hobby1", "hobby2", "hobby3", "hobby4", "hobby5", "hobby6"], reviews: ["good", "very good"], gender: 0, type: 0, sesac: 0, background: 0), FromQueueDB(uid: "aabcds", nick: "nick", lat: 10, long: 10, reputation: [4,0,1,0,2,0,3,0], hf: ["hobby1", "hobby2", "hobby3", "hobby4", "hobby5", "hobby6"], reviews: ["goodasdklfnk\nasdklfnmalksdnf\nalmsnkdfnalksd\nanklsdfnlaksdfn\nalkdnsflkasndflkdsa\nalnskdfnalskdfnaslkdfnskla", "very good"], gender: 0, type: 0, sesac: 0, background: 0)]
 //    let data: [FromQueueDB] = []
+    
+    var data: [FromQueueDB] = UserDefaultManager.queueData!.fromQueueDB {
+        didSet {
+            dataSource.refresh()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("aroundView!")
 
         configureHierarchy()
         configureDataSource()
+        backgroundBind()
         collectionView.delegate = self
     }
     
+    
+    private func changeHobby() {
+        APIServiceForSearch.delete { result in
+            switch result {
+            case .success(let response):
+                switch response.statusCode {
+                case 200:
+                    UserDefaultManager.userStatus = UserStatus.normal.rawValue
+                    self.navigationController?.popViewController(animated: true)
+                case 201:
+                    self.view.makeToast("누군가와 취미를 함께하기로 약속하셨어요!")
+                    print("채팅화면으로 이동")
+                default: return
+                }
+            case .failure(let error):
+                print(error.errorDescription as Any)
+            }
+        }
+    }
+    
+    private func backgroundBind() {
+        backgroundView.buttonChangeHobby.rx.tap
+            .subscribe { _ in
+                self.changeHobby()
+            }
+            .disposed(by: disposeBag)
+        
+        backgroundView.buttonRefresh.rx.tap
+            .throttle(.seconds(5), latest: false, scheduler: MainScheduler.instance)
+            .subscribe { _ in
+                self.refreshQueue()
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    private func refreshQueue() {
+        let dataForOnQueue = APIServiceForSearch.getOnQueueData()
+        
+        APIServiceForSearch.onQueue(data: dataForOnQueue) { result in
+            switch result {
+            case .success(let response):
+                let resultData = try? response.map(QueueData.self)
+                self.data = resultData!.fromQueueDB
+            case .failure(let error):
+                self.errorHandler(with: error.errorCode)
+            }
+        }
+    }
+    
+        
 
 }
 

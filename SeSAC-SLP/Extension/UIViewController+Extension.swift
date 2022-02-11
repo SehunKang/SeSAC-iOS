@@ -10,7 +10,7 @@ import FirebaseAuth
 import Toast
 
 extension UIViewController {
-        
+            
     func hideKeyboardOnTap() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
@@ -35,7 +35,7 @@ extension UIViewController {
         self.navigationController?.navigationBar.topItem?.backButtonTitle = ""
     }
     
-    func goToMainRootViewController() {
+    func goHome() {
         let mainSb = UIStoryboard(name: "Main", bundle: nil)
         let mainVc = mainSb.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
         let mainNav = UINavigationController(rootViewController: mainVc)

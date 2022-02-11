@@ -22,7 +22,7 @@ class RequestReceivedViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        print("requestView!")
         configureHierarchy()
     }
 

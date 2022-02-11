@@ -12,6 +12,7 @@ import CoreLocationUI
 import RxSwift
 import RxCocoa
 import Moya
+import SwiftUI
 
 enum SeekGender {
     case all
@@ -80,6 +81,7 @@ class HomeViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         findFriend()
+        
     }
     
     private func basicUIConfigure() {
@@ -156,9 +158,9 @@ class HomeViewController: UIViewController {
                 switch status {
                 case UserStatus.normal.rawValue:
                     UserDefaultManager.queueData = self.currentQueueData
+                    self.getUserLocation()
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: SearchHobbyViewController.identifier) as! SearchHobbyViewController
                     vc.hidesBottomBarWhenPushed = true // MAGIC!!
-                    vc.currentLocation = self.mapView.region.center
                     self.navigationController?.pushViewController(vc, animated: true)
 //                case UserStatus.searching.rawValue:
 //                case UserStatus.doneMatching.rawValue:
@@ -170,10 +172,9 @@ class HomeViewController: UIViewController {
     }
     
     private func findFriend() {
-        let data = getDataForAPI(location: mapView.region.center)
+        let data = getDataForOnqueueAPI()
         
-        let provider = MoyaProvider<APIServiceQueue>()
-        provider.request(.onqueue(data: data)) { result in
+        APIServiceForSearch.onQueue(data: data) { result in
             switch result {
             case let .success(response):
                 let data = try? response.map(QueueData.self)
@@ -184,13 +185,22 @@ class HomeViewController: UIViewController {
             }
         }
     }
-    private func getDataForAPI(location: CLLocationCoordinate2D) -> [String: Any] {
+    
+    private func getDataForOnqueueAPI() -> [String: Any] {
         
-        let latitude = location.latitude
-        let longitude = location.longitude
-        let region: Int = Int((trunc((latitude + 90) * 100) * 100000) + (trunc((longitude + 180) * 100)))
-        let data = ["region": region, "lat": latitude, "long": longitude] as [String : Any]
+        getUserLocation()
+        
+        guard let location = UserDefaultManager.userLocation else {return [:]}
+
+        let data = ["region": location.region, "lat": location.lat, "long": location.long] as [String : Any]
         return data
+    }
+    
+    private func getUserLocation() {
+        let latitude = mapView.region.center.latitude
+        let longitude = mapView.region.center.longitude
+        let region: Int = Int((trunc((latitude + 90) * 100) * 100000) + (trunc((longitude + 180) * 100)))
+        UserDefaultManager.userLocation = UserLocation(region: region, lat: latitude, long: longitude)
     }
     
     private func showFriend() {
