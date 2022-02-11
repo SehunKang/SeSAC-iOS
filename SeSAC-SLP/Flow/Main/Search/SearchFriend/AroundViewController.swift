@@ -10,6 +10,7 @@ import SnapKit
 import Tabman
 import RxSwift
 import RxCocoa
+import Toast
 
 class AroundViewController: UIViewController {
     
@@ -35,7 +36,7 @@ class AroundViewController: UIViewController {
     //완료 하고 FromQueueDB hashable 바꿔줄까?
     var dataSource: UICollectionViewDiffableDataSource<Section, FromQueueDB>! = nil
     
-//    let data = [FromQueueDB(uid: "aabc", nick: "nick", lat: 10, long: 10, reputation: [0,0,0,0,0,0,0,0], hf: ["hobby1", "hobby2", "hobby3", "hobby4", "hobby5", "hobby6"], reviews: ["good", "very good"], gender: 0, type: 0, sesac: 0, background: 0), FromQueueDB(uid: "aabcds", nick: "nick", lat: 10, long: 10, reputation: [4,0,1,0,2,0,3,0], hf: ["hobby1", "hobby2", "hobby3", "hobby4", "hobby5", "hobby6"], reviews: ["goodasdklfnk\nasdklfnmalksdnf\nalmsnkdfnalksd\nanklsdfnlaksdfn\nalkdnsflkasndflkdsa\nalnskdfnalskdfnaslkdfnskla", "very good"], gender: 0, type: 0, sesac: 0, background: 0)]
+//    let data = [FromQueueDB(uid: "aabc", nick: "nick", lat: 10, long: 10, reputation: [0,0,0,0,0,0,0,0], hf: ["hobby1", "hobby2", "hobby3", "hobby4", "hobby5", "hobby6"], reviews: ["good", "very good"], gender: 0, type: 0, sesac: 0, background: 0), FromQueueDB(uid: "aabcds", nick: "nick", lat: 10, long: 10, reputation: [4,0,1,0,2,0,3,0], hf: ["hobby1", "hobby2", "hobby3", "hobby4", "hobby5", "hobby6"], reviews: ["goodasdklfnk\nasdklfnmalksdnf\nalmsnkdfnalksd\nanklsdfnlaksdfn\nalkdnsflkasndflkdsa\nalnskdfnalskdfnaslkdfnskla", "very good"], gender: 0, type: 0, sesac: 0, background: 0), FromQueueDB(uid: "aabcaasdds", nick: "nick", lat: 10, long: 10, reputation: [4,0,1,0,2,0,3,0], hf: ["hobby1", "hobby2", "hobby3", "hobby4", "hobby5", "hobby6"], reviews: [], gender: 0, type: 0, sesac: 0, background: 0)]
 //    let data: [FromQueueDB] = []
     
     var data: [FromQueueDB] = UserDefaultManager.queueData!.fromQueueDB {
@@ -80,7 +81,7 @@ class AroundViewController: UIViewController {
                 self.changeHobby()
             }
             .disposed(by: disposeBag)
-        
+
         backgroundView.buttonRefresh.rx.tap
             .throttle(.seconds(5), latest: false, scheduler: MainScheduler.instance)
             .subscribe { _ in
@@ -91,7 +92,7 @@ class AroundViewController: UIViewController {
     
     private func refreshQueue() {
         let dataForOnQueue = APIServiceForSearch.getOnQueueData()
-        
+
         APIServiceForSearch.onQueue(data: dataForOnQueue) { result in
             switch result {
             case .success(let response):
@@ -102,8 +103,6 @@ class AroundViewController: UIViewController {
             }
         }
     }
-    
-        
 
 }
 
@@ -146,7 +145,7 @@ extension AroundViewController {
             collectionView.backgroundView?.isHidden = true
         }
     }
-    @objc func badgeClicked(_ sender: UIButton) {
+    @objc func badgeClicked(sender: UIButton) {
         print(sender.tag)
     }
     
@@ -156,7 +155,7 @@ extension AroundViewController {
             supplementaryView.badge.setAttributedTitle(NSAttributedString(string: "요청하기", attributes: [NSAttributedString.Key.font: CustomFont.Title3_M14.font, NSAttributedString.Key.foregroundColor: CustomColor.SLPWhite.color]), for: .normal)
             supplementaryView.badge.backgroundColor = CustomColor.SLPError.color
             supplementaryView.badge.tag = indexPath.item
-            supplementaryView.badge.addTarget(self, action: #selector(self.badgeClicked(_:)), for: .touchUpInside)
+            supplementaryView.badge.addTarget(self, action: #selector(self.badgeClicked(sender:)), for: .touchUpInside)
             
         }
 
@@ -209,6 +208,7 @@ extension AroundViewController: UICollectionViewDelegate {
         dataSource.refresh()
         return false
     }
+    
     
 }
 

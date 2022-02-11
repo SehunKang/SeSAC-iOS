@@ -179,6 +179,7 @@ class HomeViewController: UIViewController {
             case let .success(response):
                 let data = try? response.map(QueueData.self)
                 self.currentQueueData = data
+                print(data as Any)
             case let .failure(error):
                 print(error.errorDescription as Any)
                 self.errorHandler(with: error.errorCode)

@@ -309,7 +309,10 @@ extension CardCell {
             if self.data?.reviews.count != 0 {
                 content.text = item.comment
             } else {
-                content.attributedText = NSAttributedString(string: "첫 리뷰를 기다리는 중이에요!", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray.cgColor])
+                //attributedText로 했다가 에러나서 디버깅으로 두시간 날려먹음
+//                content.attributedText = NSAttributedString(string: "첫 리뷰를 기다리는 중이에요!", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray.cgColor])
+                content.textProperties.color = CustomColor.SLPGray2.color
+                content.text = "첫 리뷰를 기다리는 중이에요!"
             }
             content.textProperties.numberOfLines = 2
             content.textProperties.font = CustomFont.Body3_R14.font
@@ -404,6 +407,7 @@ extension CardCell: UICollectionViewDelegate {
     // header 클릭은 delegate
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        print(indexPath)
         collectionView.deselectItem(at: indexPath, animated: true)
     }
 }

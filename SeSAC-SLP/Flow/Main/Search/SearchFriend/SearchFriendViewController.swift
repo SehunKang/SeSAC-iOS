@@ -62,7 +62,23 @@ class SearchFriendViewController: TabmanViewController {
 
     
     @objc func stopFind() {
-        
+        APIServiceForSearch.delete { result in
+            switch result {
+            case .success(let response):
+                switch response.statusCode {
+                case 200:
+                    UserDefaultManager.userStatus = UserStatus.normal.rawValue
+                    self.navigationController?.popToRootViewController(animated: true)
+                case 201:
+                    self.view.makeToast("누군가와 취미를 함께하기로 약송하셨어요!")
+                    print("goto chat")
+                default:
+                    return
+                }
+            case .failure(let error):
+                self.errorHandler(with: error.errorCode)
+            }
+        }
     }
 
 }
