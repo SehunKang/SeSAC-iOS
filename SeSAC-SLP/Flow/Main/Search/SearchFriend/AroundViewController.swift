@@ -145,8 +145,17 @@ extension AroundViewController {
             collectionView.backgroundView?.isHidden = true
         }
     }
+    
     @objc func badgeClicked(sender: UIButton) {
         print(sender.tag)
+        showPopUp(title: "취미 같이 하기를 요청할게요",
+                  message: "요청이 수락되면 30분 후에 리뷰를 남길 수 있어요", rightActionCompletion:  {
+            self.sendRequest(sender.tag)
+        })
+    }
+    
+    func sendRequest(_ cardIndex: Int) {
+        print(cardIndex)
     }
     
     func configureDataSource() {
