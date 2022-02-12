@@ -41,18 +41,18 @@ class AroundViewController: UIViewController {
     
     var data: [FromQueueDB] = UserDefaultManager.queueData!.fromQueueDB {
         didSet {
-            dataSource.refresh()
+            collectionView.reloadData()
         }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("aroundView!")
 
         configureHierarchy()
         configureDataSource()
         backgroundBind()
         collectionView.delegate = self
+        refreshQueue()
     }
     
     
@@ -103,6 +103,81 @@ class AroundViewController: UIViewController {
             }
         }
     }
+    
+    private func sendRequest(_ cardIndex: Int) {
+        
+        let dataForAPI = ["otheruid": data[cardIndex].uid]
+        APIServiceForSearch.hobbyRequest(data: dataForAPI) { result in
+            
+            switch result {
+            case .success(let response):
+                switch response.statusCode {
+                case 200:
+                    self.view.makeToast("취미 함께 하기 요청을 보냈습니다")
+                case 201:
+                    self.hobbyAccept(dataForAPI)
+                case 202:
+                    self.view.makeToast("상대방이 취미 함께 하기를 그만두었습니다.")
+                default: return
+                }
+            case .failure(let error):
+                self.errorHandler(with: error.errorCode)
+            }
+        }
+    }
+    
+    private func hobbyAccept(_ apiData: [String: String]) {
+        
+        APIServiceForSearch.hobbyAccept(data: apiData) { result in
+            switch result {
+            case .success(let response):
+                switch response.statusCode {
+                case 200:
+                    self.view.makeToast("상대방도 취미 함께 하기를 요청했습니다. 채팅방으로 이동합니다", duration: 1, position: .center, style: ToastManager.shared.style) {_ in
+                        print("go to chat")
+                    }
+                case 201:
+                    self.view.makeToast("상태방이 이미 다른 사람과 취미를 함께하는 중입니다.")
+                case 202:
+                    self.view.makeToast("상대방이 취미 함께 하기를 그만두었습니다.")
+                case 203:
+                    self.view.makeToast("앗! 누군가가 나의 취미 함께 하기를 수락하였어요!", duration: 1, position: .center, style: ToastManager.shared.style) { _ in
+                        self.checkMyState()
+                    }
+                default: return
+                }
+            case .failure(let error):
+                self.errorHandler(with: error.errorCode)
+            }
+        }
+    }
+    
+    private func checkMyState() {
+        
+        APIServiceForSearch.myQueueState { result in
+            switch result {
+            case .success(let response):
+                let responseData = try? response.map(MyQueueStatus.self)
+                switch response.statusCode {
+                case 200:
+                    if responseData?.matched == 1 {
+                        self.view.makeToast("채팅방으로 이동합니다.", duration: 1, position: .center, style: ToastManager.shared.style) {_ in
+                            print("goto chat")
+                        }
+                    }
+                case 201:
+                    self.view.makeToast("오랜 시간 동안 매칭 되지 않아 새싹 친구찾기를 그만둡니다.", duration: 1, position: .center, style: ToastManager.shared.style) {_ in
+                        UserDefaultManager.userStatus = UserStatus.normal.rawValue
+                        self.goHome()
+                    }
+                default: return
+                }
+            case .failure(let error):
+                self.errorHandler(with: error.errorCode)
+            }
+        }
+    }
+
 
 }
 
@@ -148,15 +223,14 @@ extension AroundViewController {
     
     @objc func badgeClicked(sender: UIButton) {
         print(sender.tag)
+        
+        
         showPopUp(title: "취미 같이 하기를 요청할게요",
                   message: "요청이 수락되면 30분 후에 리뷰를 남길 수 있어요", rightActionCompletion:  {
             self.sendRequest(sender.tag)
         })
     }
     
-    func sendRequest(_ cardIndex: Int) {
-        print(cardIndex)
-    }
     
     func configureDataSource() {
         let badgeRegistration = UICollectionView.SupplementaryRegistration<BadgeView>(elementKind: BadgeView.reuseIdentifier) { supplementaryView, elementKind, indexPath in
@@ -207,10 +281,9 @@ extension AroundViewController: UICollectionViewDelegate {
 //        }
         //근데 왜 위와 같은 결과?? collectionView.allowsMultipleSelection 메서드를 건드려야 되는데 하니까 이상해짐..
         if collectionView.cellForItem(at: indexPath)?.isSelected == true {
-            print(indexPath)
             collectionView.deselectItem(at: indexPath, animated: true)
+            refreshQueue()
         } else {
-            print(indexPath)
             collectionView.selectItem(at: indexPath, animated: true, scrollPosition: [])
         }
 

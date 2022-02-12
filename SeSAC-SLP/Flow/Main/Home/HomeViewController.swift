@@ -13,6 +13,7 @@ import RxSwift
 import RxCocoa
 import Moya
 import SwiftUI
+import Toast
 
 enum SeekGender {
     case all
@@ -20,18 +21,6 @@ enum SeekGender {
     case female
 }
 
-struct QueueData: Codable {
-    let fromQueueDB, fromQueueDBRequested: [FromQueueDB]
-    let fromRecommend: [String]
-}
-
-struct FromQueueDB: Codable, Hashable {
-    let uid, nick: String
-    let lat, long: Double
-    let reputation: [Int]
-    let hf, reviews: [String]
-    let gender, type, sesac, background: Int
-}
 
 
 class HomeViewController: UIViewController {
@@ -157,12 +146,9 @@ class HomeViewController: UIViewController {
                 let status = UserDefaultManager.userStatus
                 switch status {
                 case UserStatus.normal.rawValue:
-                    UserDefaultManager.queueData = self.currentQueueData
-                    self.getUserLocation()
-                    let vc = self.storyboard?.instantiateViewController(withIdentifier: SearchHobbyViewController.identifier) as! SearchHobbyViewController
-                    vc.hidesBottomBarWhenPushed = true // MAGIC!!
-                    self.navigationController?.pushViewController(vc, animated: true)
-//                case UserStatus.searching.rawValue:
+                    self.whenNormal()
+                case UserStatus.searching.rawValue:
+                    self.whenSearching()
 //                case UserStatus.doneMatching.rawValue:
                 default: break
                 }
@@ -170,6 +156,46 @@ class HomeViewController: UIViewController {
             .disposed(by: disposeBag)
 
     }
+    
+    private func whenNormal() {
+        if UserDefaultManager.userData?.gender == Gender.none.rawValue {
+            view.makeToast("새싹 찾기 기능을 이용하기 위해서는 성별이 필요해요!", duration: 1, position: .center, style: ToastManager.shared.style) { _ in
+                let sb = UIStoryboard(name: "MyInfo", bundle: nil)
+                let vc = sb.instantiateViewController(withIdentifier: MyInfoDetailViewController.identifier) as! MyInfoDetailViewController
+                let nav = UINavigationController(rootViewController: vc)
+                self.present(nav, animated: true, completion: nil)
+                return
+            }
+        }
+        if !CLLocationManager.locationServicesEnabled() {
+            showLocationServiceAlert()
+            return
+        }
+        
+        UserDefaultManager.queueData = self.currentQueueData
+        self.getUserLocation()
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: SearchHobbyViewController.identifier) as! SearchHobbyViewController
+        vc.hidesBottomBarWhenPushed = true // MAGIC!!
+        self.navigationController?.pushViewController(vc, animated: true)
+
+    }
+    
+    private func whenSearching() {
+        let vc1 = self.storyboard?.instantiateViewController(withIdentifier: SearchHobbyViewController.identifier) as! SearchHobbyViewController
+        let vc2 = self.storyboard?.instantiateViewController(withIdentifier: SearchFriendViewController.identifier) as! SearchFriendViewController
+        
+        if let navigationController = navigationController {
+            vc2.hidesBottomBarWhenPushed = true
+            vc1.hidesBottomBarWhenPushed = true
+            
+            navigationController.pushViewController(vc2, animated: true)
+            let stackCount = navigationController.viewControllers.count
+            let addIndex = stackCount - 1
+            navigationController.viewControllers.insert(vc1, at: addIndex)
+        }
+        
+    }
+    
     
     private func findFriend() {
         let data = getDataForOnqueueAPI()
