@@ -37,10 +37,16 @@ class RequestReceivedViewController: UIViewController {
 
     var data: [FromQueueDB] = UserDefaultManager.queueData!.fromQueueDBRequested {
         didSet {
-            dataSource.refresh()
+            if snapshot.numberOfSections == 0 {
+                snapshot.appendSections([.main])
+            }
+            snapshot.deleteItems(oldValue)
+            snapshot.appendItems(data, toSection: .main)
+            dataSource.apply(snapshot)
         }
     }
-    
+    var snapshot = NSDiffableDataSourceSnapshot<Section, FromQueueDB>()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -233,7 +239,6 @@ extension RequestReceivedViewController {
         
         collectionView.dataSource = dataSource
 
-        var snapshot = NSDiffableDataSourceSnapshot<Section, FromQueueDB>()
         
         if snapshot.numberOfSections == 0 {
             snapshot.appendSections([.main])

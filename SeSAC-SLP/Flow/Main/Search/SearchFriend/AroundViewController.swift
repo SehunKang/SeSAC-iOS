@@ -36,12 +36,20 @@ class AroundViewController: UIViewController {
     //완료 하고 FromQueueDB hashable 바꿔줄까?
     var dataSource: UICollectionViewDiffableDataSource<Section, FromQueueDB>! = nil
     
+    var snapshot = NSDiffableDataSourceSnapshot<Section, FromQueueDB>()
+
+    
 //    let data = [FromQueueDB(uid: "aabc", nick: "nick", lat: 10, long: 10, reputation: [0,0,0,0,0,0,0,0], hf: ["hobby1", "hobby2", "hobby3", "hobby4", "hobby5", "hobby6"], reviews: ["good", "very good"], gender: 0, type: 0, sesac: 0, background: 0), FromQueueDB(uid: "aabcds", nick: "nick", lat: 10, long: 10, reputation: [4,0,1,0,2,0,3,0], hf: ["hobby1", "hobby2", "hobby3", "hobby4", "hobby5", "hobby6"], reviews: ["goodasdklfnk\nasdklfnmalksdnf\nalmsnkdfnalksd\nanklsdfnlaksdfn\nalkdnsflkasndflkdsa\nalnskdfnalskdfnaslkdfnskla", "very good"], gender: 0, type: 0, sesac: 0, background: 0), FromQueueDB(uid: "aabcaasdds", nick: "nick", lat: 10, long: 10, reputation: [4,0,1,0,2,0,3,0], hf: ["hobby1", "hobby2", "hobby3", "hobby4", "hobby5", "hobby6"], reviews: [], gender: 0, type: 0, sesac: 0, background: 0)]
 //    let data: [FromQueueDB] = []
     
-    var data: [FromQueueDB] = UserDefaultManager.queueData!.fromQueueDB {
+    lazy var data: [FromQueueDB] = UserDefaultManager.queueData!.fromQueueDB {
         didSet {
-            collectionView.reloadData()
+            if snapshot.numberOfSections == 0 {
+                snapshot.appendSections([.main])
+            }
+            snapshot.deleteItems(oldValue)
+            snapshot.appendItems(data, toSection: .main)
+            dataSource.apply(snapshot)
         }
     }
 
@@ -97,6 +105,7 @@ class AroundViewController: UIViewController {
             switch result {
             case .success(let response):
                 let resultData = try? response.map(QueueData.self)
+                print(resultData)
                 self.data = resultData!.fromQueueDB
             case .failure(let error):
                 self.errorHandler(with: error.errorCode)
@@ -259,13 +268,18 @@ extension AroundViewController {
         
         collectionView.dataSource = dataSource
 
-        var snapshot = NSDiffableDataSourceSnapshot<Section, FromQueueDB>()
         
         if snapshot.numberOfSections == 0 {
             snapshot.appendSections([.main])
-            snapshot.appendItems(data)
-            dataSource.apply(snapshot, animatingDifferences: true)
+            dataInit()
         }
+    }
+    
+    func dataInit() {
+        
+        snapshot.appendItems(data)
+        dataSource.apply(snapshot, animatingDifferences: true)
+
     }
 }
 

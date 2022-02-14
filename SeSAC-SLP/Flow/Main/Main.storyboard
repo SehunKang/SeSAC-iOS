@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -175,6 +176,64 @@
             </objects>
             <point key="canvasLocation" x="5307" y="92"/>
         </scene>
+        <!--Chat View Controller-->
+        <scene sceneID="nr9-kg-wmJ">
+            <objects>
+                <viewController storyboardIdentifier="ChatViewController" id="apy-4l-gbi" customClass="ChatViewController" customModule="SeSAC_SLP" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="a1u-gL-hbg">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LhM-eZ-2IB">
+                                <rect key="frame" x="16" y="808" width="382" height="38"/>
+                                <subviews>
+                                    <stackView autoresizesSubviews="NO" opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="yCJ-yH-IX0">
+                                        <rect key="frame" x="0.0" y="0.0" width="382" height="38"/>
+                                        <subviews>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Ts6-ie-1uc">
+                                                <rect key="frame" x="0.0" y="0.0" width="0.5" height="38"/>
+                                                <color key="textColor" name="SLPBlack"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" placeholderIntrinsicWidth="38" placeholderIntrinsicHeight="38" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xze-sd-hBO">
+                                                <rect key="frame" x="0.5" y="0.0" width="381.5" height="38"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="send_inact"/>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="Xze-sd-hBO" firstAttribute="leading" secondItem="Ts6-ie-1uc" secondAttribute="trailing" id="VlP-Jx-daZ"/>
+                                            <constraint firstItem="Ts6-ie-1uc" firstAttribute="leading" secondItem="yCJ-yH-IX0" secondAttribute="leading" id="bzG-iX-h5K"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" name="SLPGray1"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="yCJ-yH-IX0" secondAttribute="trailing" id="2xW-Fa-6wu"/>
+                                    <constraint firstItem="yCJ-yH-IX0" firstAttribute="leading" secondItem="LhM-eZ-2IB" secondAttribute="leading" id="MNL-fm-Lt3"/>
+                                    <constraint firstItem="yCJ-yH-IX0" firstAttribute="top" secondItem="LhM-eZ-2IB" secondAttribute="top" id="gD9-VY-IGl"/>
+                                    <constraint firstAttribute="bottom" secondItem="yCJ-yH-IX0" secondAttribute="bottom" id="gew-o8-NRc"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Czi-sW-IZR"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Czi-sW-IZR" firstAttribute="bottom" secondItem="LhM-eZ-2IB" secondAttribute="bottom" constant="16" id="H8R-Hw-8Rj"/>
+                            <constraint firstItem="LhM-eZ-2IB" firstAttribute="leading" secondItem="Czi-sW-IZR" secondAttribute="leading" constant="16" id="KQo-8g-3oP"/>
+                            <constraint firstItem="Czi-sW-IZR" firstAttribute="trailing" secondItem="LhM-eZ-2IB" secondAttribute="trailing" constant="16" id="Lku-SX-XQl"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="containerView" destination="LhM-eZ-2IB" id="MWV-ma-i59"/>
+                        <outlet property="sendButton" destination="Xze-sd-hBO" id="i55-YI-Rue"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2HV-VI-t0j" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6076.811594202899" y="91.741071428571431"/>
+        </scene>
     </scenes>
     <color key="tintColor" name="SLPBlack"/>
     <resources>
@@ -183,8 +242,12 @@
         <image name="home_inact" width="24" height="24"/>
         <image name="map_marker" width="48" height="48"/>
         <image name="place" width="24" height="24"/>
+        <image name="send_inact" width="24" height="24"/>
         <namedColor name="SLPBlack">
             <color red="0.20000000298023224" green="0.20000000298023224" blue="0.20000000298023224" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="SLPGray1">
+            <color red="0.96899998188018799" green="0.96899998188018799" blue="0.96899998188018799" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -98,7 +98,6 @@ class CardCell: UICollectionViewCell {
     var data: FromQueueDB? {
         didSet {
             nameInit()
-            print(collectionView.collectionViewLayout.collectionViewContentSize.height)
 //            collectionView.heightAnchor.constraint(equalToConstant: collectionView.collectionViewLayout.collectionViewContentSize.height).isActive = true
 //            collectionView.heightAnchor.constraint(equalToConstant: 472).isActive = true
 //            collectionView.layoutIfNeeded()
@@ -132,7 +131,6 @@ class CardCell: UICollectionViewCell {
         clipsToBounds = true
         layer.cornerRadius = 8
         
-        imageView.backgroundColor = .systemPink
         
         setUpConstraints()
         configureDataSource()
