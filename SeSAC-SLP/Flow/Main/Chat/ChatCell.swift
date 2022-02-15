@@ -69,14 +69,15 @@ class ChatCell: UICollectionViewCell {
     }
     
     private func bind() {
-        guard let model = model, let font = messageTextView.font else {
+        guard let model = model else {
             return
         }
         messageTextView.text = model.message
         timeLabel.text = model.date
-        let estimatedFrame = model.message.getEstimatedFrame(with: font)
+//        let estimatedFrame = model.message.getEstimatedFrame(with: font)
         
-        messageTextView.widthAnchor.constraint(equalToConstant: estimatedFrame.width + 16).isActive = true
+        messageTextView.sizeToFit()
+        messageTextView.widthAnchor.constraint(lessThanOrEqualToConstant: UIScreen.main.bounds.width * 2/3).isActive = true
         
         if model.chatType == .receive {
             messageTextView.backgroundColor = .clear
@@ -94,11 +95,11 @@ class ChatCell: UICollectionViewCell {
 }
 
 
-extension String {
-    func getEstimatedFrame(with font: UIFont) -> CGRect {
-        let size = CGSize(width: UIScreen.main.bounds.width * 2/3, height: 1000)
-        let optionss = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
-        let estimatedFrame = NSString(string: self).boundingRect(with: size, options: optionss, attributes: [.font: font], context: nil)
-        return estimatedFrame
-    }
-}
+//extension String {
+//    func getEstimatedFrame(with font: UIFont) -> CGRect {
+//        let size = CGSize(width: UIScreen.main.bounds.width * 2/3, height: 1000)
+//        let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
+//        let estimatedFrame = NSString(string: self).boundingRect(with: size, options: options, attributes: [.font: font], context: nil)
+//        return estimatedFrame
+//    }
+//}

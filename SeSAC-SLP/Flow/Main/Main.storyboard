@@ -191,13 +191,13 @@
                                         <rect key="frame" x="0.0" y="0.0" width="382" height="38"/>
                                         <subviews>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Ts6-ie-1uc">
-                                                <rect key="frame" x="0.0" y="0.0" width="0.5" height="38"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="347.5" height="38"/>
                                                 <color key="textColor" name="SLPBlack"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" placeholderIntrinsicWidth="38" placeholderIntrinsicHeight="38" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xze-sd-hBO">
-                                                <rect key="frame" x="0.5" y="0.0" width="381.5" height="38"/>
+                                                <rect key="frame" x="347.5" y="0.0" width="34.5" height="38"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="send_inact"/>
                                             </button>
@@ -228,6 +228,7 @@
                     <connections>
                         <outlet property="containerView" destination="LhM-eZ-2IB" id="MWV-ma-i59"/>
                         <outlet property="sendButton" destination="Xze-sd-hBO" id="i55-YI-Rue"/>
+                        <outlet property="textView" destination="Ts6-ie-1uc" id="gMX-cB-HKj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2HV-VI-t0j" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

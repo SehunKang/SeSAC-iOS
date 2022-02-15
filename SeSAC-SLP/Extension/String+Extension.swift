@@ -24,4 +24,14 @@ extension String {
             return predicate.evaluate(with: self)
         }
     }
+    
+    /// formate = yyyy-MM-dd'T'HH:mm:ssX
+    var toDate: Date {
+        get {
+            let format = DateFormatter()
+            format.dateFormat = "yyyy-MM-dd'T'HH:mm:ssX"
+            let date = format.date(from: self)!
+            return date
+        }
+    }
 }
