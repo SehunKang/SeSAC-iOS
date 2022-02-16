@@ -72,6 +72,9 @@ class RealmService {
         }
     }
     
+    
+    
+    
 //    func realmBind(with uid: String) -> Observable<Payload> {
 ////        guard let object = realm.objects(ChatData.self).filter("uid == %@", uid).first else {return nil}
 //        guard let object = realm.objects(ChatData.self).filter("uid == %@", uid).first?.payload else {fatalError("realm bind failed")}

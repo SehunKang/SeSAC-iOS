@@ -23,7 +23,7 @@ class ChatData: Object {
 }
 
 ///payload in chat API
-class Payload: Object {
+class Payload: Object, Codable {
     
     @Persisted var __v: Int = 0
     @Persisted var _id: String = ""

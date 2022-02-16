@@ -11,11 +11,12 @@ import SnapKit
 import Realm
 import RxSwift
 import RxCocoa
+import RealmSwift
 
-//struct ChatModel: Codable {
-//
-//    let payload: [Payload]
-//}
+struct ChatModel: Codable {
+
+    let payload: [Payload]
+}
 
 class ChatViewController: UIViewController {
     
@@ -44,8 +45,12 @@ class ChatViewController: UIViewController {
     
     
     @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var textViewHeight: NSLayoutConstraint!
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var containerView: UIView!
+    
+    
+    var realmNotificationToken: NotificationToken?
     
     
     override func viewDidLoad() {
@@ -55,14 +60,16 @@ class ChatViewController: UIViewController {
         collectionViewConfigure()
         chatPreSet()
         bind()
+        keyboardConfigure()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
 //        SocketIOManager.shared.closeConnection()
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
-    
     
     
     private func uiConfigure() {
@@ -70,6 +77,10 @@ class ChatViewController: UIViewController {
         containerView.layer.cornerRadius = 8
         textView.font = CustomFont.Body3_R14.font
         textView.delegate = self
+        
+        textView.snp.remakeConstraints { make in
+            make.height.lessThanOrEqualTo(77)
+        }
         
         sendButton.setImage(UIImage(named: "send_inact"), for: .disabled)
         sendButton.setImage(UIImage(named: "send_act"), for: .normal)
@@ -86,14 +97,15 @@ class ChatViewController: UIViewController {
     private func bind() {
         textView.rx.text
             .orEmpty
-            .map {$0.count > 1}
+            .map {$0.count > 0}
             .share(replay: 1, scope: .whileConnected)
             .bind(to: self.sendButton.rx.isEnabled)
             .disposed(by: bag)
         
         sendButton.rx.tap
-            .subscribe { _ in
-                self.postText()
+            .subscribe {[unowned self] _ in
+                postText()
+                textView.endEditing(true)
             }
             .disposed(by: bag)
     
@@ -108,13 +120,31 @@ class ChatViewController: UIViewController {
 //            case .success(let response):
 //                guard let resultData = try? response.map(Payload.self) else {return}
                 RealmService.shared.appendChatData(of: self.uid, payload: [resultData])
-//                self.textView.text = ""
+                self.textView.text = ""
 //            case .failure(let error):
 //                self.errorHandler(with: error.errorCode)
 //            }
 //        }
-//        chatSnapshot.append([ChatItem(message: resultData.chat, date: resultData.createdAt.timeFilter, chatType: .send)])
-//        dataSource.apply(chatSnapshot, to: .main)
+    }
+    
+    private func keyboardConfigure() {
+        hideKeyboardOnTap()
+
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardUp), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDown), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc private func keyboardUp(_ notification: NSNotification) {
+//        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+//
+//        }
+        print("up")
+    }
+    
+    @objc private func keyboardDown(_ notification: NSNotification) {
+        
+        print("down")
     }
     
 }
@@ -183,40 +213,26 @@ extension ChatViewController {
         
         if RealmService.shared.isFirstChat(with: uid) {
             RealmService.shared.createNewChatData(of: uid)
-        } else {
-            getChatData()
         }
+//        getChatDataFromServer()
 //        socketOn()
-//        realmBind()
+        realmBind()
 
     }
     
-    ///DB로부터 채팅상대(uid)에 대한 데이터를 먼저 가져오고 서버로부터 요청한다.
-    private func getChatData() {
-        
-        let previousChatPayload = RealmService.shared.getAllChatData(from: uid)
-        
-        let items = payloadToItem(payload: previousChatPayload)
-        chatSnapshot.append(items)
-        
-//        getRemainderChatDataFromServer()
+    private func getChatDataFromServer() {
+        let lastChatDate = RealmService.shared.lastChatDate(with: uid)
+
+        APIServiceForChat.lastChat(to: uid, at: lastChatDate) { result in
+            switch result {
+            case .success(let response):
+                guard let resultData = try? response.map(ChatModel.self) else {return}
+                RealmService.shared.appendChatData(of: self.uid, payload: resultData.payload)
+            case .failure(let error):
+                self.errorHandler(with: error.errorCode)
+            }
+        }
     }
-    
-//    private func getRemainderChatDataFromServer() {
-//        let lastChatDate = RealmService.shared.lastChatDate(with: uid)
-//
-//        APIServiceForChat.lastChat(to: uid, at: lastChatDate) { result in
-//            switch result {
-//            case .success(let response):
-//                let resultData = try? response.map(ChatModel.self)
-//                let items = self.payloadToItem(payload: resultData!.payload)
-//                self.chatSnapshot.append(items)
-//                self.dataSource.apply(self.chatSnapshot, to: .main)
-//            case .failure(let error):
-//                self.errorHandler(with: error.errorCode)
-//            }
-//        }
-//    }
 
     private func socketOn() {
         
@@ -237,20 +253,43 @@ extension ChatViewController {
         let value = Payload(__v: __v, _id: _id, chat: chat, createdAt: createdAt.toDate, from: from, to: to)
         
         RealmService.shared.appendChatData(of: uid, payload: [value])
-        //넣어야대
     }
     
-//    private func realmBind() {
-//        let observable = RealmService.shared.realmBind(with: uid)
-//
-//        observable.subscribe { event in
-//            guard let payload = event.element else {return}
-//            let item = self.payloadToItem(payload: [payload])
-//            self.chatSnapshot.append(item)
-//            self.dataSource.apply(self.chatSnapshot, to: .main)
-//        }
-//        .disposed(by: bag)
-//    }
+    private func realmBind() {
+        guard let object = RealmService.shared.realm.objects(ChatData.self).filter("uid == %@", uid!).first?.payload else { return }
+        
+        realmNotificationToken = object.observe {[unowned self] change in
+            switch change {
+            case .initial(let result):
+                let items = self.payloadToItem(payload: Array(result))
+                chatSnapshot.append(items)
+                dataSource.apply(chatSnapshot, to: .main)
+                collectionView.scrollToItem(at: IndexPath(item: result.count - 1, section: 0), at: .bottom, animated: false)
+//                print("NotificationToken Inital\n", result as Any)
+            case .update(let result, let deletions ,let insertions, let modifications):
+//                print("NotificationToken\n update result = \(result)")
+                if deletions.count > 0 {
+                    print("deletion")
+                }
+                if insertions.count > 0 {
+                    let payload = result.last!
+                    let item = payloadToItem(payload: [payload])
+                    chatSnapshot.append(item)
+                    dataSource.apply(chatSnapshot, to: .main)
+                    if payload.to == uid {
+                        collectionView.scrollToItem(at: IndexPath(item: result.count - 1, section: 0), at: .bottom, animated: true)
+                    }
+//                    print("insertion")
+                }
+                if modifications.count > 0 {
+                    print("modification")
+                }
+            case .error(let error):
+                print(error as Any)
+            }
+        }
+    
+    }
 
     private func payloadToItem(payload: [Payload]) -> [ChatItem] {
 
@@ -273,11 +312,27 @@ extension ChatViewController {
 
 }
 
-extension ChatViewController {
-    
-    
-}
-
 extension ChatViewController: UITextViewDelegate {
     
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        textView.text = ""
+    }
+
+    func textViewDidChange(_ textView: UITextView) {
+        let numberOfLines = Int((textView.contentSize.height / textView.font!.lineHeight))
+        
+        //3줄에서 2줄로 넘어갈때 1줄 높이가 되는 버그가 있음
+        if numberOfLines > 2 {
+            textView.isScrollEnabled = true
+            textView.snp.remakeConstraints { make in
+                make.height.equalTo(77)
+            }
+        } else {
+            textView.isScrollEnabled = false
+            textView.snp.remakeConstraints { make in
+                make.height.lessThanOrEqualTo(77)
+            }
+        }
+        
+    }
 }
