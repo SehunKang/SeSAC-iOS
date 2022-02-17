@@ -83,6 +83,10 @@ extension MyInfoViewController: UITableViewDelegate, UITableViewDataSource {
                     let vc = self.storyboard?.instantiateViewController(withIdentifier: MyInfoDetailViewController.identifier) as! MyInfoDetailViewController
                     vc.hidesBottomBarWhenPushed = true
                     self.navigationController?.pushViewController(vc, animated: true)
+                case 401:
+                    self.refreshToken {
+                        self.tableView(tableView, didSelectRowAt: indexPath)
+                    }
                 default:
                     self.errorHandler(with: code)
                 }

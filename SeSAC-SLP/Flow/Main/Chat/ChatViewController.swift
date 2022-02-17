@@ -28,10 +28,15 @@ class ChatViewController: UIViewController {
         case main
     }
     
+    enum ChatType {
+        case receive
+        case send
+    }
+    
     struct ChatItem: Hashable {
         let message: String
         let date: String
-        let chatType: ChatCell.ChatType
+        let chatType: ChatType
         private let identifier = UUID()
     }
     
@@ -41,7 +46,7 @@ class ChatViewController: UIViewController {
     
 //    var data: [ChatItem] = [ChatItem(message: "hi", date: "15:02", chatType: .receive), ChatItem(message: "hello", date: "16:03", chatType: .send), ChatItem(message: "asdkfnakjsdfbnakjsdbflakjsdbflakjsdbflakjsbdflkjasbdflkjasbdlfkjasbdlfkjbalsjkdfbalksdjfbalksjdbflakjsdbflkadsjbflakjsdbflakjsdbflaksjdbflkasjdbfalksjdfbalksjdfbalsjkdfbalksdjfbklj", date: "16:09", chatType: .receive)]
     
-    var uid: String! = "test"
+    var uid: String! = "test3"
     
     
     @IBOutlet weak var textView: UITextView!
@@ -75,6 +80,8 @@ class ChatViewController: UIViewController {
     private func uiConfigure() {
         
         containerView.layer.cornerRadius = 8
+        containerView.clipsToBounds = true
+        containerView.layer.zPosition = 999
         textView.font = CustomFont.Body3_R14.font
         textView.delegate = self
         
@@ -84,14 +91,12 @@ class ChatViewController: UIViewController {
         
         sendButton.setImage(UIImage(named: "send_inact"), for: .disabled)
         sendButton.setImage(UIImage(named: "send_act"), for: .normal)
-        
     }
     
     private func collectionViewConfigure() {
         configureHierarchy()
         configureDataSource()
         snapshotSectionInit()
-        snapshotItemInit()
     }
     
     private func bind() {
@@ -105,7 +110,7 @@ class ChatViewController: UIViewController {
         sendButton.rx.tap
             .subscribe {[unowned self] _ in
                 postText()
-                textView.endEditing(true)
+//                textView.endEditing(true)
             }
             .disposed(by: bag)
     
@@ -136,15 +141,33 @@ class ChatViewController: UIViewController {
     }
     
     @objc private func keyboardUp(_ notification: NSNotification) {
-//        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-//
-//        }
-        print("up")
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            let count = collectionView.numberOfItems(inSection: 0)
+            var cellY = collectionView.cellForItem(at: IndexPath(item: count - 1, section: 0))?.frame.origin.y ?? self.collectionView.frame.maxY
+            
+            let textFieldHeight = 77.0
+            let safeAreaHeight = self.view.frame.maxY - containerView.frame.maxY
+            let keyboardAndTextFieldHeight = keyboardSize.height + textFieldHeight + safeAreaHeight - 16
+            
+            cellY = cellY > collectionView.frame.maxY ? collectionView.frame.maxY : cellY
+                        
+            if keyboardSize.height <= (self.view.frame.height - cellY - textFieldHeight) {
+                self.containerView.transform = CGAffineTransform(translationX: 0, y: -(keyboardSize.height - (safeAreaHeight - 16)))
+                self.view.bringSubviewToFront(self.containerView)
+            } else {
+                self.collectionView.transform = CGAffineTransform(translationX: 0, y: -(cellY - (self.view.frame.maxY - (keyboardAndTextFieldHeight + 16))))
+                self.containerView.transform = CGAffineTransform(translationX: 0, y: -(keyboardSize.height - (safeAreaHeight - 16)))
+//                self.view.bringSubviewToFront(self.containerView)
+
+            }
+            
+        }
     }
     
     @objc private func keyboardDown(_ notification: NSNotification) {
-        
-        print("down")
+        self.containerView.transform = .identity
+        self.collectionView.transform = .identity
+
     }
     
 }
@@ -165,7 +188,7 @@ extension ChatViewController {
         
         let section: NSCollectionLayoutSection
         
-        let itemSize = NSCollectionLayoutSize(widthDimension: .absolute(self.view.bounds.width), heightDimension: .estimated(50))
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(50))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: itemSize.heightDimension)
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
@@ -174,20 +197,34 @@ extension ChatViewController {
         return UICollectionViewCompositionalLayout(section: section)
     }
     
-    private func cellRegistration() -> UICollectionView.CellRegistration<ChatCell, ChatItem> {
-        return UICollectionView.CellRegistration<ChatCell, ChatItem> { cell, indexPath, item in
+    private func cellRegistration() -> UICollectionView.CellRegistration<ChatCellSend, ChatItem> {
+        return UICollectionView.CellRegistration<ChatCellSend, ChatItem> { cell, indexPath, item in
             
-            cell.model = .init(message: item.message, chatType: item.chatType, date: item.date)
+            cell.messageTextView.text = item.message
+            cell.timeLabel.text = item.date
+        }
+    }
+    
+    private func receivedCellRegistration() -> UICollectionView.CellRegistration<ChatCellReceived, ChatItem> {
+        return UICollectionView.CellRegistration<ChatCellReceived, ChatItem> { cell, indexPath, item in
+            
+            cell.messageTextView.text = item.message
+            cell.timeLabel.text = item.date
         }
     }
     
     private func configureDataSource() {
         
         let cellRegistration = cellRegistration()
+        let receivedCellRegistration = receivedCellRegistration()
         
         dataSource = UICollectionViewDiffableDataSource<Section, ChatItem>(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
             
-            return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
+            if itemIdentifier.chatType == .send {
+                return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
+            } else {
+                return collectionView.dequeueConfiguredReusableCell(using: receivedCellRegistration, for: indexPath, item: itemIdentifier)
+            }
         })
     }
     
@@ -198,12 +235,6 @@ extension ChatViewController {
         dataSource.apply(snapshot)
     }
     
-    private func snapshotItemInit() {
-        
-//        let chatItem: [ChatItem] = data
-//        chatSnapshot.append(chatItem)
-//        dataSource.apply(chatSnapshot, to: .main)
-    }
 }
 
 // 채팅이 시작되기 전의 채팅 세팅
@@ -265,9 +296,7 @@ extension ChatViewController {
                 chatSnapshot.append(items)
                 dataSource.apply(chatSnapshot, to: .main)
                 collectionView.scrollToItem(at: IndexPath(item: result.count - 1, section: 0), at: .bottom, animated: false)
-//                print("NotificationToken Inital\n", result as Any)
             case .update(let result, let deletions ,let insertions, let modifications):
-//                print("NotificationToken\n update result = \(result)")
                 if deletions.count > 0 {
                     print("deletion")
                 }
@@ -279,7 +308,6 @@ extension ChatViewController {
                     if payload.to == uid {
                         collectionView.scrollToItem(at: IndexPath(item: result.count - 1, section: 0), at: .bottom, animated: true)
                     }
-//                    print("insertion")
                 }
                 if modifications.count > 0 {
                     print("modification")
@@ -297,7 +325,7 @@ extension ChatViewController {
         var items: [ChatItem] = []
         payload.forEach {
             let chat = $0.chat
-            let type: ChatCell.ChatType
+            let type: ChatType
             if $0.from == myUid {
                 type = .send
             } else {
@@ -333,6 +361,5 @@ extension ChatViewController: UITextViewDelegate {
                 make.height.lessThanOrEqualTo(77)
             }
         }
-        
     }
 }

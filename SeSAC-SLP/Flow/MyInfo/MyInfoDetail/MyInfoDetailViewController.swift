@@ -138,6 +138,8 @@ class MyInfoDetailViewController: UIViewController {
             switch code {
             case 200, 406:
                 print("goto onboarding")
+            case 401:
+                self.withdraw()
             default:
                 self.errorHandler(with: code)
             }
@@ -158,6 +160,10 @@ class MyInfoDetailViewController: UIViewController {
             switch code {
             case 200:
                 self.navigationController?.popViewController(animated: true)
+            case 401:
+                self.refreshToken {
+                    self.saveButtonClicekd()
+                }
             default:
                 self.errorHandler(with: code)
             }

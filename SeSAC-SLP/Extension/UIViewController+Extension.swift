@@ -52,21 +52,21 @@ extension UIViewController {
         self.view.window?.makeKeyAndVisible()
     }
     
+    func refreshToken(completion: @escaping () -> ()) {
+        let currentUser = Auth.auth().currentUser
+        currentUser?.getIDTokenForcingRefresh(true) { idToken, error in
+            if let error = error {
+                self.view.makeToast("오류가 발생했습니다. 잠시후에 다시 시도해주세요")
+                print(error.localizedDescription)
+                return
+            }
+            UserDefaultManager.idtoken = idToken!
+            completion()
+        }
+    }
+    
     func errorHandler(with code: Int) {
         switch code {
-        case 401:
-            let currentUser = Auth.auth().currentUser
-            currentUser?.getIDTokenForcingRefresh(true) { idToken, error in
-                if let error = error {
-                    self.view.makeToast("오류가 발생했습니다. 잠시후에 다시 시도해주세요")
-                    print(error.localizedDescription)
-                    return;
-                }
-                UserDefaultManager.idtoken = idToken!
-                //추후 변경
-                print("idtoken? \(UserDefaultManager.idtoken)")
-                self.view.makeToast("한번 더 시도해 주세요")
-            }
         case 406:
             self.view.makeToast("가입되지 않은 회원입니다.", duration: 1, style: ToastManager.shared.style) { didTap in
                 let sb = UIStoryboard(name: "Start", bundle: nil)

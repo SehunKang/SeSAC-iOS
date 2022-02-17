@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2E2D17B327B8D2D100ECBFD7 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2D17B227B8D2D100ECBFD7 /* ChatViewController.swift */; };
-		2E2D17B527B8D34B00ECBFD7 /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2D17B427B8D34B00ECBFD7 /* ChatCell.swift */; };
+		2E2D17B527B8D34B00ECBFD7 /* ChatCellSend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2D17B427B8D34B00ECBFD7 /* ChatCellSend.swift */; };
 		2E2D17BA27BA978400ECBFD7 /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2D17B927BA978400ECBFD7 /* RealmModel.swift */; };
 		2E308E5827AAC86100AD08CC /* MyInfoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E308E5727AAC86100AD08CC /* MyInfoDetailViewController.swift */; };
 		2E308E5A27AB9E6B00AD08CC /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E308E5927AB9E6A00AD08CC /* UILabel+Extension.swift */; };
@@ -22,6 +22,7 @@
 		2E35519227B2B3B2008912C9 /* Tabman in Frameworks */ = {isa = PBXBuildFile; productRef = 2E35519127B2B3B2008912C9 /* Tabman */; };
 		2E35DBCC279D585200EFD884 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E35DBCB279D585200EFD884 /* Main.storyboard */; };
 		2E35DBD0279D632500EFD884 /* NetworkCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E35DBCF279D632500EFD884 /* NetworkCheck.swift */; };
+		2E38F6E127BE83E7005263B5 /* ChatCellReceived.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E38F6E027BE83E6005263B5 /* ChatCellReceived.swift */; };
 		2E394F6327B54F6D0009F98B /* BadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E394F6227B54F6D0009F98B /* BadgeView.swift */; };
 		2E394F6727B647320009F98B /* APIServiceForSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E394F6627B647310009F98B /* APIServiceForSearch.swift */; };
 		2E6BB15527B3F7CE0095ADE4 /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6BB15427B3F7CE0095ADE4 /* CardCell.swift */; };
@@ -89,7 +90,7 @@
 /* Begin PBXFileReference section */
 		286BE18E69BFEA2A9111C052 /* Pods-SeSAC-SLP.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeSAC-SLP.release.xcconfig"; path = "Target Support Files/Pods-SeSAC-SLP/Pods-SeSAC-SLP.release.xcconfig"; sourceTree = "<group>"; };
 		2E2D17B227B8D2D100ECBFD7 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
-		2E2D17B427B8D34B00ECBFD7 /* ChatCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
+		2E2D17B427B8D34B00ECBFD7 /* ChatCellSend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCellSend.swift; sourceTree = "<group>"; };
 		2E2D17B927BA978400ECBFD7 /* RealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModel.swift; sourceTree = "<group>"; };
 		2E308E5727AAC86100AD08CC /* MyInfoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoDetailViewController.swift; sourceTree = "<group>"; };
 		2E308E5927AB9E6A00AD08CC /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
@@ -101,6 +102,7 @@
 		2E3305EC27BBB92B00A1AECD /* Moya_ChatAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Moya_ChatAPI.swift; sourceTree = "<group>"; };
 		2E35DBCB279D585200EFD884 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		2E35DBCF279D632500EFD884 /* NetworkCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCheck.swift; sourceTree = "<group>"; };
+		2E38F6E027BE83E6005263B5 /* ChatCellReceived.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCellReceived.swift; sourceTree = "<group>"; };
 		2E394F6227B54F6D0009F98B /* BadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeView.swift; sourceTree = "<group>"; };
 		2E394F6627B647310009F98B /* APIServiceForSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServiceForSearch.swift; sourceTree = "<group>"; };
 		2E6BB15427B3F7CE0095ADE4 /* CardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
@@ -188,7 +190,8 @@
 			isa = PBXGroup;
 			children = (
 				2E2D17B227B8D2D100ECBFD7 /* ChatViewController.swift */,
-				2E2D17B427B8D34B00ECBFD7 /* ChatCell.swift */,
+				2E2D17B427B8D34B00ECBFD7 /* ChatCellSend.swift */,
+				2E38F6E027BE83E6005263B5 /* ChatCellReceived.swift */,
 				2E2D17B927BA978400ECBFD7 /* RealmModel.swift */,
 				2E3305E327BB6D1000A1AECD /* RealmService.swift */,
 				2E3305E527BB71C800A1AECD /* SocketManager.swift */,
@@ -522,15 +525,15 @@
 			);
 			mainGroup = 2EBAEF57279539ED00C2A089;
 			packageReferences = (
-				2EBAEF7C2795468100C2A089 /* XCRemoteSwiftPackageReference "SnapKit.git" */,
-				2E92DFB42798EFC90020567B /* XCRemoteSwiftPackageReference "Toast-Swift.git" */,
-				2E92DFBC27997F3F0020567B /* XCRemoteSwiftPackageReference "Alamofire.git" */,
-				2E92DFC62799AD320020567B /* XCRemoteSwiftPackageReference "Moya.git" */,
+				2EBAEF7C2795468100C2A089 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				2E92DFB42798EFC90020567B /* XCRemoteSwiftPackageReference "Toast-Swift" */,
+				2E92DFBC27997F3F0020567B /* XCRemoteSwiftPackageReference "Alamofire" */,
+				2E92DFC62799AD320020567B /* XCRemoteSwiftPackageReference "Moya" */,
 				2E92DFC9279AF00F0020567B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				2E35519027B2B3B2008912C9 /* XCRemoteSwiftPackageReference "Tabman.git" */,
-				2E3305E727BB727400A1AECD /* XCRemoteSwiftPackageReference "socket.io-client-swift.git" */,
-				2EC4622427BBEC31009D94E6 /* XCRemoteSwiftPackageReference "RxSwift.git" */,
-				2EC4622927BBF0BE009D94E6 /* XCRemoteSwiftPackageReference "realm-swift.git" */,
+				2E35519027B2B3B2008912C9 /* XCRemoteSwiftPackageReference "Tabman" */,
+				2E3305E727BB727400A1AECD /* XCRemoteSwiftPackageReference "socket.io-client-swift" */,
+				2EC4622427BBEC31009D94E6 /* XCRemoteSwiftPackageReference "RxSwift" */,
+				2EC4622927BBF0BE009D94E6 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 2EBAEF61279539ED00C2A089 /* Products */;
 			projectDirPath = "";
@@ -615,6 +618,7 @@
 				2E97A1CA27B1540900A0A057 /* SearchFriendViewController.swift in Sources */,
 				2EDF693D27982A3C005E3F93 /* EasyAlert.swift in Sources */,
 				2EA6657627AA99AD00FD47B0 /* MyInfoModel.swift in Sources */,
+				2E38F6E127BE83E7005263B5 /* ChatCellReceived.swift in Sources */,
 				2E92DFD8279BC5F90020567B /* BirthViewController.swift in Sources */,
 				2EDF693B27982800005E3F93 /* PhoneAuthCheckViewController.swift in Sources */,
 				2EBAEF68279539ED00C2A089 /* PhoneAuthViewController.swift in Sources */,
@@ -643,7 +647,7 @@
 				2E92DFC527999D210020567B /* UserDataModel.swift in Sources */,
 				2E6DC70A27AE97D500A049CC /* Moya_QueueAPI.swift in Sources */,
 				2E35DBD0279D632500EFD884 /* NetworkCheck.swift in Sources */,
-				2E2D17B527B8D34B00ECBFD7 /* ChatCell.swift in Sources */,
+				2E2D17B527B8D34B00ECBFD7 /* ChatCellSend.swift in Sources */,
 				2E3305E427BB6D1100A1AECD /* RealmService.swift in Sources */,
 				2E97A1CE27B2997D00A0A057 /* RequestReceivedViewController.swift in Sources */,
 				2E308E5C27ABAF3F00AD08CC /* MyInfoDetailViewModel.swift in Sources */,
@@ -891,7 +895,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		2E3305E727BB727400A1AECD /* XCRemoteSwiftPackageReference "socket.io-client-swift.git" */ = {
+		2E3305E727BB727400A1AECD /* XCRemoteSwiftPackageReference "socket.io-client-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/socketio/socket.io-client-swift.git";
 			requirement = {
@@ -899,7 +903,7 @@
 				kind = branch;
 			};
 		};
-		2E35519027B2B3B2008912C9 /* XCRemoteSwiftPackageReference "Tabman.git" */ = {
+		2E35519027B2B3B2008912C9 /* XCRemoteSwiftPackageReference "Tabman" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/uias/Tabman.git";
 			requirement = {
@@ -907,7 +911,7 @@
 				minimumVersion = 2.0.0;
 			};
 		};
-		2E92DFB42798EFC90020567B /* XCRemoteSwiftPackageReference "Toast-Swift.git" */ = {
+		2E92DFB42798EFC90020567B /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/scalessec/Toast-Swift.git";
 			requirement = {
@@ -915,7 +919,7 @@
 				minimumVersion = 5.0.0;
 			};
 		};
-		2E92DFBC27997F3F0020567B /* XCRemoteSwiftPackageReference "Alamofire.git" */ = {
+		2E92DFBC27997F3F0020567B /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
 			requirement = {
@@ -923,7 +927,7 @@
 				minimumVersion = 5.0.0;
 			};
 		};
-		2E92DFC62799AD320020567B /* XCRemoteSwiftPackageReference "Moya.git" */ = {
+		2E92DFC62799AD320020567B /* XCRemoteSwiftPackageReference "Moya" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Moya/Moya.git";
 			requirement = {
@@ -939,7 +943,7 @@
 				kind = branch;
 			};
 		};
-		2EBAEF7C2795468100C2A089 /* XCRemoteSwiftPackageReference "SnapKit.git" */ = {
+		2EBAEF7C2795468100C2A089 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
 			requirement = {
@@ -947,7 +951,7 @@
 				minimumVersion = 5.0.0;
 			};
 		};
-		2EC4622427BBEC31009D94E6 /* XCRemoteSwiftPackageReference "RxSwift.git" */ = {
+		2EC4622427BBEC31009D94E6 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
 			requirement = {
@@ -955,7 +959,7 @@
 				kind = branch;
 			};
 		};
-		2EC4622927BBF0BE009D94E6 /* XCRemoteSwiftPackageReference "realm-swift.git" */ = {
+		2EC4622927BBF0BE009D94E6 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift.git";
 			requirement = {
@@ -968,27 +972,27 @@
 /* Begin XCSwiftPackageProductDependency section */
 		2E3305E827BB727500A1AECD /* SocketIO */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2E3305E727BB727400A1AECD /* XCRemoteSwiftPackageReference "socket.io-client-swift.git" */;
+			package = 2E3305E727BB727400A1AECD /* XCRemoteSwiftPackageReference "socket.io-client-swift" */;
 			productName = SocketIO;
 		};
 		2E35519127B2B3B2008912C9 /* Tabman */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2E35519027B2B3B2008912C9 /* XCRemoteSwiftPackageReference "Tabman.git" */;
+			package = 2E35519027B2B3B2008912C9 /* XCRemoteSwiftPackageReference "Tabman" */;
 			productName = Tabman;
 		};
 		2E92DFB52798EFC90020567B /* Toast */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2E92DFB42798EFC90020567B /* XCRemoteSwiftPackageReference "Toast-Swift.git" */;
+			package = 2E92DFB42798EFC90020567B /* XCRemoteSwiftPackageReference "Toast-Swift" */;
 			productName = Toast;
 		};
 		2E92DFBD27997F3F0020567B /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2E92DFBC27997F3F0020567B /* XCRemoteSwiftPackageReference "Alamofire.git" */;
+			package = 2E92DFBC27997F3F0020567B /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
 		};
 		2E92DFC72799AD320020567B /* Moya */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2E92DFC62799AD320020567B /* XCRemoteSwiftPackageReference "Moya.git" */;
+			package = 2E92DFC62799AD320020567B /* XCRemoteSwiftPackageReference "Moya" */;
 			productName = Moya;
 		};
 		2E92DFCA279AF00F0020567B /* FirebaseAuth */ = {
@@ -1003,27 +1007,27 @@
 		};
 		2EBAEF7D2795468100C2A089 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2EBAEF7C2795468100C2A089 /* XCRemoteSwiftPackageReference "SnapKit.git" */;
+			package = 2EBAEF7C2795468100C2A089 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
 		};
 		2EC4622527BBEC31009D94E6 /* RxCocoa */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2EC4622427BBEC31009D94E6 /* XCRemoteSwiftPackageReference "RxSwift.git" */;
+			package = 2EC4622427BBEC31009D94E6 /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxCocoa;
 		};
 		2EC4622727BBEC31009D94E6 /* RxSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2EC4622427BBEC31009D94E6 /* XCRemoteSwiftPackageReference "RxSwift.git" */;
+			package = 2EC4622427BBEC31009D94E6 /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxSwift;
 		};
 		2EC4622A27BBF0BE009D94E6 /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2EC4622927BBF0BE009D94E6 /* XCRemoteSwiftPackageReference "realm-swift.git" */;
+			package = 2EC4622927BBF0BE009D94E6 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = Realm;
 		};
 		2EC4622C27BBF0BE009D94E6 /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2EC4622927BBF0BE009D94E6 /* XCRemoteSwiftPackageReference "realm-swift.git" */;
+			package = 2EC4622927BBF0BE009D94E6 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */

@@ -31,13 +31,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //            let tabBarController = UITabBarController()
 //
 //            tabBarController.viewControllers = [mainNav, infoNav]
-            
-        
+//
+//
 //            window?.rootViewController = tabBarController
 //        }
         let sb = UIStoryboard(name: "Main", bundle: nil)
         let vc = sb.instantiateViewController(withIdentifier: ChatViewController.identifer) as! ChatViewController
-    
+
         window?.rootViewController = vc
 
         window?.makeKeyAndVisible()

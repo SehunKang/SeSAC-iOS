@@ -208,7 +208,13 @@ class HomeViewController: UIViewController {
                 print(data as Any)
             case let .failure(error):
                 print(error.errorDescription as Any)
-                self.errorHandler(with: error.errorCode)
+                if error.errorCode == 401 {
+                    self.refreshToken {
+                        self.findFriend()
+                    }
+                } else {
+                    self.errorHandler(with: error.errorCode)
+                }
             }
         }
     }

@@ -101,7 +101,13 @@ class RequestReceivedViewController: UIViewController {
                 let resultData = try? response.map(QueueData.self)
                 self.data = resultData!.fromQueueDBRequested
             case .failure(let error):
-                self.errorHandler(with: error.errorCode)
+                if error.errorCode == 401 {
+                    self.refreshToken {
+                        self.refreshQueue()
+                    }
+                } else {
+                    self.errorHandler(with: error.errorCode)
+                }
             }
         }
     }
@@ -128,7 +134,13 @@ class RequestReceivedViewController: UIViewController {
                 default: return
                 }
             case .failure(let error):
-                self.errorHandler(with: error.errorCode)
+                if error.errorCode == 401 {
+                    self.refreshToken {
+                        self.hobbyAccept(index: index)
+                    }
+                } else {
+                    self.errorHandler(with: error.errorCode)
+                }
             }
         }
     }
@@ -154,7 +166,13 @@ class RequestReceivedViewController: UIViewController {
                 default: return
                 }
             case .failure(let error):
-                self.errorHandler(with: error.errorCode)
+                if error.errorCode == 401 {
+                    self.refreshToken {
+                        self.checkMyState()
+                    }
+                } else {
+                    self.errorHandler(with: error.errorCode)
+                }
             }
         }
     }

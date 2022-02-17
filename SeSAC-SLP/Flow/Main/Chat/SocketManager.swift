@@ -30,6 +30,7 @@ class SocketIOManager: NSObject {
         
         socket.on(clientEvent: .connect) { data, ack in
             print("socket is connected", data, ack)
+            self.socket.emit("changesocketid", UserDefaultManager.userData!.uid)
         }
         
         socket.on(clientEvent: .disconnect) { data, ack in
@@ -57,4 +58,5 @@ class SocketIOManager: NSObject {
     func closeConnection() {
         socket.disconnect()
     }
+    
 }

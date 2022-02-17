@@ -132,6 +132,10 @@ class PhoneAuthCheckViewController: UIViewController {
                         switch code {
                         case 200:
                             self.goHome()
+                        case 401:
+                            self.refreshToken {
+                                self.buttonClicked()
+                            }
                         case 406:
                             let vc = self.storyboard?.instantiateViewController(withIdentifier: NicknameViewController.identifier) as! NicknameViewController
                             self.navigationController?.pushViewController(vc, animated: true)

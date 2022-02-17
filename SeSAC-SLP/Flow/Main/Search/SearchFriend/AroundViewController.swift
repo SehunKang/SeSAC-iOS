@@ -105,10 +105,15 @@ class AroundViewController: UIViewController {
             switch result {
             case .success(let response):
                 let resultData = try? response.map(QueueData.self)
-                print(resultData)
                 self.data = resultData!.fromQueueDB
             case .failure(let error):
-                self.errorHandler(with: error.errorCode)
+                if error.errorCode == 401 {
+                    self.refreshToken {
+                        self.refreshQueue()
+                    }
+                } else {
+                    self.errorHandler(with: error.errorCode)
+                }
             }
         }
     }
@@ -130,7 +135,13 @@ class AroundViewController: UIViewController {
                 default: return
                 }
             case .failure(let error):
-                self.errorHandler(with: error.errorCode)
+                if error.errorCode == 401 {
+                    self.refreshToken {
+                        self.sendRequest(cardIndex)
+                    }
+                } else {
+                    self.errorHandler(with: error.errorCode)
+                }
             }
         }
     }
@@ -156,7 +167,13 @@ class AroundViewController: UIViewController {
                 default: return
                 }
             case .failure(let error):
-                self.errorHandler(with: error.errorCode)
+                if error.errorCode == 401 {
+                    self.refreshToken {
+                        self.hobbyAccept(apiData)
+                    }
+                } else {
+                    self.errorHandler(with: error.errorCode)
+                }
             }
         }
     }
@@ -182,7 +199,13 @@ class AroundViewController: UIViewController {
                 default: return
                 }
             case .failure(let error):
-                self.errorHandler(with: error.errorCode)
+                if error.errorCode == 401 {
+                    self.refreshToken {
+                        self.checkMyState()
+                    }
+                } else {
+                    self.errorHandler(with: error.errorCode)
+                }
             }
         }
     }

@@ -342,7 +342,13 @@ extension SearchHobbyViewController {
                 print(response.debugDescription)
                 self.responseHandlerForRequestQueue(statusCode: response.statusCode)
             case let .failure(error):
-                self.errorHandler(with: error.errorCode)
+                if error.errorCode == 401 {
+                    self.refreshToken {
+                        self.requestQueue()
+                    }
+                } else {
+                    self.errorHandler(with: error.errorCode)
+                }
             }
         }
     }

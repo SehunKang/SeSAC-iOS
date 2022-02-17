@@ -83,7 +83,13 @@ class SearchFriendViewController: TabmanViewController {
                 default: return
                 }
             case .failure(let failure):
-                self.errorHandler(with: failure.errorCode)
+                if failure.errorCode == 401 {
+                    self.refreshToken {
+                        self.myQueueStatus()
+                    }
+                } else {
+                    self.errorHandler(with: failure.errorCode)
+                }
             }
         }
     }
@@ -125,7 +131,13 @@ class SearchFriendViewController: TabmanViewController {
                     return
                 }
             case .failure(let error):
-                self.errorHandler(with: error.errorCode)
+                if error.errorCode == 401 {
+                    self.refreshToken {
+                        self.stopFind()
+                    }
+                } else {
+                    self.errorHandler(with: error.errorCode)
+                }
             }
         }
     }
