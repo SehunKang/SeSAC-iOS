@@ -54,6 +54,11 @@ class ChatViewController: UIViewController {
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var containerView: UIView!
     
+    @IBOutlet weak var moreMenuStack: UIStackView!
+    @IBOutlet weak var sirenButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var reviewButton: UIButton!
+    
     
     var realmNotificationToken: NotificationToken?
     
@@ -61,11 +66,13 @@ class ChatViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         uiConfigure()
         collectionViewConfigure()
         chatPreSet()
         bind()
         keyboardConfigure()
+        moreMenuConfigure()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -81,7 +88,7 @@ class ChatViewController: UIViewController {
         
         containerView.layer.cornerRadius = 8
         containerView.clipsToBounds = true
-        containerView.layer.zPosition = 999
+        containerView.layer.zPosition = 1
         textView.font = CustomFont.Body3_R14.font
         textView.delegate = self
         
@@ -91,7 +98,9 @@ class ChatViewController: UIViewController {
         
         sendButton.setImage(UIImage(named: "send_inact"), for: .disabled)
         sendButton.setImage(UIImage(named: "send_act"), for: .normal)
+        
     }
+    
     
     private func collectionViewConfigure() {
         configureHierarchy()
@@ -170,6 +179,67 @@ class ChatViewController: UIViewController {
 
     }
     
+    private func moreMenuConfigure() {
+        
+        view.bringSubviewToFront(moreMenuStack)
+        moreMenuStack.clipsToBounds = true
+        [sirenButton, cancelButton, reviewButton].forEach { button in
+            let font = CustomFont.Title3_M14.font
+            let color = CustomColor.SLPBlack.color
+            var config = UIButton.Configuration.plain()
+            config.imagePlacement = .top
+            config.imagePadding = 6
+            config.titleAlignment = .center
+            config.baseForegroundColor = color
+            switch button {
+            case sirenButton:
+                config.title = "새싹 신고"
+                config.image = UIImage(named: "siren")
+                button!.rx.tap.subscribe { [weak self] _ in
+                    self?.report()
+                }.disposed(by: bag)
+            case cancelButton:
+                config.title = "약속 취소"
+                config.image = UIImage(named: "cancel_match")
+            case reviewButton:
+                config.title = "리뷰 등록"
+                config.image = UIImage(named: "write")
+            default: return
+            }
+            button?.configuration = config
+            button?.titleLabel?.font = font
+            button?.backgroundColor = .systemBackground
+        }
+        moreMenuStack.transform = CGAffineTransform(translationX: 0, y: -200)
+        moreMenuStack.spacing = 0
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            self.showMoreMenu()
+        }
+        
+    }
+    
+    private func showMoreMenu() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tapWhenMoreMenu))
+        UIView.animate(withDuration: 0.3, delay: 0, options: .layoutSubviews) {
+            self.moreMenuStack.transform = .identity
+        }
+        view.addOverlay(yPosition: moreMenuStack.frame.maxY, tapGesture: tap )
+
+    }
+    
+    @objc private func tapWhenMoreMenu() {
+        view.removeOverlay()
+        moreMenuStack.transform = CGAffineTransform(translationX: 0, y: -200)
+    }
+    
+    private func report() {
+        let vc = ReportViewController()
+        vc.modalPresentationStyle = .overFullScreen
+        self.present(vc, animated: true, completion: nil)
+    }
+
+    
 }
 
 extension ChatViewController {
@@ -179,7 +249,7 @@ extension ChatViewController {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
         view.addSubview(collectionView)
         collectionView.snp.makeConstraints { make in
-            make.leading.trailing.top.equalTo(self.view.safeAreaInsets)
+            make.leading.trailing.top.equalTo(self.view.safeAreaLayoutGuide)
             make.bottom.equalTo(containerView.snp.top).offset(-20)
         }
     }

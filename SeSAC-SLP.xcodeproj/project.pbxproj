@@ -23,6 +23,7 @@
 		2E35DBCC279D585200EFD884 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E35DBCB279D585200EFD884 /* Main.storyboard */; };
 		2E35DBD0279D632500EFD884 /* NetworkCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E35DBCF279D632500EFD884 /* NetworkCheck.swift */; };
 		2E38F6E127BE83E7005263B5 /* ChatCellReceived.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E38F6E027BE83E6005263B5 /* ChatCellReceived.swift */; };
+		2E38F6E627BFB172005263B5 /* ReportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E38F6E427BFB172005263B5 /* ReportViewController.swift */; };
 		2E394F6327B54F6D0009F98B /* BadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E394F6227B54F6D0009F98B /* BadgeView.swift */; };
 		2E394F6727B647320009F98B /* APIServiceForSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E394F6627B647310009F98B /* APIServiceForSearch.swift */; };
 		2E6BB15527B3F7CE0095ADE4 /* CardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6BB15427B3F7CE0095ADE4 /* CardCell.swift */; };
@@ -103,6 +104,7 @@
 		2E35DBCB279D585200EFD884 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		2E35DBCF279D632500EFD884 /* NetworkCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCheck.swift; sourceTree = "<group>"; };
 		2E38F6E027BE83E6005263B5 /* ChatCellReceived.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCellReceived.swift; sourceTree = "<group>"; };
+		2E38F6E427BFB172005263B5 /* ReportViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewController.swift; sourceTree = "<group>"; };
 		2E394F6227B54F6D0009F98B /* BadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeView.swift; sourceTree = "<group>"; };
 		2E394F6627B647310009F98B /* APIServiceForSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServiceForSearch.swift; sourceTree = "<group>"; };
 		2E6BB15427B3F7CE0095ADE4 /* CardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardCell.swift; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 				2E3305E327BB6D1000A1AECD /* RealmService.swift */,
 				2E3305E527BB71C800A1AECD /* SocketManager.swift */,
 				2E3305EA27BBB8F100A1AECD /* APIServiceForChat.swift */,
+				2E38F6E427BFB172005263B5 /* ReportViewController.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -612,6 +615,7 @@
 			files = (
 				2E394F6327B54F6D0009F98B /* BadgeView.swift in Sources */,
 				2ED1212027AD1AA200A3C8D5 /* UIView+Extension.swift in Sources */,
+				2E38F6E627BFB172005263B5 /* ReportViewController.swift in Sources */,
 				2E92DFCF279B0BF20020567B /* String+Extension.swift in Sources */,
 				2E92DFDD279C3D830020567B /* GenderViewController.swift in Sources */,
 				2E308E5A27AB9E6B00AD08CC /* UILabel+Extension.swift in Sources */,

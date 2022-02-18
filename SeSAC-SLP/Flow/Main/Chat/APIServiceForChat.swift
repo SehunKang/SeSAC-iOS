@@ -24,4 +24,16 @@ class APIServiceForChat {
         }
     }
     
+    static func report(data: [String: Any], completion: @escaping (_ result:  Int) -> ()) {
+        let provider = MoyaProvider<APIServiceChat>()
+        provider.request(.report(data: data)) { result in
+            switch result {
+            case .success(let response):
+                completion(response.statusCode)
+            case .failure(let error):
+                fatalError(error.localizedDescription)
+            }
+        }
+    }
+    
 }

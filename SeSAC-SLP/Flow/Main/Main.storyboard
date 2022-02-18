@@ -219,18 +219,54 @@
                                     <constraint firstAttribute="bottom" secondItem="yCJ-yH-IX0" secondAttribute="bottom" id="gew-o8-NRc"/>
                                 </constraints>
                             </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="Q9m-np-xgL">
+                                <rect key="frame" x="0.0" y="44" width="414" height="72"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k9M-fm-eV4">
+                                        <rect key="frame" x="0.0" y="0.0" width="133.5" height="72"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Button">
+                                            <fontDescription key="titleFontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
+                                        </buttonConfiguration>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Udp-Ba-dfp">
+                                        <rect key="frame" x="140.5" y="0.0" width="133" height="72"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="133" id="MgW-VP-5n8"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8cz-vz-jv6">
+                                        <rect key="frame" x="280.5" y="0.0" width="133.5" height="72"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="Udp-Ba-dfp" firstAttribute="centerX" secondItem="Q9m-np-xgL" secondAttribute="centerX" id="2Ot-76-F3g"/>
+                                    <constraint firstAttribute="height" constant="72" id="Ign-C7-x5d"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Czi-sW-IZR"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="Czi-sW-IZR" firstAttribute="trailing" secondItem="Q9m-np-xgL" secondAttribute="trailing" id="0od-af-PJy"/>
+                            <constraint firstItem="Q9m-np-xgL" firstAttribute="leading" secondItem="Czi-sW-IZR" secondAttribute="leading" id="1nC-CT-VoC"/>
+                            <constraint firstItem="Q9m-np-xgL" firstAttribute="top" secondItem="Czi-sW-IZR" secondAttribute="top" id="9Pv-Vx-6RH"/>
                             <constraint firstItem="Czi-sW-IZR" firstAttribute="bottom" secondItem="LhM-eZ-2IB" secondAttribute="bottom" constant="16" id="H8R-Hw-8Rj"/>
                             <constraint firstItem="LhM-eZ-2IB" firstAttribute="leading" secondItem="Czi-sW-IZR" secondAttribute="leading" constant="16" id="KQo-8g-3oP"/>
                             <constraint firstItem="Czi-sW-IZR" firstAttribute="trailing" secondItem="LhM-eZ-2IB" secondAttribute="trailing" constant="16" id="Lku-SX-XQl"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="cancelButton" destination="Udp-Ba-dfp" id="h9W-Z2-2FN"/>
                         <outlet property="containerView" destination="LhM-eZ-2IB" id="MWV-ma-i59"/>
+                        <outlet property="moreMenuStack" destination="Q9m-np-xgL" id="gh2-q3-hSP"/>
+                        <outlet property="reviewButton" destination="8cz-vz-jv6" id="HpE-8T-3PB"/>
                         <outlet property="sendButton" destination="Xze-sd-hBO" id="i55-YI-Rue"/>
+                        <outlet property="sirenButton" destination="k9M-fm-eV4" id="g8N-kG-1Yn"/>
                         <outlet property="textView" destination="Ts6-ie-1uc" id="gMX-cB-HKj"/>
                         <outlet property="textViewHeight" destination="Ci8-UE-D1Y" id="RTk-mV-7H1"/>
                     </connections>

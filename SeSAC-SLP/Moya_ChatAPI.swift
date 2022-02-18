@@ -11,6 +11,7 @@ import Moya
 enum APIServiceChat {
     case lastChatDate(from: String, lastChatDate: String)
     case chatTo(to: String, text: String)
+    case report(data: [String: Any])
 }
 
 
@@ -26,6 +27,8 @@ extension APIServiceChat: TargetType {
             return "/chat/\(from)?lastchatDate=\(lastChatDate)"
         case .chatTo(let to, _):
             return "/chat/\(to)"
+        case .report:
+            return "/user/report"
         }
     }
     
@@ -34,6 +37,8 @@ extension APIServiceChat: TargetType {
         case .lastChatDate:
             return .get
         case .chatTo:
+            return .post
+        case .report:
             return .post
         }
     }
@@ -44,6 +49,8 @@ extension APIServiceChat: TargetType {
             return .requestPlain
         case .chatTo(_, let text):
             return .requestParameters(parameters: ["chat": text], encoding: URLEncoding.httpBody)
+        case .report(let data):
+            return .requestParameters(parameters: data, encoding: URLEncoding.init(destination: .httpBody, arrayEncoding: .noBrackets, boolEncoding: .literal))
         }
     }
     

@@ -149,7 +149,7 @@ class PopUpViewController: UIViewController {
     private func setupViews() {
         view.addSubview(containerView)
         containerView.addSubview(containerStackView)
-        view.backgroundColor = .black.withAlphaComponent(0.2)
+        view.backgroundColor = .black.withAlphaComponent(0.5)
     }
 
     private func addSubviews() {

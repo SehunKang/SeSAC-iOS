@@ -17,4 +17,24 @@ extension UIView {
         self.layer.shadowRadius = 5
         self.layer.shadowOpacity = 0.3
     }
+    
+    func addOverlay(yPosition: CGFloat = 0, tapGesture: UIGestureRecognizer) {
+        let overlay = UIView()
+        overlay.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        overlay.frame = CGRect(x: 0, y: yPosition, width: self.bounds.width, height: self.bounds.height)
+        overlay.layer.zPosition = 2
+        overlay.backgroundColor = .black.withAlphaComponent(0.5)
+        overlay.tag = 100
+        overlay.addGestureRecognizer(tapGesture)
+        addSubview(overlay)
+        
+        
+    }
+    
+    func removeOverlay() {
+        guard let overlay = self.subviews.filter({ view in
+            view.tag == 100
+        }).first else {return}
+        overlay.removeFromSuperview()
+    }
 }
