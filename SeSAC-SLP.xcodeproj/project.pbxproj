@@ -16,7 +16,6 @@
 		2E3305E227BB681300A1AECD /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3305E127BB681300A1AECD /* Date+Extension.swift */; };
 		2E3305E427BB6D1100A1AECD /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3305E327BB6D1000A1AECD /* RealmService.swift */; };
 		2E3305E627BB71C800A1AECD /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3305E527BB71C800A1AECD /* SocketManager.swift */; };
-		2E3305E927BB727500A1AECD /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = 2E3305E827BB727500A1AECD /* SocketIO */; };
 		2E3305EB27BBB8F100A1AECD /* APIServiceForChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3305EA27BBB8F100A1AECD /* APIServiceForChat.swift */; };
 		2E3305ED27BBB92C00A1AECD /* Moya_ChatAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3305EC27BBB92B00A1AECD /* Moya_ChatAPI.swift */; };
 		2E35519227B2B3B2008912C9 /* Tabman in Frameworks */ = {isa = PBXBuildFile; productRef = 2E35519127B2B3B2008912C9 /* Tabman */; };
@@ -78,6 +77,8 @@
 		2ED1211927AC3BC600A3C8D5 /* MyInfoDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED1211827AC3BC500A3C8D5 /* MyInfoDetailModel.swift */; };
 		2ED1211C27ACFA2100A3C8D5 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED1211B27ACFA2100A3C8D5 /* HomeViewController.swift */; };
 		2ED1212027AD1AA200A3C8D5 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED1211F27AD1AA100A3C8D5 /* UIView+Extension.swift */; };
+		2ED409D327C0B84400EB1BDA /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED409D227C0B84400EB1BDA /* ReviewViewController.swift */; };
+		2ED409D627C145C600EB1BDA /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = 2ED409D527C145C600EB1BDA /* SocketIO */; };
 		2ED54EF0279D3A84001AE07C /* APIModelForStart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED54EEF279D3A84001AE07C /* APIModelForStart.swift */; };
 		2ED54EF3279D4931001AE07C /* APIServiceForStart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED54EF2279D4931001AE07C /* APIServiceForStart.swift */; };
 		2ED54EF5279D4B93001AE07C /* NickNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED54EF4279D4B93001AE07C /* NickNameViewModel.swift */; };
@@ -153,6 +154,7 @@
 		2ED1211827AC3BC500A3C8D5 /* MyInfoDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInfoDetailModel.swift; sourceTree = "<group>"; };
 		2ED1211B27ACFA2100A3C8D5 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		2ED1211F27AD1AA100A3C8D5 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		2ED409D227C0B84400EB1BDA /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
 		2ED54EEF279D3A84001AE07C /* APIModelForStart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIModelForStart.swift; sourceTree = "<group>"; };
 		2ED54EF2279D4931001AE07C /* APIServiceForStart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServiceForStart.swift; sourceTree = "<group>"; };
 		2ED54EF4279D4B93001AE07C /* NickNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameViewModel.swift; sourceTree = "<group>"; };
@@ -172,9 +174,9 @@
 				2E92DFCD279AF00F0020567B /* FirebaseMessaging in Frameworks */,
 				2E92DFBE27997F3F0020567B /* Alamofire in Frameworks */,
 				2EC4622627BBEC31009D94E6 /* RxCocoa in Frameworks */,
+				2ED409D627C145C600EB1BDA /* SocketIO in Frameworks */,
 				2EC4622D27BBF0BE009D94E6 /* RealmSwift in Frameworks */,
 				2E92DFB62798EFC90020567B /* Toast in Frameworks */,
-				2E3305E927BB727500A1AECD /* SocketIO in Frameworks */,
 				2E35519227B2B3B2008912C9 /* Tabman in Frameworks */,
 				2EC4622B27BBF0BE009D94E6 /* Realm in Frameworks */,
 				2EC4622827BBEC31009D94E6 /* RxSwift in Frameworks */,
@@ -199,6 +201,7 @@
 				2E3305E527BB71C800A1AECD /* SocketManager.swift */,
 				2E3305EA27BBB8F100A1AECD /* APIServiceForChat.swift */,
 				2E38F6E427BFB172005263B5 /* ReportViewController.swift */,
+				2ED409D227C0B84400EB1BDA /* ReviewViewController.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -493,11 +496,11 @@
 				2E92DFCA279AF00F0020567B /* FirebaseAuth */,
 				2E92DFCC279AF00F0020567B /* FirebaseMessaging */,
 				2E35519127B2B3B2008912C9 /* Tabman */,
-				2E3305E827BB727500A1AECD /* SocketIO */,
 				2EC4622527BBEC31009D94E6 /* RxCocoa */,
 				2EC4622727BBEC31009D94E6 /* RxSwift */,
 				2EC4622A27BBF0BE009D94E6 /* Realm */,
 				2EC4622C27BBF0BE009D94E6 /* RealmSwift */,
+				2ED409D527C145C600EB1BDA /* SocketIO */,
 			);
 			productName = "SeSAC-SLP";
 			productReference = 2EBAEF60279539ED00C2A089 /* SeSAC-SLP.app */;
@@ -534,9 +537,9 @@
 				2E92DFC62799AD320020567B /* XCRemoteSwiftPackageReference "Moya" */,
 				2E92DFC9279AF00F0020567B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				2E35519027B2B3B2008912C9 /* XCRemoteSwiftPackageReference "Tabman" */,
-				2E3305E727BB727400A1AECD /* XCRemoteSwiftPackageReference "socket.io-client-swift" */,
 				2EC4622427BBEC31009D94E6 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				2EC4622927BBF0BE009D94E6 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				2ED409D427C145C400EB1BDA /* XCRemoteSwiftPackageReference "socket.io-client-swift" */,
 			);
 			productRefGroup = 2EBAEF61279539ED00C2A089 /* Products */;
 			projectDirPath = "";
@@ -641,6 +644,7 @@
 				2E6F22A127B6BBD100205B23 /* DefaultPopUpView.swift in Sources */,
 				2E2D17BA27BA978400ECBFD7 /* RealmModel.swift in Sources */,
 				2EA6657027AA94C500FD47B0 /* MyInfoViewController.swift in Sources */,
+				2ED409D327C0B84400EB1BDA /* ReviewViewController.swift in Sources */,
 				2E92DFDA279C2BA80020567B /* EmailViewController.swift in Sources */,
 				2E3305E227BB681300A1AECD /* Date+Extension.swift in Sources */,
 				2ED54EF5279D4B93001AE07C /* NickNameViewModel.swift in Sources */,
@@ -899,14 +903,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		2E3305E727BB727400A1AECD /* XCRemoteSwiftPackageReference "socket.io-client-swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/socketio/socket.io-client-swift.git";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 		2E35519027B2B3B2008912C9 /* XCRemoteSwiftPackageReference "Tabman" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/uias/Tabman.git";
@@ -971,14 +967,17 @@
 				version = 10.22.0;
 			};
 		};
+		2ED409D427C145C400EB1BDA /* XCRemoteSwiftPackageReference "socket.io-client-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/socketio/socket.io-client-swift.git";
+			requirement = {
+				kind = exactVersion;
+				version = 15.2.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		2E3305E827BB727500A1AECD /* SocketIO */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2E3305E727BB727400A1AECD /* XCRemoteSwiftPackageReference "socket.io-client-swift" */;
-			productName = SocketIO;
-		};
 		2E35519127B2B3B2008912C9 /* Tabman */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 2E35519027B2B3B2008912C9 /* XCRemoteSwiftPackageReference "Tabman" */;
@@ -1033,6 +1032,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2EC4622927BBF0BE009D94E6 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
+		};
+		2ED409D527C145C600EB1BDA /* SocketIO */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2ED409D427C145C400EB1BDA /* XCRemoteSwiftPackageReference "socket.io-client-swift" */;
+			productName = SocketIO;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

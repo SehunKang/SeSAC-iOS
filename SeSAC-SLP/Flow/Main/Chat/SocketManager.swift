@@ -23,7 +23,6 @@ class SocketIOManager: NSObject {
         manager = SocketManager(socketURL: url, config: [
             .log(true),
             .compress,
-            .extraHeaders(["auth": UserDefaultManager.idtoken])
         ])
         
         socket = manager.defaultSocket

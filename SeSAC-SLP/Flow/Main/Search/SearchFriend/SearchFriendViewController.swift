@@ -52,10 +52,12 @@ class SearchFriendViewController: TabmanViewController {
         
         //뷰를 벗어나도 작동되는데, 그 후의 함수 실행에 문제가 있을 것 같다.
         Observable<Int>.timer(.seconds(1), period: .seconds(5), scheduler: MainScheduler.asyncInstance)
-            .subscribe { _ in
-                self.myQueueStatus()
-                if UserDefaultManager.userStatus == UserStatus.normal.rawValue {
+            .subscribe { [weak self] _ in
+                guard let self = self else {return}
+                if UserDefaultManager.userStatus != UserStatus.searching.rawValue {
                     self.stopStatusCheck()
+                } else {
+                    self.myQueueStatus()
                 }
             }
             .disposed(by: disposeBag)
@@ -63,7 +65,8 @@ class SearchFriendViewController: TabmanViewController {
     
     private func myQueueStatus() {
         print("status check")
-        APIServiceForSearch.myQueueState { result in
+        APIServiceForSearch.myQueueState { [weak self] result in
+            guard let self = self else {return}
             switch result {
             case .success(let response):
                 let responseData = try? response.map(MyQueueStatus.self)
@@ -72,7 +75,7 @@ class SearchFriendViewController: TabmanViewController {
                     if responseData?.matched == 1 {
                         UserDefaultManager.userStatus = UserStatus.doneMatching.rawValue
                         self.view.makeToast("\(responseData!.matchedNick)님과 매칭되셨습니다. 잠시 후 채팅방으로 이동합니다", duration: 1, position: .center,  style: ToastManager.shared.style) { _ in
-                            print("goto chat")
+                            self.gotoChat()
                         }
                     }
                 case 201:
@@ -116,7 +119,8 @@ class SearchFriendViewController: TabmanViewController {
 
     
     @objc func stopFind() {
-        APIServiceForSearch.delete { result in
+        APIServiceForSearch.delete {[weak self] result in
+            guard let self = self else {return}
             switch result {
             case .success(let response):
                 switch response.statusCode {
@@ -125,8 +129,9 @@ class SearchFriendViewController: TabmanViewController {
                     self.disposeBag = DisposeBag()
                     self.navigationController?.popToRootViewController(animated: true)
                 case 201:
-                    self.view.makeToast("누군가와 취미를 함께하기로 약속하셨어요!")
-                    print("goto chat")
+                    self.view.makeToast("누군가와 취미를 함께하기로 약속하셨어요!", duration: 1, position: .center, style: ToastManager.shared.style) { _ in
+                        self.gotoChat()
+                    }
                 default:
                     return
                 }
@@ -140,6 +145,13 @@ class SearchFriendViewController: TabmanViewController {
                 }
             }
         }
+    }
+    
+    private func gotoChat() {
+        UserDefaultManager.userStatus = UserStatus.doneMatching.rawValue
+        let vc = self.storyboard?.instantiateViewController(withIdentifier: ChatViewController.identifer) as! ChatViewController
+        
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 
 }

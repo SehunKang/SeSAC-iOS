@@ -12,10 +12,23 @@ import Realm
 import RxSwift
 import RxCocoa
 import RealmSwift
+import Toast
 
 struct ChatModel: Codable {
 
-    let payload: [Payload]
+    let payload: [Chat]
+}
+
+struct Chat: Codable {
+    let id: String
+    let v: Int
+    let to, from, chat, createdAt: String
+
+    enum CodingKeys: String, CodingKey {
+        case id = "_id"
+        case v = "__v"
+        case to, from, chat, createdAt
+    }
 }
 
 class ChatViewController: UIViewController {
@@ -44,9 +57,17 @@ class ChatViewController: UIViewController {
     var dataSource: UICollectionViewDiffableDataSource<Section, ChatItem>!
     var chatSnapshot = NSDiffableDataSourceSectionSnapshot<ChatItem>()
     
-//    var data: [ChatItem] = [ChatItem(message: "hi", date: "15:02", chatType: .receive), ChatItem(message: "hello", date: "16:03", chatType: .send), ChatItem(message: "asdkfnakjsdfbnakjsdbflakjsdbflakjsdbflakjsbdflkjasbdflkjasbdlfkjasbdlfkjbalsjkdfbalksdjfbalksjdbflakjsdbflkadsjbflakjsdbflakjsdbflaksjdbflkasjdbfalksjdfbalksjdfbalsjkdfbalksdjfbklj", date: "16:09", chatType: .receive)]
     
-    var uid: String! = "test3"
+    var uid: String! {
+        didSet {
+            chatPreSet()
+        }
+    }
+    var matchedUser: String = "" {
+        didSet {
+            title = matchedUser
+        }
+    }
     
     
     @IBOutlet weak var textView: UITextView!
@@ -69,16 +90,16 @@ class ChatViewController: UIViewController {
         
         uiConfigure()
         collectionViewConfigure()
-        chatPreSet()
         bind()
         keyboardConfigure()
         moreMenuConfigure()
+        statusCheck()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-//        SocketIOManager.shared.closeConnection()
+        SocketIOManager.shared.closeConnection()
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
@@ -98,7 +119,12 @@ class ChatViewController: UIViewController {
         
         sendButton.setImage(UIImage(named: "send_inact"), for: .disabled)
         sendButton.setImage(UIImage(named: "send_act"), for: .normal)
+        navBarBackButtonConfigure()
+//        navigationController?.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "ellipsis"), style: .plain, target: self, action: #selector(showMoreMenu) )
+        let buttonItem = UIBarButtonItem(image: UIImage(systemName: "ellipsis"), style: .plain, target: self, action: #selector(showMoreMenu))
         
+        self.navigationItem.rightBarButtonItem = buttonItem
+
     }
     
     
@@ -117,9 +143,8 @@ class ChatViewController: UIViewController {
             .disposed(by: bag)
         
         sendButton.rx.tap
-            .subscribe {[unowned self] _ in
-                postText()
-//                textView.endEditing(true)
+            .subscribe {[weak self] _ in
+                self?.postText()
             }
             .disposed(by: bag)
     
@@ -127,18 +152,19 @@ class ChatViewController: UIViewController {
     }
     
     private func postText() {
-        let resultData = Payload(__v: 0, _id: "test", chat: textView.text, createdAt: Date(), from: UserDefaultManager.userData!.uid, to: uid)
         
-//        APIServiceForChat.sendChat(to: uid, text: textView.text) { result in
-//            switch result {
-//            case .success(let response):
-//                guard let resultData = try? response.map(Payload.self) else {return}
-                RealmService.shared.appendChatData(of: self.uid, payload: [resultData])
+        APIServiceForChat.sendChat(to: uid, text: textView.text) {[weak self] result in
+            guard let self = self else {return}
+            switch result {
+            case .success(let response):
+                print(response.statusCode)
+                guard let resultData = try? response.map(Chat.self) else {print("failed post");return}
+                RealmService.shared.appendChatData(of: self.uid, payload: [Payload(__v: resultData.v, _id: resultData.id, chat: resultData.chat, createdAt: resultData.createdAt.toDate, from: resultData.from, to: resultData.to)])
                 self.textView.text = ""
-//            case .failure(let error):
-//                self.errorHandler(with: error.errorCode)
-//            }
-//        }
+            case .failure(let error):
+                self.errorHandler(with: error.errorCode)
+            }
+        }
     }
     
     private func keyboardConfigure() {
@@ -201,9 +227,15 @@ class ChatViewController: UIViewController {
             case cancelButton:
                 config.title = "약속 취소"
                 config.image = UIImage(named: "cancel_match")
+                button!.rx.tap.subscribe { [weak self] _ in
+                    self?.cancelMatch()
+                }.disposed(by: bag)
             case reviewButton:
                 config.title = "리뷰 등록"
                 config.image = UIImage(named: "write")
+                button!.rx.tap.subscribe { [weak self] _ in
+                    self?.review()
+                }.disposed(by: bag)
             default: return
             }
             button?.configuration = config
@@ -212,33 +244,86 @@ class ChatViewController: UIViewController {
         }
         moreMenuStack.transform = CGAffineTransform(translationX: 0, y: -200)
         moreMenuStack.spacing = 0
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            self.showMoreMenu()
-        }
-        
+                
     }
     
-    private func showMoreMenu() {
+    @objc private func showMoreMenu() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(tapWhenMoreMenu))
         UIView.animate(withDuration: 0.3, delay: 0, options: .layoutSubviews) {
             self.moreMenuStack.transform = .identity
         }
         view.addOverlay(yPosition: moreMenuStack.frame.maxY, tapGesture: tap )
+        navigationItem.rightBarButtonItem?.isEnabled = false
 
     }
     
     @objc private func tapWhenMoreMenu() {
         view.removeOverlay()
         moreMenuStack.transform = CGAffineTransform(translationX: 0, y: -200)
+        navigationItem.rightBarButtonItem?.isEnabled = true
     }
     
     private func report() {
-        let vc = ReportViewController()
+        let vc = ReportViewController(uid: uid)
         vc.modalPresentationStyle = .overFullScreen
-        self.present(vc, animated: true, completion: nil)
+        
+        self.present(vc, animated: false, completion: nil)
+    }
+    
+    private func cancelMatch() {
+        showPopUp(title: "약속을 취소하겠습니까?",
+                  message: "약속을 취소하시면 페널티가 부과됩니다.", rightActionCompletion:  {
+            APIServiceForChat.dodge(uid: self.uid) {[weak self] result in
+                guard let self = self else {return}
+                switch result {
+                case 200:
+                    UserDefaultManager.userStatus = UserStatus.normal.rawValue
+                    self.goHome()
+                case 201:
+                    //이게 필요한가??
+                    self.view.makeToast("잘못된 상대입니다.")
+                case 401:
+                    self.refreshToken {
+                        self.cancelMatch()
+                    }
+                default:
+                    self.errorHandler(with: result)
+                }
+            }
+        })
+    }
+    
+    private func review() {
+        let vc = ReviewViewController(uid: uid, userName: matchedUser)
+        vc.modalPresentationStyle = .overFullScreen
+        self.present(vc, animated: false, completion: nil)
     }
 
+    
+    private func statusCheck() {
+        APIServiceForSearch.myQueueState {[weak self] result in
+            guard let self = self else {return}
+            switch result {
+            case .success(let response):
+                switch response.statusCode {
+                case 200:
+                    guard let result = try? response.map(MyQueueStatus.self) else {return}
+                    if result.dodged == 1 || result.reviewed == 1 {
+                        self.view.makeToast("약속이 종료되어 채팅을 보낼 수 없습니다.", duration: 1, position: .center, style: ToastManager.shared.style) { _ in
+                            self.dismiss(animated: true, completion: nil)
+                        }
+                    }
+                    self.uid = result.matchedUid
+                    self.matchedUser = result.matchedNick
+                case 401:
+                    self.statusCheck()
+                default:
+                    self.errorHandler(with: response.statusCode)
+                }
+            default: return
+            }
+        }
+    }
     
 }
 
@@ -315,9 +400,9 @@ extension ChatViewController {
         if RealmService.shared.isFirstChat(with: uid) {
             RealmService.shared.createNewChatData(of: uid)
         }
-//        getChatDataFromServer()
-//        socketOn()
         realmBind()
+        getChatDataFromServer()
+        socketOn()
 
     }
     
@@ -328,7 +413,7 @@ extension ChatViewController {
             switch result {
             case .success(let response):
                 guard let resultData = try? response.map(ChatModel.self) else {return}
-                RealmService.shared.appendChatData(of: self.uid, payload: resultData.payload)
+                RealmService.shared.appendChatData(of: self.uid, payload: self.chatToPayload(chat: resultData.payload))
             case .failure(let error):
                 self.errorHandler(with: error.errorCode)
             }
@@ -359,24 +444,25 @@ extension ChatViewController {
     private func realmBind() {
         guard let object = RealmService.shared.realm.objects(ChatData.self).filter("uid == %@", uid!).first?.payload else { return }
         
-        realmNotificationToken = object.observe {[unowned self] change in
+        realmNotificationToken = object.observe {[weak self] change in
+            guard let self = self else {return}
             switch change {
             case .initial(let result):
                 let items = self.payloadToItem(payload: Array(result))
-                chatSnapshot.append(items)
-                dataSource.apply(chatSnapshot, to: .main)
-                collectionView.scrollToItem(at: IndexPath(item: result.count - 1, section: 0), at: .bottom, animated: false)
+                self.chatSnapshot.append(items)
+                self.dataSource.apply(self.chatSnapshot, to: .main)
+                self.scrollToLast()
             case .update(let result, let deletions ,let insertions, let modifications):
                 if deletions.count > 0 {
                     print("deletion")
                 }
                 if insertions.count > 0 {
                     let payload = result.last!
-                    let item = payloadToItem(payload: [payload])
-                    chatSnapshot.append(item)
-                    dataSource.apply(chatSnapshot, to: .main)
-                    if payload.to == uid {
-                        collectionView.scrollToItem(at: IndexPath(item: result.count - 1, section: 0), at: .bottom, animated: true)
+                    let item = self.payloadToItem(payload: [payload])
+                    self.chatSnapshot.append(item)
+                    self.dataSource.apply(self.chatSnapshot, to: .main)
+                    if payload.to == self.uid {
+                        self.scrollToLast()
                     }
                 }
                 if modifications.count > 0 {
@@ -405,8 +491,18 @@ extension ChatViewController {
             items.append(ChatItem(message: chat, date: date, chatType: type))
         }
         return items
-        
     }
+    
+    private func chatToPayload(chat: [Chat]) -> [Payload] {
+        let payload = chat.map {Payload(__v: $0.v, _id: $0.id, chat: $0.chat, createdAt: $0.createdAt.toDate, from: $0.from, to: $0.to) }
+        return payload
+    }
+    
+    private func scrollToLast() {
+        let count = collectionView.numberOfItems(inSection: 0)
+        collectionView.scrollToItem(at: IndexPath(item: count - 1, section: 0), at: .bottom, animated: true)
+    }
+    
 
 }
 

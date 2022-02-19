@@ -59,18 +59,32 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        getUserData()
         basicUIConfigure()
         mapConfigure()
         locationConfigure()
         buttonBind()
         findFriend()
         UserDefaultManager.userStatus = UserStatus.normal.rawValue
-        print("this is idtoken",UserDefaultManager.idtoken)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         findFriend()
         
+    }
+    
+    private func getUserData() {
+        APIServiceForStart.getUserData {[weak self] code in
+            switch code {
+            case 200: return
+            case 401:
+                self?.refreshToken {
+                    self?.getUserData()
+                }
+            default:
+                self?.errorHandler(with: code)
+            }
+        }
     }
     
     private func basicUIConfigure() {

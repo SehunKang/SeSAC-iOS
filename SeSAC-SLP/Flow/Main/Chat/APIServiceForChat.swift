@@ -36,4 +36,28 @@ class APIServiceForChat {
         }
     }
     
+    static func dodge(uid: String, completion: @escaping (_ result: Int) -> ()) {
+        let provider = MoyaProvider<APIServiceChat>()
+        provider.request(.dodge(uid: uid)) { result in
+            switch result {
+            case .success(let response):
+                completion(response.statusCode)
+            case .failure(let error):
+                fatalError(error.localizedDescription)
+            }
+        }
+    }
+    
+    static func review(data: [String: Any], completion: @escaping (_ result: Int) -> ()) {
+        let provider = MoyaProvider<APIServiceChat>()
+        provider.request(.review(data: data)) { result in
+            switch result {
+            case .success(let response):
+                completion(response.statusCode)
+            case .failure(let error):
+                fatalError(error.localizedDescription)
+            }
+        }
+    }
+    
 }

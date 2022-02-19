@@ -14,31 +14,31 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
-//        if UserDefaultManager.signInData.nick == "" {
-//            let mainSb = UIStoryboard(name: "Start", bundle: nil)
-//            let mainVc = mainSb.instantiateViewController(withIdentifier: PhoneAuthViewController.identifier) as! PhoneAuthViewController
-//            let nav = UINavigationController(rootViewController: mainVc)
-//            window?.rootViewController = nav
-//        } else {
-//            let mainSb = UIStoryboard(name: "Main", bundle: nil)
-//            let mainVc = mainSb.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
-//            let mainNav = UINavigationController(rootViewController: mainVc)
-//
-//            let infoSb = UIStoryboard(name: "MyInfo", bundle: nil)
-//            let infoVc = infoSb.instantiateViewController(withIdentifier: MyInfoViewController.identifier) as! MyInfoViewController
-//            let infoNav = UINavigationController(rootViewController: infoVc)
-//
-//            let tabBarController = UITabBarController()
-//
-//            tabBarController.viewControllers = [mainNav, infoNav]
-//
-//
-//            window?.rootViewController = tabBarController
-//        }
-        let sb = UIStoryboard(name: "Main", bundle: nil)
-        let vc = sb.instantiateViewController(withIdentifier: ChatViewController.identifer) as! ChatViewController
+        if UserDefaultManager.signInData.nick == "" {
+            let mainSb = UIStoryboard(name: "Start", bundle: nil)
+            let mainVc = mainSb.instantiateViewController(withIdentifier: PhoneAuthViewController.identifier) as! PhoneAuthViewController
+            let nav = UINavigationController(rootViewController: mainVc)
+            window?.rootViewController = nav
+        } else {
+            let mainSb = UIStoryboard(name: "Main", bundle: nil)
+            let mainVc = mainSb.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
+            let mainNav = UINavigationController(rootViewController: mainVc)
 
-        window?.rootViewController = vc
+            let infoSb = UIStoryboard(name: "MyInfo", bundle: nil)
+            let infoVc = infoSb.instantiateViewController(withIdentifier: MyInfoViewController.identifier) as! MyInfoViewController
+            let infoNav = UINavigationController(rootViewController: infoVc)
+
+            let tabBarController = UITabBarController()
+
+            tabBarController.viewControllers = [mainNav, infoNav]
+
+
+            window?.rootViewController = tabBarController
+        }
+//        let sb = UIStoryboard(name: "Main", bundle: nil)
+//        let vc = sb.instantiateViewController(withIdentifier: ChatViewController.identifer) as! ChatViewController
+//
+//        window?.rootViewController = vc
 
         window?.makeKeyAndVisible()
         

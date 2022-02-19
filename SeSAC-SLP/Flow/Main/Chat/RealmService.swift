@@ -20,7 +20,7 @@ class RealmService {
     ///uid와의 챗으로 새로운 DB 생성
     func createNewChatData(of uid: String) {
         let object = ChatData(uid: uid)
-        object.payload.append(Payload())
+//        object.payload.append(Payload())
         do {
             try realm.write {
                 realm.add(object)

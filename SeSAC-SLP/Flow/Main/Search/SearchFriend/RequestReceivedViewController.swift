@@ -43,6 +43,11 @@ class RequestReceivedViewController: UIViewController {
             snapshot.deleteItems(oldValue)
             snapshot.appendItems(data, toSection: .main)
             dataSource.apply(snapshot)
+            if data.isEmpty {
+                collectionView.backgroundView?.isHidden = false
+            } else {
+                collectionView.backgroundView?.isHidden = true
+            }
         }
     }
     var snapshot = NSDiffableDataSourceSnapshot<Section, FromQueueDB>()
@@ -122,7 +127,7 @@ class RequestReceivedViewController: UIViewController {
                 switch response.statusCode {
                 case 200:
                     UserDefaultManager.userStatus = UserStatus.doneMatching.rawValue
-                    print("goto cahat")
+                    self.gotoChatView()
                 case 201:
                     self.view.makeToast("상태방이 이미 다른 사람과 취미를 함께하는 중입니다.")
                 case 202:
@@ -155,7 +160,7 @@ class RequestReceivedViewController: UIViewController {
                 case 200:
                     if responseData?.matched == 1 {
                         self.view.makeToast("채팅방으로 이동합니다.", duration: 1, position: .center, style: ToastManager.shared.style) {_ in
-                            print("goto chat")
+                            self.gotoChatView()
                         }
                     }
                 case 201:
@@ -175,6 +180,13 @@ class RequestReceivedViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    private func gotoChatView() {
+        UserDefaultManager.userStatus = UserStatus.doneMatching.rawValue
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: ChatViewController.identifer) as! ChatViewController
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 
 
@@ -214,6 +226,7 @@ extension RequestReceivedViewController {
 
         collectionView.backgroundView = backgroundView
         
+        
         if data.isEmpty {
             collectionView.backgroundView?.isHidden = false
         } else {
@@ -233,8 +246,8 @@ extension RequestReceivedViewController {
     func configureDataSource() {
         let badgeRegistration = UICollectionView.SupplementaryRegistration<BadgeView>(elementKind: BadgeView.reuseIdentifier) { supplementaryView, elementKind, indexPath in
             
-            supplementaryView.badge.setAttributedTitle(NSAttributedString(string: "요청하기", attributes: [NSAttributedString.Key.font: CustomFont.Title3_M14.font, NSAttributedString.Key.foregroundColor: CustomColor.SLPWhite.color]), for: .normal)
-            supplementaryView.badge.backgroundColor = CustomColor.SLPError.color
+            supplementaryView.badge.setAttributedTitle(NSAttributedString(string: "수락하기", attributes: [NSAttributedString.Key.font: CustomFont.Title3_M14.font, NSAttributedString.Key.foregroundColor: CustomColor.SLPWhite.color]), for: .normal)
+            supplementaryView.badge.backgroundColor = CustomColor.SLPSuccess.color
             supplementaryView.badge.tag = indexPath.item
             supplementaryView.badge.addTarget(self, action: #selector(self.badgeClicked(sender:)), for: .touchUpInside)
             

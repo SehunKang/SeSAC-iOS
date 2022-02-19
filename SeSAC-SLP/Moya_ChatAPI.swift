@@ -12,6 +12,8 @@ enum APIServiceChat {
     case lastChatDate(from: String, lastChatDate: String)
     case chatTo(to: String, text: String)
     case report(data: [String: Any])
+    case dodge(uid: String)
+    case review(data: [String: Any])
 }
 
 
@@ -23,12 +25,16 @@ extension APIServiceChat: TargetType {
     
     var path: String {
         switch self {
-        case .lastChatDate(let from, let lastChatDate):
-            return "/chat/\(from)?lastchatDate=\(lastChatDate)"
+        case .lastChatDate(let from, _):
+            return "/chat/\(from)"
         case .chatTo(let to, _):
             return "/chat/\(to)"
         case .report:
             return "/user/report"
+        case .dodge:
+            return "/queue/dodge"
+        case .review(let data):
+            return "queue/rate/\(data["otheruid"]!)"
         }
     }
     
@@ -40,16 +46,24 @@ extension APIServiceChat: TargetType {
             return .post
         case .report:
             return .post
+        case .dodge:
+            return .post
+        case .review:
+            return .post
         }
     }
     
     var task: Task {
         switch self {
-        case .lastChatDate:
-            return .requestPlain
+        case .lastChatDate(_, let date):
+            return .requestParameters(parameters: ["lastchatDate": date], encoding: URLEncoding.queryString)
         case .chatTo(_, let text):
             return .requestParameters(parameters: ["chat": text], encoding: URLEncoding.httpBody)
         case .report(let data):
+            return .requestParameters(parameters: data, encoding: URLEncoding.init(destination: .httpBody, arrayEncoding: .noBrackets, boolEncoding: .literal))
+        case .dodge(let uid):
+            return .requestParameters(parameters: ["otheruid": uid], encoding: URLEncoding.httpBody)
+        case .review(let data):
             return .requestParameters(parameters: data, encoding: URLEncoding.init(destination: .httpBody, arrayEncoding: .noBrackets, boolEncoding: .literal))
         }
     }

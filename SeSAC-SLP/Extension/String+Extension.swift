@@ -29,7 +29,7 @@ extension String {
     var toDate: Date {
         get {
             let format = DateFormatter()
-            format.dateFormat = "yyyy-MM-dd'T'HH:mm:ssX"
+            format.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSX"
             let date = format.date(from: self)!
             return date
         }

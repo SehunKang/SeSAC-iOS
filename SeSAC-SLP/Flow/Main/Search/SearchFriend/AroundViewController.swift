@@ -50,6 +50,11 @@ class AroundViewController: UIViewController {
             snapshot.deleteItems(oldValue)
             snapshot.appendItems(data, toSection: .main)
             dataSource.apply(snapshot)
+            if data.isEmpty {
+                collectionView.backgroundView?.isHidden = false
+            } else {
+                collectionView.backgroundView?.isHidden = true
+            }
         }
     }
 
@@ -188,7 +193,7 @@ class AroundViewController: UIViewController {
                 case 200:
                     if responseData?.matched == 1 {
                         self.view.makeToast("채팅방으로 이동합니다.", duration: 1, position: .center, style: ToastManager.shared.style) {_ in
-                            print("goto chat")
+                            self.gotoChatView()
                         }
                     }
                 case 201:
@@ -208,6 +213,13 @@ class AroundViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    private func gotoChatView() {
+        UserDefaultManager.userStatus = UserStatus.doneMatching.rawValue
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: ChatViewController.identifer) as! ChatViewController
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 
 
