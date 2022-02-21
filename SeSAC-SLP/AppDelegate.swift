@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import FirebaseMessaging
 import UserNotifications
 import Toast
 
@@ -16,11 +17,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        
         FirebaseApp.configure()
         
+        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
         UNUserNotificationCenter.current().delegate = self
-        UNUserNotificationCenter.current().requestAuthorization(options: [.badge,.sound,.alert], completionHandler: { (granted,error) in })
+        UNUserNotificationCenter.current().requestAuthorization(options: authOptions, completionHandler: { _ , _ in })
+        
         application.registerForRemoteNotifications()
         
         Messaging.messaging().delegate = self
@@ -71,14 +74,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate {
     
     func idtokenRefresh() {
-//        let currentUser = Auth.auth().currentUser
-//        currentUser?.getIDTokenForcingRefresh(true) { idToken, error in
-//            if let error = error {
-//                print(error.localizedDescription)
-//                return;
-//            }
-//            UserDefaultManager.idtoken = idToken!
-//        }
+        let currentUser = Auth.auth().currentUser
+        currentUser?.getIDTokenForcingRefresh(true) { idToken, error in
+            if let error = error {
+                print(error.localizedDescription)
+                return;
+            }
+            UserDefaultManager.idtoken = idToken!
+        }
     }
 }
 
@@ -87,6 +90,12 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     func application(application: UIApplication,
                      didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         Messaging.messaging().apnsToken = deviceToken
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        print("push click")
+        
+        completionHandler()
     }
 }
 

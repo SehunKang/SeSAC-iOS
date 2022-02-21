@@ -13,6 +13,7 @@ enum APIServiceUser {
     case signIn(data: SignInData)
     case updateMyPage(data: [String: Any])
     case withdraw
+    case updateFcm(fcmToken: String)
 }
 
 extension APIServiceUser: TargetType {
@@ -30,6 +31,8 @@ extension APIServiceUser: TargetType {
             return "/user/update/mypage"
         case .withdraw:
             return "/user/withdraw"
+        case .updateFcm:
+            return "user/update_fcm_token"
         }
     }
     
@@ -43,6 +46,8 @@ extension APIServiceUser: TargetType {
             return .post
         case .withdraw:
             return .post
+        case .updateFcm:
+            return .put
         }
     }
     
@@ -56,18 +61,14 @@ extension APIServiceUser: TargetType {
             return .requestParameters(parameters: data, encoding: URLEncoding.httpBody)
         case .withdraw:
             return .requestPlain
+        case .updateFcm(let fcmToken):
+            return .requestParameters(parameters: ["FCMtoken": fcmToken], encoding: URLEncoding.httpBody)
         }
     }
     
     var headers: [String : String]? {
         switch self {
-        case .getUserData:
-            return ["idtoken": UserDefaultManager.idtoken]
-        case .signIn:
-            return ["idtoken": UserDefaultManager.idtoken]
-        case .updateMyPage:
-            return ["idtoken": UserDefaultManager.idtoken]
-        case .withdraw:
+        default:
             return ["idtoken": UserDefaultManager.idtoken]
         }
     }

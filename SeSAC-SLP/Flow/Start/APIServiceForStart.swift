@@ -47,6 +47,19 @@ class APIServiceForStart {
             }
         }
     }
+    
+    //언제 해야하고 결과값을 어떻게 해야하나?
+    static func fcmTokenUpdate(fcmToken: String) {
+        let provider = MoyaProvider<APIServiceUser>()
+        provider.request(.updateFcm(fcmToken: fcmToken)) { result in
+            switch result {
+            case .success(let response):
+                print(response.statusCode)
+            case .failure(let error):
+                print(error.errorCode)
+            }
+        }
+    }
 
 
 }

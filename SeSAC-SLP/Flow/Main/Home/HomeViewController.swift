@@ -65,7 +65,10 @@ class HomeViewController: UIViewController {
         locationConfigure()
         buttonBind()
         findFriend()
-        UserDefaultManager.userStatus = UserStatus.normal.rawValue
+//        UserDefaultManager.userStatus = UserStatus.normal.rawValue
+        print("uid = \(UserDefaultManager.userData?.uid)")
+        print("fcm from userdata = \(UserDefaultManager.userData?.fcMtoken)")
+        print("fcm from signin= \(UserDefaultManager.signInData.fcMtoken)")
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -76,7 +79,11 @@ class HomeViewController: UIViewController {
     private func getUserData() {
         APIServiceForStart.getUserData {[weak self] code in
             switch code {
-            case 200: return
+            case 200:
+                if UserDefaultManager.userData?.fcMtoken != UserDefaultManager.signInData.fcMtoken {
+                    let fcmToken = UserDefaultManager.signInData.fcMtoken
+                    APIServiceForStart.fcmTokenUpdate(fcmToken: fcmToken)
+                }
             case 401:
                 self?.refreshToken {
                     self?.getUserData()
