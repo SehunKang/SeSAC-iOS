@@ -19,6 +19,8 @@ class SearchFriendViewController: TabmanViewController {
     
     private var viewControllers = [AroundViewController(), RequestReceivedViewController()]
     
+    var isPushed = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navBarConfig()
@@ -46,7 +48,9 @@ class SearchFriendViewController: TabmanViewController {
         
         addBar(bar, dataSource: self, at: .top)
         statusCheck()
+    
     }
+    
     
     private func statusCheck() {
         
@@ -166,6 +170,9 @@ extension SearchFriendViewController: PageboyViewControllerDataSource, TMBarData
     }
     
     func defaultPage(for pageboyViewController: PageboyViewController) -> PageboyViewController.Page? {
+        if isPushed == true {
+            return .at(index: 1)
+        }
         return nil
     }
     
@@ -173,6 +180,5 @@ extension SearchFriendViewController: PageboyViewControllerDataSource, TMBarData
         let title: String = index == 0 ? "주변 새싹" : "받은 요청"
         return TMBarItem(title: title)
     }
-    
     
 }

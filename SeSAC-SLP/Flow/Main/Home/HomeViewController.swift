@@ -66,9 +66,6 @@ class HomeViewController: UIViewController {
         buttonBind()
         findFriend()
 //        UserDefaultManager.userStatus = UserStatus.normal.rawValue
-        print("uid = \(UserDefaultManager.userData?.uid)")
-        print("fcm from userdata = \(UserDefaultManager.userData?.fcMtoken)")
-        print("fcm from signin= \(UserDefaultManager.signInData.fcMtoken)")
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -92,6 +89,7 @@ class HomeViewController: UIViewController {
                 self?.errorHandler(with: code)
             }
         }
+        
     }
     
     private func basicUIConfigure() {
@@ -170,7 +168,8 @@ class HomeViewController: UIViewController {
                     self.whenNormal()
                 case UserStatus.searching.rawValue:
                     self.whenSearching()
-//                case UserStatus.doneMatching.rawValue:
+                case UserStatus.doneMatching.rawValue:
+                    self.gotoChat()
                 default: break
                 }
             }
@@ -215,6 +214,14 @@ class HomeViewController: UIViewController {
             navigationController.viewControllers.insert(vc1, at: addIndex)
         }
         
+    }
+    
+    private func gotoChat() {
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        let vc = sb.instantiateViewController(withIdentifier: ChatViewController.identifer) as! ChatViewController
+        vc.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(vc, animated: true)
+
     }
     
     

@@ -310,7 +310,8 @@ class ChatViewController: UIViewController {
                     guard let result = try? response.map(MyQueueStatus.self) else {return}
                     if result.dodged == 1 || result.reviewed == 1 {
                         self.view.makeToast("약속이 종료되어 채팅을 보낼 수 없습니다.", duration: 1, position: .center, style: ToastManager.shared.style) { _ in
-                            self.dismiss(animated: true, completion: nil)
+                            self.navigationController?.popViewController(animated: true)
+                            UserDefaultManager.userStatus = UserStatus.normal.rawValue
                         }
                     }
                     self.uid = result.matchedUid

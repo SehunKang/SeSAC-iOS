@@ -69,6 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     
+    
 }
 
 extension AppDelegate {
@@ -92,11 +93,74 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         Messaging.messaging().apnsToken = deviceToken
     }
     
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        
+        //엄밀히 따지자면 topViewController 일듯?
+        guard let rootViewController = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window?.rootViewController?.topViewController else {return}
+
+        if rootViewController is SearchFriendViewController || rootViewController is ChatViewController {
+            completionHandler([])
+        } else {
+            completionHandler([.list, .banner, .badge, .sound])
+        }
+    }
+    
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        print("push click")
+        
+        guard let rootViewController = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window?.rootViewController, let topViewController = rootViewController.topViewController else {return}
+        
+
+        let info = response.notification.request.content.userInfo
+        //채팅
+        if ((info[AnyHashable("matched")] as? String) != nil) {
+            if UserDefaultManager.userStatus == UserStatus.doneMatching.rawValue {
+                let sb = UIStoryboard(name: "Main", bundle: nil)
+                let vc = sb.instantiateViewController(withIdentifier: ChatViewController.identifer) as! ChatViewController
+                vc.hidesBottomBarWhenPushed = true
+                topViewController.navigationController?.pushViewController(vc, animated: true)
+            } else {
+                topViewController.goHome()
+            }
+        //약속 취소
+        } else if ((info[AnyHashable("dodge")] as? String) != nil) {
+            print("dodged")
+        //매칭 수락
+        } else if ((info[AnyHashable("hobbyAccepted")] as? String) != nil) {
+            if UserDefaultManager.userStatus == UserStatus.searching.rawValue {
+                let sb = UIStoryboard(name: "Main", bundle: nil)
+                let vc = sb.instantiateViewController(withIdentifier: ChatViewController.identifer) as! ChatViewController
+                vc.hidesBottomBarWhenPushed = true
+                topViewController.navigationController?.pushViewController(vc, animated: true)
+            } else {
+                topViewController.goHome()
+            }
+            //매칭 요청
+        } else if ((info[AnyHashable("hobbyRequest")] as? String) != nil) {
+            if UserDefaultManager.userStatus == UserStatus.searching.rawValue {
+                topViewController.goAccept {
+                    guard let newTopView = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.window?.rootViewController?.topViewController else {return}
+                    let sb = UIStoryboard(name: "Main", bundle: nil)
+                    let stack1 = sb.instantiateViewController(withIdentifier: SearchHobbyViewController.identifier) as! SearchHobbyViewController
+                    let stack2 = sb.instantiateViewController(withIdentifier: SearchFriendViewController.identifier) as! SearchFriendViewController
+                    stack1.hidesBottomBarWhenPushed = true
+                    stack2.hidesBottomBarWhenPushed = true
+                    newTopView.navigationController?.pushViewController(stack2, animated: true)
+                    stack2.isPushed = true
+                    newTopView.navigationController?.viewControllers.insert(stack1, at: 1)
+                }
+                
+            } else {
+                topViewController.goHome()
+            }
+        } else {
+            print("else")
+        }
         
         completionHandler()
     }
+    
+
+    
 }
 
 extension AppDelegate: MessagingDelegate {
