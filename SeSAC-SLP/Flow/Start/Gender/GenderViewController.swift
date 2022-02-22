@@ -113,7 +113,9 @@ class GenderViewController: UIViewController {
                 let vc = self.storyboard?.instantiateViewController(withIdentifier: NicknameViewController.identifier) as! NicknameViewController
                 self.navigationController?.pushViewController(vc, animated: true)
             case 401:
-                self.doneButtonClicked()
+                self.refreshToken {
+                    self.doneButtonClicked()
+                }
             default:
                 self.errorHandler(with: statusCode)
             }

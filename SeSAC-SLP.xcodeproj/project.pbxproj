@@ -79,6 +79,14 @@
 		2ED1212027AD1AA200A3C8D5 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED1211F27AD1AA100A3C8D5 /* UIView+Extension.swift */; };
 		2ED409D327C0B84400EB1BDA /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED409D227C0B84400EB1BDA /* ReviewViewController.swift */; };
 		2ED409D627C145C600EB1BDA /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = 2ED409D527C145C600EB1BDA /* SocketIO */; };
+		2ED409D927C4B3DF00EB1BDA /* Shop.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2ED409D827C4B3DF00EB1BDA /* Shop.storyboard */; };
+		2ED409DB27C4B54200EB1BDA /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED409DA27C4B54200EB1BDA /* ShopViewController.swift */; };
+		2ED409DD27C4B59200EB1BDA /* BackgroundShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED409DC27C4B59200EB1BDA /* BackgroundShopViewController.swift */; };
+		2ED409DF27C4B5AE00EB1BDA /* ForegroundShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED409DE27C4B5AE00EB1BDA /* ForegroundShopViewController.swift */; };
+		2ED409E127C4F7A400EB1BDA /* APIServiceForShop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED409E027C4F7A300EB1BDA /* APIServiceForShop.swift */; };
+		2ED409E327C4F7C200EB1BDA /* Moya_ShopAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED409E227C4F7C200EB1BDA /* Moya_ShopAPI.swift */; };
+		2ED409E527C52F3D00EB1BDA /* ForegroundCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED409E427C52F3C00EB1BDA /* ForegroundCollectionViewCell.swift */; };
+		2ED409E927C5452800EB1BDA /* BackgroundCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED409E827C5452800EB1BDA /* BackgroundCollectionViewCell.swift */; };
 		2ED54EF0279D3A84001AE07C /* APIModelForStart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED54EEF279D3A84001AE07C /* APIModelForStart.swift */; };
 		2ED54EF3279D4931001AE07C /* APIServiceForStart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED54EF2279D4931001AE07C /* APIServiceForStart.swift */; };
 		2ED54EF5279D4B93001AE07C /* NickNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED54EF4279D4B93001AE07C /* NickNameViewModel.swift */; };
@@ -155,6 +163,14 @@
 		2ED1211B27ACFA2100A3C8D5 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		2ED1211F27AD1AA100A3C8D5 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		2ED409D227C0B84400EB1BDA /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
+		2ED409D827C4B3DF00EB1BDA /* Shop.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Shop.storyboard; sourceTree = "<group>"; };
+		2ED409DA27C4B54200EB1BDA /* ShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
+		2ED409DC27C4B59200EB1BDA /* BackgroundShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundShopViewController.swift; sourceTree = "<group>"; };
+		2ED409DE27C4B5AE00EB1BDA /* ForegroundShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForegroundShopViewController.swift; sourceTree = "<group>"; };
+		2ED409E027C4F7A300EB1BDA /* APIServiceForShop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServiceForShop.swift; sourceTree = "<group>"; };
+		2ED409E227C4F7C200EB1BDA /* Moya_ShopAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Moya_ShopAPI.swift; sourceTree = "<group>"; };
+		2ED409E427C52F3C00EB1BDA /* ForegroundCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForegroundCollectionViewCell.swift; sourceTree = "<group>"; };
+		2ED409E827C5452800EB1BDA /* BackgroundCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundCollectionViewCell.swift; sourceTree = "<group>"; };
 		2ED54EEF279D3A84001AE07C /* APIModelForStart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIModelForStart.swift; sourceTree = "<group>"; };
 		2ED54EF2279D4931001AE07C /* APIServiceForStart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIServiceForStart.swift; sourceTree = "<group>"; };
 		2ED54EF4279D4B93001AE07C /* NickNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NickNameViewModel.swift; sourceTree = "<group>"; };
@@ -382,6 +398,7 @@
 				2EBAEF82279585B700C2A089 /* Protocol.swift */,
 				2E92DFBA279971E80020567B /* UserDefaultManager.swift */,
 				2E92DFC2279999DC0020567B /* Moya_UserAPI.swift */,
+				2ED409E227C4F7C200EB1BDA /* Moya_ShopAPI.swift */,
 				2E6DC70927AE97D500A049CC /* Moya_QueueAPI.swift */,
 				2E3305EC27BBB92B00A1AECD /* Moya_ChatAPI.swift */,
 				2EBAEF6C279539EF00C2A089 /* Assets.xcassets */,
@@ -421,9 +438,24 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
+		2ED409D727C4B3BB00EB1BDA /* Shop */ = {
+			isa = PBXGroup;
+			children = (
+				2ED409D827C4B3DF00EB1BDA /* Shop.storyboard */,
+				2ED409DA27C4B54200EB1BDA /* ShopViewController.swift */,
+				2ED409DC27C4B59200EB1BDA /* BackgroundShopViewController.swift */,
+				2ED409DE27C4B5AE00EB1BDA /* ForegroundShopViewController.swift */,
+				2ED409E427C52F3C00EB1BDA /* ForegroundCollectionViewCell.swift */,
+				2ED409E827C5452800EB1BDA /* BackgroundCollectionViewCell.swift */,
+				2ED409E027C4F7A300EB1BDA /* APIServiceForShop.swift */,
+			);
+			path = Shop;
+			sourceTree = "<group>";
+		};
 		2ED54EF1279D3C4E001AE07C /* Flow */ = {
 			isa = PBXGroup;
 			children = (
+				2ED409D727C4B3BB00EB1BDA /* Shop */,
 				2EA6656C27AA941E00FD47B0 /* MyInfo */,
 				2EA963E127981C0200DA7C2E /* Start */,
 				2ED54EF6279D5784001AE07C /* Main */,
@@ -561,6 +593,7 @@
 				2EBAEF8A2796854400C2A089 /* GoogleService-Info.plist in Resources */,
 				2EDF693727982464005E3F93 /* NotoSansKR-Medium.otf in Resources */,
 				2E97A1D627B2A4A500A0A057 /* BackgroundView.xib in Resources */,
+				2ED409D927C4B3DF00EB1BDA /* Shop.storyboard in Resources */,
 				2EBAEF6D279539EF00C2A089 /* Assets.xcassets in Resources */,
 				2EDF693827982464005E3F93 /* NotoSansKR-Regular.otf in Resources */,
 				2EBAEF6B279539ED00C2A089 /* Start.storyboard in Resources */,
@@ -617,10 +650,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				2E394F6327B54F6D0009F98B /* BadgeView.swift in Sources */,
+				2ED409DB27C4B54200EB1BDA /* ShopViewController.swift in Sources */,
 				2ED1212027AD1AA200A3C8D5 /* UIView+Extension.swift in Sources */,
 				2E38F6E627BFB172005263B5 /* ReportViewController.swift in Sources */,
 				2E92DFCF279B0BF20020567B /* String+Extension.swift in Sources */,
 				2E92DFDD279C3D830020567B /* GenderViewController.swift in Sources */,
+				2ED409DF27C4B5AE00EB1BDA /* ForegroundShopViewController.swift in Sources */,
 				2E308E5A27AB9E6B00AD08CC /* UILabel+Extension.swift in Sources */,
 				2E97A1CA27B1540900A0A057 /* SearchFriendViewController.swift in Sources */,
 				2EDF693D27982A3C005E3F93 /* EasyAlert.swift in Sources */,
@@ -641,6 +676,7 @@
 				2EA963E02797A1F500DA7C2E /* CustomTextField.swift in Sources */,
 				2ED54EF3279D4931001AE07C /* APIServiceForStart.swift in Sources */,
 				2E92DFC3279999DC0020567B /* Moya_UserAPI.swift in Sources */,
+				2ED409DD27C4B59200EB1BDA /* BackgroundShopViewController.swift in Sources */,
 				2E6F22A127B6BBD100205B23 /* DefaultPopUpView.swift in Sources */,
 				2E2D17BA27BA978400ECBFD7 /* RealmModel.swift in Sources */,
 				2EA6657027AA94C500FD47B0 /* MyInfoViewController.swift in Sources */,
@@ -648,6 +684,8 @@
 				2E92DFDA279C2BA80020567B /* EmailViewController.swift in Sources */,
 				2E3305E227BB681300A1AECD /* Date+Extension.swift in Sources */,
 				2ED54EF5279D4B93001AE07C /* NickNameViewModel.swift in Sources */,
+				2ED409E927C5452800EB1BDA /* BackgroundCollectionViewCell.swift in Sources */,
+				2ED409E327C4F7C200EB1BDA /* Moya_ShopAPI.swift in Sources */,
 				2E92DFB927993E7C0020567B /* UIViewController+Extension.swift in Sources */,
 				2E3305ED27BBB92C00A1AECD /* Moya_ChatAPI.swift in Sources */,
 				2EBAEF812795859800C2A089 /* PhoneAuthViewModel.swift in Sources */,
@@ -663,6 +701,7 @@
 				2E308E5827AAC86100AD08CC /* MyInfoDetailViewController.swift in Sources */,
 				2ED1211C27ACFA2100A3C8D5 /* HomeViewController.swift in Sources */,
 				2EA6657227AA94D500FD47B0 /* MyInfoViewModel.swift in Sources */,
+				2ED409E127C4F7A400EB1BDA /* APIServiceForShop.swift in Sources */,
 				2E6DC71127AFF73600A049CC /* MyHobbyCell.swift in Sources */,
 				2E6BB15527B3F7CE0095ADE4 /* CardCell.swift in Sources */,
 				2E97A1D027B2999900A0A057 /* AroundViewController.swift in Sources */,
@@ -670,6 +709,7 @@
 				2E394F6727B647320009F98B /* APIServiceForSearch.swift in Sources */,
 				2ED029AE27B7BBB000707319 /* APIModelForSearch.swift in Sources */,
 				2E6DC70F27AFBBD300A049CC /* SearchHobbyViewController.swift in Sources */,
+				2ED409E527C52F3D00EB1BDA /* ForegroundCollectionViewCell.swift in Sources */,
 				2ED54EF0279D3A84001AE07C /* APIModelForStart.swift in Sources */,
 				2E6DC70C27AE9CD900A049CC /* Float+Extension.swift in Sources */,
 				2EA963D72796EF7300DA7C2E /* CustomColor.swift in Sources */,

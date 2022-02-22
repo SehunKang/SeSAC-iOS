@@ -317,7 +317,9 @@ class ChatViewController: UIViewController {
                     self.uid = result.matchedUid
                     self.matchedUser = result.matchedNick
                 case 401:
-                    self.statusCheck()
+                    self.refreshToken {
+                        self.statusCheck()
+                    }
                 default:
                     self.errorHandler(with: response.statusCode)
                 }
