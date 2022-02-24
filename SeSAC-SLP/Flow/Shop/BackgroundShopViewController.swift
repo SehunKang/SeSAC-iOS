@@ -20,27 +20,40 @@ class BackgroundShopViewController: UIViewController {
         }
     }
     
-    var productArray = Array<SKProduct>()
+    var productArray: Array<SKProduct>! {
+        didSet {
+            DispatchQueue.main.async {
+                self.collectionViewConfigure()
+            }
+        }
+    }
     
-    let collectionView = UICollectionView()
+    var collectionView: UICollectionView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         requestProductData()
-        updateInfo()
-        collectionViewConfigure()
+//        collectionViewConfigure()
 
     }
     
     private func collectionViewConfigure() {
+        
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        
         view.addSubview(collectionView)
         collectionView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.trailing.leading.bottom.equalToSuperview()
+            make.top.equalToSuperview().inset(344)
         }
         collectionView.register(BackgroundCollectionViewCell.self, forCellWithReuseIdentifier: "BackgroundCollectionViewCell")
         collectionView.delegate = self
         collectionView.dataSource = self
     }
+    
+
     
     private func requestProductData() {
         if SKPaymentQueue.canMakePayments() {
@@ -111,14 +124,19 @@ extension BackgroundShopViewController: SKProductsRequestDelegate {
     func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
         let products = response.products
         
-        if products.count > 0 {
-            for i in products {
-                productArray.append(i)
-            }
-        } else {
-            print("no product found")
-        }
+        productArray = products
+//        if products.count > 0 {
+//            for i in products {
+//                productArray.append(i)
+//            }
+//        } else {
+//            print("no product found")
+//        }
+        updateInfo()
+
     }
+    
+    
 }
 
 extension BackgroundShopViewController: SKPaymentTransactionObserver {
@@ -151,21 +169,29 @@ extension BackgroundShopViewController: UICollectionViewDelegate, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BackgroundCollectionViewCell", for: indexPath) as? BackgroundCollectionViewCell else {return UICollectionViewCell()}
-        
         cell.imageView.image = UIImage(named: "sesac_background_\(indexPath.item)")
-        cell.nameLabel.text = productArray[indexPath.item].localizedTitle
-        cell.discriptionLabel.text = productArray[indexPath.item].localizedTitle
-        if myItem[indexPath.item] == 1 {
+
+        if indexPath.item == 0 {
+            cell.nameLabel.text = "하늘 공원"
+            cell.discriptionLabel.text = "새싹들을 많이 마주치는 매력적인 하늘 공원입니다."
             cell.priceButton.setTitle("보유", for: .normal)
             cell.priceButton.setTitleColor(CustomColor.SLPGray7.color, for: .normal)
             cell.priceButton.backgroundColor = CustomColor.SLPGray2.color
         } else {
-            cell.priceButton.setTitle("\(productArray[indexPath.item].price)", for: .normal)
-            cell.priceButton.setTitleColor(CustomColor.SLPWhite.color, for: .normal)
-            cell.priceButton.backgroundColor = CustomColor.SLPGreen.color
-            cell.priceButton.tag = indexPath.item
-            cell.priceButton.addTarget(self, action: #selector(buttonClicked(_:)), for: .touchUpInside)
+            cell.nameLabel.text = productArray[indexPath.item - 1].localizedTitle
+            cell.discriptionLabel.text = productArray[indexPath.item - 1].localizedDescription
+            if myItem[indexPath.item] == 1 {
+                cell.priceButton.setTitle("보유", for: .normal)
+                cell.priceButton.setTitleColor(CustomColor.SLPGray7.color, for: .normal)
+                cell.priceButton.backgroundColor = CustomColor.SLPGray2.color
+            } else {
+                cell.priceButton.setTitle("\(productArray[indexPath.item - 1].price)", for: .normal)
+                cell.priceButton.setTitleColor(CustomColor.SLPWhite.color, for: .normal)
+                cell.priceButton.backgroundColor = CustomColor.SLPGreen.color
+            }
         }
+        cell.priceButton.tag = indexPath.item
+        cell.priceButton.addTarget(self, action: #selector(buttonClicked(_:)), for: .touchUpInside)
         
         return cell
     }

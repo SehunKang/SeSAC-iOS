@@ -70,7 +70,7 @@ struct MyInfo: Codable {
     let reportedUser: [String]
     let dodgepenalty, dodgeNum, ageMin, ageMax: Int
     let searchable: Int
-    let createdAt, birth: Date
+    let createdAt, birth: String
 
     enum CodingKeys: String, CodingKey {
         case id = "_id"

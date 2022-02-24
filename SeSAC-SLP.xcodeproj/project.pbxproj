@@ -444,9 +444,9 @@
 				2ED409D827C4B3DF00EB1BDA /* Shop.storyboard */,
 				2ED409DA27C4B54200EB1BDA /* ShopViewController.swift */,
 				2ED409DC27C4B59200EB1BDA /* BackgroundShopViewController.swift */,
+				2ED409E827C5452800EB1BDA /* BackgroundCollectionViewCell.swift */,
 				2ED409DE27C4B5AE00EB1BDA /* ForegroundShopViewController.swift */,
 				2ED409E427C52F3C00EB1BDA /* ForegroundCollectionViewCell.swift */,
-				2ED409E827C5452800EB1BDA /* BackgroundCollectionViewCell.swift */,
 				2ED409E027C4F7A300EB1BDA /* APIServiceForShop.swift */,
 			);
 			path = Shop;

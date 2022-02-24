@@ -21,7 +21,6 @@ class MyInfoViewController: UIViewController {
         title = "내 정보"
         tableViewConfig()
         navBarBackButtonConfigure()
-        print(UserDefaultManager.userData as Any)
     }
         
     private func tableViewConfig() {

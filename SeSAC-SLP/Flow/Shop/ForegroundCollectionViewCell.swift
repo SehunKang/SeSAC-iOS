@@ -26,7 +26,7 @@ class ForegroundCollectionViewCell: UICollectionViewCell {
     
     let priceButton: UIButton = {
         let button = UIButton()
-        button.layer.cornerRadius = 30
+        button.layer.cornerRadius = 8
         button.titleLabel?.font = CustomFont.Title5_M12.font
         return button
     }()
@@ -51,6 +51,9 @@ class ForegroundCollectionViewCell: UICollectionViewCell {
     private func configure() {
         [imageView, nameLabel, priceButton, discriptionLabel].forEach {
             contentView.addSubview($0)
+        }
+        contentView.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(8)
         }
         
         imageView.snp.makeConstraints { make in

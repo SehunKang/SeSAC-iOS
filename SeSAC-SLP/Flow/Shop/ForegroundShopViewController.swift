@@ -8,6 +8,7 @@
 import UIKit
 import StoreKit
 import SnapKit
+import MachO
 
 class ForegroundShopViewController: UIViewController {
     
@@ -20,30 +21,57 @@ class ForegroundShopViewController: UIViewController {
         }
     }
     
-    var productArray = Array<SKProduct>()
+    var productArray: Array<SKProduct>! {
+        didSet {
+            DispatchQueue.main.async {
+                self.collectionViewConfigure()
+            }
+        }
+    }
     
-    let collectionView = UICollectionView()
+    var collectionView: UICollectionView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        requestProductData()
-        updateInfo()
-        collectionViewConfigure()
 
-        // Do any additional setup after loading the view.
+        requestProductData()
+//        collectionViewConfigure()
+
     }
     
     private func collectionViewConfigure() {
+
+//        let layout = UICollectionViewFlowLayout()
+//        layout.scrollDirection = .vertical
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: createLayout())
+        
         view.addSubview(collectionView)
         collectionView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.trailing.leading.bottom.equalToSuperview()
+            make.top.equalToSuperview().inset(344)
         }
         collectionView.register(ForegroundCollectionViewCell.self, forCellWithReuseIdentifier: "ForegroundCollectionViewCell")
         collectionView.delegate = self
         collectionView.dataSource = self
     }
     
+    private func createLayout() -> UICollectionViewLayout {
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5), heightDimension: .estimated(280))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension:  itemSize.heightDimension)
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+//        group.interItemSpacing = .fixed(8)
+//        group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 8)
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.interGroupSpacing = 16
+        section.contentInsets = NSDirectionalEdgeInsets(top: 8, leading: 8, bottom: 8, trailing: 8)
+        return UICollectionViewCompositionalLayout(section: section)
+    }
+    
     private func requestProductData() {
+
         if SKPaymentQueue.canMakePayments() {
             let request = SKProductsRequest(productIdentifiers: productIdentifier as Set<String>)
             request.delegate = self
@@ -51,10 +79,11 @@ class ForegroundShopViewController: UIViewController {
         } else {
             print("IAP 에러")
         }
+
     }
     
     private func receiptValidation(transaction: SKPaymentTransaction, productIdentifier: String) {
-        
+
         let receiptFileURL = Bundle.main.appStoreReceiptURL
         let receiptData = try? Data(contentsOf: receiptFileURL!)
         let receiptString = receiptData?.base64EncodedString(options: NSData.Base64EncodingOptions(rawValue: 0))
@@ -81,7 +110,7 @@ class ForegroundShopViewController: UIViewController {
         APIServiceForShop.myInfo {[weak self] (myInfo, result) in
             guard let self = self else {return}
             if let myInfo = myInfo {
-                let items = myInfo.sesacCollection
+                let items = myInfo.backgroundCollection
                 for item in items {
                     self.myItem[item] = 1
                 }
@@ -109,15 +138,19 @@ class ForegroundShopViewController: UIViewController {
 extension ForegroundShopViewController: SKProductsRequestDelegate {
     
     func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
+
         let products = response.products
         
-        if products.count > 0 {
-            for i in products {
-                productArray.append(i)
-            }
-        } else {
-            print("no product found")
-        }
+        productArray = products
+//        if products.count > 0 {
+//            for i in products {
+//                productArray.append(i)
+//            }
+//        } else {
+//            print("no product found")
+//        }
+        updateInfo()
+
     }
 }
 
@@ -153,20 +186,29 @@ extension ForegroundShopViewController: UICollectionViewDelegate, UICollectionVi
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ForegroundCollectionViewCell", for: indexPath) as? ForegroundCollectionViewCell else {return UICollectionViewCell()}
         
         cell.imageView.image = UIImage(named: "sesac_face_\(indexPath.item)")
-        cell.nameLabel.text = productArray[indexPath.item].localizedTitle
-        cell.discriptionLabel.text = productArray[indexPath.item].localizedTitle
-        if myItem[indexPath.item] == 1 {
+
+        if indexPath.item == 0 {
+            cell.nameLabel.text = "기본 새싹"
+            cell.discriptionLabel.text = "새싹을 대표하는 기본 식물입니다. 다른 새싹들과 함께 하는 것을 좋아합니다."
             cell.priceButton.setTitle("보유", for: .normal)
             cell.priceButton.setTitleColor(CustomColor.SLPGray7.color, for: .normal)
             cell.priceButton.backgroundColor = CustomColor.SLPGray2.color
         } else {
-            cell.priceButton.setTitle("\(productArray[indexPath.item].price)", for: .normal)
-            cell.priceButton.setTitleColor(CustomColor.SLPWhite.color, for: .normal)
-            cell.priceButton.backgroundColor = CustomColor.SLPGreen.color
-            cell.priceButton.tag = indexPath.item
-            cell.priceButton.addTarget(self, action: #selector(buttonClicked(_:)), for: .touchUpInside)
+            cell.nameLabel.text = productArray[indexPath.item - 1].localizedTitle
+            cell.discriptionLabel.text = productArray[indexPath.item - 1].localizedDescription
+            if myItem[indexPath.item] == 1 {
+                cell.priceButton.setTitle("보유", for: .normal)
+                cell.priceButton.setTitleColor(CustomColor.SLPGray7.color, for: .normal)
+                cell.priceButton.backgroundColor = CustomColor.SLPGray2.color
+            } else {
+                cell.priceButton.setTitle("\(productArray[indexPath.item - 1].price)", for: .normal)
+                cell.priceButton.setTitleColor(CustomColor.SLPWhite.color, for: .normal)
+                cell.priceButton.backgroundColor = CustomColor.SLPGreen.color
+            }
         }
-        
+        cell.priceButton.tag = indexPath.item
+        cell.priceButton.addTarget(self, action: #selector(buttonClicked(_:)), for: .touchUpInside)
+
         return cell
     }
     

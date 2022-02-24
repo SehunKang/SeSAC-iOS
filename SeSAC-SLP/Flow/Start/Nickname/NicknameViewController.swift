@@ -81,10 +81,7 @@ class NicknameViewController: UIViewController {
                     switch statusCode {
                     case 200:
                         UserDefaultManager.validNickFlag = 0
-                        let sb = UIStoryboard(name: "Main", bundle: nil)
-                        let viewController = sb.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
-                        self.view.window?.rootViewController = viewController
-                        self.view.window?.makeKeyAndVisible()
+                        self.goHome()
                     case 201:
                         print("이미가입한 유저??")
                     case 202:

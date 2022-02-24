@@ -44,9 +44,13 @@ extension UIViewController {
         let infoVc = infoSb.instantiateViewController(withIdentifier: MyInfoViewController.identifier) as! MyInfoViewController
         let infoNav = UINavigationController(rootViewController: infoVc)
         
+        let shopSb = UIStoryboard(name: "Shop", bundle: nil)
+        let shopVc = shopSb.instantiateViewController(withIdentifier: ShopViewController.identifier) as! ShopViewController
+        let shopNav = UINavigationController(rootViewController: shopVc)
+        
         let tabBarController = UITabBarController()
         
-        tabBarController.viewControllers = [mainNav, infoNav]
+        tabBarController.viewControllers = [mainNav, shopNav ,infoNav]
         
         
         self.view.window?.rootViewController = tabBarController
@@ -111,9 +115,14 @@ extension UIViewController {
         let infoVc = infoSb.instantiateViewController(withIdentifier: MyInfoViewController.identifier) as! MyInfoViewController
         let infoNav = UINavigationController(rootViewController: infoVc)
         
+        let shopSb = UIStoryboard(name: "Shop", bundle: nil)
+        let shopVc = shopSb.instantiateViewController(withIdentifier: ShopViewController.identifier) as! ShopViewController
+        let shopNav = UINavigationController(rootViewController: shopVc)
+
+        
         let tabBarController = UITabBarController()
         
-        tabBarController.viewControllers = [mainNav, infoNav]
+        tabBarController.viewControllers = [mainNav, shopNav ,infoNav]
         
         
         self.view.window?.rootViewController = tabBarController
