@@ -9,6 +9,8 @@ import UIKit
 import Tabman
 import Pageboy
 import SnapKit
+import RxSwift
+import RxCocoa
 
 class ShopViewController: TabmanViewController {
     
@@ -23,6 +25,16 @@ class ShopViewController: TabmanViewController {
         button.titleLabel?.font = CustomFont.Body3_R14.font
         button.setTitleColor(CustomColor.SLPWhite.color, for: .normal)
         return button
+    }()
+    
+    lazy var activtyIndicator: UIActivityIndicatorView = {
+        let view = UIActivityIndicatorView()
+        view.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        view.center = self.view.center
+        view.hidesWhenStopped = true
+        view.style = .large
+        view.stopAnimating()
+        return view
     }()
     
     private var viewControllers = [ForegroundShopViewController(), BackgroundShopViewController()]
@@ -46,10 +58,26 @@ class ShopViewController: TabmanViewController {
         imageViewConfigure()
         tabmanConfigure()
         
+        view.addSubview(activtyIndicator)
+        
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
         NotificationCenter.default.addObserver(self, selector: #selector(foregroundClicked(_:)), name: NSNotification.Name("foregroundClicked"), object: nil)
-        
         NotificationCenter.default.addObserver(self, selector: #selector(backgroundClicked(_:)), name: NSNotification.Name("backgroundClicked"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(isIndicatorOn(_:)), name: NSNotification.Name("isOnActivityIndicator"), object: nil)
+
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name("foregroundClicked"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name("backgroundClicked"), object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name("isOnActivityIndicator"), object: nil)
     }
     
     private func getMyInfo() {
@@ -152,6 +180,18 @@ class ShopViewController: TabmanViewController {
     @objc func backgroundClicked(_ notification: Notification) {
         guard let item = notification.userInfo?["item"] as? Int else {return}
         backgroundImage = item
+    }
+    
+    @objc func isIndicatorOn(_ notification: Notification) {
+        guard let item = notification.userInfo?["isOn"] as? Bool else {return}
+        print("\(item)")
+        if item {
+            activtyIndicator.startAnimating()
+            view.isUserInteractionEnabled = false
+        } else {
+            activtyIndicator.stopAnimating()
+            view.isUserInteractionEnabled = true
+        }
     }
 
 

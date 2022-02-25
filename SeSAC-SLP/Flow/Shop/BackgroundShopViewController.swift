@@ -37,6 +37,11 @@ class BackgroundShopViewController: UIViewController {
 
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+    }
+    
     private func collectionViewConfigure() {
         
         let layout = UICollectionViewFlowLayout()
@@ -93,7 +98,7 @@ class BackgroundShopViewController: UIViewController {
         APIServiceForShop.myInfo {[weak self] (myInfo, result) in
             guard let self = self else {return}
             if let myInfo = myInfo {
-                let items = myInfo.sesacCollection
+                let items = myInfo.backgroundCollection
                 for item in items {
                     self.myItem[item] = 1
                 }
@@ -110,10 +115,17 @@ class BackgroundShopViewController: UIViewController {
     }
     
     @objc private func buttonClicked(_ sender: UIButton) {
-        let index = sender.tag
+        if myItem[sender.tag] == 1 {
+            return
+        }
+        let index = sender.tag - 1
+
+        NotificationCenter.default.post(name: NSNotification.Name("isOnActivityIndicator"), object: nil, userInfo: ["isOn": true])
+        
         let payment = SKPayment(product: productArray[index])
         SKPaymentQueue.default().add(payment)
         SKPaymentQueue.default().add(self)
+        
     }
 
 
@@ -143,7 +155,9 @@ extension BackgroundShopViewController: SKPaymentTransactionObserver {
     
     func paymentQueue(_ queue: SKPaymentQueue, removedTransactions transactions: [SKPaymentTransaction]) {
         print("remove transaction")
+        NotificationCenter.default.post(name: NSNotification.Name("isOnActivityIndicator"), object: nil, userInfo: ["isOn": false])
     }
+    
     
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         
@@ -192,6 +206,8 @@ extension BackgroundShopViewController: UICollectionViewDelegate, UICollectionVi
         }
         cell.priceButton.tag = indexPath.item
         cell.priceButton.addTarget(self, action: #selector(buttonClicked(_:)), for: .touchUpInside)
+
+            
         
         return cell
     }

@@ -110,7 +110,7 @@ class ForegroundShopViewController: UIViewController {
         APIServiceForShop.myInfo {[weak self] (myInfo, result) in
             guard let self = self else {return}
             if let myInfo = myInfo {
-                let items = myInfo.backgroundCollection
+                let items = myInfo.sesacCollection
                 for item in items {
                     self.myItem[item] = 1
                 }
@@ -127,7 +127,13 @@ class ForegroundShopViewController: UIViewController {
     }
     
     @objc private func buttonClicked(_ sender: UIButton) {
-        let index = sender.tag
+        if myItem[sender.tag] == 1 {
+            return
+        }
+        let index = sender.tag - 1
+
+        NotificationCenter.default.post(name: NSNotification.Name("isOnActivityIndicator"), object: nil, userInfo: ["isOn": true])
+
         let payment = SKPayment(product: productArray[index])
         SKPaymentQueue.default().add(payment)
         SKPaymentQueue.default().add(self)
@@ -158,6 +164,8 @@ extension ForegroundShopViewController: SKPaymentTransactionObserver {
     
     func paymentQueue(_ queue: SKPaymentQueue, removedTransactions transactions: [SKPaymentTransaction]) {
         print("remove transaction")
+        NotificationCenter.default.post(name: NSNotification.Name("isOnActivityIndicator"), object: nil, userInfo: ["isOn": false])
+
     }
     
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
