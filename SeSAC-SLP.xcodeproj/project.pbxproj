@@ -77,6 +77,7 @@
 		2ED1211927AC3BC600A3C8D5 /* MyInfoDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED1211827AC3BC500A3C8D5 /* MyInfoDetailModel.swift */; };
 		2ED1211C27ACFA2100A3C8D5 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED1211B27ACFA2100A3C8D5 /* HomeViewController.swift */; };
 		2ED1212027AD1AA200A3C8D5 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED1211F27AD1AA100A3C8D5 /* UIView+Extension.swift */; };
+		2ED31B6027C9094100286183 /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = 2ED31B5F27C9094100286183 /* SkeletonView */; };
 		2ED409D327C0B84400EB1BDA /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED409D227C0B84400EB1BDA /* ReviewViewController.swift */; };
 		2ED409D627C145C600EB1BDA /* SocketIO in Frameworks */ = {isa = PBXBuildFile; productRef = 2ED409D527C145C600EB1BDA /* SocketIO */; };
 		2ED409D927C4B3DF00EB1BDA /* Shop.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2ED409D827C4B3DF00EB1BDA /* Shop.storyboard */; };
@@ -195,6 +196,7 @@
 				2E92DFB62798EFC90020567B /* Toast in Frameworks */,
 				2E35519227B2B3B2008912C9 /* Tabman in Frameworks */,
 				2EC4622B27BBF0BE009D94E6 /* Realm in Frameworks */,
+				2ED31B6027C9094100286183 /* SkeletonView in Frameworks */,
 				2EC4622827BBEC31009D94E6 /* RxSwift in Frameworks */,
 				2E92DFC82799AD320020567B /* Moya in Frameworks */,
 				2E92DFCB279AF00F0020567B /* FirebaseAuth in Frameworks */,
@@ -533,6 +535,7 @@
 				2EC4622A27BBF0BE009D94E6 /* Realm */,
 				2EC4622C27BBF0BE009D94E6 /* RealmSwift */,
 				2ED409D527C145C600EB1BDA /* SocketIO */,
+				2ED31B5F27C9094100286183 /* SkeletonView */,
 			);
 			productName = "SeSAC-SLP";
 			productReference = 2EBAEF60279539ED00C2A089 /* SeSAC-SLP.app */;
@@ -572,6 +575,7 @@
 				2EC4622427BBEC31009D94E6 /* XCRemoteSwiftPackageReference "RxSwift" */,
 				2EC4622927BBF0BE009D94E6 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				2ED409D427C145C400EB1BDA /* XCRemoteSwiftPackageReference "socket.io-client-swift" */,
+				2ED31B5E27C9094100286183 /* XCRemoteSwiftPackageReference "SkeletonView" */,
 			);
 			productRefGroup = 2EBAEF61279539ED00C2A089 /* Products */;
 			projectDirPath = "";
@@ -1007,6 +1011,14 @@
 				version = 10.22.0;
 			};
 		};
+		2ED31B5E27C9094100286183 /* XCRemoteSwiftPackageReference "SkeletonView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Juanpe/SkeletonView.git";
+			requirement = {
+				kind = exactVersion;
+				version = 1.29.2;
+			};
+		};
 		2ED409D427C145C400EB1BDA /* XCRemoteSwiftPackageReference "socket.io-client-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/socketio/socket.io-client-swift.git";
@@ -1072,6 +1084,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2EC4622927BBF0BE009D94E6 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
+		};
+		2ED31B5F27C9094100286183 /* SkeletonView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2ED31B5E27C9094100286183 /* XCRemoteSwiftPackageReference "SkeletonView" */;
+			productName = SkeletonView;
 		};
 		2ED409D527C145C600EB1BDA /* SocketIO */ = {
 			isa = XCSwiftPackageProductDependency;

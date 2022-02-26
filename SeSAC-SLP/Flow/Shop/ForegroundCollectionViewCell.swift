@@ -49,8 +49,10 @@ class ForegroundCollectionViewCell: UICollectionViewCell {
     }
     
     private func configure() {
+        self.isSkeletonable = true
         [imageView, nameLabel, priceButton, discriptionLabel].forEach {
             contentView.addSubview($0)
+            $0.isSkeletonable = true
         }
         contentView.snp.makeConstraints { make in
             make.edges.equalToSuperview().inset(8)
@@ -72,5 +74,7 @@ class ForegroundCollectionViewCell: UICollectionViewCell {
             make.leading.trailing.bottom.equalToSuperview()
             make.top.equalTo(priceButton.snp.bottom).offset(8)
         }
+        nameLabel.text = "기본 새싹"
+        discriptionLabel.skeletonTextNumberOfLines = 3
     }
 }

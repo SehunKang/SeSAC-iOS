@@ -15,12 +15,14 @@ class BackgroundCollectionViewCell: UICollectionViewCell {
         view.contentMode = .center
         view.layer.cornerRadius = 8
         view.layer.masksToBounds = true
+        view.isSkeletonable = true
         return view
     }()
     
     let nameLabel: UILabel = {
         let label = UILabel()
         label.font = CustomFont.Title2_R16.font
+        label.isSkeletonable = true
         return label
     }()
     
@@ -28,6 +30,7 @@ class BackgroundCollectionViewCell: UICollectionViewCell {
         let button = UIButton()
         button.layer.cornerRadius = 8
         button.titleLabel?.font = CustomFont.Title5_M12.font
+        button.isSkeletonable = true
         return button
     }()
     
@@ -35,6 +38,7 @@ class BackgroundCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.font = CustomFont.Body3_R14.font
         label.numberOfLines = 0
+        label.isSkeletonable = true
         return label
     }()
     
@@ -53,6 +57,9 @@ class BackgroundCollectionViewCell: UICollectionViewCell {
     private func configure() {
         contentView.addSubview(imageView)
         contentView.addSubview(containerView)
+        self.isSkeletonable = true
+        containerView.isSkeletonable = true
+        
         [nameLabel, priceButton, discriptionLabel].forEach {
             containerView.addSubview($0)
         }
@@ -84,6 +91,10 @@ class BackgroundCollectionViewCell: UICollectionViewCell {
             make.bottom.equalToSuperview()
             make.top.equalTo(priceButton.snp.bottom).offset(8)
         }
+        nameLabel.text = "하늘 공원"
+
+        discriptionLabel.skeletonTextNumberOfLines = 2
+
     }
 
 }

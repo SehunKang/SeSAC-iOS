@@ -8,6 +8,7 @@
 import UIKit
 import StoreKit
 import SnapKit
+import SkeletonView
 
 
 class BackgroundShopViewController: UIViewController {
@@ -20,10 +21,10 @@ class BackgroundShopViewController: UIViewController {
         }
     }
     
-    var productArray: Array<SKProduct>! {
+    var productArray: Array<SKProduct>? {
         didSet {
             DispatchQueue.main.async {
-                self.collectionViewConfigure()
+                self.view.hideSkeleton()
             }
         }
     }
@@ -33,7 +34,9 @@ class BackgroundShopViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         requestProductData()
-//        collectionViewConfigure()
+        self.view.isSkeletonable = true
+        collectionViewConfigure()
+        self.view.showAnimatedGradientSkeleton()
 
     }
     
@@ -56,6 +59,8 @@ class BackgroundShopViewController: UIViewController {
         collectionView.register(BackgroundCollectionViewCell.self, forCellWithReuseIdentifier: "BackgroundCollectionViewCell")
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.isSkeletonable = true
+        
     }
     
 
@@ -122,7 +127,7 @@ class BackgroundShopViewController: UIViewController {
 
         NotificationCenter.default.post(name: NSNotification.Name("isOnActivityIndicator"), object: nil, userInfo: ["isOn": true])
         
-        let payment = SKPayment(product: productArray[index])
+        let payment = SKPayment(product: productArray![index])
         SKPaymentQueue.default().add(payment)
         SKPaymentQueue.default().add(self)
         
@@ -175,16 +180,16 @@ extension BackgroundShopViewController: SKPaymentTransactionObserver {
     }
 }
 
-extension BackgroundShopViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension BackgroundShopViewController: UICollectionViewDelegate, SkeletonCollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return myItem.count
+        guard let productArray = productArray else {return 1}
+        return productArray.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BackgroundCollectionViewCell", for: indexPath) as? BackgroundCollectionViewCell else {return UICollectionViewCell()}
         cell.imageView.image = UIImage(named: "sesac_background_\(indexPath.item)")
-
         if indexPath.item == 0 {
             cell.nameLabel.text = "하늘 공원"
             cell.discriptionLabel.text = "새싹들을 많이 마주치는 매력적인 하늘 공원입니다."
@@ -192,22 +197,22 @@ extension BackgroundShopViewController: UICollectionViewDelegate, UICollectionVi
             cell.priceButton.setTitleColor(CustomColor.SLPGray7.color, for: .normal)
             cell.priceButton.backgroundColor = CustomColor.SLPGray2.color
         } else {
-            cell.nameLabel.text = productArray[indexPath.item - 1].localizedTitle
-            cell.discriptionLabel.text = productArray[indexPath.item - 1].localizedDescription
+            guard let productArray = productArray else {return UICollectionViewCell()}
+            let product = productArray[indexPath.item - 1]
+            cell.nameLabel.text = product.localizedTitle
+            cell.discriptionLabel.text = product.localizedDescription
             if myItem[indexPath.item] == 1 {
                 cell.priceButton.setTitle("보유", for: .normal)
                 cell.priceButton.setTitleColor(CustomColor.SLPGray7.color, for: .normal)
                 cell.priceButton.backgroundColor = CustomColor.SLPGray2.color
             } else {
-                cell.priceButton.setTitle("\(productArray[indexPath.item - 1].price)", for: .normal)
+                cell.priceButton.setTitle("\(product.price)", for: .normal)
                 cell.priceButton.setTitleColor(CustomColor.SLPWhite.color, for: .normal)
                 cell.priceButton.backgroundColor = CustomColor.SLPGreen.color
             }
         }
         cell.priceButton.tag = indexPath.item
         cell.priceButton.addTarget(self, action: #selector(buttonClicked(_:)), for: .touchUpInside)
-
-            
         
         return cell
     }
@@ -217,8 +222,20 @@ extension BackgroundShopViewController: UICollectionViewDelegate, UICollectionVi
         collectionView.deselectItem(at: indexPath, animated: false)
     }
     
+    func collectionSkeletonView(_ skeletonView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return myItem.count
+    }
     
+//    func collectionSkeletonView(_ skeletonView: UICollectionView, skeletonCellForItemAt indexPath: IndexPath) -> UICollectionViewCell? {
+//        let cell = skeletonView.dequeueReusableCell(withReuseIdentifier: "BackgroundCollectionViewCell", for: indexPath) as! BackgroundCollectionViewCell
+//        return cell
+//    }
     
+    func collectionSkeletonView(_ skeletonView: UICollectionView, cellIdentifierForItemAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        return "BackgroundCollectionViewCell"
+    }
+    
+
 }
 
 extension BackgroundShopViewController: UICollectionViewDelegateFlowLayout {

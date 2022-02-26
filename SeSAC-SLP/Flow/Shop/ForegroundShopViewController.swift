@@ -9,6 +9,7 @@ import UIKit
 import StoreKit
 import SnapKit
 import MachO
+import SkeletonView
 
 class ForegroundShopViewController: UIViewController {
     
@@ -21,10 +22,10 @@ class ForegroundShopViewController: UIViewController {
         }
     }
     
-    var productArray: Array<SKProduct>! {
+    var productArray: Array<SKProduct>? {
         didSet {
             DispatchQueue.main.async {
-                self.collectionViewConfigure()
+                self.view.hideSkeleton()
             }
         }
     }
@@ -35,8 +36,9 @@ class ForegroundShopViewController: UIViewController {
         super.viewDidLoad()
 
         requestProductData()
-//        collectionViewConfigure()
-
+        self.view.isSkeletonable = true
+        collectionViewConfigure()
+        self.view.showAnimatedGradientSkeleton()
     }
     
     private func collectionViewConfigure() {
@@ -53,6 +55,7 @@ class ForegroundShopViewController: UIViewController {
         collectionView.register(ForegroundCollectionViewCell.self, forCellWithReuseIdentifier: "ForegroundCollectionViewCell")
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.isSkeletonable = true
     }
     
     private func createLayout() -> UICollectionViewLayout {
@@ -134,7 +137,7 @@ class ForegroundShopViewController: UIViewController {
 
         NotificationCenter.default.post(name: NSNotification.Name("isOnActivityIndicator"), object: nil, userInfo: ["isOn": true])
 
-        let payment = SKPayment(product: productArray[index])
+        let payment = SKPayment(product: productArray![index])
         SKPaymentQueue.default().add(payment)
         SKPaymentQueue.default().add(self)
     }
@@ -184,10 +187,12 @@ extension ForegroundShopViewController: SKPaymentTransactionObserver {
     }
 }
 
-extension ForegroundShopViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension ForegroundShopViewController: UICollectionViewDelegate, SkeletonCollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return myItem.count
+        guard let productArray = productArray else {return 1}
+        return productArray.count + 1
+
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -202,14 +207,16 @@ extension ForegroundShopViewController: UICollectionViewDelegate, UICollectionVi
             cell.priceButton.setTitleColor(CustomColor.SLPGray7.color, for: .normal)
             cell.priceButton.backgroundColor = CustomColor.SLPGray2.color
         } else {
-            cell.nameLabel.text = productArray[indexPath.item - 1].localizedTitle
-            cell.discriptionLabel.text = productArray[indexPath.item - 1].localizedDescription
+            guard let productArray = productArray else {return UICollectionViewCell()}
+            let product = productArray[indexPath.item - 1]
+            cell.nameLabel.text = product.localizedTitle
+            cell.discriptionLabel.text = product.localizedDescription
             if myItem[indexPath.item] == 1 {
                 cell.priceButton.setTitle("보유", for: .normal)
                 cell.priceButton.setTitleColor(CustomColor.SLPGray7.color, for: .normal)
                 cell.priceButton.backgroundColor = CustomColor.SLPGray2.color
             } else {
-                cell.priceButton.setTitle("\(productArray[indexPath.item - 1].price)", for: .normal)
+                cell.priceButton.setTitle("\(product.price)", for: .normal)
                 cell.priceButton.setTitleColor(CustomColor.SLPWhite.color, for: .normal)
                 cell.priceButton.backgroundColor = CustomColor.SLPGreen.color
             }
@@ -223,6 +230,14 @@ extension ForegroundShopViewController: UICollectionViewDelegate, UICollectionVi
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         NotificationCenter.default.post(name: NSNotification.Name("foregroundClicked"), object: nil, userInfo: ["item": indexPath.item])
         collectionView.deselectItem(at: indexPath, animated: false)
+    }
+    
+    func collectionSkeletonView(_ skeletonView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return myItem.count
+    }
+    
+    func collectionSkeletonView(_ skeletonView: UICollectionView, cellIdentifierForItemAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        return "ForegroundCollectionViewCell"
     }
     
     
