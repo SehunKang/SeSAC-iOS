@@ -15,10 +15,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         if UserDefaultManager.signInData.nick == "" {
-            let mainSb = UIStoryboard(name: "Start", bundle: nil)
-            let mainVc = mainSb.instantiateViewController(withIdentifier: PhoneAuthViewController.identifier) as! PhoneAuthViewController
-            let nav = UINavigationController(rootViewController: mainVc)
-            window?.rootViewController = nav
+            let sb = UIStoryboard(name: "Start", bundle: nil)
+            let vc = sb.instantiateViewController(withIdentifier: OnboardingViewController.identifier) as! OnboardingViewController
+            window?.rootViewController = vc
         } else {
             let mainSb = UIStoryboard(name: "Main", bundle: nil)
             let mainVc = mainSb.instantiateViewController(withIdentifier: "HomeViewController") as! HomeViewController
@@ -27,7 +26,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let infoSb = UIStoryboard(name: "MyInfo", bundle: nil)
             let infoVc = infoSb.instantiateViewController(withIdentifier: MyInfoViewController.identifier) as! MyInfoViewController
             let infoNav = UINavigationController(rootViewController: infoVc)
-            
+
             let shopSb = UIStoryboard(name: "Shop", bundle: nil)
             let shopVc = shopSb.instantiateViewController(withIdentifier: ShopViewController.identifier) as! ShopViewController
             let shopNav = UINavigationController(rootViewController: shopVc)
@@ -39,10 +38,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
             window?.rootViewController = tabBarController
         }
-//        let sb = UIStoryboard(name: "Main", bundle: nil)
-//        let vc = sb.instantiateViewController(withIdentifier: ChatViewController.identifer) as! ChatViewController
-//
-//        window?.rootViewController = vc
 
         window?.makeKeyAndVisible()
         

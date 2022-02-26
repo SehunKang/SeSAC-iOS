@@ -14,6 +14,64 @@
         </array>
     </customFonts>
     <scenes>
+        <!--Onboarding View Controller-->
+        <scene sceneID="Wcf-WZ-7Mv">
+            <objects>
+                <viewController storyboardIdentifier="OnboardingViewController" id="ehT-uf-xLg" customClass="OnboardingViewController" customModule="SeSAC_SLP" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="1jY-VS-AG2">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wpv-2A-CoK" customClass="FilledButton" customModule="SeSAC_SLP" customModuleProvider="target">
+                                <rect key="frame" x="16" y="798" width="382" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="87o-cY-qa1"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="시작하기"/>
+                                <connections>
+                                    <action selector="startButtonClicked:" destination="ehT-uf-xLg" eventType="touchUpInside" id="aOT-Na-Wci"/>
+                                </connections>
+                            </button>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="kSt-Ht-4ld">
+                                <rect key="frame" x="149" y="730" width="116" height="26"/>
+                            </pageControl>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="8P4-DY-2ZO">
+                                <rect key="frame" x="0.0" y="160" width="414" height="514"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Db0-hK-bPn">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="jwt-Pz-PH4"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="jwt-Pz-PH4" firstAttribute="trailing" secondItem="8P4-DY-2ZO" secondAttribute="trailing" id="3PE-1i-TWw"/>
+                            <constraint firstItem="wpv-2A-CoK" firstAttribute="leading" secondItem="jwt-Pz-PH4" secondAttribute="leading" constant="16" id="3aA-5a-WFU"/>
+                            <constraint firstItem="8P4-DY-2ZO" firstAttribute="top" secondItem="jwt-Pz-PH4" secondAttribute="top" constant="116" id="JRS-4k-G55"/>
+                            <constraint firstItem="wpv-2A-CoK" firstAttribute="top" secondItem="kSt-Ht-4ld" secondAttribute="bottom" constant="42" id="ejf-T7-dBE"/>
+                            <constraint firstItem="jwt-Pz-PH4" firstAttribute="bottom" secondItem="wpv-2A-CoK" secondAttribute="bottom" constant="16" id="hKG-zL-9L6"/>
+                            <constraint firstItem="8P4-DY-2ZO" firstAttribute="leading" secondItem="jwt-Pz-PH4" secondAttribute="leading" id="jv1-ml-soD"/>
+                            <constraint firstItem="kSt-Ht-4ld" firstAttribute="top" secondItem="8P4-DY-2ZO" secondAttribute="bottom" constant="56" id="rKg-z8-hWQ"/>
+                            <constraint firstItem="jwt-Pz-PH4" firstAttribute="trailing" secondItem="wpv-2A-CoK" secondAttribute="trailing" constant="16" id="tbN-XM-eX4"/>
+                            <constraint firstItem="kSt-Ht-4ld" firstAttribute="centerX" secondItem="1jY-VS-AG2" secondAttribute="centerX" id="xzc-eq-Tzv"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="8P4-DY-2ZO" id="bfN-XA-L6L"/>
+                        <outlet property="pageControl" destination="kSt-Ht-4ld" id="nA1-iH-8cn"/>
+                        <outlet property="startButton" destination="wpv-2A-CoK" id="HjG-Xl-X6P"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SOJ-7r-VCR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1028.985507246377" y="-597.32142857142856"/>
+        </scene>
         <!--Phone Auth View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
