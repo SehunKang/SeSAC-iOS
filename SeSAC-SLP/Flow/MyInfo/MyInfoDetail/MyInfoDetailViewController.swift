@@ -87,8 +87,8 @@ class MyInfoDetailViewController: UIViewController {
     
     private func uiConfigureWithData() {
     
-        backgroundImage.image = UIImage(named: "sesac_background_1")
-        sesacFaceImage.image = UIImage(named: "sesac_face_1")
+        backgroundImage.image = UIImage(named: "sesac_background_\(UserDefaultManager.userData!.background)")
+        sesacFaceImage.image = UIImage(named: "sesac_face_\(UserDefaultManager.userData!.sesac)")
         
         cardView.text = UserDefaultManager.userData?.nick
         

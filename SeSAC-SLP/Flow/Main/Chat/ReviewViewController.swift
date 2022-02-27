@@ -140,7 +140,7 @@ class ReviewViewController: UIViewController {
     
     private let doneButton: UIButton = {
         let button = UIButton()
-        button.setTitle("신고하기", for: .normal)
+        button.setTitle("리뷰하기", for: .normal)
         button.titleLabel?.font = CustomFont.Body3_R14.font
         button.titleLabel?.textColor = CustomColor.SLPGray3.color
         button.backgroundColor = CustomColor.SLPGray6.color
@@ -259,12 +259,6 @@ class ReviewViewController: UIViewController {
             }
             .disposed(by: bag)
         
-        doneButton.rx.tap
-            .subscribe {[weak self] _ in
-                print(self?.result as Any)
-            }
-            .disposed(by: bag)
-        
         textView.rx.text
             .orEmpty
             .map { text in
@@ -294,7 +288,7 @@ class ReviewViewController: UIViewController {
     
     private func doneButtonClicked() {
         let data: [String: Any] = ["otheruid": uid, "reputation": result, "comment": textView.text!]
-        APIServiceForChat.report(data: data) {[weak self] result in
+        APIServiceForChat.review(data: data) {[weak self] result in
             switch result {
             case 200:
                 UserDefaultManager.userStatus = UserStatus.normal.rawValue
