@@ -1,0 +1,6 @@
+#!/bin/sh
+list=$(ls ~/Desktop/SSAC/projects)
+for item in ${list}
+do
+	git subtree add --prefix="$item" ~/Desktop/SSAC/projects/$item main
+done
