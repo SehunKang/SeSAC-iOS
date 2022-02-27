@@ -1,0 +1,15 @@
+/* 
+  Localizable.strings
+  SeSAC_Week05
+
+  Created by Sehun Kang on 2021/11/01.
+  
+*/
+
+"tab_home" = "홈";
+"tab_setting" = "설정";
+
+"welcome_text" = "하이 방가방가";
+
+"content_title" = "일기 작성";
+"save" = "저장";

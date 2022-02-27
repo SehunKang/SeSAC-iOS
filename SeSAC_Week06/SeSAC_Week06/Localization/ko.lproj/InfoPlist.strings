@@ -1,0 +1,10 @@
+/* 
+  InfoPlist.strings
+  SeSAC_Week05
+
+  Created by Sehun Kang on 2021/11/01.
+  
+*/
+
+CFBundleDisplayName = "나으 다이어리";
+NSCameraUsageDescription = "카메라 권한을 허용해주세요";

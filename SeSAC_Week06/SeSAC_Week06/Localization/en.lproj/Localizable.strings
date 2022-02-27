@@ -1,0 +1,15 @@
+/* 
+  Localizable.strings
+  SeSAC_Week05
+
+  Created by Sehun Kang on 2021/11/01.
+  
+*/
+
+"tab_home" = "HOME";
+"tab_setting" = "Setting";
+
+"welcome_text" = "Hello! nuce to meet you";
+
+"content_title" = "Write a Journal";
+"save" = "Save";

@@ -1,0 +1,10 @@
+/* 
+  Setting.strings
+  SeSAC_Week05
+
+  Created by Sehun Kang on 2021/11/01.
+  
+*/
+
+"data_backup" = "백업하기";
+"data_restore" = "복구하기";
