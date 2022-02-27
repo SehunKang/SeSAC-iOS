@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="EHf-IW-A2E">
+            <objects>
+                <viewController id="01J-lp-oVM" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash_logo" translatesAutoresizingMaskIntoConstraints="NO" id="2jf-e2-whv">
+                                <rect key="frame" x="87" y="264.5" width="240" height="287"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="txt" translatesAutoresizingMaskIntoConstraints="NO" id="OXC-fu-xVe">
+                                <rect key="frame" x="47.5" y="579.5" width="319" height="107.5"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="2jf-e2-whv" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.58" id="4Dl-tA-5zY"/>
+                            <constraint firstItem="2jf-e2-whv" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" constant="-40" id="N1o-Qu-4XP"/>
+                            <constraint firstItem="OXC-fu-xVe" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" multiplier="0.77" id="UpK-0q-XYN"/>
+                            <constraint firstItem="OXC-fu-xVe" firstAttribute="top" secondItem="2jf-e2-whv" secondAttribute="bottom" constant="28" id="bTj-Y2-GRW"/>
+                            <constraint firstItem="OXC-fu-xVe" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="e9b-wP-zrL"/>
+                            <constraint firstItem="2jf-e2-whv" firstAttribute="height" secondItem="Ze5-6b-2t3" secondAttribute="height" multiplier="0.32" id="irr-6m-tGP"/>
+                            <constraint firstItem="OXC-fu-xVe" firstAttribute="height" secondItem="Ze5-6b-2t3" secondAttribute="height" multiplier="0.12" id="q3U-yI-gRB"/>
+                            <constraint firstItem="2jf-e2-whv" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="ypE-ah-pp4"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="53" y="375"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="splash_logo" width="220" height="264"/>
+        <image name="txt" width="328" height="112"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
